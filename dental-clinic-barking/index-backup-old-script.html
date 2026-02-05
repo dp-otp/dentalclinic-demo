@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>East Ham Dental Care | Premium Dental Services in East Ham</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #14b8a6;
+            --teal-dark: #0d9488;
+            --teal-light: #5eead4;
+            --blue: #1e40af;
+            --blue-light: #3b82f6;
+            --beige: #f8f6f0;
+            --white: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-gray: #6b7280;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--beige);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header/Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+            box-shadow: 0 4px 30px rgba(20, 184, 166, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .logo-tooth {
+            width: 55px;
+            height: 55px;
+            position: relative;
+            filter: drop-shadow(0 4px 15px rgba(20, 184, 166, 0.3));
+        }
+
+        /* Precise tooth-only clip path - accurate proportions */
+        .logo-tooth img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(2.9);
+            clip-path: polygon(
+                50% 4%, 47% 5%, 44.5% 7%, 42.5% 9.5%, 40.5% 12.5%, 39% 16%,
+                37.5% 20%, 36.5% 24.5%, 35.8% 29.5%, 35.3% 35%, 35% 41%,
+                34.8% 47.5%, 34.8% 50%, 34.9% 52.5%, 35.2% 59%, 35.7% 65%,
+                36.4% 70.5%, 37.3% 75.5%, 38.5% 79.5%, 40% 82.5%, 41.8% 85%,
+                43.8% 87.5%, 46% 89.5%, 48.2% 91%, 50% 92%,
+                51.8% 91%, 54% 89.5%, 56.2% 87.5%, 58.2% 85%, 60% 82.5%,
+                61.5% 79.5%, 62.7% 75.5%, 63.6% 70.5%, 64.3% 65%, 64.8% 59%,
+                65.1% 52.5%, 65.2% 50%, 65.2% 47.5%, 65% 41%, 64.7% 35%,
+                64.2% 29.5%, 63.5% 24.5%, 62.5% 20%, 61% 16%, 59.5% 12.5%,
+                57.5% 9.5%, 55.5% 7%, 53% 5%
+            );
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .logo-text span {
+            color: var(--teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        .nav-links a.active {
+            color: var(--teal);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--teal);
+        }
+
+        .book-btn {
+            padding: 0.75rem 1.75rem;
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .book-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.5),
+                        0 4px 12px rgba(20, 184, 166, 0.3);
+        }
+
+        .book-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: #f5ebe4;
+        }
+
+        /* Nanotech Grid - TEAL SHAPES IN MIDDLE DIAGONAL BAND */
+        .nanotech-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 1;
+        }
+
+
+        /* Noise Texture Overlay */
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 50;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            color: white;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(20, 184, 166, 0.5),
+                        0 6px 18px rgba(20, 184, 166, 0.3);
+        }
+
+        .cta-primary:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            color: var(--teal);
+            border: 2px solid var(--teal);
+        }
+
+        .cta-secondary:hover {
+            background: var(--teal);
+            color: white;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
+        }
+
+        .cta-secondary:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        /* Hero Image - Premium Floating Effect */
+        .hero-image {
+            position: relative;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1500px;
+        }
+
+        .hero-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 30px 80px rgba(20, 184, 166, 0.3))
+                    drop-shadow(0 15px 40px rgba(20, 184, 166, 0.2))
+                    drop-shadow(0 5px 15px rgba(20, 184, 166, 0.1));
+            clip-path: circle(43% at 50% 50%);
+            animation: float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-image img:hover {
+            transform: translateY(-15px) scale(1.05);
+            filter: drop-shadow(0 40px 100px rgba(20, 184, 166, 0.4))
+                    drop-shadow(0 20px 50px rgba(20, 184, 166, 0.3));
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotateZ(0deg);
+            }
+            50% {
+                transform: translateY(-25px) rotateZ(2deg);
+            }
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(20, 184, 166, 0.1);
+            border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+        }
+
+        .trust-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .trust-item {
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .trust-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .trust-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+            animation: float 5s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .trust-item:nth-child(1) .trust-icon {
+            animation-delay: 0s;
+        }
+
+        .trust-item:nth-child(2) .trust-icon {
+            animation-delay: 0.3s;
+        }
+
+        .trust-item:nth-child(3) .trust-icon {
+            animation-delay: 0.6s;
+        }
+
+        .trust-item:nth-child(4) .trust-icon {
+            animation-delay: 0.9s;
+        }
+
+        .trust-item:hover .trust-icon {
+            transform: scale(1.15) rotateZ(5deg);
+            box-shadow: 0 12px 30px rgba(20, 184, 166, 0.4);
+        }
+
+        .trust-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .trust-item h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .trust-item p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Featured Image - Natural Integration */
+        .featured-section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .featured-image {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .featured-image img {
+            max-width: 85%;
+            max-height: 550px;
+            object-fit: contain;
+            filter: drop-shadow(0 25px 60px rgba(20, 184, 166, 0.25))
+                    drop-shadow(0 10px 30px rgba(20, 184, 166, 0.15));
+            clip-path: ellipse(40% 45% at 50% 50%);
+            animation: float 7s ease-in-out infinite 1s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .featured-image img:hover {
+            transform: translateY(-12px) scale(1.03);
+            filter: drop-shadow(0 35px 80px rgba(20, 184, 166, 0.35))
+                    drop-shadow(0 15px 40px rgba(20, 184, 166, 0.25));
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--blue));
+            border-radius: 2px;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(20, 184, 166, 0.3);
+            box-shadow: 0 30px 60px rgba(20, 184, 166, 0.2),
+                        0 15px 30px rgba(20, 184, 166, 0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 5rem 2rem;
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.08), transparent);
+            transition: left 0.5s;
+        }
+
+        .testimonial-card:hover::before {
+            left: 100%;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(20, 184, 166, 0.18),
+                        0 12px 25px rgba(20, 184, 166, 0.1);
+            border-color: rgba(20, 184, 166, 0.2);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        /* Clinic Image - Natural Integration */
+        .clinic-section {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .clinic-image {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clinic-image img {
+            max-width: 82%;
+            max-height: 550px;
+            object-fit: contain;
+            filter: drop-shadow(0 25px 60px rgba(20, 184, 166, 0.25))
+                    drop-shadow(0 10px 30px rgba(20, 184, 166, 0.15));
+            clip-path: ellipse(42% 38% at 50% 50%);
+            animation: float 7.5s ease-in-out infinite 2s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .clinic-image img:hover {
+            transform: translateY(-12px) scale(1.03);
+            filter: drop-shadow(0 35px 80px rgba(20, 184, 166, 0.35))
+                    drop-shadow(0 15px 40px rgba(20, 184, 166, 0.25));
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll Reveal Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                padding-top: 6rem;
+                gap: 40px;
+            }
+
+            .hero-image {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .book-btn {
+                display: none;
+            }
+
+            .services-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-tooth">
+                    <img src="IMG_3883.jpeg" alt="East Ham Dental Care Logo">
+                </div>
+                <span class="logo-text">East Ham <span>Dental</span></span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html" class="book-btn">Book Appointment</a>
+            <button class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <!-- WebGL Canvas for Nanotech Grid Animation -->
+        <canvas id="nanotech-canvas" class="nanotech-canvas"></canvas>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Your Smile, <span>Our Priority</span></h1>
+                <p>Experience premium dental care in the heart of East Ham. From routine check-ups to advanced treatments, we're here to give you the confident smile you deserve.</p>
+                <div class="hero-cta">
+                    <a href="contact.html" class="cta-primary">Book Appointment</a>
+                    <a href="services.html" class="cta-secondary">Our Services</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="IMG_3883.jpeg" alt="East Ham Dental Care">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <div class="trust-container">
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v7c0 6 4 10 10 12 6-2 10-6 10-12V7l-10-5z"/>
+                    </svg>
+                </div>
+                <h3>CQC Approved</h3>
+                <p>Quality care you can trust</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3>Expert Team</h3>
+                <p>15+ years experience</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <h3>Caring Approach</h3>
+                <p>Comfortable experience</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <h3>Flexible Hours</h3>
+                <p>Open 6 days a week</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Image -->
+    <section class="featured-section">
+        <div class="featured-image">
+            <img src="IMG_3884.jpeg" alt="East Ham Dental Care Facility">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="section-header">
+            <span class="section-tag">Our Services</span>
+            <h2 class="section-title">Comprehensive Dental Care</h2>
+            <p class="section-description">From preventive care to cosmetic enhancements, we offer a full range of dental services.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <h3>General Dentistry</h3>
+                <p>Routine check-ups, cleanings, and preventive care to keep your smile healthy.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                        <line x1="9" y1="9" x2="9.01" y2="9"/>
+                        <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    </svg>
+                </div>
+                <h3>Cosmetic Dentistry</h3>
+                <p>Teeth whitening, veneers, and smile makeovers for a confident you.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2v20"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h3>Dental Implants</h3>
+                <p>Permanent tooth replacement solutions for a natural-looking smile.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h3>Orthodontics</h3>
+                <p>Invisalign and traditional braces to straighten your teeth.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <h3>Emergency Care</h3>
+                <p>Same-day appointments for urgent dental issues and pain relief.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <h3>Children's Dentistry</h3>
+                <p>Gentle, compassionate care for your little ones in a friendly environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="section-header">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="section-title">What Our Patients Say</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The team at East Ham Dental Care is absolutely wonderful. They made me feel so comfortable and my teeth have never looked better!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Patient since 2022</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Professional, caring, and highly skilled. I wouldn't trust my smile to anyone else. Highly recommend!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Patient since 2021</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Finally found a dentist who understands dental anxiety. The staff is patient and the environment is so relaxing."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">A</div>
+                    <div class="author-info">
+                        <h4>Aisha Patel</h4>
+                        <p>Patient since 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinic Image at Bottom -->
+    <section class="clinic-section">
+        <div class="clinic-image">
+            <img src="IMG_3882.jpeg" alt="East Ham Dental Care Clinic">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 East Ham Dental Care. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Nanotech Hex Grid Animation -->
+    <script type="module">
+      import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js';
+
+      // Get canvas
+      const canvas = document.getElementById('nanotech-canvas');
+      if (!canvas) {
+        console.error('Nanotech: Canvas not found');
+      }
+
+      // Scene setup
+      const scene = new THREE.Scene();
+      scene.background = null; // Transparent
+
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 15;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      // Enable tone mapping for enhanced glow
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.5;
+
+      // Hex grid parameters - diagonal strip pattern
+      const hexRadius = 0.8;
+      const spacing = 1.4;
+      const stripWidth = 35;
+      const stripHeight = 8;
+
+      // Vertex shader with scroll-driven rotation
+      const lineVertexShader = `
+        attribute float aSegmentPos;
+        attribute float aEdgeIndex;
+        attribute float aHexSeed;
+        attribute float aLayerId;
+
+        varying float vSegmentPos;
+        varying float vEdgeIndex;
+        varying float vHexSeed;
+        varying float vLayerId;
+        varying float vDiagonalPos;
+        varying vec2 vWorldPos;
+        varying float vOutroRotation;
+
+        uniform float uTime;
+        uniform float uScrollProgress;
+        uniform float uOutroProgress;
+
+        void main() {
+          vSegmentPos = aSegmentPos;
+          vEdgeIndex = aEdgeIndex;
+          vHexSeed = aHexSeed;
+          vLayerId = aLayerId;
+
+          vWorldPos = position.xy;
+          vDiagonalPos = (position.x + position.y + 20.0) / 40.0;
+
+          // Staggered Y-axis rotation on outro
+          float rotationDelay = (1.0 - vDiagonalPos) * 0.4;
+          float localOutro = clamp((uOutroProgress - rotationDelay) / 0.6, 0.0, 1.0);
+          localOutro = localOutro * localOutro * (3.0 - 2.0 * localOutro);
+
+          float rotAngle = localOutro * 0.65;
+          vOutroRotation = localOutro;
+
+          vec3 rotatedPos = position;
+          float cosR = cos(rotAngle);
+          float sinR = sin(rotAngle);
+          rotatedPos.x = position.x * cosR;
+          rotatedPos.z = position.x * sinR * 0.3;
+
+          vec4 mvPosition = modelViewMatrix * vec4(rotatedPos, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `;
+
+      // Fragment shader with all effects
+      const lineFragmentShader = `
+        precision highp float;
+
+        varying float vSegmentPos;
+        varying float vEdgeIndex;
+        varying float vHexSeed;
+        varying float vLayerId;
+        varying float vDiagonalPos;
+        varying vec2 vWorldPos;
+        varying float vOutroRotation;
+
+        uniform float uTime;
+        uniform float uBuildProgress;
+        uniform float uOutroProgress;
+        uniform float uContentMask;
+
+        float hash(float n) {
+          return fract(sin(n) * 43758.5453);
+        }
+
+        float hash2(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+        }
+
+        float noise(float x) {
+          float i = floor(x);
+          float f = fract(x);
+          return mix(hash(i), hash(i + 1.0), f * f * (3.0 - 2.0 * f));
+        }
+
+        float noise2D(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          float a = hash2(i);
+          float b = hash2(i + vec2(1.0, 0.0));
+          float c = hash2(i + vec2(0.0, 1.0));
+          float d = hash2(i + vec2(1.0, 1.0));
+          return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+        }
+
+        void main() {
+          // Intro wave
+          float introWave = uBuildProgress - vDiagonalPos * 2.0;
+          float buildMask = smoothstep(0.0, 0.3, introWave);
+
+          // Outro wave (reverse)
+          float outroWave = uOutroProgress - (1.0 - vDiagonalPos) * 1.5;
+          float outroFade = 1.0 - smoothstep(0.0, 0.4, outroWave);
+          float rotationFade = 1.0 - vOutroRotation * 0.8;
+
+          float visibilityMask = buildMask * outroFade * rotationFade;
+          if (visibilityMask < 0.01) discard;
+
+          // Content masking (center-left)
+          vec2 normalizedPos = vWorldPos / 10.0;
+          float contentCenterX = -0.35;
+          float contentCenterY = 0.1;
+          float contentDist = length(vec2(
+            (normalizedPos.x - contentCenterX) * 0.7,
+            (normalizedPos.y - contentCenterY) * 1.2
+          ));
+          float contentProtection = 1.0 - smoothstep(0.3, 0.7, contentDist);
+          contentProtection *= uContentMask;
+          float contentDim = 1.0 - contentProtection * 0.6;
+
+          // Beige edge erosion
+          float edgeDist = max(abs(normalizedPos.x) * 0.8, abs(normalizedPos.y) * 0.9);
+          float edgeErosion = smoothstep(0.6, 1.0, edgeDist);
+          float beigeNoise = noise2D(vWorldPos * 0.3 + uTime * 0.05);
+          float beigeWave = sin(vDiagonalPos * 5.0 + uTime * 0.3) * 0.3 + 0.7;
+          float beigeAmount = edgeErosion * beigeNoise * beigeWave * 0.4;
+
+          // Seeds
+          float uniqueSeed = vHexSeed * 100.0 + vEdgeIndex * 10.0 + vLayerId;
+          float layerOffset = vLayerId * 0.7 + hash(uniqueSeed) * 0.5;
+          float edgeOffset = vEdgeIndex * 0.3 + hash(uniqueSeed + 50.0) * 0.4;
+          float seedOffset = vHexSeed * 6.28;
+
+          // Micro-jitter
+          float jitterFreq = 15.0 + vLayerId * 5.0;
+          float jitter = noise(vSegmentPos * jitterFreq + uTime * 3.0 + uniqueSeed) * 0.03;
+          float jitteredPos = vSegmentPos + jitter;
+
+          // Multi-speed barber poles
+          float bp1Speed = 1.8 + vLayerId * 0.3;
+          float bp2Speed = 2.5 + hash(uniqueSeed) * 0.8;
+          float bp3Speed = 3.2 - vLayerId * 0.2;
+
+          float bp1 = smoothstep(0.3, 0.5, fract(jitteredPos * 6.0 - uTime * bp1Speed + seedOffset)) *
+                      smoothstep(0.85, 0.65, fract(jitteredPos * 6.0 - uTime * bp1Speed + seedOffset));
+          float bp2 = smoothstep(0.2, 0.4, fract(jitteredPos * 9.0 + uTime * bp2Speed + edgeOffset)) *
+                      smoothstep(0.75, 0.55, fract(jitteredPos * 9.0 + uTime * bp2Speed + edgeOffset));
+          float bp3 = smoothstep(0.35, 0.5, fract(jitteredPos * 4.0 - uTime * bp3Speed + layerOffset)) *
+                      smoothstep(0.9, 0.75, fract(jitteredPos * 4.0 - uTime * bp3Speed + layerOffset));
+
+          float barberPoles = bp1 * 0.5 + bp2 * 0.3 + bp3 * 0.2;
+
+          // Racing particles
+          float particleIntensity = 0.0;
+          for (int i = 0; i < 5; i++) {
+            float pSeed = uniqueSeed + float(i) * 17.3;
+            float pSpeed = 0.8 + hash(pSeed) * 1.5;
+            float pOffset = hash(pSeed + 100.0);
+            float pWidth = 0.06 + hash(pSeed + 200.0) * 0.08;
+            float pPhase = fract(jitteredPos + uTime * pSpeed * 0.25 + pOffset);
+            float particle = smoothstep(0.0, pWidth * 0.3, pPhase) *
+                            smoothstep(pWidth, pWidth * 0.5, pPhase);
+            particle *= 0.4 + hash(pSeed + 300.0) * 0.6;
+            particleIntensity += particle;
+          }
+          particleIntensity = min(particleIntensity, 1.0);
+
+          // Fractal gaps
+          float gap1 = smoothstep(0.08, 0.15, fract(jitteredPos * 5.0 - uTime * 0.6 + layerOffset));
+          float gap2 = smoothstep(0.05, 0.12, fract(jitteredPos * 11.0 + uTime * 0.9 + edgeOffset));
+          float gap3 = smoothstep(0.1, 0.18, fract(jitteredPos * 3.0 - uTime * 0.4 + seedOffset));
+          float gapMask = gap1 * gap2 * 0.7 + gap3 * 0.3;
+
+          // Flicker
+          float flickerBase = noise(uTime * 8.0 + uniqueSeed * 50.0);
+          float flickerFast = noise(uTime * 25.0 + uniqueSeed * 30.0);
+          float flicker = 0.85 + flickerBase * 0.1 + flickerFast * 0.05;
+
+          // Multi-frequency breathing
+          float breatheFast = sin(uTime * 4.0 + uniqueSeed * 20.0) * 0.03 + 0.97;
+          float breatheMedium = sin(uTime * 0.8 + seedOffset + vLayerId * 1.2) * 0.08 + 0.92;
+          float breatheSlow = sin(uTime * 0.2 + vDiagonalPos * 2.0) * 0.1 + 0.9;
+          float breathe = breatheFast * breatheMedium * breatheSlow;
+
+          // Micro ripples
+          float rippleSeed = floor(uTime * 0.5) + vHexSeed * 10.0;
+          float rippleChance = hash(rippleSeed);
+          float rippleActive = rippleChance > 0.85 ? 1.0 : 0.0;
+          float ripplePhase = fract(uTime * 0.5) * 6.28;
+          float rippleDist = abs(vDiagonalPos - hash(rippleSeed + 1.0));
+          float ripple = rippleActive * sin(ripplePhase - rippleDist * 10.0) *
+                        smoothstep(0.3, 0.0, rippleDist) * 0.2;
+
+          // Energy pulses
+          float pulse1 = sin(vDiagonalPos * 8.0 - uTime * 1.5) * 0.12 + 0.88;
+          float pulse2 = sin(vDiagonalPos * 15.0 + uTime * 2.2 + 1.0) * 0.08 + 0.92;
+          float pulse3 = sin(vDiagonalPos * 5.0 - uTime * 0.8 + vHexSeed * 3.0) * 0.1 + 0.9;
+          float pulse4 = sin((vDiagonalPos + vSegmentPos * 0.1) * 20.0 - uTime * 3.0) * 0.06 + 0.94;
+          float pulse5 = sin(vDiagonalPos * 3.0 - uTime * 0.4 + vEdgeIndex * 0.5) * 0.08 + 0.92;
+          float energyPulse = pulse1 * pulse2 * pulse3 * pulse4 * pulse5 + ripple;
+
+          // Color palette (teal-focused for dental brand)
+          vec3 deepCyan = vec3(0.0, 0.55, 0.7);
+          vec3 brightCyan = vec3(0.08, 0.72, 0.66);
+          vec3 teal = vec3(0.08, 0.58, 0.52);
+          vec3 turquoise = vec3(0.12, 0.68, 0.62);
+          vec3 greenCyan = vec3(0.08, 0.72, 0.5);
+
+          float colorT1 = sin(uTime * 0.25 + vHexSeed * 4.0 + vDiagonalPos * 1.5) * 0.5 + 0.5;
+          float colorT2 = sin(uTime * 0.18 + vEdgeIndex * 0.8 + vLayerId * 0.5) * 0.5 + 0.5;
+          float colorT3 = sin(uTime * 0.35 + vSegmentPos * 2.0 + seedOffset) * 0.5 + 0.5;
+
+          vec3 mix1 = mix(deepCyan, brightCyan, colorT1);
+          vec3 mix2 = mix(teal, turquoise, colorT2);
+          vec3 mix3 = mix(mix1, mix2, colorT3);
+          vec3 color = mix(mix3, greenCyan, sin(uTime * 0.15 + vDiagonalPos * 3.0) * 0.25 + 0.25);
+
+          color = mix(color, brightCyan, (1.0 - vLayerId * 0.3) * 0.2);
+          color = mix(color, teal, vLayerId * 0.15);
+
+          float layerOpacity = 1.0 - vLayerId * 0.2;
+
+          // Glitch
+          float glitchTime = floor(uTime * 4.0);
+          float glitchChance = hash(glitchTime + uniqueSeed * 100.0);
+          float glitchIntensity = glitchChance > 0.992 ? (0.3 + hash(glitchTime + 1.0) * 0.4) : 0.0;
+          float glitchSpread = glitchChance > 0.985 ? 0.15 : 0.0;
+          float glitch = glitchIntensity + glitchSpread;
+
+          // Thickness
+          float thicknessVar = 0.75 + hash(uniqueSeed + 500.0) * 0.35;
+          thicknessVar *= 0.9 + noise(vSegmentPos * 10.0 + uTime * 0.5) * 0.2;
+
+          // Combine
+          float baseOpacity = 0.25 + barberPoles * 0.35;
+          baseOpacity *= gapMask;
+          baseOpacity += particleIntensity * 0.6;
+          baseOpacity *= breathe * energyPulse * flicker;
+          baseOpacity *= layerOpacity * thicknessVar;
+          baseOpacity += glitch;
+          baseOpacity *= contentDim;
+          baseOpacity *= visibilityMask;
+          baseOpacity = clamp(baseOpacity, 0.0, 1.2);
+
+          float brightness = 0.9 + particleIntensity * 2.5 + barberPoles * 0.6;
+          brightness += glitch * 1.5;
+          brightness += particleIntensity * barberPoles * 1.5;
+          brightness *= (0.7 + contentDim * 0.3);
+
+          // Beige infusion
+          vec3 beige = vec3(0.97, 0.94, 0.88);
+          vec3 finalColor = mix(color * brightness, beige * 0.6, beigeAmount);
+
+          float saturation = 1.0 - edgeErosion * 0.3;
+          vec3 gray = vec3(dot(finalColor, vec3(0.299, 0.587, 0.114)));
+          finalColor = mix(gray, finalColor, saturation);
+
+          gl_FragColor = vec4(finalColor, baseOpacity);
+        }
+      `;
+
+      // Hex storage
+      const hexes = [];
+
+      // Create hex layers
+      function createHexLayers(x, y, hexIndex) {
+        const layers = [];
+        const hexSeed = Math.random();
+
+        for (let layer = 0; layer < 3; layer++) {
+          const offset = (layer - 1) * 0.03;
+          const radius = hexRadius + offset;
+
+          const positions = [];
+          const segmentPositions = [];
+          const edgeIndices = [];
+          const hexSeeds = [];
+          const layerIds = [];
+
+          const segmentsPerEdge = 12;
+          for (let edge = 0; edge < 6; edge++) {
+            const angle1 = (Math.PI / 3) * edge + Math.PI / 6;
+            const angle2 = (Math.PI / 3) * (edge + 1) + Math.PI / 6;
+
+            const x1 = x + Math.cos(angle1) * radius;
+            const y1 = y + Math.sin(angle1) * radius;
+            const x2 = x + Math.cos(angle2) * radius;
+            const y2 = y + Math.sin(angle2) * radius;
+
+            for (let s = 0; s < segmentsPerEdge; s++) {
+              const t1 = s / segmentsPerEdge;
+              const t2 = (s + 1) / segmentsPerEdge;
+
+              const px1 = x1 + (x2 - x1) * t1;
+              const py1 = y1 + (y2 - y1) * t1;
+              const px2 = x1 + (x2 - x1) * t2;
+              const py2 = y1 + (y2 - y1) * t2;
+
+              positions.push(px1, py1, 0, px2, py2, 0);
+              segmentPositions.push(t1, t2);
+              edgeIndices.push(edge, edge);
+              hexSeeds.push(hexSeed, hexSeed);
+              layerIds.push(layer, layer);
+            }
+          }
+
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+          geometry.setAttribute('aSegmentPos', new THREE.Float32BufferAttribute(segmentPositions, 1));
+          geometry.setAttribute('aEdgeIndex', new THREE.Float32BufferAttribute(edgeIndices, 1));
+          geometry.setAttribute('aHexSeed', new THREE.Float32BufferAttribute(hexSeeds, 1));
+          geometry.setAttribute('aLayerId', new THREE.Float32BufferAttribute(layerIds, 1));
+
+          const material = new THREE.ShaderMaterial({
+            vertexShader: lineVertexShader,
+            fragmentShader: lineFragmentShader,
+            uniforms: {
+              uTime: { value: 0 },
+              uBuildProgress: { value: 0 },
+              uScrollProgress: { value: 0 },
+              uOutroProgress: { value: 0 },
+              uContentMask: { value: 0.85 }
+            },
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+          });
+
+          const lineSegments = new THREE.LineSegments(geometry, material);
+          scene.add(lineSegments);
+          layers.push({ lineSegments, material });
+        }
+
+        return { layers, hexSeed };
+      }
+
+      // Generate grid
+      for (let row = -rows/2; row < rows/2; row++) {
+        for (let col = -cols/2; col < cols/2; col++) {
+          const x = col * hexWidth * 0.75;
+          const y = row * hexHeight + (col % 2 ? hexHeight / 2 : 0);
+          const hex = createHexLayers(x, y, hexes.length);
+          hexes.push(hex);
+        }
+      }
+
+      // Animation state
+      let buildProgress = 0;
+      const buildSpeed = 0.4;
+      let time = 0;
+      let scrollProgress = 0;
+      let outroProgress = 0;
+      let targetOutro = 0;
+
+      // Real scroll tracking
+      function updateScrollProgress() {
+        const heroRect = heroSection.getBoundingClientRect();
+        const heroHeight = heroRect.height;
+        const scrolled = -heroRect.top;
+
+        scrollProgress = Math.max(0, Math.min(1, scrolled / heroHeight));
+        targetOutro = scrollProgress > 0.5 ? (scrollProgress - 0.5) / 0.5 : 0;
+        targetOutro = Math.max(0, Math.min(1, targetOutro));
+      }
+
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+      updateScrollProgress();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        time += 0.016;
+
+        // Smooth outro
+        outroProgress += (targetOutro - outroProgress) * 0.08;
+
+        // Build progress
+        if (buildProgress < 2 && outroProgress < 0.1) {
+          buildProgress += 0.016 * buildSpeed;
+        }
+
+        // Update uniforms
+        for (const hex of hexes) {
+          for (const layer of hex.layers) {
+            layer.material.uniforms.uTime.value = time;
+            layer.material.uniforms.uBuildProgress.value = buildProgress;
+            layer.material.uniforms.uScrollProgress.value = scrollProgress;
+            layer.material.uniforms.uOutroProgress.value = outroProgress;
+          }
+        }
+
+        composer.render();
+      }
+
+      animate();
+
+      // Resize handler
+      window.addEventListener('resize', () => {
+        const aspect = window.innerWidth / window.innerHeight;
+        camera.left = -viewSize * aspect;
+        camera.right = viewSize * aspect;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        composer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      console.log('Nanotech hex grid initialized with', hexes.length, 'hexagons');
+    </script>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.service-card, .testimonial-card, .trust-item').forEach(el => {
+            el.classList.add('fade-in-up');
+            observer.observe(el);
+        });
+
+        // Add stagger delays to service cards
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.classList.add(`stagger-${(index % 6) + 1}`);
+        });
+
+        // Add stagger delays to testimonial cards
+        document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+            card.classList.add(`stagger-${(index % 3) + 1}`);
+        });
+
+        // Add stagger delays to trust items
+        document.querySelectorAll('.trust-item').forEach((item, index) => {
+            item.classList.add(`stagger-${(index % 4) + 1}`);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | The Heathway Dental Surgery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cream: #E8DFD8; --cream-light: #F5F0EC; --beige: #f5ebe4; --beige-soft: rgba(245, 235, 228, 0.15);
+            --teal: #14b8a6; --teal-muted: #0d9488; --teal-soft: rgba(20, 184, 166, 0.15); --teal-glow: rgba(20, 184, 166, 0.4);
+            --navy: #0a1628; --navy-light: #0f2240; --blue-accent: #1e3a5f; --blue-neon: #00d4ff; --blue-glow: rgba(0, 212, 255, 0.3);
+            --black: #050a10; --charcoal: #0d1520; --gray-900: #131c2a; --gray-800: #1a2535; --gray-700: #243347; --gray-600: #3d4f66; --gray-400: #8899aa; --gray-300: #b0bfcc;
+            --white: #FFFFFF;
+            --font-display: 'Sora', sans-serif; --font-body: 'Outfit', sans-serif;
+            --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 4rem; --space-3xl: 6rem; --space-4xl: 8rem;
+            --container-max: 1280px; --container-padding: 1.5rem;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--black); color: var(--gray-300); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px var(--teal-glow); } 50% { box-shadow: 0 0 40px var(--teal-glow); } }
+        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Diagonal lines */
+        .hero__diagonal {
+            position: absolute;
+            width: 130%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 10%, rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.08) 90%, transparent 100%);
+            transform-origin: 0 0;
+            transform: rotate(30deg);
+            box-shadow: 0 0 4px rgba(20, 184, 166, 0.1);
+        }
+        .hero__diagonal--1 { top: 6%; left: 0; opacity: 0.5; }
+        .hero__diagonal--2 { top: 12%; left: 0; opacity: 0.6; }
+        .hero__diagonal--3 { top: 18%; left: 0; opacity: 0.7; }
+        .hero__diagonal--4 { top: 24%; left: 0; opacity: 0.85; }
+        .hero__diagonal--5 { top: 30%; left: 0; opacity: 1; }
+        .hero__diagonal--6 { top: 36%; left: 0; opacity: 1; }
+        .hero__diagonal--7 { top: 42%; left: 0; opacity: 0.85; }
+        .hero__diagonal--8 { top: 48%; left: 0; opacity: 0.7; }
+
+        /* Curved arcs */
+        .hero__arc {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.06);
+        }
+        .hero__arc--1 { width: 700px; height: 700px; bottom: -400px; right: -150px; border-color: rgba(255, 255, 255, 0.06); }
+        .hero__arc--2 { width: 500px; height: 500px; bottom: -280px; right: -80px; border-color: rgba(255, 255, 255, 0.08); }
+        .hero__arc--3 { width: 400px; height: 400px; top: -250px; right: -120px; border-color: rgba(255, 255, 255, 0.07); box-shadow: 0 0 15px rgba(0, 212, 255, 0.05); }
+
+        .page-hero__lines { position: absolute; top: 0; left: 0; width: 50%; height: 100%; pointer-events: none; overflow: visible; }
+
+        .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: var(--space-md) 0; background: rgba(5, 10, 16, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 212, 255, 0.1); }
+        .nav { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; }
+        .logo__mark { width: 48px; height: 48px; background: linear-gradient(135deg, var(--teal), var(--blue-neon)); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; animation: pulse-glow 3s ease-in-out infinite; }
+        .logo__text { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--white); }
+        .nav__links { display: flex; align-items: center; gap: var(--space-xl); list-style: none; }
+        .nav__link { text-decoration: none; color: var(--cream); font-size: 0.9rem; font-weight: 500; transition: all 0.3s; position: relative; }
+        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--teal), var(--blue-neon)); transition: width 0.3s; box-shadow: 0 0 10px var(--teal-glow); }
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__link:hover::after, .nav__link--active::after { width: 100%; }
+        .nav__cta { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--teal), var(--teal-muted)); color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-radius: 10px; transition: all 0.4s; }
+        .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--teal-glow); }
+        .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+
+        .page-hero { background: var(--black); padding: 180px 0 120px; position: relative; overflow: hidden; }
+        .page-hero__gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse 80% 60% at 70% 80%, rgba(20, 184, 166, 0.1), transparent 60%), radial-gradient(ellipse 60% 50% at 20% 30%, rgba(20, 184, 166, 0.06), transparent 50%), radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0, 212, 255, 0.05), transparent 50%), var(--black); background-size: 200% 200%; animation: gradient-shift 20s ease infinite; }
+        .page-hero__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); position: relative; text-align: center; }
+        .page-hero__badge { display: inline-flex; align-items: center; gap: var(--space-sm); padding: 0.5rem 1rem; background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3); border-radius: 50px; margin-bottom: var(--space-lg); }
+        .page-hero__badge-dot { width: 8px; height: 8px; background: var(--teal); border-radius: 50%; animation: pulse-glow 2s infinite; }
+        .page-hero__badge-text { color: var(--teal); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .page-hero__title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; color: var(--white); margin-bottom: var(--space-md); }
+        .page-hero__description { font-size: 1.125rem; color: var(--cream); max-width: 600px; margin: 0 auto; }
+
+        .services { padding: var(--space-4xl) 0; background: linear-gradient(180deg, var(--beige) 0%, rgba(180, 165, 150, 1) 100%); }
+        .services__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .services__header { text-align: center; margin-bottom: var(--space-3xl); }
+        .services__eyebrow { display: inline-block; color: var(--teal); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: var(--space-md); }
+        .services__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: var(--cream); margin-bottom: var(--space-md); }
+        .services__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+
+        .service-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95), rgba(15, 25, 40, 0.85)); backdrop-filter: blur(12px); padding: var(--space-xl); border-radius: 20px; border: 1px solid rgba(20, 184, 166, 0.2); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), transparent 50%, rgba(0, 212, 255, 0.05)); opacity: 0.5; transition: opacity 0.5s; }
+        .service-card:hover { transform: translateY(-10px); border-color: rgba(20, 184, 166, 0.5); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 184, 166, 0.2); }
+        .service-card:hover::before { opacity: 1; }
+        .service-card__header { display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md); position: relative; }
+        .service-card__icon { width: 56px; height: 56px; min-width: 56px; background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(0, 212, 255, 0.1)); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--teal); transition: all 0.4s; }
+        .service-card:hover .service-card__icon { box-shadow: 0 0 20px var(--teal-glow); }
+        .service-card__icon svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .service-card__title { font-family: var(--font-display); font-size: 1.375rem; font-weight: 600; color: var(--cream); margin-bottom: var(--space-xs); }
+        .service-card__subtitle { color: var(--gray-300); font-size: 0.9375rem; line-height: 1.6; }
+        .service-card__list { list-style: none; margin-bottom: var(--space-lg); position: relative; }
+        .service-card__list li { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-xs) 0; color: var(--gray-300); font-size: 0.9375rem; }
+        .service-card__list li::before { content: ''; width: 6px; height: 6px; background: linear-gradient(135deg, var(--teal), var(--blue-neon)); border-radius: 50%; box-shadow: 0 0 8px var(--teal-glow); }
+        .service-card__cta { display: inline-flex; align-items: center; gap: var(--space-xs); color: var(--teal); font-weight: 600; font-size: 0.9375rem; text-decoration: none; transition: all 0.3s; position: relative; }
+        .service-card__cta:hover { gap: var(--space-sm); color: var(--blue-neon); }
+        .service-card__cta svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+        .nhs-info { padding: var(--space-4xl) 0; background: linear-gradient(180deg, rgba(180, 165, 150, 1) 0%, rgba(80, 90, 100, 1) 100%); }
+        .nhs-info__container { max-width: 900px; margin: 0 auto; padding: 0 var(--container-padding); }
+        .nhs-info__card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); backdrop-filter: blur(12px); border-radius: 24px; padding: var(--space-2xl); display: grid; grid-template-columns: auto 1fr; gap: var(--space-xl); align-items: center; border: 1px solid rgba(20, 184, 166, 0.2); }
+        .nhs-info__badge { width: 100px; height: 100px; background: linear-gradient(135deg, var(--teal), var(--blue-neon)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--white); box-shadow: 0 0 40px var(--teal-glow); }
+        .nhs-info__content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--cream); margin-bottom: var(--space-sm); }
+        .nhs-info__content p { color: var(--gray-300); font-size: 1rem; line-height: 1.7; }
+
+        /* CTA Section - Simple dark with teal gradients */
+        .cta-section { padding: var(--space-4xl) 0; position: relative; overflow: hidden; background: radial-gradient(ellipse 80% 60% at 70% 80%, rgba(20, 184, 166, 0.1), transparent 60%), radial-gradient(ellipse 60% 50% at 20% 30%, rgba(20, 184, 166, 0.06), transparent 50%), radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0, 212, 255, 0.05), transparent 50%), var(--black); }
+        .cta-section__container { max-width: 800px; margin: 0 auto; padding: 0 var(--container-padding); text-align: center; position: relative; z-index: 1; }
+        .cta-section__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: var(--cream); margin-bottom: var(--space-md); }
+        .cta-section__text { color: var(--gray-300); font-size: 1.0625rem; margin-bottom: var(--space-xl); }
+        .btn { display: inline-flex; align-items: center; gap: var(--space-sm); padding: 1rem 2rem; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.4s; border: none; cursor: pointer; }
+        .btn--primary { background: linear-gradient(135deg, var(--teal), var(--teal-muted)); color: var(--white); }
+        .btn--primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--teal-glow); }
+
+        .footer { background: var(--black); padding: var(--space-3xl) 0 var(--space-xl); border-top: 1px solid rgba(232, 223, 216, 0.15); }
+        .footer__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-3xl); margin-bottom: var(--space-3xl); }
+        .footer__brand { max-width: 280px; }
+        .footer__logo { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+        .footer__logo-mark { width: 40px; height: 40px; background: linear-gradient(135deg, var(--teal), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; }
+        .footer__logo-text { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--white); }
+        .footer__tagline { color: var(--cream); font-size: 0.9375rem; line-height: 1.7; }
+        .footer__heading { color: var(--white); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--space-lg); }
+        .footer__links { list-style: none; }
+        .footer__links li { margin-bottom: var(--space-sm); }
+        .footer__links a { color: var(--cream); text-decoration: none; font-size: 0.9375rem; transition: color 0.3s; }
+        .footer__links a:hover { color: var(--teal); }
+        .footer__contact-item { color: var(--cream); font-size: 0.9375rem; margin-bottom: var(--space-sm); }
+        .footer__bottom { padding-top: var(--space-xl); border-top: 1px solid rgba(232, 223, 216, 0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer__copyright { color: var(--gray-600); font-size: 0.8125rem; }
+        .footer__legal { display: flex; gap: var(--space-lg); }
+        .footer__legal a { color: var(--gray-600); text-decoration: none; font-size: 0.8125rem; transition: color 0.3s; }
+        .footer__legal a:hover { color: var(--teal); }
+
+        @media (max-width: 1024px) {
+            .services__grid { grid-template-columns: 1fr; }
+            .nhs-info__card { grid-template-columns: 1fr; text-align: center; }
+            .nhs-info__badge { margin: 0 auto; }
+            .footer__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav__links, .nav__cta { display: none; }
+            .nav__mobile-toggle { display: flex; }
+            .page-hero { padding: 140px 0 80px; }
+            .footer__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo"><div class="logo__mark">H</div><span class="logo__text">Heathway Dental</span></a>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="services.html" class="nav__link nav__link--active">Services</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="chatbot.html" class="nav__link">DentalAI</a></li>
+            </ul>
+            <a href="contact.html" class="nav__cta">Book Appointment</a>
+            <button class="nav__mobile-toggle"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero__gradient">
+            <div class="page-hero__lines">
+                <div class="hero__diagonal hero__diagonal--1"></div>
+                <div class="hero__diagonal hero__diagonal--2"></div>
+                <div class="hero__diagonal hero__diagonal--3"></div>
+                <div class="hero__diagonal hero__diagonal--4"></div>
+                <div class="hero__diagonal hero__diagonal--5"></div>
+                <div class="hero__diagonal hero__diagonal--6"></div>
+                <div class="hero__diagonal hero__diagonal--7"></div>
+                <div class="hero__diagonal hero__diagonal--8"></div>
+            </div>
+            <div class="hero__arc hero__arc--1"></div>
+            <div class="hero__arc hero__arc--2"></div>
+            <div class="hero__arc hero__arc--3"></div>
+        </div>
+        <div class="page-hero__container">
+            <div class="page-hero__badge"><span class="page-hero__badge-dot"></span><span class="page-hero__badge-text">Our Services</span></div>
+            <h1 class="page-hero__title">Comprehensive dental care</h1>
+            <p class="page-hero__description">From routine check-ups to advanced treatments, we provide the full range of dental services your family needs.</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services__container">
+            <div class="services__grid">
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                        <div><h3 class="service-card__title">General Dentistry</h3><p class="service-card__subtitle">Preventive care to keep your smile healthy and bright.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Routine Check-ups</li><li>Professional Cleaning</li><li>Oral Health Assessments</li><li>X-rays & Diagnostics</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+                        <div><h3 class="service-card__title">Cosmetic Dentistry</h3><p class="service-card__subtitle">Transform your smile with our aesthetic dental treatments.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Teeth Whitening</li><li>Porcelain Veneers</li><li>Composite Bonding</li><li>Smile Makeovers</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                        <div><h3 class="service-card__title">Dental Implants</h3><p class="service-card__subtitle">Permanent tooth replacement for a natural-looking smile.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Single Tooth Implants</li><li>Multiple Implants</li><li>Full Arch Restoration</li><li>Implant-Supported Dentures</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                        <div><h3 class="service-card__title">Orthodontics</h3><p class="service-card__subtitle">Straighten your teeth for improved function and appearance.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Invisalign Clear Aligners</li><li>Traditional Braces</li><li>Bite Correction</li><li>Retainers</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                        <div><h3 class="service-card__title">Root Canal Treatment</h3><p class="service-card__subtitle">Save infected teeth and relieve pain with expert endodontic care.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Pain-Free Procedures</li><li>Advanced Technology</li><li>Single Visit Treatment</li><li>Post-Treatment Care</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                        <div><h3 class="service-card__title">Emergency Care</h3><p class="service-card__subtitle">Immediate care when you need it most.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Same-Day Appointments</li><li>Tooth Pain Relief</li><li>Broken Tooth Repair</li><li>Trauma Treatment</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                        <div><h3 class="service-card__title">Children's Dentistry</h3><p class="service-card__subtitle">Gentle, compassionate care for your little ones.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Child-Friendly Environment</li><li>Preventive Care</li><li>Fluoride Treatments</li><li>Dental Sealants</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-card__header">
+                        <div class="service-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.25M15.54 15.54l4.24 4.25M1 12h6M17 12h6M4.22 19.78l4.24-4.25M15.54 8.46l4.24-4.25"/></svg></div>
+                        <div><h3 class="service-card__title">Sedation Dentistry</h3><p class="service-card__subtitle">Anxiety-free dental care for nervous patients.</p></div>
+                    </div>
+                    <ul class="service-card__list"><li>Nitrous Oxide (Laughing Gas)</li><li>Oral Sedation</li><li>IV Sedation</li><li>Comfort-Focused Care</li></ul>
+                    <a href="contact.html" class="service-card__cta">Book Appointment <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="nhs-info">
+        <div class="nhs-info__container">
+            <div class="nhs-info__card">
+                <div class="nhs-info__badge">NHS</div>
+                <div class="nhs-info__content">
+                    <h3>NHS & Private Patients Welcome</h3>
+                    <p>We're proud to offer both NHS and private dental services. As an NHS registered practice, we provide quality dental care at NHS band prices. We also offer a range of private treatments for those seeking additional cosmetic or advanced options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-section__container">
+            <h2 class="cta-section__title">Ready to get started?</h2>
+            <p class="cta-section__text">Book your appointment today and experience the difference quality dental care makes.</p>
+            <a href="contact.html" class="btn btn--primary">Book Your Appointment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand"><div class="footer__logo"><div class="footer__logo-mark">H</div><span class="footer__logo-text">Heathway Dental</span></div><p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our Dagenham practice.</p></div>
+                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">Book Online</a></li></ul></div>
+                <div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="services.html">General Dentistry</a></li><li><a href="services.html">Cosmetic Dentistry</a></li><li><a href="services.html">Dental Implants</a></li><li><a href="services.html">Orthodontics</a></li></ul></div>
+                <div><h4 class="footer__heading">Contact</h4><p class="footer__contact-item">276a Heathway<br>Dagenham, RM10 8QS</p><p class="footer__contact-item">020 8592 5030</p><p class="footer__contact-item">Mon-Thu: 9am-5pm<br>Fri: 9am-4:30pm</p></div>
+            </div>
+            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 The Heathway Dental Surgery. All rights reserved.</p><div class="footer__legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+        </div>
+    </footer>
+</body>
+</html>

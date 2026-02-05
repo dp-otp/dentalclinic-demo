@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | The Heathway Dental Surgery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM — Premium Futuristic
+           =========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #E8DFD8;
+            --cream-light: #F5F0EC;
+            --beige: #f5ebe4;
+            --beige-soft: rgba(245, 235, 228, 0.15);
+            --teal: #14b8a6;
+            --teal-muted: #0d9488;
+            --teal-soft: rgba(20, 184, 166, 0.15);
+            --teal-glow: rgba(20, 184, 166, 0.4);
+            --navy: #0a1628;
+            --navy-light: #0f2240;
+            --blue-accent: #1e3a5f;
+            --blue-neon: #00d4ff;
+            --blue-glow: rgba(0, 212, 255, 0.3);
+            --black: #050a10;
+            --charcoal: #0d1520;
+            --gray-900: #131c2a;
+            --gray-800: #1a2535;
+            --gray-700: #243347;
+            --gray-600: #3d4f66;
+            --gray-400: #8899aa;
+            --gray-300: #b0bfcc;
+            --white: #FFFFFF;
+            --font-display: 'Sora', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            --space-4xl: 8rem;
+            --container-max: 1280px;
+            --container-padding: 1.5rem;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--black);
+            color: var(--gray-300);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--teal-glow); }
+            50% { box-shadow: 0 0 40px var(--teal-glow); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Diagonal lines animation */
+        .hero__diagonal {
+            position: absolute;
+            width: 130%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.08) 10%,
+                rgba(255, 255, 255, 0.14) 50%,
+                rgba(255, 255, 255, 0.08) 90%,
+                transparent 100%);
+            transform-origin: 0 0;
+            transform: rotate(30deg);
+            box-shadow: 0 0 4px rgba(20, 184, 166, 0.1);
+        }
+
+        .hero__diagonal--1 { top: 6%; left: 0; opacity: 0.5; }
+        .hero__diagonal--2 { top: 12%; left: 0; opacity: 0.6; }
+        .hero__diagonal--3 { top: 18%; left: 0; opacity: 0.7; }
+        .hero__diagonal--4 { top: 24%; left: 0; opacity: 0.85; }
+        .hero__diagonal--5 { top: 30%; left: 0; opacity: 1; }
+        .hero__diagonal--6 { top: 36%; left: 0; opacity: 1; }
+        .hero__diagonal--7 { top: 42%; left: 0; opacity: 0.85; }
+        .hero__diagonal--8 { top: 48%; left: 0; opacity: 0.7; }
+
+        /* Curved arcs */
+        .hero__arc {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.06);
+        }
+
+        .hero__arc--1 {
+            width: 700px;
+            height: 700px;
+            bottom: -400px;
+            right: -150px;
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .hero__arc--2 {
+            width: 500px;
+            height: 500px;
+            bottom: -280px;
+            right: -80px;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .hero__arc--3 {
+            width: 400px;
+            height: 400px;
+            top: -250px;
+            right: -120px;
+            border-color: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.05);
+        }
+
+        /* Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: var(--space-md) 0;
+            background: rgba(5, 10, 16, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+        }
+
+        .logo__mark {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .logo__text {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: var(--cream);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal), var(--blue-neon));
+            transition: width 0.3s;
+            box-shadow: 0 0 10px var(--teal-glow);
+        }
+
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__link:hover::after, .nav__link--active::after { width: 100%; }
+
+        .nav__cta {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--teal), var(--teal-muted));
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.4s;
+        }
+
+        .nav__cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--teal-glow);
+        }
+
+        .nav__mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav__mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: var(--black);
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero__gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 80%, rgba(20, 184, 166, 0.1), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 20% 30%, rgba(20, 184, 166, 0.06), transparent 50%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0, 212, 255, 0.05), transparent 50%),
+                var(--black);
+            background-size: 200% 200%;
+            animation: gradient-shift 20s ease infinite;
+        }
+
+        .page-hero__lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .page-hero__container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            position: relative;
+            text-align: center;
+        }
+
+        .page-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 0.5rem 1rem;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 50px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .page-hero__badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .page-hero__badge-text {
+            color: var(--teal);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .page-hero__title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: var(--space-md);
+        }
+
+        .page-hero__title-gradient {
+            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-hero__description {
+            font-size: 1.125rem;
+            color: var(--cream);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Story Section */
+        .story {
+            padding: var(--space-4xl) 0;
+            background: linear-gradient(180deg, var(--beige) 0%, rgba(180, 165, 150, 1) 100%);
+        }
+
+        .story__container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+        }
+
+        .story__content { max-width: 520px; }
+
+        .story__eyebrow {
+            color: var(--teal);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .story__title {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1.3;
+            margin-bottom: var(--space-lg);
+        }
+
+        .story__title-gradient {
+            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .story__text {
+            color: var(--navy);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+        }
+
+        .story__image {
+            background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            border-radius: 24px;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story__image::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .story__image:hover::before { opacity: 0.4; }
+
+        .story__image-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue-neon);
+        }
+
+        .story__image-text {
+            color: var(--gray-600);
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Team Section */
+        .team {
+            padding: var(--space-4xl) 0;
+            background: linear-gradient(180deg, rgba(180, 165, 150, 1) 0%, rgba(140, 130, 120, 1) 100%);
+            position: relative;
+        }
+
+        .team::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.06), transparent 60%);
+        }
+
+        .team__container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            color: var(--teal);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-description {
+            max-width: 560px;
+            margin: 0 auto;
+            color: var(--navy);
+            font-size: 1.0625rem;
+        }
+
+        .team__card {
+            background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95));
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: var(--space-2xl);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+        }
+
+        .team__card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .team__avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--gray-700), var(--gray-800));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border: 2px solid rgba(20, 184, 166, 0.3);
+        }
+
+        .team__info h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: var(--space-xs);
+        }
+
+        .team__info p {
+            color: var(--teal);
+            font-weight: 500;
+        }
+
+        .team__bio {
+            color: var(--gray-300);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .team__bio p { margin-bottom: var(--space-md); }
+        .team__bio p:last-child { margin-bottom: 0; }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(180deg, rgba(140, 130, 120, 1) 0%, rgba(100, 95, 90, 1) 100%);
+            padding: var(--space-3xl) 0;
+            border-top: 1px solid rgba(20, 184, 166, 0.15);
+            border-bottom: 1px solid rgba(20, 184, 166, 0.15);
+        }
+
+        .stats__container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .stat {
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .stat__value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat__label {
+            color: var(--cream);
+            font-size: 0.875rem;
+        }
+
+        /* Values Section */
+        .values {
+            padding: var(--space-4xl) 0;
+            background: linear-gradient(180deg, rgba(100, 95, 90, 1) 0%, rgba(80, 90, 100, 1) 100%);
+        }
+
+        .values__container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .values__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .value-card {
+            background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95), rgba(15, 25, 40, 0.85));
+            backdrop-filter: blur(12px);
+            padding: var(--space-xl);
+            border-radius: 20px;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(20, 184, 166, 0.5);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(20, 184, 166, 0.2);
+        }
+
+        .value-card__icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(0, 212, 255, 0.1));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+            color: var(--teal);
+            transition: all 0.4s;
+        }
+
+        .value-card:hover .value-card__icon {
+            box-shadow: 0 0 20px var(--teal-glow);
+        }
+
+        .value-card__icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .value-card__title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: var(--space-sm);
+        }
+
+        .value-card__text {
+            color: var(--gray-300);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        /* CTA Section - Simple dark with teal gradients */
+        .cta-section {
+            padding: var(--space-4xl) 0;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 80%, rgba(20, 184, 166, 0.1), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 20% 30%, rgba(20, 184, 166, 0.06), transparent 50%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0, 212, 255, 0.05), transparent 50%),
+                var(--black);
+        }
+
+        .cta-section__container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section__title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-section__text {
+            color: var(--gray-300);
+            font-size: 1.0625rem;
+            margin-bottom: var(--space-xl);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.4s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn--primary {
+            background: linear-gradient(135deg, var(--teal), var(--teal-muted));
+            color: var(--white);
+        }
+
+        .btn--primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--teal-glow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: var(--space-3xl) 0 var(--space-xl);
+            border-top: 1px solid rgba(232, 223, 216, 0.15);
+        }
+
+        .footer__container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-3xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        .footer__brand { max-width: 280px; }
+
+        .footer__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer__logo-mark {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer__logo-text {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .footer__tagline {
+            color: var(--cream);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        .footer__heading {
+            color: var(--white);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer__links { list-style: none; }
+        .footer__links li { margin-bottom: var(--space-sm); }
+
+        .footer__links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.3s;
+        }
+
+        .footer__links a:hover { color: var(--teal); }
+
+        .footer__contact-item {
+            color: var(--cream);
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer__bottom {
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(232, 223, 216, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer__copyright {
+            color: var(--gray-600);
+            font-size: 0.8125rem;
+        }
+
+        .footer__legal { display: flex; gap: var(--space-lg); }
+
+        .footer__legal a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            transition: color 0.3s;
+        }
+
+        .footer__legal a:hover { color: var(--teal); }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .story__container { grid-template-columns: 1fr; }
+            .story__image { height: 360px; }
+            .values__grid { grid-template-columns: repeat(2, 1fr); }
+            .stats__container { grid-template-columns: repeat(2, 1fr); }
+            .footer__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav__links, .nav__cta { display: none; }
+            .nav__mobile-toggle { display: flex; }
+            .page-hero { padding: 140px 0 80px; }
+            .values__grid { grid-template-columns: 1fr; }
+            .team__card-header { flex-direction: column; text-align: center; }
+            .footer__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <div class="logo__mark">H</div>
+                <span class="logo__text">Heathway Dental</span>
+            </a>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="services.html" class="nav__link">Services</a></li>
+                <li><a href="about.html" class="nav__link nav__link--active">About</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="chatbot.html" class="nav__link">DentalAI</a></li>
+            </ul>
+            <a href="contact.html" class="nav__cta">Book Appointment</a>
+            <button class="nav__mobile-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero__gradient">
+            <div class="page-hero__lines">
+                <div class="hero__diagonal hero__diagonal--1"></div>
+                <div class="hero__diagonal hero__diagonal--2"></div>
+                <div class="hero__diagonal hero__diagonal--3"></div>
+                <div class="hero__diagonal hero__diagonal--4"></div>
+                <div class="hero__diagonal hero__diagonal--5"></div>
+                <div class="hero__diagonal hero__diagonal--6"></div>
+                <div class="hero__diagonal hero__diagonal--7"></div>
+                <div class="hero__diagonal hero__diagonal--8"></div>
+            </div>
+            <div class="hero__arc hero__arc--1"></div>
+            <div class="hero__arc hero__arc--2"></div>
+            <div class="hero__arc hero__arc--3"></div>
+        </div>
+        <div class="page-hero__container">
+            <div class="page-hero__badge">
+                <span class="page-hero__badge-dot"></span>
+                <span class="page-hero__badge-text">About Us</span>
+            </div>
+            <h1 class="page-hero__title">Caring for <span class="page-hero__title-gradient">Dagenham's</span> smiles</h1>
+            <p class="page-hero__description">Your trusted partner in comprehensive dental care, serving the community with excellence and compassion.</p>
+        </div>
+    </section>
+
+    <section class="story">
+        <div class="story__container">
+            <div class="story__content">
+                <span class="story__eyebrow">Our Story</span>
+                <h2 class="story__title">A practice built on <span class="story__title-gradient">trust</span> and quality care</h2>
+                <p class="story__text">The Heathway Dental Surgery has been a cornerstone of the Dagenham community, providing exceptional dental services with a personal touch. Located at 276a Heathway, we're proud to serve our diverse, vibrant neighbourhood.</p>
+                <p class="story__text">We believe in creating a welcoming environment where every patient feels comfortable and cared for. Our modern facility combines state-of-the-art technology with compassionate care.</p>
+                <p class="story__text">We're committed to inclusivity and diversity, and we're proud to be a welcoming space where everyone is treated with dignity and respect.</p>
+            </div>
+            <div class="story__image">
+                <div class="story__image-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+                    </svg>
+                </div>
+                <span class="story__image-text">Insert Practice Photo</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <div class="team__container">
+            <header class="section-header">
+                <span class="section-eyebrow">Our Team</span>
+                <h2 class="section-title">Expert care, personal touch</h2>
+                <p class="section-description">Our experienced team is dedicated to providing exceptional care in a comfortable, welcoming environment.</p>
+            </header>
+            <div class="team__card">
+                <div class="team__card-header">
+                    <div class="team__avatar">Photo</div>
+                    <div class="team__info">
+                        <h3>Dr Niti Kaushal</h3>
+                        <p>Principal Dentist</p>
+                    </div>
+                </div>
+                <div class="team__bio">
+                    <p>Our practice is led by Dr Niti Kaushal, an experienced dental professional dedicated to providing exceptional care. Our team is committed to continuous professional development, ensuring we stay at the forefront of modern dental techniques and technologies.</p>
+                    <p>We're NHS registered and CQC quality approved, which means we meet the highest standards of care and safety. Our diverse team reflects the community we serve, and we're fluent in multiple languages to better communicate with all our patients.</p>
+                    <p>From routine check-ups to complex procedures, every member of our team is committed to making your dental experience as comfortable and effective as possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats__container">
+            <div class="stat"><div class="stat__value">15+</div><div class="stat__label">Years Experience</div></div>
+            <div class="stat"><div class="stat__value">5,000+</div><div class="stat__label">Happy Patients</div></div>
+            <div class="stat"><div class="stat__value">NHS</div><div class="stat__label">Registered Practice</div></div>
+            <div class="stat"><div class="stat__value">CQC</div><div class="stat__label">Quality Approved</div></div>
+        </div>
+    </section>
+
+    <section class="values">
+        <div class="values__container">
+            <header class="section-header">
+                <span class="section-eyebrow">Our Values</span>
+                <h2 class="section-title">What sets us apart</h2>
+                <p class="section-description">We're guided by principles that put your wellbeing first.</p>
+            </header>
+            <div class="values__grid">
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <h3 class="value-card__title">Premium Quality</h3>
+                    <p class="value-card__text">We use only the highest quality materials and latest technology to ensure exceptional results.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                    <h3 class="value-card__title">Patient-Centered</h3>
+                    <p class="value-card__text">Your comfort, concerns, and goals are our top priority. We listen and tailor treatments to your needs.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                    <h3 class="value-card__title">Inclusive Care</h3>
+                    <p class="value-card__text">Everyone is welcome here. We're proud to be a welcoming, inclusive space for all.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.25M15.54 15.54l4.24 4.25M1 12h6M17 12h6M4.22 19.78l4.24-4.25M15.54 8.46l4.24-4.25"/></svg></div>
+                    <h3 class="value-card__title">Advanced Technology</h3>
+                    <p class="value-card__text">From digital imaging to modern techniques, we invest in technology that improves your experience.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                    <h3 class="value-card__title">Gentle Approach</h3>
+                    <p class="value-card__text">We understand dental anxiety. Our compassionate team creates a calm, reassuring environment.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                    <h3 class="value-card__title">Excellence</h3>
+                    <p class="value-card__text">NHS registered and CQC approved, we maintain the highest standards in every aspect of care.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-section__container">
+            <h2 class="cta-section__title">Experience exceptional dental care</h2>
+            <p class="cta-section__text">Join our family of satisfied patients and discover the difference personalised care makes.</p>
+            <a href="contact.html" class="btn btn--primary">Book Your Appointment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo"><div class="footer__logo-mark">H</div><span class="footer__logo-text">Heathway Dental</span></div>
+                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our Dagenham practice.</p>
+                </div>
+                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">Book Online</a></li></ul></div>
+                <div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="services.html">General Dentistry</a></li><li><a href="services.html">Cosmetic Dentistry</a></li><li><a href="services.html">Dental Implants</a></li><li><a href="services.html">Orthodontics</a></li></ul></div>
+                <div><h4 class="footer__heading">Contact</h4><p class="footer__contact-item">276a Heathway<br>Dagenham, RM10 8QS</p><p class="footer__contact-item">020 8592 5030</p><p class="footer__contact-item">Mon-Thu: 9am-5pm<br>Fri: 9am-4:30pm</p></div>
+            </div>
+            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 The Heathway Dental Surgery. All rights reserved.</p><div class="footer__legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL Hex Animation - Complete</title>
+    <style>
+        body { margin: 0; background: #F5F1ED; overflow-x: hidden; }
+        #webgl-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+        .hero { position: relative; min-height: 100vh; z-index: 10; pointer-events: none; }
+        .content { position: relative; height: 200vh; padding: 100px 50px; pointer-events: auto; }
+        .content h1 { font-family: sans-serif; font-size: 3rem; color: #008878; }
+        #debug { position: fixed; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px;
+                 font-family: monospace; font-size: 11px; z-index: 1000; border: 1px solid #008878; color: #008878; }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <div id="debug">Loading...</div>
+    <div class="hero">
+        <div class="content">
+            <h1>Scroll to test animations</h1>
+            <p style="font-family: sans-serif; color: #1a1a2e;">Watch the hexagons construct, animate, and deconstruct as you scroll.</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/+esm';
+        import { EffectComposer } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+        import { ShaderPass } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/ShaderPass.js';
+
+        const debug = document.getElementById('debug');
+        debug.innerHTML = 'Three.js loaded!<br>';
+
+        // SCENE SETUP
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xF5F1ED);
+
+        const camera = new THREE.OrthographicCamera(
+            -window.innerWidth/2, window.innerWidth/2,
+            window.innerHeight/2, -window.innerHeight/2, 1, 1000
+        );
+        camera.position.z = 500;
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.getElementById('webgl-canvas'),
+            antialias: true,
+            alpha: false
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        debug.innerHTML += 'Renderer ready!<br>';
+
+        // CUSTOM SHADERS
+        const hexVertexShader = `
+            uniform float uTime;
+            uniform vec2 uResolution;
+            uniform float uState;
+            uniform float uWaveProgress;
+            uniform float uSnakeskin[64];
+
+            attribute vec3 aHexCenter;
+            attribute float aHexId;
+            attribute float aLayerId;
+            attribute float aSegmentId;
+            attribute float aPerimeter;
+
+            varying vec3 vColor;
+            varying float vOpacity;
+            varying float vBrightness;
+
+            void main() {
+                vec3 pos = position;
+
+                // Diagonal calculation (35°)
+                vec2 screenPos = (aHexCenter.xy + uResolution * 0.5) / uResolution;
+                float diagX = screenPos.x;
+                float diagY = 1.0 - screenPos.y;
+                float diagonal = diagX * 0.819 + diagY * 0.574; // cos35, sin35
+                float waveDist = abs(diagonal - uWaveProgress);
+
+                // Medical color palette
+                vec3 teal = vec3(0.0, 0.533, 0.471);      // #008878
+                vec3 blueGrey = vec3(0.6, 0.702, 0.749);  // #99B3BF
+                vec3 lightGrey = vec3(0.753, 0.769, 0.780); // #C0C4C7
+                vec3 lightTeal = vec3(0.4, 0.749, 0.722);  // #66BFB8
+
+                // Layer-based coloring
+                vec3 baseColor = lightGrey;
+                if (aLayerId < 0.5) {
+                    baseColor = mix(teal, lightTeal, sin(uTime * 2.0 + aHexId * 0.5) * 0.5 + 0.5);
+                } else if (aLayerId < 1.5) {
+                    baseColor = mix(lightTeal, blueGrey, sin(uTime * 1.5 + aHexId * 0.3) * 0.5 + 0.5);
+                }
+
+                vColor = baseColor;
+                vOpacity = 0.3;
+                vBrightness = 1.0;
+
+                // STATE: INTRO - Diagonal wave construction
+                if (uState < 0.5) {
+                    if (waveDist < 0.06) {
+                        vOpacity = 1.0;
+                        vBrightness = 25.0; // Extreme bloom
+                    } else if (waveDist < 0.12) {
+                        vOpacity = 0.9;
+                        vBrightness = 18.0;
+                    } else if (waveDist < 0.20) {
+                        vOpacity = 0.7;
+                        vBrightness = 8.0;
+                    } else {
+                        vOpacity = 0.0; // Not yet constructed
+                    }
+                }
+                // STATE: IDLE - All 5 animation techniques + multi-frequency breathing
+                else if (uState < 1.5) {
+                    // Multi-frequency breathing (3 frequencies)
+                    float breathSlow = sin(uTime * 0.2) * 0.5 + 0.5;           // 0.2Hz
+                    float breathMed = sin(uTime * 1.5 + aHexId) * 0.5 + 0.5;   // 1.5Hz
+                    float breathFast = sin(uTime * 8.0 + aSegmentId * 0.1) * 0.5 + 0.5; // 8Hz
+                    float breath = breathSlow * 0.4 + breathMed * 0.3 + breathFast * 0.3;
+
+                    // 1. RACING SEGMENTS - fast bright spots
+                    float raceSpeed = 12.0;
+                    float racePulse = fract(aPerimeter + uTime * raceSpeed * 0.1);
+                    float raceHighlight = smoothstep(0.96, 0.98, racePulse) * smoothstep(1.0, 0.98, racePulse);
+
+                    // 2. GAP TRAVEL (barber pole) - traveling dark gaps
+                    float gapSpeed = 3.0;
+                    float gapPhase = fract(aPerimeter - uTime * gapSpeed * 0.1);
+                    float gapMask = step(0.12, fract(gapPhase * 10.0)); // 10 traveling gaps
+
+                    // 3. BROKEN SEGMENTS (erosion) - random flicker
+                    float noise = fract(sin(aSegmentId * 12.9898 + floor(uTime * 2.0)) * 43758.5453);
+                    float erosion = step(0.82, noise); // 18% eroded
+
+                    // 4. FIREFLY MOTION - jitter displacement
+                    float fireflyX = sin(uTime * 3.5 + aSegmentId * 10.0) * 1.5;
+                    float fireflyY = cos(uTime * 4.2 + aSegmentId * 8.5) * 1.5;
+                    pos.x += fireflyX;
+                    pos.y += fireflyY;
+
+                    // 5. MULTI-SEGMENT TRAINS - groups pulse together
+                    float trainSize = 5.0;
+                    float trainId = floor(aSegmentId / trainSize);
+                    float trainPulse = sin(trainId * 0.23 + uTime * 2.0) * 0.5 + 0.5;
+
+                    // Combine all effects
+                    vOpacity = 0.35 + breath * 0.4;
+                    vOpacity *= gapMask * erosion; // Apply gaps and erosion
+                    vOpacity += raceHighlight * 0.7; // Add racing highlights
+                    vOpacity = clamp(vOpacity, 0.0, 1.0);
+
+                    vBrightness = 1.2 + breath * 2.5;
+                    vBrightness += raceHighlight * 20.0; // Extreme brightness for racing
+                    vBrightness *= (0.6 + trainPulse * 0.8); // Train modulation
+
+                    // SNAKESKIN FLIPS - check if this hex is flipping
+                    int hexIdx = int(mod(aHexId, 64.0));
+                    if (uSnakeskin[hexIdx] > 0.5) {
+                        vColor = vec3(1.0) - vColor; // Invert color
+                        vBrightness *= 3.5;
+                        vOpacity = 1.0;
+                    }
+                }
+                // STATE: OUTRO - Reverse diagonal wave
+                else {
+                    float reverseWave = 1.0 - uWaveProgress;
+                    float reverseDist = abs(diagonal - reverseWave);
+                    if (reverseDist < 0.08) {
+                        vOpacity = 1.0;
+                        vBrightness = 25.0;
+                    } else if (reverseDist > 0.15) {
+                        vOpacity = 0.0;
+                    } else {
+                        vOpacity = 0.6;
+                        vBrightness = 8.0;
+                    }
+                }
+
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+            }
+        `;
+
+        const hexFragmentShader = `
+            varying vec3 vColor;
+            varying float vOpacity;
+            varying float vBrightness;
+
+            void main() {
+                gl_FragColor = vec4(vColor * vBrightness, vOpacity);
+            }
+        `;
+
+        const particleVertexShader = `
+            uniform float uTime;
+            uniform float uState;
+
+            attribute vec3 aVelocity;
+            attribute vec3 aTarget;
+            attribute float aParticleId;
+            attribute float aBirthTime;
+
+            varying vec3 vColor;
+            varying float vOpacity;
+            varying float vBrightness;
+
+            void main() {
+                float age = uTime - aBirthTime;
+                vec3 pos = position;
+
+                // INTRO: Nanotech assembly - particles fly to targets
+                if (uState < 0.5 && age > 0.0) {
+                    float progress = min(age * 1.2, 1.0);
+                    float easeProgress = progress * progress * (3.0 - 2.0 * progress); // Smoothstep
+                    pos = mix(position, aTarget, easeProgress);
+
+                    // Turbulence during flight
+                    float turbulence = (1.0 - easeProgress) * 8.0;
+                    pos.x += sin(uTime * 4.0 + aParticleId * 10.0) * turbulence;
+                    pos.y += cos(uTime * 5.0 + aParticleId * 8.0) * turbulence;
+                }
+                // IDLE/OUTRO: Particles disperse
+                else if (age > 0.0) {
+                    pos += aVelocity * age * 1.5;
+                }
+
+                vColor = vec3(0.0, 0.533, 0.471); // Teal
+
+                // Brightness and opacity based on state
+                if (uState < 0.5) {
+                    // Construction phase - bright and visible
+                    vOpacity = smoothstep(0.0, 0.3, age) * (1.0 - smoothstep(2.5, 3.5, age));
+                    vBrightness = 18.0 + sin(uTime * 12.0 + aParticleId) * 6.0;
+                } else {
+                    // Idle/outro - fade away quickly
+                    vOpacity = max(0.0, 1.0 - age * 0.5);
+                    vBrightness = 6.0;
+                }
+
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                gl_PointSize = 4.0 + sin(uTime * 6.0 + aParticleId) * 2.0;
+            }
+        `;
+
+        const particleFragmentShader = `
+            varying vec3 vColor;
+            varying float vOpacity;
+            varying float vBrightness;
+
+            void main() {
+                vec2 center = gl_PointCoord - vec2(0.5);
+                float dist = length(center);
+                if (dist > 0.5) discard;
+
+                float alpha = smoothstep(0.5, 0.25, dist) * vOpacity;
+                gl_FragColor = vec4(vColor * vBrightness, alpha);
+            }
+        `;
+
+        debug.innerHTML += 'Shaders defined!<br>';
+
+        // POST-PROCESSING SHADERS
+        const ChromaticAberrationShader = {
+            uniforms: {
+                'tDiffuse': { value: null },
+                'amount': { value: 0.0015 }
+            },
+            vertexShader: `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform sampler2D tDiffuse;
+                uniform float amount;
+                varying vec2 vUv;
+                void main() {
+                    vec2 offset = amount * (vUv - 0.5);
+                    vec4 cr = texture2D(tDiffuse, vUv + offset);
+                    vec4 cg = texture2D(tDiffuse, vUv);
+                    vec4 cb = texture2D(tDiffuse, vUv - offset);
+                    gl_FragColor = vec4(cr.r, cg.g, cb.b, cg.a);
+                }
+            `
+        };
+
+        const ACESToneMappingShader = {
+            uniforms: {
+                'tDiffuse': { value: null },
+                'exposure': { value: 1.2 }
+            },
+            vertexShader: `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform sampler2D tDiffuse;
+                uniform float exposure;
+                varying vec2 vUv;
+
+                vec3 ACESFilm(vec3 x) {
+                    float a = 2.51, b = 0.03, c = 2.43, d = 0.59, e = 0.14;
+                    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
+                }
+
+                float dither(vec2 uv) {
+                    return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+                }
+
+                void main() {
+                    vec4 color = texture2D(tDiffuse, vUv);
+                    color.rgb *= exposure;
+                    color.rgb = ACESFilm(color.rgb);
+                    color.rgb += (dither(vUv * 1920.0) - 0.5) / 255.0;
+                    gl_FragColor = color;
+                }
+            `
+        };
+
+        // POST-PROCESSING SETUP
+        const composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+
+        const bloomPass = new UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight),
+            2.5, 0.8, 0.1
+        );
+        composer.addPass(bloomPass);
+
+        const chromaticPass = new ShaderPass(ChromaticAberrationShader);
+        composer.addPass(chromaticPass);
+
+        const tonePass = new ShaderPass(ACESToneMappingShader);
+        composer.addPass(tonePass);
+
+        debug.innerHTML += 'Post-processing ready!<br>';
+
+        // BUILD HEXAGON GRID WITH 30 SEGMENTS PER SIDE
+        const HR = 55, HW = HR * Math.sqrt(3), HH = HR * 1.5;
+        const cols = Math.ceil(window.innerWidth / HW) + 3;
+        const rows = Math.ceil(window.innerHeight / HH) + 3;
+        const SEGS_PER_SIDE = 30;
+
+        const snakeskinData = new Float32Array(64);
+        const hexMaterial = new THREE.ShaderMaterial({
+            vertexShader: hexVertexShader,
+            fragmentShader: hexFragmentShader,
+            uniforms: {
+                uTime: { value: 0 },
+                uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                uState: { value: 0 },
+                uWaveProgress: { value: 0 },
+                uSnakeskin: { value: snakeskinData }
+            },
+            transparent: true,
+            blending: THREE.NormalBlending,
+            depthWrite: false
+        });
+
+        let segmentCount = 0;
+        for (let row = -1; row < rows; row++) {
+            for (let col = -1; col < cols; col++) {
+                const x = col * HW + (row % 2) * (HW / 2) - window.innerWidth / 2;
+                const y = row * HH - window.innerHeight / 2;
+                const hexId = row * cols + col;
+
+                // 3 layers per hexagon
+                for (let layer = 0; layer < 3; layer++) {
+                    const layerRadius = HR + (layer - 1) * 3;
+
+                    // 6 sides per hexagon
+                    for (let side = 0; side < 6; side++) {
+                        const a1 = (Math.PI / 3) * side;
+                        const a2 = (Math.PI / 3) * (side + 1);
+                        const x1 = x + Math.cos(a1) * layerRadius;
+                        const y1 = y + Math.sin(a1) * layerRadius;
+                        const x2 = x + Math.cos(a2) * layerRadius;
+                        const y2 = y + Math.sin(a2) * layerRadius;
+
+                        // 30 segments per side
+                        for (let seg = 0; seg < SEGS_PER_SIDE; seg++) {
+                            const t1 = seg / SEGS_PER_SIDE;
+                            const t2 = (seg + 1) / SEGS_PER_SIDE;
+                            const px1 = x1 + (x2 - x1) * t1;
+                            const py1 = y1 + (y2 - y1) * t1;
+                            const px2 = x1 + (x2 - x1) * t2;
+                            const py2 = y1 + (y2 - y1) * t2;
+                            const perimeter = (side + t1) / 6;
+
+                            const geo = new THREE.BufferGeometry();
+                            geo.setAttribute('position', new THREE.Float32BufferAttribute([
+                                px1, py1, 0, px2, py2, 0
+                            ], 3));
+                            geo.setAttribute('aHexCenter', new THREE.Float32BufferAttribute([
+                                x, y, 0, x, y, 0
+                            ], 3));
+                            geo.setAttribute('aHexId', new THREE.Float32BufferAttribute([hexId, hexId], 1));
+                            geo.setAttribute('aLayerId', new THREE.Float32BufferAttribute([layer, layer], 1));
+                            geo.setAttribute('aSegmentId', new THREE.Float32BufferAttribute([
+                                side * SEGS_PER_SIDE + seg, side * SEGS_PER_SIDE + seg
+                            ], 1));
+                            geo.setAttribute('aPerimeter', new THREE.Float32BufferAttribute([perimeter, perimeter], 1));
+
+                            scene.add(new THREE.LineSegments(geo, hexMaterial));
+                            segmentCount++;
+                        }
+                    }
+                }
+            }
+        }
+
+        debug.innerHTML += `Grid: ${segmentCount} segments!<br>`;
+
+        // PARTICLE SYSTEM - 160 particles per hexagon
+        const PPH = window.innerWidth < 768 ? 80 : 160;
+        const numHex = rows * cols;
+        const totalParticles = numHex * PPH;
+
+        const pPos = new Float32Array(totalParticles * 3);
+        const pVel = new Float32Array(totalParticles * 3);
+        const pTgt = new Float32Array(totalParticles * 3);
+        const pId = new Float32Array(totalParticles);
+        const pBirth = new Float32Array(totalParticles);
+
+        let pi = 0;
+        for (let row = -1; row < rows; row++) {
+            for (let col = -1; col < cols; col++) {
+                const x = col * HW + (row % 2) * (HW / 2) - window.innerWidth / 2;
+                const y = row * HH - window.innerHeight / 2;
+
+                for (let p = 0; p < PPH && pi < totalParticles; p++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = 40 + Math.random() * 100;
+                    pPos[pi*3] = x + Math.cos(angle) * radius;
+                    pPos[pi*3+1] = y + Math.sin(angle) * radius;
+                    pPos[pi*3+2] = (Math.random() - 0.5) * 30;
+
+                    pVel[pi*3] = (Math.random() - 0.5) * 40;
+                    pVel[pi*3+1] = (Math.random() - 0.5) * 40;
+                    pVel[pi*3+2] = 0;
+
+                    const tAngle = Math.random() * Math.PI * 2;
+                    pTgt[pi*3] = x + Math.cos(tAngle) * HR;
+                    pTgt[pi*3+1] = y + Math.sin(tAngle) * HR;
+                    pTgt[pi*3+2] = 0;
+
+                    pId[pi] = pi;
+                    pBirth[pi] = Math.random() * 0.6;
+                    pi++;
+                }
+            }
+        }
+
+        const pGeo = new THREE.BufferGeometry();
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+        pGeo.setAttribute('aVelocity', new THREE.BufferAttribute(pVel, 3));
+        pGeo.setAttribute('aTarget', new THREE.BufferAttribute(pTgt, 3));
+        pGeo.setAttribute('aParticleId', new THREE.BufferAttribute(pId, 1));
+        pGeo.setAttribute('aBirthTime', new THREE.BufferAttribute(pBirth, 1));
+
+        const pMat = new THREE.ShaderMaterial({
+            vertexShader: particleVertexShader,
+            fragmentShader: particleFragmentShader,
+            uniforms: {
+                uTime: { value: 0 },
+                uState: { value: 0 }
+            },
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        const particleSystem = new THREE.Points(pGeo, pMat);
+        scene.add(particleSystem);
+
+        debug.innerHTML += `Particles: ${pi}!<br>FPS: <span id="fps">--</span>`;
+
+        // ANIMATION STATE & SCROLL TRIGGERS
+        let animState = 0; // 0=intro, 1=idle, 2=outro
+        let waveProgress = 0;
+        let idleTime = 0;
+        let nextSnakeskinFlip = 2.0;
+
+        // Scroll trigger
+        let lastScrollY = 0;
+        const hero = document.querySelector('.hero');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const scrollY = window.scrollY;
+                const scrollingDown = scrollY > lastScrollY;
+
+                if (entry.isIntersecting && animState === 2) {
+                    // Scrolled back up - restart intro
+                    animState = 0;
+                    waveProgress = 0;
+                    idleTime = 0;
+                } else if (!entry.isIntersecting && scrollingDown && animState === 1) {
+                    // Scrolled down past - trigger outro
+                    animState = 2;
+                    waveProgress = 1.0;
+                }
+
+                lastScrollY = scrollY;
+            });
+        }, { threshold: [0, 0.5, 1] });
+        observer.observe(hero);
+
+        // ADAPTIVE QUALITY
+        let qualityLevel = 1.0;
+        let lowFpsCount = 0;
+
+        // ANIMATION LOOP
+        let lastTime = performance.now();
+        let frameCount = 0;
+        let fps = 60;
+
+        function animate(time) {
+            requestAnimationFrame(animate);
+            const dt = (time - lastTime) / 1000;
+
+            // FPS tracking
+            frameCount++;
+            if (time - lastTime >= 1000) {
+                fps = frameCount;
+                frameCount = 0;
+                lastTime = time;
+                document.getElementById('fps').textContent = fps + (qualityLevel < 1.0 ? ' (reduced)' : '');
+
+                // Adaptive quality
+                if (fps < 45) {
+                    lowFpsCount++;
+                    if (lowFpsCount >= 3 && qualityLevel > 0.5) {
+                        qualityLevel = 0.5;
+                        bloomPass.strength = 1.5;
+                        renderer.setPixelRatio(1);
+                        pGeo.setDrawRange(0, Math.floor(totalParticles * 0.5));
+                    }
+                } else if (fps >= 55) {
+                    lowFpsCount = 0;
+                    if (qualityLevel < 1.0) {
+                        qualityLevel = 1.0;
+                        bloomPass.strength = 2.5;
+                        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                        pGeo.setDrawRange(0, totalParticles);
+                    }
+                }
+            }
+
+            // State progression
+            if (animState === 0) {
+                // INTRO - diagonal wave
+                waveProgress += dt * 0.22; // ~4.5 second sweep
+                if (waveProgress >= 1.3) {
+                    waveProgress = 1.0;
+                    animState = 1;
+                    idleTime = 0;
+                    nextSnakeskinFlip = 2.0 + Math.random() * 2.0;
+                }
+            } else if (animState === 1) {
+                // IDLE - sustain with effects
+                idleTime += dt;
+
+                // Snakeskin flips every 2-4 seconds
+                if (idleTime >= nextSnakeskinFlip) {
+                    snakeskinData.fill(0);
+                    const numFlips = 3 + Math.floor(Math.random() * 4); // 3-6 hexagons
+                    for (let i = 0; i < numFlips; i++) {
+                        const idx = Math.floor(Math.random() * 64);
+                        snakeskinData[idx] = 1.0;
+                    }
+                    hexMaterial.uniforms.uSnakeskin.value = snakeskinData;
+                    nextSnakeskinFlip = idleTime + 2.0 + Math.random() * 2.0;
+
+                    // Clear after 150ms
+                    setTimeout(() => {
+                        snakeskinData.fill(0);
+                        hexMaterial.uniforms.uSnakeskin.value = snakeskinData;
+                    }, 150);
+                }
+            } else if (animState === 2) {
+                // OUTRO - reverse wave
+                waveProgress -= dt * 0.22;
+                if (waveProgress <= -0.3) {
+                    waveProgress = 0;
+                }
+            }
+
+            // Update uniforms
+            const t = time * 0.001;
+            hexMaterial.uniforms.uTime.value = t;
+            hexMaterial.uniforms.uState.value = animState;
+            hexMaterial.uniforms.uWaveProgress.value = waveProgress;
+            pMat.uniforms.uTime.value = t;
+            pMat.uniforms.uState.value = animState;
+
+            composer.render();
+        }
+
+        animate(0);
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.left = -window.innerWidth / 2;
+            camera.right = window.innerWidth / 2;
+            camera.top = window.innerHeight / 2;
+            camera.bottom = -window.innerHeight / 2;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+            hexMaterial.uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
+        });
+
+        debug.innerHTML += '<br>✅ ANIMATION RUNNING!';
+    </script>
+</body>
+</html>

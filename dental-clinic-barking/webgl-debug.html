@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebGL Debug</title>
+    <style>
+        body { margin: 0; background: #F5F1ED; }
+        #debug { position: fixed; top: 10px; left: 10px; background: white; padding: 10px;
+                 font-family: monospace; font-size: 11px; z-index: 1000; border: 1px solid #008878;
+                 max-width: 500px; max-height: 90vh; overflow: auto; }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="debug">Starting...<br></div>
+
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/+esm';
+
+        const debug = document.getElementById('debug');
+        function log(msg, isError = false) {
+            debug.innerHTML += `<span class="${isError ? 'error' : 'success'}">${msg}</span><br>`;
+            console.log(msg);
+        }
+
+        try {
+            log('Step 1: Importing THREE.js...');
+            log('✓ THREE.js loaded!');
+
+            log('Step 2: Creating scene...');
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xF5F1ED);
+            log('✓ Scene created');
+
+            log('Step 3: Creating camera...');
+            const camera = new THREE.OrthographicCamera(-window.innerWidth/2, window.innerWidth/2, window.innerHeight/2, -window.innerHeight/2, 1, 1000);
+            camera.position.z = 500;
+            log('✓ Camera created');
+
+            log('Step 4: Creating renderer...');
+            const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas'), antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            log('✓ Renderer created');
+
+            log('Step 5: Defining custom GLSL shaders...');
+
+            const hexVertexShader = `
+                uniform float uTime;
+                uniform vec2 uResolution;
+                uniform float uState;
+                uniform float uWaveProgress;
+
+                attribute vec3 aHexCenter;
+                attribute float aHexId;
+                attribute float aLayerId;
+                attribute float aSegmentId;
+                attribute float aPerimeter;
+
+                varying vec3 vColor;
+                varying float vOpacity;
+                varying float vBrightness;
+
+                void main() {
+                    vec3 pos = position;
+
+                    // 35° diagonal calculation
+                    vec2 screenPos = (aHexCenter.xy + uResolution * 0.5) / uResolution;
+                    float diagonal = screenPos.x * 0.819 + (1.0 - screenPos.y) * 0.574;
+                    float waveDist = abs(diagonal - uWaveProgress);
+
+                    // Medical color palette
+                    vec3 teal = vec3(0.0, 0.533, 0.471);
+                    vec3 lightTeal = vec3(0.4, 0.749, 0.722);
+                    vec3 blueGrey = vec3(0.6, 0.702, 0.749);
+                    vec3 lightGrey = vec3(0.753, 0.769, 0.780);
+
+                    vColor = lightGrey;
+                    if (aLayerId < 0.5) {
+                        vColor = mix(teal, lightTeal, sin(uTime * 2.0 + aHexId * 0.5) * 0.5 + 0.5);
+                    } else if (aLayerId < 1.5) {
+                        vColor = mix(lightTeal, blueGrey, 0.5);
+                    }
+
+                    // INTRO: Diagonal wave construction
+                    if (uState < 0.5) {
+                        if (waveDist < 0.06) {
+                            vOpacity = 1.0;
+                            vBrightness = 25.0; // Extreme bloom
+                        } else if (waveDist < 0.12) {
+                            vOpacity = 0.9;
+                            vBrightness = 15.0;
+                        } else if (waveDist < 0.20) {
+                            vOpacity = 0.6;
+                            vBrightness = 5.0;
+                        } else {
+                            vOpacity = 0.0;
+                        }
+                    }
+                    // IDLE: All 5 animation techniques
+                    else if (uState < 1.5) {
+                        // Multi-frequency breathing
+                        float breathSlow = sin(uTime * 0.2) * 0.5 + 0.5;
+                        float breathMed = sin(uTime * 1.5 + aHexId) * 0.5 + 0.5;
+                        float breathFast = sin(uTime * 8.0 + aSegmentId * 0.1) * 0.5 + 0.5;
+                        float breath = breathSlow * 0.4 + breathMed * 0.3 + breathFast * 0.3;
+
+                        // 1. Racing segments
+                        float racePulse = fract(aPerimeter + uTime * 1.2);
+                        float race = smoothstep(0.96, 0.98, racePulse) * smoothstep(1.0, 0.98, racePulse);
+
+                        // 2. Gap travel (barber pole)
+                        float gapPhase = fract(aPerimeter - uTime * 0.3);
+                        float gapMask = step(0.12, fract(gapPhase * 10.0));
+
+                        // 3. Broken segments (erosion)
+                        float noise = fract(sin(aSegmentId * 12.9898 + floor(uTime * 2.0)) * 43758.5453);
+                        float erosion = step(0.82, noise);
+
+                        // 4. Firefly motion
+                        pos.x += sin(uTime * 3.5 + aSegmentId * 10.0) * 1.5;
+                        pos.y += cos(uTime * 4.2 + aSegmentId * 8.5) * 1.5;
+
+                        // 5. Multi-segment trains
+                        float trainId = floor(aSegmentId / 5.0);
+                        float trainPulse = sin(trainId * 0.23 + uTime * 2.0) * 0.5 + 0.5;
+
+                        vOpacity = 0.35 + breath * 0.4;
+                        vOpacity *= gapMask * erosion;
+                        vOpacity += race * 0.7;
+                        vOpacity = clamp(vOpacity, 0.0, 1.0);
+
+                        vBrightness = 1.2 + breath * 2.5 + race * 20.0;
+                        vBrightness *= (0.6 + trainPulse * 0.8);
+                    }
+                    // OUTRO: Reverse wave
+                    else {
+                        float reverseDist = abs(diagonal - (1.0 - uWaveProgress));
+                        if (reverseDist < 0.08) {
+                            vOpacity = 1.0;
+                            vBrightness = 25.0;
+                        } else if (reverseDist > 0.15) {
+                            vOpacity = 0.0;
+                        } else {
+                            vOpacity = 0.5;
+                            vBrightness = 8.0;
+                        }
+                    }
+
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                }
+            `;
+
+            const hexFragmentShader = `
+                varying vec3 vColor;
+                varying float vOpacity;
+                varying float vBrightness;
+
+                void main() {
+                    gl_FragColor = vec4(vColor * vBrightness, vOpacity);
+                }
+            `;
+
+            log('✓ Shaders defined');
+
+            log('Step 6: Creating segmented hexagon grid (30 segments/side, 3 layers)...');
+            const HR = 55;
+            const HW = HR * Math.sqrt(3);
+            const HH = HR * 1.5;
+            const cols = Math.ceil(window.innerWidth / HW) + 2;
+            const rows = Math.ceil(window.innerHeight / HH) + 2;
+            const SEGS = 30;
+
+            const material = new THREE.ShaderMaterial({
+                vertexShader: hexVertexShader,
+                fragmentShader: hexFragmentShader,
+                uniforms: {
+                    uTime: { value: 0 },
+                    uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                    uState: { value: 0 },
+                    uWaveProgress: { value: 0 }
+                },
+                transparent: true,
+                blending: THREE.NormalBlending,
+                depthWrite: false
+            });
+
+            let segCount = 0;
+            for (let row = -1; row < rows; row++) {
+                for (let col = -1; col < cols; col++) {
+                    const x = col * HW + (row % 2) * (HW / 2) - window.innerWidth / 2;
+                    const y = row * HH - window.innerHeight / 2;
+                    const hexId = row * cols + col;
+
+                    // 3 layers per hexagon
+                    for (let layer = 0; layer < 3; layer++) {
+                        const layerRadius = HR + (layer - 1) * 3;
+
+                        // 6 sides
+                        for (let side = 0; side < 6; side++) {
+                            const a1 = (Math.PI / 3) * side;
+                            const a2 = (Math.PI / 3) * (side + 1);
+                            const x1 = x + Math.cos(a1) * layerRadius;
+                            const y1 = y + Math.sin(a1) * layerRadius;
+                            const x2 = x + Math.cos(a2) * layerRadius;
+                            const y2 = y + Math.sin(a2) * layerRadius;
+
+                            // 30 segments per side
+                            for (let seg = 0; seg < SEGS; seg++) {
+                                const t1 = seg / SEGS;
+                                const t2 = (seg + 1) / SEGS;
+                                const px1 = x1 + (x2 - x1) * t1;
+                                const py1 = y1 + (y2 - y1) * t1;
+                                const px2 = x1 + (x2 - x1) * t2;
+                                const py2 = y1 + (y2 - y1) * t2;
+                                const perimeter = (side + t1) / 6;
+
+                                const geometry = new THREE.BufferGeometry();
+                                geometry.setAttribute('position', new THREE.Float32BufferAttribute([
+                                    px1, py1, 0, px2, py2, 0
+                                ], 3));
+                                geometry.setAttribute('aHexCenter', new THREE.Float32BufferAttribute([
+                                    x, y, 0, x, y, 0
+                                ], 3));
+                                geometry.setAttribute('aHexId', new THREE.Float32BufferAttribute([hexId, hexId], 1));
+                                geometry.setAttribute('aLayerId', new THREE.Float32BufferAttribute([layer, layer], 1));
+                                geometry.setAttribute('aSegmentId', new THREE.Float32BufferAttribute([
+                                    side * SEGS + seg, side * SEGS + seg
+                                ], 1));
+                                geometry.setAttribute('aPerimeter', new THREE.Float32BufferAttribute([perimeter, perimeter], 1));
+
+                                const line = new THREE.LineSegments(geometry, material);
+                                scene.add(line);
+                                segCount++;
+                            }
+                        }
+                    }
+                }
+            }
+            log(`✓ Created ${segCount} segments with custom attributes`);
+
+            log('Step 7: Starting animated wave construction...');
+
+            let animState = 0; // 0=intro, 1=idle, 2=outro
+            let waveProgress = 0;
+            let lastTime = performance.now();
+
+            function animate(time) {
+                requestAnimationFrame(animate);
+
+                const deltaTime = (time - lastTime) / 1000;
+                lastTime = time;
+
+                // State progression
+                if (animState === 0) {
+                    waveProgress += deltaTime * 0.22; // ~4.5 second sweep
+                    if (waveProgress >= 1.3) {
+                        waveProgress = 1.0;
+                        animState = 1; // Switch to idle
+                    }
+                } else if (animState === 1) {
+                    // Idle - sustain animation
+                }
+
+                // Update shader uniforms
+                material.uniforms.uTime.value = time * 0.001;
+                material.uniforms.uState.value = animState;
+                material.uniforms.uWaveProgress.value = waveProgress;
+
+                renderer.render(scene, camera);
+            }
+            animate(0);
+            log('✓ ANIMATION RUNNING! Watch the diagonal wave sweep!');
+
+        } catch (error) {
+            log(`ERROR: ${error.message}`, true);
+            log(`Stack: ${error.stack}`, true);
+        }
+    </script>
+</body>
+</html>
