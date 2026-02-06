@@ -68,8 +68,18 @@
         .nav__cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
         .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--blue-glow); }
         .nav__cta:hover::before { left: 100%; }
-        .mobile-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .mobile-toggle span { width: 20px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+        .mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
+        .mobile-toggle span { width: 24px; height: 2px; background: var(--white); transition: all 0.3s ease; border-radius: 2px; }
+        .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.97); backdrop-filter: blur(20px); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu__links { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
+        .mobile-menu__link { text-decoration: none; color: #CBD5E1; font-size: 1.25rem; font-weight: 500; padding: 0.75rem 2rem; display: block; transition: color 0.3s; }
+        .mobile-menu__link:hover, .mobile-menu__link--active { color: white; }
+        .mobile-menu__link--ai { color: #8B5CF6; }
+        .mobile-menu__cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, #3B82F6, #7C3AED); color: white; text-decoration: none; font-size: 1rem; font-weight: 600; border-radius: 50px; margin-top: 1rem; }
 
         .main { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 1.5rem 2rem; }
         .chat-wrapper { width: 100%; max-width: 700px; display: flex; flex-direction: column; gap: 1.5rem; }
@@ -116,13 +126,13 @@
         .footer__text a:hover { color: var(--blue); }
 
         @media (max-width: 768px) {
-            .header { top: 10px; max-width: 95%; }
-            .header__inner { padding: 0.6rem 1rem; gap: 0.5rem; }
+            .header { top: 8px; left: 8px; right: 8px; max-width: none; width: auto; transform: none; }
+            .header__inner { padding: 0.5rem 1rem; gap: 0.5rem; border-radius: 20px; }
             .nav__links { display: none; }
             .nav__cta { display: none; }
             .mobile-toggle { display: flex; }
-            .logo__mark { width: 70px; height: 70px; }
-            .logo__text { font-size: 1rem; }
+            .logo__mark { width: 48px; height: 48px; }
+            .logo__text { font-size: 0.95rem; }
             .logo__subtext { font-size: 0.55rem; }
             .main { padding: 90px 1rem 1.5rem; }
             .chat-header__title { font-size: 1.25rem; }
@@ -131,6 +141,12 @@
             .quick-btn { font-size: 0.6875rem; padding: 0.35rem 0.75rem; }
             .bg-arc--1 { width: 500px; height: 500px; }
             .bg-arc--2 { width: 400px; height: 400px; }
+        }
+        @media (max-width: 480px) {
+            .logo__mark { width: 40px; height: 40px; }
+            .logo__text { font-size: 0.85rem; }
+            .logo__subtext { display: none; }
+            .mobile-menu__link { font-size: 1.125rem; padding: 0.6rem 2rem; }
         }
     </style>
 </head>
@@ -172,6 +188,18 @@
             <button class="mobile-toggle"><span></span><span></span><span></span></button>
         </div>
     </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu__links">
+            <li><a href="index.html" class="mobile-menu__link">Home</a></li>
+            <li><a href="services.html" class="mobile-menu__link">Services</a></li>
+            <li><a href="about.html" class="mobile-menu__link">About</a></li>
+            <li><a href="gallery.html" class="mobile-menu__link">Gallery</a></li>
+            <li><a href="contact.html" class="mobile-menu__link">Contact</a></li>
+            <li><a href="chatbot.html" class="mobile-menu__link mobile-menu__link--active mobile-menu__link--ai">Abbey AI</a></li>
+        </ul>
+        <a href="contact.html" class="mobile-menu__cta">Book Appointment</a>
+    </div>
 
     <main class="main">
         <div class="chat-wrapper">
@@ -374,6 +402,23 @@
 
         function handleKey(e) {
             if (e.key === 'Enter') sendMessage();
+        }
+
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            document.querySelectorAll('.mobile-menu__link, .mobile-menu__cta').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
         }
     </script>
 </body>

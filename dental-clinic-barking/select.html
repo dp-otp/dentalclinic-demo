@@ -131,6 +131,129 @@
             66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
+        /* Navigation Header */
+        .nav-header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            max-width: 95%;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav {
+            background: rgba(5, 10, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            padding: 0.75rem 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(124, 58, 237, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(59, 130, 246, 0.15), 0 0 80px rgba(124, 58, 237, 0.1);
+        }
+
+        .nav__logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav__logo .logo__mark {
+            width: 60px;
+            height: 60px;
+        }
+
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: var(--gray-400);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blue), var(--purple));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__link:hover::after, .nav__link--active::after { width: 100%; }
+
+        .nav__cta {
+            padding: 0.6rem 1.25rem;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav__cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--blue-glow);
+        }
+
+        .nav__mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .nav__mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav__mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .nav__mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav__mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.97); backdrop-filter: blur(20px); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu__links { list-style: none; text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
+        .mobile-menu__link { text-decoration: none; color: #CBD5E1; font-size: 1.25rem; font-weight: 500; padding: 0.75rem 2rem; display: block; transition: color 0.3s; }
+        .mobile-menu__link:hover, .mobile-menu__link--active { color: white; }
+        .mobile-menu__link--ai { color: #8B5CF6; }
+        .mobile-menu__cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, #3B82F6, #7C3AED); color: white; text-decoration: none; font-size: 1rem; font-weight: 600; border-radius: 50px; margin-top: 1rem; }
+
         /* Main Content */
         .container {
             position: relative;
@@ -499,6 +622,34 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-header {
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                max-width: none;
+                width: auto;
+                transform: none;
+            }
+
+            .nav {
+                padding: 0.5rem 1rem;
+                gap: 0.5rem;
+                border-radius: 20px;
+            }
+
+            .nav__links { display: none; }
+            .nav__cta { display: none; }
+            .nav__mobile-toggle { display: flex; }
+
+            .nav__logo .logo__mark {
+                width: 48px;
+                height: 48px;
+            }
+
+            .logo__text {
+                font-size: 0.95rem;
+            }
+
             .branches {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -526,12 +677,13 @@
                 height: 70px;
             }
 
-            .logo__text {
-                font-size: 1.5rem;
-            }
-
             .logo__subtext {
                 font-size: 0.7rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
@@ -725,9 +877,64 @@
                 font-size: 1.5rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .nav__logo .logo__mark {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo__text {
+                font-size: 0.85rem;
+            }
+
+            .logo__subtext {
+                display: none;
+            }
+
+            .mobile-menu__link {
+                font-size: 1.125rem;
+                padding: 0.6rem 2rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <header class="nav-header" id="navHeader">
+        <nav class="nav">
+            <a href="index.html" class="nav__logo">
+                <div class="logo__mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__text-group">
+                    <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                </div>
+            </a>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="services.html" class="nav__link">Services</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+                <li><a href="locations.html" class="nav__link">Locations</a></li>
+                <li><a href="chatbot.html" class="nav__link">Abbey AI</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+            </ul>
+            <a href="contact.html" class="nav__cta">Book Now</a>
+            <button class="nav__mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu__links">
+            <li><a href="index.html" class="mobile-menu__link">Home</a></li>
+            <li><a href="services.html" class="mobile-menu__link">Services</a></li>
+            <li><a href="about.html" class="mobile-menu__link">About</a></li>
+            <li><a href="gallery.html" class="mobile-menu__link">Gallery</a></li>
+            <li><a href="locations.html" class="mobile-menu__link">Locations</a></li>
+            <li><a href="chatbot.html" class="mobile-menu__link mobile-menu__link--ai">Abbey AI</a></li>
+            <li><a href="contact.html" class="mobile-menu__link">Contact</a></li>
+        </ul>
+        <a href="contact.html" class="mobile-menu__cta">Book Appointment</a>
+    </div>
+
     <div class="bg">
         <div class="bg__gradient"></div>
         <div class="bg__grid"></div>
@@ -1108,6 +1315,25 @@
                 localStorage.setItem('preferredBranch', branch);
             });
         });
+    </script>
+
+    <script>
+    const mobileToggle = document.querySelector('.nav__mobile-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        document.querySelectorAll('.mobile-menu__link, .mobile-menu__cta').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
     </script>
 </body>
 </html>
