@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Abbey Dental Practice London</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --blue: #3B82F6; --blue-light: #60A5FA; --blue-bright: #2563EB; --blue-glow: rgba(59, 130, 246, 0.4);
+            --purple: #7C3AED; --purple-light: #8B5CF6; --purple-glow: rgba(124, 58, 237, 0.3);
+            --white: #FFFFFF; --off-white: #F8FAFC; --light-gray: #F1F5F9;
+            --charcoal: #0a0a0a; --black: #000000;
+            --gray-900: #111111; --gray-800: #1a1a1a; --gray-600: #475569; --gray-400: #94A3B8; --gray-300: #CBD5E1;
+            --font-display: 'Sora', sans-serif; --font-body: 'Outfit', sans-serif;
+            --container-max: 1280px; --container-padding: 1.5rem;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--black); color: var(--gray-300); line-height: 1.6; }
+
+        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(124, 58, 237, 0.05); display: flex; align-items: center; gap: 3rem; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .nav:hover { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(59, 130, 246, 0.15), 0 0 80px rgba(124, 58, 237, 0.1); }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo__mark { width: 100px; height: 100px; transition: all 0.5s; }
+        .logo__mark img { width: 100%; height: 100%; object-fit: contain; }
+        .logo:hover .logo__mark { transform: scale(1.1); }
+        .logo__text-group { display: flex; flex-direction: column; line-height: 1; }
+        .logo__text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
+        .logo__text-abbey { color: #38BDF8; }
+        .logo__text-dental { color: #8B5CF6; }
+        .logo__subtext { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3px; }
+        .nav__links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; transition: all 0.3s; position: relative; }
+        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width 0.3s ease; border-radius: 2px; }
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__link:hover::after, .nav__link--active::after { width: 100%; }
+        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; transition: all 0.4s ease; position: relative; overflow: hidden; }
+        .nav__cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+        .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--blue-glow); }
+        .nav__cta:hover::before { left: 100%; }
+        .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+
+        .page-hero { padding: 160px 0 80px; background: #000000; position: relative; overflow: hidden; }
+        .page-hero__bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000000; }
+        .page-hero__diagonal-lines { position: absolute; top: 0; left: 0; width: 60%; height: 100%; pointer-events: none; }
+        .page-hero__diagonal { position: absolute; width: 130%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%); transform-origin: 0 0; transform: rotate(30deg); box-shadow: 0 0 6px rgba(124, 58, 237, 0.2); }
+        .page-hero__diagonal--1 { top: 10%; left: 0; opacity: 0.5; }
+        .page-hero__diagonal--2 { top: 20%; left: 0; opacity: 0.6; }
+        .page-hero__diagonal--3 { top: 30%; left: 0; opacity: 0.8; }
+        .page-hero__diagonal--4 { top: 40%; left: 0; opacity: 1; }
+        .page-hero__diagonal--5 { top: 50%; left: 0; opacity: 0.8; }
+        .page-hero__diagonal--6 { top: 60%; left: 0; opacity: 0.6; }
+        .page-hero__arc { position: absolute; border-radius: 50%; border: 1.5px solid rgba(124, 58, 237, 0.2); box-shadow: 0 0 20px rgba(124, 58, 237, 0.1); }
+        .page-hero__arc--1 { width: 500px; height: 500px; bottom: -250px; right: -100px; }
+        .page-hero__arc--2 { width: 350px; height: 350px; bottom: -150px; right: -50px; border-color: rgba(124, 58, 237, 0.25); }
+        .page-hero__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); position: relative; text-align: center; }
+        .page-hero__badge { display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 50px; margin-bottom: 1.5rem; }
+        .page-hero__badge-dot { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; box-shadow: 0 0 10px var(--blue-glow); }
+        .page-hero__badge-text { color: var(--blue-light); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .page-hero__title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+        .page-hero__description { font-size: 1.125rem; color: var(--gray-300); max-width: 600px; margin: 0 auto; }
+
+        .gallery-section { padding: 5rem 0; }
+        .gallery-section--dark { background: var(--black); }
+        .gallery-section--light { background: var(--white); }
+        .gallery-section__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .gallery-section__header { text-align: center; margin-bottom: 3rem; }
+        .gallery-section__eyebrow { display: inline-block; color: var(--blue); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+        .gallery-section__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 1rem; }
+        .gallery-section--dark .gallery-section__title { color: var(--white); }
+        .gallery-section--light .gallery-section__title { color: var(--charcoal); }
+        .gallery-section__description { max-width: 600px; margin: 0 auto; font-size: 1rem; }
+        .gallery-section--dark .gallery-section__description { color: var(--gray-300); }
+        .gallery-section--light .gallery-section__description { color: var(--gray-600); }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .gallery-grid--3 { grid-template-columns: repeat(3, 1fr); }
+        .gallery-item { position: relative; aspect-ratio: 1; border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.4s; }
+        .gallery-item--wide { grid-column: span 2; aspect-ratio: 2/1; }
+        .gallery-item--tall { grid-row: span 2; aspect-ratio: 1/2; }
+        .gallery-item:hover { transform: scale(1.02); }
+        .gallery-item__placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; transition: all 0.4s; }
+        .gallery-section--dark .gallery-item__placeholder { background: linear-gradient(135deg, #111, #0a0a0a); border: 1px solid rgba(59, 130, 246, 0.15); }
+        .gallery-section--light .gallery-item__placeholder { background: linear-gradient(135deg, #f8f8f8, #f0f0f0); border: 1px solid rgba(59, 130, 246, 0.1); }
+        .gallery-item:hover .gallery-item__placeholder { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(59, 130, 246, 0.1); }
+        .gallery-item__icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .gallery-section--dark .gallery-item__icon { background: rgba(59, 130, 246, 0.1); color: var(--blue); }
+        .gallery-section--light .gallery-item__icon { background: rgba(59, 130, 246, 0.1); color: var(--blue); }
+        .gallery-item__icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .gallery-item__text { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .gallery-section--dark .gallery-item__text { color: var(--gray-400); }
+        .gallery-section--light .gallery-item__text { color: var(--gray-600); }
+
+        .smile-gallery { padding: 5rem 0; background: linear-gradient(180deg, var(--white) 0%, var(--off-white) 100%); }
+        .smile-gallery__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .smile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .smile-card { background: linear-gradient(145deg, #111, #0a0a0a); border-radius: 20px; overflow: hidden; border: 1px solid rgba(59, 130, 246, 0.15); transition: all 0.4s; }
+        .smile-card:hover { transform: translateY(-8px); border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(59, 130, 246, 0.1); }
+        .smile-card__images { display: grid; grid-template-columns: 1fr 1fr; }
+        .smile-card__image { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; }
+        .smile-card__image--before { background: linear-gradient(135deg, #1a1a1a, #111); border-right: 1px solid rgba(255,255,255,0.05); }
+        .smile-card__image--after { background: linear-gradient(135deg, #0f1520, #0a0f18); }
+        .smile-card__label { font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.15em; padding: 0.25rem 0.75rem; border-radius: 20px; }
+        .smile-card__image--before .smile-card__label { color: var(--gray-400); background: rgba(255,255,255,0.05); }
+        .smile-card__image--after .smile-card__label { color: var(--blue-light); background: rgba(59, 130, 246, 0.15); }
+        .smile-card__icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(59, 130, 246, 0.1); color: var(--blue); }
+        .smile-card__icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .smile-card__content { padding: 1.5rem; }
+        .smile-card__title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+        .smile-card__text { color: var(--gray-400); font-size: 0.875rem; line-height: 1.6; }
+
+        .footer { background: #000000; padding: 4rem 0 2rem; border-top: 1px solid rgba(59, 130, 246, 0.15); }
+        .footer__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer__brand { max-width: 280px; }
+        .footer__logo { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .footer__logo-mark { width: 100px; height: 100px; }
+        .footer__logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+        .footer__logo-text { display: flex; flex-direction: column; line-height: 1; }
+        .footer__logo-text-main { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
+        .footer__logo-text-abbey { color: #38BDF8; }
+        .footer__logo-text-dental { color: #8B5CF6; }
+        .footer__logo-subtext { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 2px; }
+        .footer__tagline { color: var(--gray-400); font-size: 0.9375rem; line-height: 1.7; }
+        .footer__heading { color: var(--white); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .footer__links { list-style: none; }
+        .footer__links li { margin-bottom: 0.75rem; }
+        .footer__links a { color: var(--gray-400); text-decoration: none; font-size: 0.9375rem; transition: color 0.3s; }
+        .footer__links a:hover { color: var(--blue); }
+        .footer__contact-item { color: var(--gray-400); font-size: 0.9375rem; margin-bottom: 0.75rem; }
+        .footer__socials { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .footer__social { width: 40px; height: 40px; background: linear-gradient(135deg, var(--blue), var(--purple)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s; text-decoration: none; }
+        .footer__social:hover { box-shadow: 0 5px 20px var(--blue-glow); transform: translateY(-2px); }
+        .footer__social svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .footer__bottom { padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer__copyright { color: var(--gray-600); font-size: 0.8125rem; }
+        .footer__legal { display: flex; gap: 2rem; }
+        .footer__legal a { color: var(--gray-600); text-decoration: none; font-size: 0.8125rem; transition: color 0.3s; }
+        .footer__legal a:hover { color: var(--blue); }
+
+        @media (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .smile-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .header { top: 10px; max-width: 95%; }
+            .nav { padding: 0.6rem 1rem; gap: 0.5rem; }
+            .nav__links { display: none; }
+            .nav__cta { display: none; }
+            .nav__mobile-toggle { display: flex; }
+            .logo__mark { width: 70px; height: 70px; }
+            .logo__text { font-size: 1.1rem; }
+            .logo__subtext { font-size: 0.55rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item--wide, .gallery-item--tall { grid-column: span 1; grid-row: span 1; aspect-ratio: 1; }
+            .smile-grid { grid-template-columns: 1fr; }
+            .footer__grid { grid-template-columns: 1fr; }
+            .footer__bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <div class="logo__mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__text-group">
+                    <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                </div>
+            </a>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="services.html" class="nav__link">Services</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="gallery.html" class="nav__link nav__link--active">Gallery</a></li>
+                <li><a href="locations.html" class="nav__link">Locations</a></li>
+                <li><a href="chatbot.html" class="nav__link">Abbey AI</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+            </ul>
+            <a href="contact.html" class="nav__cta">Book Appointment</a>
+            <button class="nav__mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero__bg">
+            <div class="page-hero__diagonal-lines">
+                <div class="page-hero__diagonal page-hero__diagonal--1"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--2"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--3"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--4"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--5"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--6"></div>
+            </div>
+            <div class="page-hero__arc page-hero__arc--1"></div>
+            <div class="page-hero__arc page-hero__arc--2"></div>
+        </div>
+        <div class="page-hero__container">
+            <div class="page-hero__badge">
+                <span class="page-hero__badge-dot"></span>
+                <span class="page-hero__badge-text">Our Gallery</span>
+            </div>
+            <h1 class="page-hero__title">See Our Practice & Results</h1>
+            <p class="page-hero__description">Take a virtual tour of our modern, purpose-built practice and see the smile transformations we've achieved for our patients.</p>
+        </div>
+    </section>
+
+    <!-- Practice Gallery -->
+    <section class="gallery-section gallery-section--dark">
+        <div class="gallery-section__container">
+            <div class="gallery-section__header">
+                <span class="gallery-section__eyebrow">Practice Tour</span>
+                <h2 class="gallery-section__title">Our Modern Facilities</h2>
+                <p class="gallery-section__description">Our 4 modern practices across London feature state-of-the-art equipment and welcoming environments designed for your comfort.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-item--wide">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Reception Area</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Waiting Room</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Treatment Room 1</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Treatment Room 2</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Hygiene Suite</span>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-item--wide">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Practice Exterior</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">X-Ray Room</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item__placeholder">
+                        <div class="gallery-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        <span class="gallery-item__text">Sterilisation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smile Gallery -->
+    <section class="smile-gallery">
+        <div class="smile-gallery__container">
+            <div class="gallery-section__header">
+                <span class="gallery-section__eyebrow">Smile Transformations</span>
+                <h2 class="gallery-section__title" style="color: var(--charcoal);">Before & After Results</h2>
+                <p class="gallery-section__description" style="color: var(--gray-600);">See the amazing smile transformations we've achieved. Results from teeth whitening, veneers, and cosmetic treatments.</p>
+            </div>
+            <div class="smile-grid">
+                <div class="smile-card">
+                    <div class="smile-card__images">
+                        <div class="smile-card__image smile-card__image--before">
+                            <span class="smile-card__label">Before</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                        <div class="smile-card__image smile-card__image--after">
+                            <span class="smile-card__label">After</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="smile-card__content">
+                        <h3 class="smile-card__title">Teeth Whitening</h3>
+                        <p class="smile-card__text">Professional whitening treatment achieving a brighter, more confident smile.</p>
+                    </div>
+                </div>
+                <div class="smile-card">
+                    <div class="smile-card__images">
+                        <div class="smile-card__image smile-card__image--before">
+                            <span class="smile-card__label">Before</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                        <div class="smile-card__image smile-card__image--after">
+                            <span class="smile-card__label">After</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="smile-card__content">
+                        <h3 class="smile-card__title">Porcelain Veneers</h3>
+                        <p class="smile-card__text">Complete smile makeover with custom porcelain veneers for a natural look.</p>
+                    </div>
+                </div>
+                <div class="smile-card">
+                    <div class="smile-card__images">
+                        <div class="smile-card__image smile-card__image--before">
+                            <span class="smile-card__label">Before</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                        <div class="smile-card__image smile-card__image--after">
+                            <span class="smile-card__label">After</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="smile-card__content">
+                        <h3 class="smile-card__title">Crown Restoration</h3>
+                        <p class="smile-card__text">Damaged tooth restored with a natural-looking porcelain crown.</p>
+                    </div>
+                </div>
+                <div class="smile-card">
+                    <div class="smile-card__images">
+                        <div class="smile-card__image smile-card__image--before">
+                            <span class="smile-card__label">Before</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                        <div class="smile-card__image smile-card__image--after">
+                            <span class="smile-card__label">After</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="smile-card__content">
+                        <h3 class="smile-card__title">White Fillings</h3>
+                        <p class="smile-card__text">Old metal fillings replaced with tooth-colored composite fillings.</p>
+                    </div>
+                </div>
+                <div class="smile-card">
+                    <div class="smile-card__images">
+                        <div class="smile-card__image smile-card__image--before">
+                            <span class="smile-card__label">Before</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                        <div class="smile-card__image smile-card__image--after">
+                            <span class="smile-card__label">After</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="smile-card__content">
+                        <h3 class="smile-card__title">Dental Bridge</h3>
+                        <p class="smile-card__text">Missing tooth replaced with a fixed bridge for a complete smile.</p>
+                    </div>
+                </div>
+                <div class="smile-card">
+                    <div class="smile-card__images">
+                        <div class="smile-card__image smile-card__image--before">
+                            <span class="smile-card__label">Before</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                        <div class="smile-card__image smile-card__image--after">
+                            <span class="smile-card__label">After</span>
+                            <div class="smile-card__icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="smile-card__content">
+                        <h3 class="smile-card__title">Composite Bonding</h3>
+                        <p class="smile-card__text">Chipped teeth repaired with cosmetic bonding for a seamless finish.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Photos -->
+    <section class="gallery-section gallery-section--dark">
+        <div class="gallery-section__container">
+            <div class="gallery-section__header">
+                <span class="gallery-section__eyebrow">Our Team</span>
+                <h2 class="gallery-section__title">Meet the Team</h2>
+                <p class="gallery-section__description">Our friendly, experienced team is here to make your visit comfortable and ensure you receive the best care.</p>
+            </div>
+            <div style="max-width: 700px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid rgba(124, 58, 237, 0.2); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);">
+                <img src="our-team.jpg" alt="Our dental team" style="width: 100%; height: auto; display: block;">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="footer__logo-mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                        <div class="footer__logo-text">
+                            <span class="footer__logo-text-main"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span>
+                        </div>
+                    </div>
+                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our 4 practices across London.</p>
+                    <div class="footer__socials">
+                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" class="footer__social" title="Instagram">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" class="footer__social" title="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Quick Links</h4>
+                    <ul class="footer__links">
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="services.html">General Dentistry</a></li>
+                        <li><a href="services.html">Cosmetic Dentistry</a></li>
+                        <li><a href="services.html">Root Canal</a></li>
+                        <li><a href="services.html">Facial Aesthetics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Our Locations</h4>
+                    <p class="footer__contact-item"><a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Barking</a> | <a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Walthamstow</a><br><a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Whitechapel</a> | <a href="locations.html" style="color: var(--gray-400); text-decoration: none;">South Harrow</a></p>
+                    <p class="footer__contact-item"><a href="locations.html" style="color: var(--purple-light); text-decoration: none;">View all locations &rarr;</a></p>
+                    <p class="footer__contact-item">Mon-Fri: 8:30am-6pm<br>Sat-Sun: Closed</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2026 Abbey Dental Practice. All rights reserved.</p>
+                <div class="footer__legal">
+                    <a href="employment.html">Careers</a>
+                    <a href="contact.html#faq">FAQ</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <style>
+        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); transition: all 0.4s; z-index: 1000; }
+        .chatbot-widget:hover { transform: scale(1.1); box-shadow: 0 6px 30px var(--purple-glow); }
+        .chatbot-widget__pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--purple)); animation: chatbot-pulse 2s ease-out infinite; z-index: -1; }
+        @keyframes chatbot-pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+    </style>
+    <a href="chatbot.html" class="chatbot-widget" title="Chat with Abbey AI">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="chatbot-widget__pulse"></span>
+    </a>
+</body>
+</html>

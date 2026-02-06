@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Abbey Dental Barking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --purple: #7C3AED; --purple-light: #8B5CF6; --purple-muted: #6D28D9; --purple-glow: rgba(124, 58, 237, 0.4);
+            --blue-neon: #3B82F6; --blue-light: #60A5FA;
+            --white: #FFFFFF; --off-white: #F8FAFC; --light-gray: #F1F5F9;
+            --charcoal: #0F172A; --black: #020617;
+            --gray-800: #1E293B; --gray-700: #334155; --gray-600: #475569; --gray-400: #94A3B8; --gray-300: #CBD5E1;
+            --font-display: 'Sora', sans-serif; --font-body: 'Outfit', sans-serif;
+            --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 4rem; --space-3xl: 6rem; --space-4xl: 8rem;
+            --container-max: 1280px; --container-padding: 1.5rem;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--black); color: var(--gray-300); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px var(--purple-glow); } 50% { box-shadow: 0 0 30px var(--purple-glow); } }
+        @keyframes rotate { to { transform: rotate(360deg); } }
+
+        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; }
+        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); display: flex; align-items: center; gap: 3rem; }
+        .logo { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; }
+        .logo__mark { width: 100px; height: 100px; transition: all 0.5s; }
+        .logo__mark img { width: 100%; height: 100%; object-fit: contain; }
+        .logo__text-group { display: flex; flex-direction: column; align-items: flex-start; }
+        .logo__text { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 600; }
+        .logo__text-abbey { color: #38BDF8; }
+        .logo__text-dental { color: #8B5CF6; }
+        .logo__subtext { font-family: 'Cinzel', serif; font-size: 0.7rem; color: var(--gray-400); font-weight: 400; letter-spacing: 0.1em; }
+        .logo__branch { font-size: 0.7rem; color: var(--gray-400); font-weight: 400; display: block; }
+        .nav__links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; position: relative; }
+        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue-neon), var(--purple)); transition: width 0.3s ease; }
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__link:hover::after, .nav__link--active::after { width: 100%; }
+        .nav__link--ai { color: var(--purple-light); }
+        .nav__link--ai::after { background: var(--purple); }
+        .nav__link--ai:hover { color: var(--purple-light); }
+        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; transition: all 0.4s ease; }
+        .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
+        .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+
+        .branch-switcher { position: fixed; top: 90px; right: 20px; z-index: 999; }
+        .branch-switcher__btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(5, 10, 20, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 50px; color: var(--gray-300); font-size: 0.75rem; text-decoration: none; transition: all 0.3s; }
+        .branch-switcher__btn:hover { border-color: rgba(59, 130, 246, 0.5); color: var(--white); }
+
+        .page-hero { padding: 160px 0 80px; background: var(--black); position: relative; overflow: hidden; }
+        .page-hero__gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000000; }
+        .page-hero__diagonal-lines { position: absolute; top: 0; left: 0; width: 60%; height: 100%; pointer-events: none; }
+        .page-hero__diagonal { position: absolute; width: 130%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%); transform-origin: 0 0; transform: rotate(30deg); }
+        .page-hero__diagonal--1 { top: 10%; left: 0; opacity: 0.5; }
+        .page-hero__diagonal--2 { top: 20%; left: 0; opacity: 0.6; }
+        .page-hero__diagonal--3 { top: 30%; left: 0; opacity: 0.8; }
+        .page-hero__diagonal--4 { top: 40%; left: 0; opacity: 1; }
+        .page-hero__diagonal--5 { top: 50%; left: 0; opacity: 0.8; }
+        .page-hero__diagonal--6 { top: 60%; left: 0; opacity: 0.6; }
+        .page-hero__arc { position: absolute; border-radius: 50%; border: 1.5px solid rgba(124, 58, 237, 0.2); }
+        .page-hero__arc--1 { width: 500px; height: 500px; bottom: -250px; right: -100px; }
+        .page-hero__arc--2 { width: 350px; height: 350px; bottom: -150px; right: -50px; border-color: rgba(124, 58, 237, 0.25); }
+        .page-hero__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); position: relative; z-index: 10; text-align: center; }
+        .page-hero__eyebrow { display: inline-flex; align-items: center; gap: var(--space-sm); padding: 0.5rem 1rem; background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 50px; margin-bottom: var(--space-lg); }
+        .page-hero__eyebrow-dot { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; animation: pulse-glow 2s ease-in-out infinite; }
+        .page-hero__eyebrow-text { color: var(--purple-light); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .page-hero__title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; color: var(--white); margin-bottom: var(--space-md); }
+        .page-hero__title-gradient { background: linear-gradient(135deg, var(--purple), var(--blue-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-hero__description { max-width: 640px; margin: 0 auto; font-size: 1.125rem; line-height: 1.7; color: var(--gray-300); }
+
+        .story { background: linear-gradient(180deg, var(--white) 0%, var(--light-gray) 100%); padding: var(--space-4xl) 0; }
+        .story__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center; }
+        .story__image { border-radius: 24px; height: 500px; overflow: hidden; border: 1px solid rgba(124, 58, 237, 0.2); position: relative; }
+        .story__image img { width: 100%; height: 100%; object-fit: cover; }
+        .story__image-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: var(--white); font-size: 0.875rem; }
+        .story__image-icon { width: 64px; height: 64px; background: rgba(124, 58, 237, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--purple); }
+        .story__image-text { color: var(--gray-600); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .story__content { max-width: 540px; }
+        .story__eyebrow { color: var(--purple); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: var(--space-md); }
+        .story__title { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--charcoal); line-height: 1.2; margin-bottom: var(--space-lg); }
+        .story__text { color: var(--gray-600); font-size: 1rem; line-height: 1.8; margin-bottom: var(--space-md); }
+        .story__highlight { background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(59, 130, 246, 0.05)); border-left: 4px solid var(--purple); padding: var(--space-md) var(--space-lg); border-radius: 0 12px 12px 0; margin: var(--space-lg) 0; }
+        .story__highlight-text { color: var(--gray-700); font-size: 1.0625rem; font-style: italic; line-height: 1.7; }
+
+        .values { background: linear-gradient(180deg, var(--light-gray) 0%, var(--gray-300) 100%); padding: var(--space-4xl) 0; }
+        .values__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .section-header { text-align: center; margin-bottom: var(--space-3xl); }
+        .section-eyebrow { display: inline-block; color: var(--purple); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: var(--space-md); }
+        .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--charcoal); margin-bottom: var(--space-md); }
+        .section-description { max-width: 560px; margin: 0 auto; color: var(--gray-600); font-size: 1.0625rem; line-height: 1.7; }
+        .values__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+        .value-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); padding: var(--space-xl); border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2); text-align: center; transition: all 0.5s; }
+        .value-card:hover { transform: translateY(-10px); border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+        .value-card__icon { width: 64px; height: 64px; background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(59, 130, 246, 0.1)); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-lg); color: var(--purple); }
+        .value-card__icon svg { width: 32px; height: 32px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .value-card__title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--white); margin-bottom: var(--space-sm); }
+        .value-card__text { color: var(--gray-300); font-size: 0.9375rem; line-height: 1.7; }
+
+        .team { background: linear-gradient(180deg, var(--gray-300) 0%, var(--gray-800) 100%); padding: var(--space-4xl) 0; }
+        .team__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .team__intro { text-align: center; margin-bottom: var(--space-xl); max-width: 700px; margin-left: auto; margin-right: auto; }
+        .team__intro-text { color: var(--gray-600); font-size: 1rem; line-height: 1.8; }
+        .team__languages { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-3xl); }
+        .team__language { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 0.5rem 1rem; background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 50px; color: var(--purple-light); font-size: 0.875rem; font-weight: 500; }
+        .team__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-lg); margin-bottom: var(--space-3xl); }
+        .team-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2); overflow: hidden; transition: all 0.5s; }
+        .team-card:hover { transform: translateY(-10px); border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+        .team__photo { width: 100%; max-width: 700px; margin: 0 auto var(--space-2xl); border-radius: 20px; overflow: hidden; border: 1px solid rgba(124, 58, 237, 0.2); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); }
+        .team__photo img { width: 100%; height: auto; display: block; }
+        .team-card__content { padding: var(--space-lg); }
+        .team-card__name { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: var(--space-xs); }
+        .team-card__role { color: var(--purple-light); font-size: 0.8125rem; font-weight: 500; margin-bottom: var(--space-sm); }
+        .team-card__gdc { color: var(--gray-400); font-size: 0.75rem; }
+
+        .accreditations { background: linear-gradient(180deg, var(--gray-800) 0%, var(--black) 100%); padding: var(--space-4xl) 0; }
+        .accreditations__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .accreditations__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+        .accreditation-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); padding: var(--space-xl); border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2); text-align: center; transition: all 0.4s ease; }
+        .accreditation-card:hover { border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); }
+        .accreditation-card__icon { width: 80px; height: 80px; background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(59, 130, 246, 0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-lg); }
+        .accreditation-card__icon-text { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .accreditation-card__title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--white); margin-bottom: var(--space-sm); }
+        .accreditation-card__text { color: var(--gray-300); font-size: 0.9375rem; line-height: 1.7; }
+
+        .cta-section { padding: var(--space-4xl) 0; position: relative; overflow: hidden; }
+        .cta-section__bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse 80% 60% at 70% 80%, rgba(124, 58, 237, 0.12), transparent 60%), var(--black); }
+        .cta-section__container { max-width: 800px; margin: 0 auto; padding: 0 var(--container-padding); text-align: center; position: relative; z-index: 1; }
+        .cta-section__title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: var(--white); margin-bottom: var(--space-md); }
+        .cta-section__text { color: var(--gray-300); font-size: 1.0625rem; line-height: 1.7; margin-bottom: var(--space-xl); }
+        .btn { display: inline-flex; align-items: center; gap: var(--space-sm); padding: 1rem 2rem; font-family: var(--font-body); font-size: 0.9375rem; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.4s; cursor: pointer; border: none; }
+        .btn--primary { background: linear-gradient(135deg, var(--purple), var(--purple-muted)); color: var(--white); }
+        .btn--primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--purple-glow); }
+
+        .footer { background: var(--black); padding: var(--space-3xl) 0 var(--space-xl); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .footer__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-3xl); margin-bottom: var(--space-3xl); }
+        .footer__brand { max-width: 280px; }
+        .footer__logo { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+        .footer__logo-mark { width: 80px; height: 80px; transition: all 0.5s; }
+        .footer__logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+        .footer__logo-text-group { display: flex; flex-direction: column; align-items: flex-start; }
+        .footer__logo-text { font-family: 'Cinzel', serif; font-size: 1.125rem; font-weight: 600; }
+        .footer__logo-text-abbey { color: #38BDF8; }
+        .footer__logo-text-dental { color: #8B5CF6; }
+        .footer__logo-subtext { font-family: 'Cinzel', serif; font-size: 0.7rem; color: var(--gray-400); font-weight: 400; letter-spacing: 0.1em; }
+        .footer__tagline { color: var(--gray-400); font-size: 0.9375rem; line-height: 1.7; }
+        .footer__heading { color: var(--white); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--space-lg); }
+        .footer__links { list-style: none; }
+        .footer__links li { margin-bottom: var(--space-sm); }
+        .footer__links a { color: var(--gray-400); text-decoration: none; font-size: 0.9375rem; transition: all 0.3s; }
+        .footer__links a:hover { color: var(--purple); }
+        .footer__contact-item { color: var(--gray-400); font-size: 0.9375rem; margin-bottom: var(--space-sm); }
+        .footer__bottom { padding-top: var(--space-xl); border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; }
+        .footer__copyright { color: var(--gray-600); font-size: 0.8125rem; }
+        .footer__legal { display: flex; gap: var(--space-lg); }
+        .footer__legal a { color: var(--gray-600); text-decoration: none; font-size: 0.8125rem; transition: color 0.3s; }
+        .footer__legal a:hover { color: var(--purple); }
+
+        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); transition: all 0.4s; z-index: 1000; }
+        .chatbot-widget:hover { transform: scale(1.1); }
+
+        @media (max-width: 1024px) {
+            .story__container { grid-template-columns: 1fr; gap: var(--space-2xl); }
+            .values__grid { grid-template-columns: repeat(2, 1fr); }
+            .team__grid { grid-template-columns: repeat(3, 1fr); }
+            .accreditations__grid { grid-template-columns: repeat(2, 1fr); }
+            .footer__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .header { top: 10px; max-width: 95%; }
+            .nav { padding: 0.6rem 1rem; gap: 0.5rem; }
+            .logo__mark { width: 70px; height: 70px; }
+            .nav__links { display: none; }
+            .nav__cta { display: none; }
+            .nav__mobile-toggle { display: flex; }
+            .branch-switcher { top: 75px; right: 10px; }
+            .values__grid { grid-template-columns: 1fr; }
+            .team__grid { grid-template-columns: repeat(2, 1fr); }
+            .accreditations__grid { grid-template-columns: 1fr; }
+            .footer__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
+            .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
+        }
+        @media (max-width: 480px) { .team__grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <div class="logo__mark"><img src="../486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__text-group">
+                    <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                    <span class="logo__subtext">BARKING</span>
+                </div>
+            </a>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="services.html" class="nav__link">Services</a></li>
+                <li><a href="about.html" class="nav__link nav__link--active">About</a></li>
+                <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="chatbot.html" class="nav__link nav__link--ai">Abbey AI</a></li>
+            </ul>
+            <a href="contact.html" class="nav__cta">Book Appointment</a>
+            <button class="nav__mobile-toggle"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <a href="../select.html" class="branch-switcher">
+        <span class="branch-switcher__btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Change Branch
+        </span>
+    </a>
+
+    <section class="page-hero">
+        <div class="page-hero__gradient">
+            <div class="page-hero__diagonal-lines">
+                <div class="page-hero__diagonal page-hero__diagonal--1"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--2"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--3"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--4"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--5"></div>
+                <div class="page-hero__diagonal page-hero__diagonal--6"></div>
+            </div>
+            <div class="page-hero__arc page-hero__arc--1"></div>
+            <div class="page-hero__arc page-hero__arc--2"></div>
+        </div>
+        <div class="page-hero__container">
+            <div class="page-hero__eyebrow">
+                <span class="page-hero__eyebrow-dot"></span>
+                <span class="page-hero__eyebrow-text">About Us</span>
+            </div>
+            <h1 class="page-hero__title">Meet the <span class="page-hero__title-gradient">Abbey Dental</span> Barking team</h1>
+            <p class="page-hero__description">Dedicated professionals providing quality dental care to the Barking community for over 20 years. Our multilingual team is committed to making your dental experience comfortable and stress-free.</p>
+        </div>
+    </section>
+
+    <section class="story">
+        <div class="story__container">
+            <div class="story__image">
+                <img src="../2026-02-05 (1).jpg" alt="Abbey Dental team with Chief Dental Officer Barry Cockcroft and Lord Howe">
+                <div class="story__image-caption">Our team with Barry Cockcroft, Chief Dental Officer and Lord Howe (April 2012)</div>
+            </div>
+            <div class="story__content">
+                <span class="story__eyebrow">Our Story</span>
+                <h2 class="story__title">From Abbey Road to Arboretum Place</h2>
+                <p class="story__text">Abbey Dental Practice has been a cornerstone of dental care in Barking for over two decades. Originally located on Abbey Road, our practice has grown alongside the community we serve.</p>
+                <p class="story__text">We recently moved to our brand new, purpose-built facility at 2 Arboretum Place. This modern practice has been designed with patient comfort and clinical excellence in mind.</p>
+                <div class="story__highlight">
+                    <p class="story__highlight-text">"We aim to deliver a patient focused, quality dental service in a safe and friendly environment by staff committed to continuously developing their skills."</p>
+                </div>
+                <p class="story__text">Our experienced team is committed to continuing the tradition of compassionate, comprehensive dental care that has made Abbey Dental Practice a trusted name in Barking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="values">
+        <div class="values__container">
+            <header class="section-header">
+                <span class="section-eyebrow">Our Values</span>
+                <h2 class="section-title">What drives us</h2>
+                <p class="section-description">At Abbey Dental Barking, our values guide every interaction and treatment decision.</p>
+            </header>
+            <div class="values__grid">
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                    <h3 class="value-card__title">Patient-Focused Care</h3>
+                    <p class="value-card__text">Your comfort and wellbeing are at the heart of everything we do.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h3 class="value-card__title">Safety First</h3>
+                    <p class="value-card__text">CQC approved with the highest standards of infection control.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+                    <h3 class="value-card__title">Accessibility</h3>
+                    <p class="value-card__text">NHS and private care options with multilingual staff.</p>
+                </article>
+                <article class="value-card">
+                    <div class="value-card__icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                    <h3 class="value-card__title">Clinical Excellence</h3>
+                    <p class="value-card__text">Modern techniques and continuous professional development.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="team">
+        <div class="team__container">
+            <header class="section-header">
+                <span class="section-eyebrow">Our Team</span>
+                <h2 class="section-title">Meet our dental professionals</h2>
+                <p class="section-description">Our experienced team brings together diverse expertise and a shared commitment to your dental health.</p>
+            </header>
+            <div class="team__intro">
+                <p class="team__intro-text">At Abbey Dental Barking, we pride ourselves on having a diverse, multilingual team who can communicate with patients in their preferred language.</p>
+            </div>
+            <div class="team__languages">
+                <span class="team__language"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> English</span>
+                <span class="team__language"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Hindi</span>
+                <span class="team__language"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Gujarati</span>
+                <span class="team__language"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Farsi</span>
+                <span class="team__language"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Urdu</span>
+                <span class="team__language"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Nepali</span>
+            </div>
+            <div class="team__photo">
+                <img src="../our-team.jpg" alt="Our dental team">
+            </div>
+            <div class="team__grid">
+                <article class="team-card">
+                    <div class="team-card__content">
+                        <h3 class="team-card__name">Dr Shital Sojitra</h3>
+                        <p class="team-card__role">Principal Dentist</p>
+                        <p class="team-card__gdc">GDC Registered</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <div class="team-card__content">
+                        <h3 class="team-card__name">Dr Janki Vaghela</h3>
+                        <p class="team-card__role">Associate Dentist</p>
+                        <p class="team-card__gdc">GDC Registered</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <div class="team-card__content">
+                        <h3 class="team-card__name">Dr Maryam Zane-Azirani</h3>
+                        <p class="team-card__role">Associate Dentist</p>
+                        <p class="team-card__gdc">GDC Registered</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <div class="team-card__content">
+                        <h3 class="team-card__name">Dhirendra Bantawa</h3>
+                        <p class="team-card__role">Dental Hygienist</p>
+                        <p class="team-card__gdc">GDC Registered</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <div class="team-card__content">
+                        <h3 class="team-card__name">Support Staff</h3>
+                        <p class="team-card__role">Reception & Nursing</p>
+                        <p class="team-card__gdc">Friendly Team</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="accreditations">
+        <div class="accreditations__container">
+            <header class="section-header">
+                <span class="section-eyebrow">Accreditations</span>
+                <h2 class="section-title">Quality you can trust</h2>
+                <p class="section-description">Our Barking practice meets the highest standards of dental care and safety.</p>
+            </header>
+            <div class="accreditations__grid">
+                <article class="accreditation-card">
+                    <div class="accreditation-card__icon"><span class="accreditation-card__icon-text">NHS</span></div>
+                    <h3 class="accreditation-card__title">NHS Registered</h3>
+                    <p class="accreditation-card__text">We are a fully registered NHS dental practice, providing affordable dental care to patients of all ages.</p>
+                </article>
+                <article class="accreditation-card">
+                    <div class="accreditation-card__icon"><span class="accreditation-card__icon-text">CQC</span></div>
+                    <h3 class="accreditation-card__title">CQC Approved</h3>
+                    <p class="accreditation-card__text">Inspected and approved by the Care Quality Commission, meeting all required standards for safety and quality.</p>
+                </article>
+                <article class="accreditation-card">
+                    <div class="accreditation-card__icon"><span class="accreditation-card__icon-text">GDC</span></div>
+                    <h3 class="accreditation-card__title">GDC Registered</h3>
+                    <p class="accreditation-card__text">All our dental professionals are registered with the General Dental Council, ensuring qualified and ethical care.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-section__bg"></div>
+        <div class="cta-section__container">
+            <h2 class="cta-section__title">Ready to meet our team?</h2>
+            <p class="cta-section__text">Book an appointment today and experience the difference of patient-focused dental care at Abbey Dental Barking.</p>
+            <a href="contact.html" class="btn btn--primary">Book Appointment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="footer__logo-mark"><img src="../486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                        <div class="footer__logo-text-group">
+                            <span class="footer__logo-text"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span>
+                            <span class="footer__logo-subtext">BARKING</span>
+                        </div>
+                    </div>
+                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our Barking practice.</p>
+                    <div class="footer__socials" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Connect on LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="../select.html">Other Branches</a></li></ul></div>
+                <div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="services.html">General Dentistry</a></li><li><a href="services.html">Cosmetic Dentistry</a></li><li><a href="services.html">Root Canal</a></li><li><a href="services.html">Facial Aesthetics</a></li></ul></div>
+                <div><h4 class="footer__heading">Contact</h4><p class="footer__contact-item">2 Arboretum Place<br>Barking, IG11 7RL</p><p class="footer__contact-item">020 8594 4129</p><p class="footer__contact-item">Mon-Fri: 8:30am-6pm<br>Sat-Sun: Closed</p></div>
+            </div>
+            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 Abbey Dental Barking. All rights reserved.</p><div class="footer__legal"><a href="../employment.html">Careers</a><a href="../contact.html#faq">FAQ</a><a href="#">Privacy Policy</a></div></div>
+        </div>
+    </footer>
+
+    <a href="chatbot.html" class="chatbot-widget" title="Abbey AI">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+    </a>
+</body>
+</html>

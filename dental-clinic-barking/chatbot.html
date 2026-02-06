@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DentalAI Assistant | The Heathway Dental Surgery</title>
+    <title>Abbey AI | Abbey Dental Practice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --teal: #14b8a6;
-            --teal-light: #2dd4bf;
-            --teal-glow: rgba(20, 184, 166, 0.6);
-            --turquoise: #06b6d4;
-            --cyan: #00d4ff;
-            --black: #030712;
-            --dark: #0a0f1a;
-            --gray-900: #111827;
-            --gray-800: #1f2937;
+            --blue: #3B82F6;
+            --blue-light: #60A5FA;
+            --blue-glow: rgba(59, 130, 246, 0.5);
+            --purple: #7C3AED;
+            --purple-light: #8B5CF6;
+            --purple-glow: rgba(124, 58, 237, 0.3);
+            --black: #000000;
+            --dark: #0a0a0a;
+            --gray-900: #111111;
+            --gray-800: #1a1a1a;
             --gray-600: #4b5563;
             --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
             --white: #FFFFFF;
-            --cream: #E8DFD8;
             --font-display: 'Sora', sans-serif;
             --font-body: 'Outfit', sans-serif;
         }
@@ -33,12 +34,11 @@
         body {
             font-family: var(--font-body);
             background: var(--black);
-            color: var(--cream);
+            color: var(--gray-300);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Background with animated gradient */
         .bg-container {
             position: fixed;
             top: 0;
@@ -47,27 +47,16 @@
             height: 100%;
             z-index: 0;
             overflow: hidden;
-            background:
-                radial-gradient(ellipse 80% 60% at 70% 80%, rgba(20, 184, 166, 0.1), transparent 60%),
-                radial-gradient(ellipse 60% 50% at 20% 30%, rgba(20, 184, 166, 0.06), transparent 50%),
-                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0, 212, 255, 0.05), transparent 50%),
-                var(--black);
-            background-size: 200% 200%;
-            animation: gradient-shift 20s ease infinite;
+            background: #000000;
         }
 
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Curved arcs */
+        /* Curved arcs with purple glow */
         .bg-arc {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(124, 58, 237, 0.25);
             pointer-events: none;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.06);
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.1);
         }
 
         .bg-arc--1 {
@@ -75,7 +64,7 @@
             height: 700px;
             bottom: -350px;
             right: -150px;
-            border-color: rgba(255, 255, 255, 0.06);
+            border-color: rgba(124, 58, 237, 0.2);
         }
 
         .bg-arc--2 {
@@ -83,7 +72,7 @@
             height: 500px;
             bottom: -220px;
             right: -80px;
-            border-color: rgba(255, 255, 255, 0.08);
+            border-color: rgba(124, 58, 237, 0.25);
         }
 
         .bg-arc--3 {
@@ -91,11 +80,11 @@
             height: 450px;
             top: -280px;
             right: -140px;
-            border-color: rgba(255, 255, 255, 0.07);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.05);
+            border-color: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
         }
 
-        /* Diagonal lines */
+        /* Diagonal lines with purple */
         .bg-lines {
             position: absolute;
             top: 0;
@@ -110,10 +99,10 @@
             position: absolute;
             width: 130%;
             height: 1px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 10%, rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0.08) 90%, transparent 100%);
+            background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%);
             transform-origin: 0 0;
             transform: rotate(30deg);
-            box-shadow: 0 0 4px rgba(20, 184, 166, 0.1);
+            box-shadow: 0 0 6px rgba(124, 58, 237, 0.2);
         }
 
         .bg-diagonal--1 { top: 6%; left: 0; opacity: 0.5; }
@@ -125,25 +114,36 @@
         .bg-diagonal--7 { top: 42%; left: 0; opacity: 0.85; }
         .bg-diagonal--8 { top: 48%; left: 0; opacity: 0.7; }
 
-        /* Minimal Header */
+        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        /* Header */
         .header {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            max-width: 95%;
             z-index: 1000;
-            padding: 1rem 2rem;
-            background: rgba(3, 7, 18, 0.7);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .header__inner {
-            max-width: 1200px;
-            margin: 0 auto;
+            background: rgba(5, 10, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            padding: 0.75rem 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(124, 58, 237, 0.05);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 3rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .header__inner:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(59, 130, 246, 0.15), 0 0 80px rgba(124, 58, 237, 0.1);
         }
 
         .logo {
@@ -154,26 +154,34 @@
         }
 
         .logo__mark {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--teal), var(--turquoise));
-            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+            transition: all 0.5s;
+        }
+
+        .logo__mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo:hover .logo__mark { transform: scale(1.1); }
+
+        .logo__text-group {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+            flex-direction: column;
+            line-height: 1;
         }
 
         .logo__text {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--white);
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
         }
+
+        .logo__text-abbey { color: #38BDF8; }
+        .logo__text-dental { color: #8B5CF6; }
 
         .nav__links {
             display: flex;
@@ -185,25 +193,32 @@
         .nav__link {
             text-decoration: none;
             color: var(--gray-400);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             transition: color 0.3s;
+            position: relative;
         }
 
-        .nav__link:hover, .nav__link--active { color: var(--teal-light); }
+        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--purple)); transition: width 0.3s ease; border-radius: 2px; }
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__link:hover::after, .nav__link--active::after { width: 100%; }
 
         .nav__cta {
-            padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, var(--teal), var(--turquoise));
+            padding: 0.6rem 1.25rem;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
             color: var(--white);
             text-decoration: none;
-            font-size: 0.8125rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+            border-radius: 50px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav__cta:hover { box-shadow: 0 0 30px rgba(20, 184, 166, 0.4); }
+        .nav__cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+        .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--blue-glow); }
+        .nav__cta:hover::before { left: 100%; }
 
         .mobile-toggle {
             display: none;
@@ -212,12 +227,15 @@
             background: none;
             border: none;
             cursor: pointer;
+            padding: 5px;
         }
 
         .mobile-toggle span {
             width: 20px;
             height: 2px;
             background: var(--white);
+            transition: all 0.3s;
+            border-radius: 2px;
         }
 
         /* Main Content */
@@ -232,7 +250,6 @@
             padding: 100px 1.5rem 2rem;
         }
 
-        /* Chat Container */
         .chat-wrapper {
             width: 100%;
             max-width: 700px;
@@ -258,16 +275,16 @@
             font-size: 0.875rem;
         }
 
-        /* Dark Glassmorphism Chat Box */
+        /* Chat Box */
         .chat-box {
-            background: rgba(10, 15, 26, 0.8);
+            background: rgba(10, 10, 15, 0.9);
             backdrop-filter: blur(40px);
             border-radius: 20px;
-            border: 1px solid rgba(20, 184, 166, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             overflow: hidden;
             box-shadow:
-                0 25px 60px rgba(0, 0, 0, 0.5),
-                0 0 40px rgba(20, 184, 166, 0.05),
+                0 25px 60px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(59, 130, 246, 0.05),
                 inset 0 1px 0 rgba(255, 255, 255, 0.03);
             display: flex;
             flex-direction: column;
@@ -285,7 +302,7 @@
 
         .chat-messages::-webkit-scrollbar { width: 4px; }
         .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: rgba(20, 184, 166, 0.2); border-radius: 2px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.2); border-radius: 2px; }
 
         .message {
             display: flex;
@@ -318,14 +335,14 @@
         }
 
         .message--bot .message__avatar {
-            background: rgba(20, 184, 166, 0.15);
-            border: 1px solid rgba(20, 184, 166, 0.3);
-            box-shadow: 0 0 15px rgba(20, 184, 166, 0.2);
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
         }
 
         .message--user .message__avatar {
-            background: linear-gradient(135deg, var(--teal), var(--turquoise));
-            box-shadow: 0 0 15px rgba(20, 184, 166, 0.3);
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            box-shadow: 0 0 15px var(--blue-glow);
         }
 
         .message__content {
@@ -338,15 +355,15 @@
         .message--bot .message__content {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--cream);
+            color: var(--gray-300);
             border-bottom-left-radius: 4px;
         }
 
         .message--user .message__content {
-            background: linear-gradient(135deg, var(--teal), var(--turquoise));
+            background: linear-gradient(135deg, var(--blue), var(--purple));
             color: white;
             border-bottom-right-radius: 4px;
-            box-shadow: 0 5px 20px rgba(20, 184, 166, 0.2);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.2);
         }
 
         .message__time {
@@ -373,7 +390,7 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            background: var(--teal);
+            background: var(--blue);
             animation: typingPulse 1.4s infinite;
         }
 
@@ -388,7 +405,7 @@
         /* Quick Actions */
         .quick-actions {
             padding: 0.75rem;
-            border-top: 1px solid rgba(20, 184, 166, 0.1);
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
@@ -398,7 +415,7 @@
         .quick-btn {
             padding: 0.4rem 0.875rem;
             background: transparent;
-            border: 1px solid rgba(20, 184, 166, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 16px;
             color: var(--gray-400);
             font-size: 0.75rem;
@@ -408,26 +425,26 @@
         }
 
         .quick-btn:hover {
-            background: rgba(20, 184, 166, 0.1);
-            border-color: rgba(20, 184, 166, 0.4);
-            color: var(--teal-light);
-            box-shadow: 0 0 15px rgba(20, 184, 166, 0.15);
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+            color: var(--blue-light);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
         }
 
         /* Input Area */
         .chat-input-area {
             padding: 1rem;
-            border-top: 1px solid rgba(20, 184, 166, 0.1);
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
             display: flex;
             gap: 0.75rem;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .chat-input {
             flex: 1;
             padding: 0.75rem 1rem;
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(20, 184, 166, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.15);
             border-radius: 12px;
             color: var(--white);
             font-size: 0.875rem;
@@ -439,14 +456,14 @@
         .chat-input::placeholder { color: var(--gray-600); }
 
         .chat-input:focus {
-            border-color: rgba(20, 184, 166, 0.4);
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
         }
 
         .send-btn {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, var(--teal), var(--turquoise));
+            background: linear-gradient(135deg, var(--blue), var(--purple));
             border: none;
             border-radius: 12px;
             cursor: pointer;
@@ -454,12 +471,12 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
         }
 
         .send-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(20, 184, 166, 0.4);
+            box-shadow: 0 0 30px var(--blue-glow);
         }
 
         .send-btn svg {
@@ -489,12 +506,17 @@
             transition: color 0.2s;
         }
 
-        .footer__text a:hover { color: var(--teal); }
+        .footer__text a:hover { color: var(--blue); }
 
         /* Mobile */
         @media (max-width: 768px) {
-            .nav__links, .nav__cta { display: none; }
+            .header { top: 10px; max-width: 95%; }
+            .header__inner { padding: 0.6rem 1rem; gap: 0.5rem; }
+            .nav__links { display: none; }
+            .nav__cta { display: none; }
             .mobile-toggle { display: flex; }
+            .logo__mark { width: 70px; height: 70px; }
+            .logo__text { font-size: 1rem; }
             .main { padding: 90px 1rem 1.5rem; }
             .chat-header__title { font-size: 1.25rem; }
             .chat-box { height: calc(100vh - 260px); min-height: 380px; }
@@ -525,15 +547,19 @@
     <header class="header">
         <div class="header__inner">
             <a href="index.html" class="logo">
-                <div class="logo__mark">H</div>
-                <span class="logo__text">Heathway Dental</span>
+                <div class="logo__mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__text-group">
+                    <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                </div>
             </a>
             <ul class="nav__links">
                 <li><a href="index.html" class="nav__link">Home</a></li>
                 <li><a href="services.html" class="nav__link">Services</a></li>
                 <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+                <li><a href="locations.html" class="nav__link">Locations</a></li>
+                <li><a href="chatbot.html" class="nav__link nav__link--active">Abbey AI</a></li>
                 <li><a href="contact.html" class="nav__link">Contact</a></li>
-                <li><a href="chatbot.html" class="nav__link nav__link--active">DentalAI</a></li>
             </ul>
             <a href="contact.html" class="nav__cta">Book Now</a>
             <button class="mobile-toggle"><span></span><span></span><span></span></button>
@@ -543,8 +569,8 @@
     <main class="main">
         <div class="chat-wrapper">
             <div class="chat-header">
-                <h1 class="chat-header__title">DentalAI Assistant</h1>
-                <p class="chat-header__subtitle">Your intelligent dental companion</p>
+                <h1 class="chat-header__title">Abbey AI</h1>
+                <p class="chat-header__subtitle">Your intelligent dental companion at Abbey Dental Practice</p>
             </div>
 
             <div class="chat-box">
@@ -552,7 +578,7 @@
                     <div class="message message--bot">
                         <div class="message__avatar">&#129302;</div>
                         <div>
-                            <div class="message__content">Hello! I'm your AI dental assistant. I can help with appointments, services, dental questions, or just chat. How can I help you today?</div>
+                            <div class="message__content">Hello! I'm Abbey AI, your friendly dental assistant at Abbey Dental Practice. I can help with appointments, services, dental advice, pricing, emergency info, or just chat. How can I assist you today?</div>
                             <div class="message__time">Just now</div>
                         </div>
                     </div>
@@ -578,7 +604,7 @@
     </main>
 
     <footer class="footer">
-        <p class="footer__text">&copy; 2026 The Heathway Dental Surgery &middot; <a href="contact.html">Contact</a> &middot; <a href="#">Privacy</a></p>
+        <p class="footer__text">&copy; 2026 Abbey Dental Practice &middot; <a href="contact.html">Contact</a> &middot; <a href="#">Privacy</a></p>
     </footer>
 
     <script>
@@ -590,59 +616,238 @@
         }
 
         const responses = {
-            'hello': "Hello! Welcome to The Heathway Dental Surgery. How can I help you today?",
-            'hi': "Hi there! What can I assist you with?",
-            'hey': "Hey! I'm here to help. What do you need?",
-            'good morning': "Good morning! How can I help with your dental needs today?",
+            // Greetings
+            'hello': "Hello! I'm Abbey AI. Welcome to Abbey Dental Practice! How can I help you today?",
+            'hi': "Hi there! I'm Abbey AI. What can I assist you with?",
+            'hey': "Hey! Abbey AI here, ready to help. What do you need?",
+            'good morning': "Good morning! Abbey AI here. How can I help with your dental needs today?",
             'good afternoon': "Good afternoon! What can I do for you?",
             'good evening': "Good evening! How may I assist you?",
-            'hiya': "Hiya! Welcome! How can I help?",
-            'howdy': "Howdy! What can I do for you?",
-            'yo': "Hey! What's up?",
-            'sup': "Hey! How can I help?",
-            'bye': "Goodbye! Take care of your smile!",
-            'goodbye': "Bye! Have a great day!",
-            'thanks': "You're welcome! Anything else?",
-            'thank you': "My pleasure! Need anything else?",
-            'cheers': "Cheers! Happy to help!",
-            'how are you': "I'm great, thanks! How can I help you?",
-            'book': "To book: Call 020 8592 5030, email info@heathwaydental.co.uk, or use our Contact page!",
-            'appointment': "Booking is easy! Call 020 8592 5030 or visit our Contact page.",
-            'schedule': "Call 020 8592 5030 or book online via our Contact page!",
-            'hours': "Mon-Thu: 9am-5pm | Fri: 9am-4:30pm | Sat-Sun: Closed",
-            'opening': "We're open Mon-Thu 9-5, Fri 9-4:30. Closed weekends.",
-            'time': "Hours: Mon-Thu 9am-5pm, Fri 9am-4:30pm",
-            'open': "Yes! Mon-Thu 9-5, Fri 9-4:30",
-            'services': "We offer: General Dentistry, Cosmetic, Implants, Orthodontics, Root Canal, Children's, Emergency Care. Which interests you?",
-            'treatment': "Treatments: check-ups, fillings, whitening, implants, braces, root canals & more!",
-            'whitening': "Professional whitening available! In-office or take-home kits. Want to book?",
-            'implant': "Dental implants: permanent solution for missing teeth. Single, multiple, or full arch available.",
-            'braces': "We offer Invisalign and traditional braces. Invisalign is nearly invisible!",
-            'invisalign': "Invisalign: clear, removable aligners. Discreet teeth straightening!",
-            'filling': "White or amalgam fillings available. White fillings match your natural tooth color!",
-            'crown': "Crowns protect damaged teeth. Porcelain for natural look. Usually 2 visits.",
-            'veneer': "Veneers transform your smile! Great for chips, gaps, discoloration.",
-            'extraction': "Extractions done comfortably with anaesthetic. Replacement options available.",
-            'clean': "Professional cleaning removes plaque & tartar. Recommended every 6-12 months.",
-            'checkup': "Regular check-ups include exam, X-rays if needed, and cleaning. Book today!",
-            'location': "276a Heathway, Dagenham, RM10 8QS. Near Dagenham Heathway station.",
-            'address': "Find us at 276a Heathway, Dagenham, RM10 8QS",
-            'where': "We're at 276a Heathway, Dagenham, RM10 8QS",
-            'nhs': "Yes! NHS registered & CQC approved. Band prices: £26.80 / £73.50 / £319.10",
-            'price': "NHS Bands: £26.80-£319.10. Private quotes at consultation.",
-            'cost': "NHS: £26.80-£319.10. Private varies. Book consultation for quote!",
-            'emergency': "Emergency? Call 020 8592 5030 now! Same-day appointments available.",
-            'pain': "In pain? Call 020 8592 5030 for emergency appointment!",
-            'toothache': "Toothache? Call 020 8592 5030 - we have emergency slots!",
-            'child': "Kids welcome! Gentle care from age 1. Fun, friendly environment.",
-            'kid': "Children's dentistry: gentle, fun visits from first tooth!",
-            'nervous': "Dental anxiety? We offer sedation, extra time, gentle approach. You're in control.",
-            'scared': "Nervous patients welcome! Sedation available. We go at your pace.",
-            'sensitive': "Sensitivity? Try sensitivity toothpaste. Book a check to identify the cause!",
-            'breath': "Bad breath? Often treatable! Book a check-up - usually gum or bacteria related.",
-            'joke': "Why did the king go to the dentist? To get his teeth crowned! 👑",
-            'funny': "What time is a dental appointment? Tooth-hurty! (2:30) ⏰",
-            'default': "I can help with: Appointments, Services, Hours, Location, NHS info, Emergencies. Or call 020 8592 5030!"
+            'hiya': "Hiya! Welcome to Abbey Dental! How can I help?",
+            'howdy': "Howdy! Abbey AI at your service. What brings you here today?",
+            'greetings': "Greetings! I'm Abbey AI, your dental assistant. How can I help?",
+
+            // Farewells
+            'bye': "Goodbye! Take care of your smile! 😊",
+            'goodbye': "Bye! Have a lovely day! Remember to brush twice daily!",
+            'see you': "See you soon! Keep smiling!",
+            'later': "Catch you later! Don't forget to floss!",
+            'cya': "Cya! Take care of those pearly whites!",
+
+            // Gratitude
+            'thanks': "You're welcome! Anything else I can help with?",
+            'thank you': "My pleasure! Let me know if you need anything else.",
+            'cheers': "Cheers! Happy to help. Need anything else?",
+            'ta': "No problem! Is there anything else?",
+            'appreciate': "Glad I could help! Any other questions?",
+
+            // About the AI
+            'who are you': "I'm Abbey AI, the friendly virtual assistant for Abbey Dental Practice. I can help with appointments, services, dental questions, and more!",
+            'what are you': "I'm Abbey AI - an intelligent chatbot designed to help patients of Abbey Dental. I know about our services, prices, team, and can answer dental questions!",
+            'your name': "I'm Abbey AI! Named after Abbey Dental Practice. Nice to meet you!",
+            'what can you do': "I can help you book appointments, explain our services, give pricing info, share opening hours, provide dental advice, tell jokes, and much more! Try asking me anything dental-related.",
+            'how are you': "I'm doing great, thanks for asking! Ready to help with any dental questions. How can I assist you?",
+
+            // Appointments & Booking
+            'book': "To book an appointment: Call 020 8594 4129, or visit our Contact page! We're at 2 Arboretum Place, Barking.",
+            'appointment': "Booking is easy! Call 020 8594 4129 or use our online Contact form. New patients always welcome!",
+            'schedule': "Ready to schedule? Call 020 8594 4129 or book online via our Contact page!",
+            'register': "To register as a new patient, call 020 8594 4129 or visit us with photo ID. NHS and private patients welcome!",
+            'new patient': "Welcome! New patients can register by calling 020 8594 4129 or visiting us. Bring photo ID and any medical history.",
+            'first visit': "Your first visit includes a thorough exam, X-rays if needed, and a treatment plan discussion. Allow about 30-45 minutes.",
+            'cancel': "To cancel or reschedule, please call 020 8594 4129 as soon as possible. We appreciate 24 hours notice.",
+            'reschedule': "Need to reschedule? No problem! Call 020 8594 4129 and we'll find a new time for you.",
+            'waiting list': "Want to get in sooner? Ask to be on our cancellation list when you call 020 8594 4129!",
+            'availability': "We have appointments Mon-Fri 8:30am-6pm. Call 020 8594 4129 to check availability.",
+
+            // Opening Hours
+            'hours': "We're open Mon-Fri: 8:30am-6pm | Closed Sat & Sun",
+            'opening': "Opening hours: Monday to Friday 8:30am-6pm. Weekends closed.",
+            'time': "Our hours are Mon-Fri 8:30am to 6pm.",
+            'open': "Yes, we're open Mon-Fri 8:30am-6pm! How can we help?",
+            'closed': "We're closed on weekends. Open Mon-Fri 8:30am-6pm.",
+            'weekend': "Sorry, we're closed on weekends. We're open Mon-Fri 8:30am-6pm.",
+            'saturday': "We're closed on Saturdays. Open Monday to Friday 8:30am-6pm.",
+            'sunday': "We're closed on Sundays. Please visit us Mon-Fri 8:30am-6pm.",
+            'bank holiday': "We're usually closed on bank holidays. Check our website or call ahead.",
+
+            // Services - General
+            'services': "We offer: ✓ General Dentistry ✓ Cosmetic (Whitening, Veneers) ✓ Restorative (Crowns, Bridges, Implants) ✓ Root Canal ✓ Children's Dentistry ✓ Facial Aesthetics ✓ Hygiene Services. Which interests you?",
+            'treatment': "Our treatments include: check-ups, fillings, whitening, veneers, crowns, bridges, dentures, root canals, extractions, Botox & more!",
+            'what do you offer': "We provide comprehensive dental care: preventive, cosmetic, and restorative treatments. NHS and private options available!",
+
+            // Specific Treatments
+            'whitening': "Professional teeth whitening can brighten your smile by several shades! We offer in-office and take-home options. Want to book a consultation?",
+            'veneer': "Porcelain veneers transform your smile! Perfect for chips, gaps, discoloration, or uneven teeth. Results last 10-15 years with proper care.",
+            'filling': "We offer tooth-colored (composite) and amalgam fillings. White fillings match your natural teeth and contain no metal!",
+            'crown': "Dental crowns protect and restore damaged teeth. We use porcelain for a natural look. The process usually takes 2 visits.",
+            'bridge': "Dental bridges fill the gap from missing teeth. Fixed in place, they look and function like natural teeth!",
+            'denture': "We offer full and partial dentures for natural-looking tooth replacement. Modern dentures are comfortable and secure!",
+            'extraction': "Tooth extractions are performed comfortably with local anaesthetic. This includes wisdom teeth removal.",
+            'implant': "Dental implants are the gold standard for replacing missing teeth. They look, feel, and function like natural teeth! Book a consultation to see if you're a candidate.",
+            'root canal': "Root canal treatment saves infected teeth. Modern techniques make it comfortable - similar to having a filling done!",
+            'braces': "Interested in straightening your teeth? We can discuss orthodontic options. Ask about a consultation!",
+            'invisalign': "Curious about Invisalign? Clear aligners are a discreet way to straighten teeth. Book a consultation to learn more!",
+            'orthodontic': "We can assess your orthodontic needs and discuss the best options for straightening your teeth.",
+
+            // Hygiene & Prevention
+            'clean': "Professional cleaning by our hygienist removes plaque and tartar that brushing misses. Recommended every 6 months!",
+            'hygiene': "Our hygienist provides professional cleaning, scale and polish, and gum disease treatment. Essential for a healthy mouth!",
+            'scale and polish': "A scale and polish removes built-up tartar and stains, leaving your teeth feeling fresh and clean!",
+            'checkup': "Regular check-ups include a thorough exam and X-rays if needed. We recommend every 6 months. Book today!",
+            'x-ray': "Dental X-rays help us spot problems invisible to the eye. Modern digital X-rays use minimal radiation.",
+            'fluoride': "Fluoride treatments strengthen enamel and help prevent decay. Great for children and adults!",
+            'sealant': "Dental sealants protect children's teeth from decay. A quick, painless protective coating for molars.",
+            'mouthguard': "We make custom mouthguards for sports and night guards for teeth grinding. Much better than store-bought!",
+            'night guard': "Grinding your teeth at night? A custom night guard protects your teeth from wear and can reduce jaw pain.",
+
+            // Dental Conditions
+            'cavity': "Cavities are treated with fillings. The sooner we catch them, the simpler the treatment. Regular check-ups help!",
+            'decay': "Tooth decay is preventable! Brush twice daily, floss, limit sugar, and see us regularly. If you have decay, we can treat it.",
+            'gum disease': "Gum disease is treatable! Signs include bleeding gums, bad breath, loose teeth. Our hygienist can help get your gums healthy.",
+            'gingivitis': "Gingivitis is early gum disease - reversible with good care! Professional cleaning and improved brushing/flossing can cure it.",
+            'periodontitis': "Periodontitis is advanced gum disease. We offer deep cleaning and treatment to save your teeth. Early action is key!",
+            'sensitive': "Sensitive teeth? Could be worn enamel, gum recession, or decay. We can assess and recommend treatment or special toothpaste.",
+            'sensitivity': "Tooth sensitivity has many causes. Use a sensitivity toothpaste and book an appointment so we can check the cause.",
+            'abscess': "A dental abscess needs urgent treatment! Call 020 8594 4129 immediately - don't wait as infection can spread.",
+            'broken tooth': "Broken a tooth? Try to save any pieces. Rinse gently and call us urgently at 020 8594 4129!",
+            'chipped': "Chipped tooth? We can repair it with bonding, veneers, or crowns depending on severity. Call for an appointment!",
+            'loose tooth': "Adult loose tooth? Don't ignore it - could be gum disease or injury. Please call 020 8594 4129 for assessment.",
+            'bleeding gums': "Bleeding gums often indicate gum disease. Don't stop brushing! Book a hygiene appointment and we'll help.",
+            'bad breath': "Bad breath (halitosis) can be caused by gum disease, decay, or other issues. We can help identify and treat the cause!",
+            'halitosis': "Halitosis has dental causes we can treat! Book an appointment for a check-up and hygiene visit.",
+            'plaque': "Plaque is a film of bacteria that causes decay and gum disease. Brush twice daily, floss, and visit our hygienist!",
+            'tartar': "Tartar is hardened plaque that only professional cleaning can remove. Regular hygiene visits keep it under control!",
+            'wisdom teeth': "Wisdom teeth problems? We can assess whether they need removal. Pain or swelling? Call us urgently!",
+
+            // Location & Directions
+            'location': "We're at 2 Arboretum Place, Barking, IG11 7RL. Our modern, purpose-built practice is easy to find!",
+            'address': "Abbey Dental: 2 Arboretum Place, Barking, IG11 7RL",
+            'where': "Find us at 2 Arboretum Place, Barking, IG11 7RL. Near Barking town centre!",
+            'directions': "We're at 2 Arboretum Place, Barking, IG11 7RL. Click the map link on our Contact page for directions!",
+            'parking': "There's parking nearby at Barking town centre car parks. We're also accessible by public transport!",
+            'transport': "We're a short walk from Barking station (District, Hammersmith & City, Overground lines). Buses stop nearby too!",
+            'near': "We're near Barking town centre, a short walk from the station. Easy to reach by tube, train, or bus!",
+            'moved': "Yes, we moved from Abbey Road to our new purpose-built practice at 2 Arboretum Place, Barking!",
+
+            // NHS & Pricing
+            'nhs': "Yes! We're NHS registered & CQC approved. NHS Band prices: Band 1: £26.80 | Band 2: £73.50 | Band 3: £319.10",
+            'price': "NHS Bands: £26.80 / £73.50 / £319.10. Private fees quoted at consultation.",
+            'cost': "NHS treatments: £26.80-£319.10 depending on band. Private options available - ask for quote!",
+            'fee': "NHS fees: Band 1 £26.80 (check-up), Band 2 £73.50 (fillings), Band 3 £319.10 (crowns etc). Private rates on request.",
+            'band 1': "NHS Band 1 (£26.80): Check-up, diagnosis, X-rays, scale and polish, prevention advice.",
+            'band 2': "NHS Band 2 (£73.50): Everything in Band 1 plus fillings, extractions, root canal treatment.",
+            'band 3': "NHS Band 3 (£319.10): Everything in Bands 1 & 2 plus crowns, dentures, bridges.",
+            'private': "We offer private treatments with premium materials and extended appointments. Ask for a quote!",
+            'payment': "We accept cash, card, and offer payment plans for larger treatments. Ask our reception for details!",
+            'finance': "Need to spread the cost? Ask about our payment plan options for private treatments!",
+            'payment plan': "Yes, we offer payment plans to help spread the cost of private treatments. Ask reception for details!",
+            'card': "Yes, we accept all major credit and debit cards!",
+            'insurance': "We work with various dental insurance providers. Check with your insurer and bring your details!",
+            'exempt': "Some patients are exempt from NHS charges (under 18, pregnant, certain benefits). Ask us if you qualify!",
+            'free dental': "Free NHS dental care is available if you're under 18, pregnant/new mum, or on certain benefits like Universal Credit.",
+            'hc2': "Have an HC2 certificate? You'll get free NHS dental treatment. Bring it to your appointment!",
+
+            // Emergency
+            'emergency': "Dental emergency? Call 020 8594 4129 immediately! We'll fit you in as soon as possible.",
+            'pain': "In pain? Don't suffer! Call 020 8594 4129 for an urgent appointment.",
+            'toothache': "Toothache? Call 020 8594 4129 - we'll see you urgently! Take paracetamol while you wait.",
+            'urgent': "Need urgent care? Call 020 8594 4129 now. We prioritize emergencies!",
+            'swelling': "Facial swelling can be serious! Call 020 8594 4129 urgently, or go to A&E if severe/affecting breathing.",
+            'knocked out': "Knocked out tooth? Keep it moist (in milk), don't touch the root, and come IMMEDIATELY! Call 020 8594 4129!",
+            'bleeding': "Mouth bleeding heavily? Apply pressure with clean gauze. If it won't stop, call 020 8594 4129 or seek A&E.",
+
+            // Children's Dentistry
+            'child': "Kids are very welcome! We provide gentle, friendly care. Dr Rachael O'Flaherty is especially great with nervous children.",
+            'kid': "Children's dentistry: gentle, patient care in a relaxed environment. We make dental visits fun!",
+            'children': "We love seeing children! Start visits early to build good habits. NHS care is free for under 18s!",
+            'baby': "Baby teeth matter! Start dental visits when first teeth appear. We're gentle with little ones.",
+            'teenager': "Teens welcome! We address unique concerns like wisdom teeth, orthodontics, and cosmetic questions.",
+
+            // Nervous Patients
+            'nervous': "Dental anxiety? We completely understand! Our team is gentle, patient, and will go at your pace.",
+            'scared': "Nervous patients welcome! We explain everything, offer breaks, and you're always in control.",
+            'anxious': "Feeling anxious about the dentist? You're not alone! We specialise in helping nervous patients feel comfortable.",
+            'phobia': "Dental phobia is more common than you think. We're experienced in helping fearful patients. Take that first step - call us!",
+            'relax': "We create a calm, relaxing environment. Tell us your concerns and we'll help you feel at ease.",
+            'sedation': "Ask us about sedation options for anxious patients. We want your visit to be as comfortable as possible.",
+            'gentle': "We pride ourselves on gentle treatment. Your comfort is our priority!",
+
+            // Comfort & Experience
+            'numbing': "We use effective local anaesthetic so you won't feel pain during treatment. Let us know if you need more!",
+            'injection': "Nervous about injections? We use techniques to minimize discomfort. Most patients say it's not as bad as expected!",
+            'anaesthetic': "Local anaesthetic numbs the area completely. You'll feel pressure but no pain. We wait until it's fully working!",
+            'pain free': "We aim for pain-free dentistry! Modern anaesthetics and techniques make treatment very comfortable.",
+            'comfortable': "Your comfort matters to us. Tell us if you need a break or feel any discomfort during treatment.",
+
+            // Facial Aesthetics
+            'botox': "Facial aesthetics including Botox available! Reduce wrinkles for a refreshed, natural look. Administered by trained clinicians.",
+            'facial': "Facial aesthetic treatments by our trained team. We offer Botox for natural-looking wrinkle reduction.",
+            'aesthetic': "Facial aesthetics: Botox for forehead lines, crow's feet, and frown lines. Subtle, natural results!",
+            'wrinkle': "Interested in wrinkle reduction? Our Botox treatments give natural-looking results. Book a consultation!",
+            'anti-aging': "We offer anti-aging facial aesthetic treatments. Botox can smooth lines and refresh your appearance.",
+
+            // Team
+            'team': "Our amazing team includes Dr Shital Sojitra (Principal), Dr Janki Vaghela, Dr Maryam, Dr Amina, Dr Bhavini, Dr Rachael, and more! 9 dentists plus hygienist Dhirendra.",
+            'dentist': "We have 9 experienced dentists led by Dr Shital Sojitra (Principal). Our multilingual team speaks many languages!",
+            'dr shital': "Dr Shital Sojitra is our Principal Dentist and practice owner. Highly experienced and committed to excellent care!",
+            'principal': "Dr Shital Sojitra is our Principal Dentist, leading a team of 9 experienced clinicians.",
+            'hygienist': "Our hygienist Dhirendra provides professional cleaning, gum disease treatment, and oral health advice.",
+            'staff': "Our friendly team includes 9 dentists, a hygienist, and dedicated support staff. We're here to help!",
+            'language': "Our team speaks: English, Hindi, Gujarati, Farsi, Urdu, Bengali, and Nepali. We can help patients in many languages!",
+
+            // Oral Hygiene Tips
+            'brush': "Brush twice daily for 2 minutes with fluoride toothpaste. Use gentle circular motions and don't forget the gum line!",
+            'brushing': "Brushing tips: Twice daily, 2 minutes, soft brush, fluoride paste. Replace your brush every 3 months!",
+            'floss': "Floss daily to clean between teeth where brushes can't reach. It prevents gum disease and decay!",
+            'flossing': "How to floss: Gently slide between teeth, curve around each tooth, use clean section each time. Daily is best!",
+            'mouthwash': "Mouthwash is a good addition to brushing and flossing - but not a replacement! Use at a different time to brushing.",
+            'electric toothbrush': "Electric toothbrushes can be more effective than manual ones. They do the brushing motion for you!",
+            'toothbrush': "Choose a soft-bristled brush and replace it every 3 months. Electric brushes are great too!",
+
+            // Aftercare
+            'aftercare': "After treatment: follow our specific advice, take any prescribed medication, and call if you have concerns!",
+            'recovery': "Recovery varies by treatment. We'll give you specific aftercare instructions. Call us with any questions!",
+            'after extraction': "After extraction: bite on gauze, avoid hot drinks and smoking, eat soft foods, don't rinse for 24 hours.",
+            'after filling': "After a filling: avoid eating until numbness wears off. Some sensitivity is normal for a few days.",
+            'eating after': "Wait until numbness wears off before eating. For extractions, stick to soft foods for 24-48 hours.",
+            'medication': "Take any prescribed medication as directed. Over-the-counter painkillers help if needed after treatment.",
+            'antibiotics': "Take antibiotics exactly as prescribed - complete the full course even if you feel better!",
+            'painkillers': "Paracetamol or ibuprofen can help after dental treatment. Follow the packet instructions.",
+
+            // Fun & Personality
+            'joke': "Why did the king go to the dentist? To get his teeth crowned! 👑 Want another?",
+            'another joke': "What does the dentist of the year get? A little plaque! 🏆",
+            'funny': "What time is a dental appointment? Tooth-hurty! (2:30) 😄",
+            'tell me a joke': "Why did the deer need braces? Because it had buck teeth! 🦌",
+            'make me laugh': "I told my dentist I wanted a crown. She said: 'You're royalty to us!' 👑",
+            'trivia': "Did you know? Your enamel is the hardest substance in your body - harder than bone!",
+            'fact': "Dental fact: The average person spends 38.5 days brushing their teeth over a lifetime!",
+            'interesting': "Fun fact: A snail's mouth contains thousands of teeth - up to 20,000! Imagine cleaning those!",
+            'bored': "Here's a smile fact: Smiling releases endorphins and makes you feel happier! 😊",
+
+            // Social & Contact
+            'phone': "Call us on 020 8594 4129 - we're here Mon-Fri 8:30am-6pm!",
+            'call': "Phone: 020 8594 4129. We're happy to answer questions or book appointments!",
+            'contact': "Contact us: Phone 020 8594 4129 or visit our Contact page for the online form!",
+            'email': "You can reach us through our Contact page form, or call 020 8594 4129!",
+            'instagram': "Follow us on Instagram: @abbeydentalbarking for updates and tips!",
+            'social': "Find us on Instagram @abbeydentalbarking and LinkedIn for dental tips and practice news!",
+            'facebook': "Check out our Facebook page for updates, dental tips, and patient stories!",
+            'website': "Visit our website for full information: services, team, gallery, and booking!",
+            'review': "We'd love your feedback! Leave us a review on Google - it helps other patients find quality care.",
+
+            // Misc
+            'pregnant': "Dental care is safe and important during pregnancy! NHS treatment is free if you're pregnant or had a baby in the last 12 months.",
+            'diabetes': "If you have diabetes, dental care is especially important. Gum disease and diabetes are linked. Keep us informed!",
+            'medical history': "Please tell us about your medical history and medications - it helps us provide safe care!",
+            'smoking': "Smoking affects oral health - gum disease, staining, cancer risk. We can help with advice and support to quit!",
+            'vaping': "Vaping still affects oral health - dry mouth, gum irritation. Better than smoking but not risk-free.",
+            'alcohol': "Excess alcohol increases mouth cancer risk and causes dry mouth. Moderation helps your oral health!",
+            'diet': "A healthy diet supports healthy teeth! Limit sugar and acid, drink water, eat crunchy vegetables.",
+
+            // Default
+            'default': "I'm Abbey AI! I can help with: Appointments, Services, Prices, Hours, Location, NHS info, Dental advice, Team info, or Emergencies. Or call 020 8594 4129!"
         };
 
         function getResponse(text) {

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employment Opportunities | Abbey Dental Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --purple: #7C3AED; --purple-light: #8B5CF6; --purple-glow: rgba(124, 58, 237, 0.4);
+            --blue: #3B82F6; --blue-light: #60A5FA; --blue-bright: #2563EB; --blue-glow: rgba(59, 130, 246, 0.4);
+            --white: #FFFFFF; --off-white: #F8FAFC; --light-gray: #F1F5F9;
+            --black: #020617; --charcoal: #0F172A;
+            --gray-600: #475569; --gray-400: #94A3B8; --gray-300: #CBD5E1;
+            --font-display: 'Sora', sans-serif; --font-body: 'Outfit', sans-serif;
+            --container-max: 1280px; --container-padding: 1.5rem;
+            --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 4rem; --space-4xl: 8rem;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--black); color: var(--gray-300); line-height: 1.6; }
+
+        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; }
+        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); display: flex; align-items: center; gap: 3rem; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo__mark { width: 100px; height: 100px; transition: all 0.5s; }
+        .logo__mark img { width: 100%; height: 100%; object-fit: contain; }
+        .logo:hover .logo__mark { transform: scale(1.1); }
+        .logo__text-group { display: flex; flex-direction: column; line-height: 1; }
+        .logo__text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
+        .logo__text-abbey { color: #38BDF8; }
+        .logo__text-dental { color: #8B5CF6; }
+        .nav__links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; transition: all 0.3s; }
+        .nav__link:hover, .nav__link--active { color: var(--white); }
+        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; }
+        .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
+        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+        .nav__mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .nav__mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav__mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mobile-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .mobile-menu.active { opacity: 1; visibility: visible; }
+        .mobile-menu__links { list-style: none; text-align: center; }
+        .mobile-menu__links li { margin-bottom: 1.5rem; opacity: 0; transform: translateY(20px); transition: all 0.3s; }
+        .mobile-menu.active .mobile-menu__links li { opacity: 1; transform: translateY(0); }
+        .mobile-menu.active .mobile-menu__links li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active .mobile-menu__links li:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-menu.active .mobile-menu__links li:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-menu.active .mobile-menu__links li:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-menu.active .mobile-menu__links li:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-menu.active .mobile-menu__links li:nth-child(6) { transition-delay: 0.35s; }
+        .mobile-menu__link { text-decoration: none; color: var(--white); font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
+        .mobile-menu__link:hover { color: var(--blue-light); }
+        .mobile-menu__link--ai { color: var(--purple-light); }
+        .mobile-menu__cta { margin-top: 2rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--blue), var(--purple)); color: var(--white); text-decoration: none; font-size: 1rem; font-weight: 600; border-radius: 50px; opacity: 0; transform: translateY(20px); transition: all 0.3s 0.4s; }
+        .mobile-menu.active .mobile-menu__cta { opacity: 1; transform: translateY(0); }
+
+        .page-hero { background: var(--black); padding: 180px 0 100px; position: relative; overflow: hidden; }
+        .page-hero__gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse 60% 50% at 70% 80%, rgba(124, 58, 237, 0.1), transparent 60%), radial-gradient(ellipse 50% 40% at 20% 30%, rgba(59, 130, 246, 0.08), transparent 50%), #000; }
+        .page-hero__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); position: relative; text-align: center; }
+        .page-hero__badge { display: inline-flex; align-items: center; gap: var(--space-sm); padding: 0.5rem 1rem; background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 50px; margin-bottom: var(--space-lg); }
+        .page-hero__badge-dot { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; }
+        .page-hero__badge-text { color: var(--purple-light); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .page-hero__title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; color: var(--white); margin-bottom: var(--space-md); }
+        .page-hero__description { font-size: 1.125rem; color: var(--gray-300); max-width: 650px; margin: 0 auto; }
+
+        .content { padding: var(--space-4xl) 0; background: linear-gradient(180deg, var(--white) 0%, var(--light-gray) 100%); }
+        .content__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .content__intro { text-align: center; max-width: 800px; margin: 0 auto var(--space-2xl); }
+        .content__intro h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--charcoal); margin-bottom: var(--space-md); }
+        .content__intro p { color: var(--gray-600); font-size: 1.125rem; line-height: 1.8; }
+
+        .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-2xl); }
+        .benefit-card { background: var(--white); border-radius: 16px; padding: var(--space-lg); border: 1px solid rgba(59, 130, 246, 0.1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); transition: all 0.3s; }
+        .benefit-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1); }
+        .benefit-card__icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--blue), var(--purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md); }
+        .benefit-card__icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 2; }
+        .benefit-card h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; }
+        .benefit-card p { color: var(--gray-600); font-size: 0.9375rem; line-height: 1.7; }
+
+        .positions { margin-bottom: var(--space-2xl); }
+        .positions__header { text-align: center; margin-bottom: var(--space-xl); }
+        .positions__header h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--charcoal); margin-bottom: 0.5rem; }
+        .positions__header p { color: var(--gray-600); }
+
+        .position-card { background: var(--white); border-radius: 16px; padding: var(--space-lg); border: 1px solid rgba(59, 130, 246, 0.1); margin-bottom: var(--space-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md); }
+        .position-card__info h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; }
+        .position-card__meta { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+        .position-card__tag { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.75rem; background: rgba(59, 130, 246, 0.1); color: var(--blue); font-size: 0.8125rem; font-weight: 500; border-radius: 50px; }
+        .position-card__tag svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .position-card__btn { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--blue), var(--purple)); color: var(--white); text-decoration: none; font-weight: 600; border-radius: 50px; transition: all 0.3s; }
+        .position-card__btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--purple-glow); }
+
+        .no-positions { background: rgba(124, 58, 237, 0.05); border: 1px dashed rgba(124, 58, 237, 0.3); border-radius: 16px; padding: var(--space-2xl); text-align: center; }
+        .no-positions h3 { font-family: var(--font-display); font-size: 1.25rem; color: var(--charcoal); margin-bottom: var(--space-sm); }
+        .no-positions p { color: var(--gray-600); margin-bottom: var(--space-md); }
+
+        .apply-section { background: linear-gradient(135deg, var(--charcoal), var(--black)); border-radius: 24px; padding: var(--space-2xl); text-align: center; color: var(--white); }
+        .apply-section h2 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; margin-bottom: var(--space-sm); }
+        .apply-section p { color: var(--gray-300); margin-bottom: var(--space-lg); max-width: 600px; margin-left: auto; margin-right: auto; }
+        .apply-section__email { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2rem; background: linear-gradient(135deg, var(--blue), var(--purple)); color: var(--white); text-decoration: none; font-size: 1.125rem; font-weight: 600; border-radius: 50px; transition: all 0.3s; }
+        .apply-section__email:hover { transform: translateY(-3px); box-shadow: 0 15px 40px var(--purple-glow); }
+        .apply-section__email svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+        .footer { background: #000; padding: var(--space-2xl) 0 var(--space-lg); border-top: 1px solid rgba(59, 130, 246, 0.15); }
+        .footer__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+        .footer__brand { max-width: 280px; }
+        .footer__logo { display: flex; align-items: center; gap: 0.75rem; margin-bottom: var(--space-md); }
+        .footer__logo-mark { width: 60px; height: 60px; }
+        .footer__logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+        .footer__logo-text { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; }
+        .footer__logo-text-abbey { color: #38BDF8; }
+        .footer__logo-text-dental { color: #8B5CF6; }
+        .footer__tagline { color: var(--gray-400); font-size: 0.9375rem; line-height: 1.7; }
+        .footer__heading { color: var(--white); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--space-md); }
+        .footer__links { list-style: none; }
+        .footer__links li { margin-bottom: 0.75rem; }
+        .footer__links a { color: var(--gray-400); text-decoration: none; font-size: 0.9375rem; transition: color 0.3s; }
+        .footer__links a:hover { color: var(--white); }
+        .footer__contact-item { color: var(--gray-400); font-size: 0.9375rem; margin-bottom: 0.75rem; }
+        .footer__bottom { padding-top: var(--space-md); border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-sm); }
+        .footer__copyright { color: var(--gray-600); font-size: 0.8125rem; }
+        .footer__legal { display: flex; gap: var(--space-md); }
+        .footer__legal a { color: var(--gray-600); text-decoration: none; font-size: 0.8125rem; }
+        .footer__legal a:hover { color: var(--gray-400); }
+
+        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); z-index: 1000; transition: all 0.3s; }
+        .chatbot-widget:hover { transform: scale(1.1); }
+        .chatbot-widget__pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--purple)); animation: chatbot-pulse 2s ease-out infinite; z-index: -1; }
+        @keyframes chatbot-pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        @media (max-width: 1024px) { .footer__grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+            .header { top: 10px; left: 10px; right: 10px; transform: none; width: auto; max-width: none; }
+            .nav { padding: 0.6rem 1rem; gap: 0.5rem; justify-content: space-between; }
+            .nav__links, .nav__cta { display: none; }
+            .nav__mobile-toggle { display: flex; }
+            .logo__mark { width: 70px; height: 70px; }
+            .logo__text { font-size: 1rem; }
+            .page-hero { padding: 140px 0 60px; }
+            .content { padding: var(--space-2xl) 0; }
+            .position-card { flex-direction: column; align-items: flex-start; }
+            .footer__grid { grid-template-columns: 1fr; }
+            .footer__bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">
+                <div class="logo__mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__text-group">
+                    <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                </div>
+            </a>
+            <ul class="nav__links">
+                <li><a href="index.html" class="nav__link">Home</a></li>
+                <li><a href="services.html" class="nav__link">Services</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="gallery.html" class="nav__link">Gallery</a></li>
+                <li><a href="chatbot.html" class="nav__link">Abbey AI</a></li>
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+            </ul>
+            <a href="contact.html" class="nav__cta">Book Appointment</a>
+            <button class="nav__mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu__links">
+            <li><a href="index.html" class="mobile-menu__link">Home</a></li>
+            <li><a href="services.html" class="mobile-menu__link">Services</a></li>
+            <li><a href="about.html" class="mobile-menu__link">About</a></li>
+            <li><a href="gallery.html" class="mobile-menu__link">Gallery</a></li>
+            <li><a href="contact.html" class="mobile-menu__link">Contact</a></li>
+            <li><a href="chatbot.html" class="mobile-menu__link mobile-menu__link--ai">Abbey AI</a></li>
+        </ul>
+        <a href="contact.html" class="mobile-menu__cta">Book Appointment</a>
+    </div>
+
+    <section class="page-hero">
+        <div class="page-hero__gradient"></div>
+        <div class="page-hero__container">
+            <div class="page-hero__badge">
+                <span class="page-hero__badge-dot"></span>
+                <span class="page-hero__badge-text">Join Our Team</span>
+            </div>
+            <h1 class="page-hero__title">Employment Opportunities</h1>
+            <p class="page-hero__description">Build your career with Abbey Dental. We're always looking for talented, passionate individuals to join our growing team across London.</p>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="content__container">
+            <div class="content__intro">
+                <h2>Why Work at Abbey Dental?</h2>
+                <p>We believe our team is our greatest asset. At Abbey Dental, we foster a supportive, professional environment where you can grow your skills, advance your career, and make a real difference in patients' lives.</p>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                    <h3>Career Development</h3>
+                    <p>Ongoing training, CPD opportunities, and clear progression pathways to help you reach your professional goals.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+                    <h3>Supportive Culture</h3>
+                    <p>Join a friendly, collaborative team that values work-life balance and celebrates successes together.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                    <h3>Competitive Package</h3>
+                    <p>Attractive salary, pension scheme, professional indemnity cover, and additional benefits.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <h3>Multiple Locations</h3>
+                    <p>Work at any of our 4 practices across London: Barking, Walthamstow, Whitechapel, or South Harrow.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                    <h3>Modern Equipment</h3>
+                    <p>State-of-the-art dental technology and equipment to deliver the best patient care.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                    <h3>NHS & Private Mix</h3>
+                    <p>Varied caseload with both NHS and private patients for a diverse, rewarding experience.</p>
+                </div>
+            </div>
+
+            <div class="positions">
+                <div class="positions__header">
+                    <h2>Current Openings</h2>
+                    <p>Check out our current vacancies below</p>
+                </div>
+
+                <div class="no-positions">
+                    <h3>No Current Vacancies</h3>
+                    <p>We don't have any open positions at the moment, but we're always interested in hearing from talented dental professionals.</p>
+                    <p>Send us your CV and we'll keep it on file for future opportunities.</p>
+                </div>
+
+                <!-- Example position cards (uncomment when positions available)
+                <div class="position-card">
+                    <div class="position-card__info">
+                        <h3>Associate Dentist</h3>
+                        <div class="position-card__meta">
+                            <span class="position-card__tag"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Barking</span>
+                            <span class="position-card__tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Full-time</span>
+                            <span class="position-card__tag"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> £80k-£120k</span>
+                        </div>
+                    </div>
+                    <a href="mailto:careers@abbeydentalbarking.co.uk?subject=Application: Associate Dentist" class="position-card__btn">Apply Now</a>
+                </div>
+
+                <div class="position-card">
+                    <div class="position-card__info">
+                        <h3>Dental Nurse</h3>
+                        <div class="position-card__meta">
+                            <span class="position-card__tag"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Walthamstow</span>
+                            <span class="position-card__tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Part-time</span>
+                            <span class="position-card__tag"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> £25k-£30k</span>
+                        </div>
+                    </div>
+                    <a href="mailto:careers@abbeydentalbarking.co.uk?subject=Application: Dental Nurse" class="position-card__btn">Apply Now</a>
+                </div>
+                -->
+            </div>
+
+            <div class="apply-section">
+                <h2>Interested in Joining Us?</h2>
+                <p>Even if there are no current vacancies, we'd love to hear from you. Send your CV and cover letter to our careers team.</p>
+                <a href="mailto:careers@abbeydentalbarking.co.uk" class="apply-section__email">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    careers@abbeydentalbarking.co.uk
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="footer__logo-mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                        <span class="footer__logo-text"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span>
+                    </div>
+                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our 4 practices across London.</p>
+                    <div class="footer__socials" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Connect on LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Quick Links</h4>
+                    <ul class="footer__links">
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="employment.html">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Services</h4>
+                    <ul class="footer__links">
+                        <li><a href="services.html">General Dentistry</a></li>
+                        <li><a href="services.html">Cosmetic Dentistry</a></li>
+                        <li><a href="services.html">Root Canal</a></li>
+                        <li><a href="services.html">Facial Aesthetics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Contact</h4>
+                    <p class="footer__contact-item">4 locations across London</p>
+                    <p class="footer__contact-item">020 8594 4129</p>
+                    <p class="footer__contact-item">Mon-Fri: 8:30am-6pm</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2026 Abbey Dental Practice. All rights reserved.</p>
+                <div class="footer__legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="contact.html#faq">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="chatbot.html" class="chatbot-widget" title="Chat with Abbey AI">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="chatbot-widget__pulse"></span>
+    </a>
+
+    <script>
+        const mobileToggle = document.querySelector('.nav__mobile-toggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        document.querySelectorAll('.mobile-menu__link, .mobile-menu__cta').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>

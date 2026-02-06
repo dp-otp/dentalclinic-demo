@@ -3,91 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Abbey Dental Practice London</title>
+    <title>Contact Us | Abbey Dental South Harrow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --purple: #7C3AED;
-            --purple-light: #8B5CF6;
-            --purple-muted: #6D28D9;
-            --purple-glow: rgba(124, 58, 237, 0.4);
-            --blue-neon: #3B82F6;
-            --blue-light: #60A5FA;
-            --white: #FFFFFF;
-            --off-white: #F8FAFC;
-            --light-gray: #F1F5F9;
-            --cream: #F5F5F5;
-            --navy: #1E293B;
-            --charcoal: #0F172A;
-            --black: #020617;
-            --gray-900: #0F172A;
-            --gray-800: #1E293B;
-            --gray-700: #334155;
-            --gray-600: #475569;
-            --gray-400: #94A3B8;
-            --gray-300: #CBD5E1;
+            --purple: #7C3AED; --purple-light: #8B5CF6; --purple-muted: #6D28D9; --purple-glow: rgba(124, 58, 237, 0.4);
+            --blue-neon: #3B82F6; --blue-light: #60A5FA;
+            --white: #FFFFFF; --off-white: #F8FAFC; --light-gray: #F1F5F9;
+            --charcoal: #0F172A; --black: #020617;
+            --gray-800: #1E293B; --gray-600: #475569; --gray-400: #94A3B8; --gray-300: #CBD5E1;
             --red: #ef4444;
-            --red-soft: rgba(239, 68, 68, 0.1);
-            --font-display: 'Sora', sans-serif;
-            --font-body: 'Outfit', sans-serif;
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 4rem;
-            --space-3xl: 6rem;
-            --space-4xl: 8rem;
-            --container-max: 1280px;
-            --container-padding: 1.5rem;
+            --font-display: 'Sora', sans-serif; --font-body: 'Outfit', sans-serif;
+            --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 4rem; --space-3xl: 6rem; --space-4xl: 8rem;
+            --container-max: 1280px; --container-padding: 1.5rem;
         }
-
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-body); background: var(--black); color: var(--gray-300); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
         @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px var(--purple-glow); } 50% { box-shadow: 0 0 40px var(--purple-glow); } }
-        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         @keyframes emergency-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); } 50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.5); } }
 
-        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(124, 58, 237, 0.05); display: flex; align-items: center; gap: 3rem; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .nav:hover { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(59, 130, 246, 0.15), 0 0 80px rgba(124, 58, 237, 0.1); }
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; }
+        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); display: flex; align-items: center; gap: 3rem; }
+        .logo { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; }
         .logo__mark { width: 100px; height: 100px; transition: all 0.5s; }
         .logo__mark img { width: 100%; height: 100%; object-fit: contain; }
-        .logo:hover .logo__mark { transform: scale(1.1); }
         .logo__text-group { display: flex; flex-direction: column; line-height: 1; }
         .logo__text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
         .logo__text-abbey { color: #38BDF8; }
         .logo__text-dental { color: #8B5CF6; }
         .logo__subtext { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3px; }
         .nav__links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em; transition: all 0.3s ease; position: relative; }
-        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue-neon), var(--purple)); transition: width 0.3s ease; border-radius: 2px; }
+        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; position: relative; }
+        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue-neon), var(--purple)); transition: width 0.3s ease; }
         .nav__link:hover, .nav__link--active { color: var(--white); }
         .nav__link:hover::after, .nav__link--active::after { width: 100%; }
-        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; transition: all 0.4s ease; position: relative; overflow: hidden; }
-        .nav__cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+        .nav__link--ai { color: var(--purple-light); }
+        .nav__link--ai::after { background: var(--purple); }
+        .nav__link--ai:hover { color: var(--purple-light); }
+        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; transition: all 0.4s ease; }
         .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
-        .nav__cta:hover::before { left: 100%; }
         .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+
+        .branch-switcher { position: fixed; top: 90px; right: 20px; z-index: 999; }
+        .branch-switcher__btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(5, 10, 20, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 50px; color: var(--gray-300); font-size: 0.75rem; text-decoration: none; transition: all 0.3s; }
+        .branch-switcher__btn:hover { border-color: rgba(59, 130, 246, 0.5); color: var(--white); }
 
         .page-hero { background: var(--black); padding: 180px 0 120px; position: relative; overflow: hidden; }
         .page-hero__gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000000; }
         .page-hero__diagonal-lines { position: absolute; top: 0; left: 0; width: 60%; height: 100%; pointer-events: none; }
-        .page-hero__diagonal { position: absolute; width: 130%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%); transform-origin: 0 0; transform: rotate(30deg); box-shadow: 0 0 6px rgba(124, 58, 237, 0.2); }
+        .page-hero__diagonal { position: absolute; width: 130%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%); transform-origin: 0 0; transform: rotate(30deg); }
         .page-hero__diagonal--1 { top: 10%; left: 0; opacity: 0.5; }
         .page-hero__diagonal--2 { top: 20%; left: 0; opacity: 0.6; }
         .page-hero__diagonal--3 { top: 30%; left: 0; opacity: 0.8; }
         .page-hero__diagonal--4 { top: 40%; left: 0; opacity: 1; }
         .page-hero__diagonal--5 { top: 50%; left: 0; opacity: 0.8; }
         .page-hero__diagonal--6 { top: 60%; left: 0; opacity: 0.6; }
-        .page-hero__arc { position: absolute; border-radius: 50%; border: 1.5px solid rgba(124, 58, 237, 0.2); box-shadow: 0 0 20px rgba(124, 58, 237, 0.1); }
+        .page-hero__arc { position: absolute; border-radius: 50%; border: 1.5px solid rgba(124, 58, 237, 0.2); }
         .page-hero__arc--1 { width: 500px; height: 500px; bottom: -250px; right: -100px; }
         .page-hero__arc--2 { width: 350px; height: 350px; bottom: -150px; right: -50px; border-color: rgba(124, 58, 237, 0.25); }
         .page-hero__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); position: relative; text-align: center; }
@@ -101,28 +77,16 @@
         .contact__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-3xl); }
         .contact__info { display: flex; flex-direction: column; gap: var(--space-md); }
 
-        .info-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); backdrop-filter: blur(12px); border-radius: 16px; padding: var(--space-lg); display: flex; align-items: flex-start; gap: var(--space-md); border: 1px solid rgba(124, 58, 237, 0.2); transition: all 0.4s; }
-        .info-card:hover { transform: translateY(-4px); border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(124, 58, 237, 0.15); }
+        .info-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); border-radius: 16px; padding: var(--space-lg); display: flex; align-items: flex-start; gap: var(--space-md); border: 1px solid rgba(124, 58, 237, 0.2); transition: all 0.4s; }
+        .info-card:hover { transform: translateY(-4px); border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
         .info-card__icon { width: 52px; height: 52px; min-width: 52px; background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(59, 130, 246, 0.1)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--purple); }
         .info-card__icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
         .info-card__content h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--white); margin-bottom: var(--space-xs); }
         .info-card__content p { color: var(--gray-300); font-size: 0.9375rem; line-height: 1.6; }
         .info-card__content a { color: var(--purple-light); text-decoration: none; font-weight: 500; transition: color 0.3s; }
         .info-card__content a:hover { color: var(--blue-neon); }
-        .phone-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
-        .phone-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .phone-item:last-child { border-bottom: none; }
-        .phone-branch { color: var(--gray-400); font-size: 0.875rem; }
-        .phone-item a { color: var(--purple-light); font-weight: 600; font-size: 0.9375rem; }
-        .info-card--phones { grid-column: span 1; }
-        .email-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
-        .email-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 0.5rem; }
-        .email-item:last-child { border-bottom: none; }
-        .email-branch { color: var(--gray-400); font-size: 0.875rem; min-width: 90px; }
-        .email-item a { color: var(--purple-light); font-weight: 500; font-size: 0.85rem; word-break: break-all; }
-        .info-card--emails { grid-column: span 1; }
 
-        .hours-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); backdrop-filter: blur(12px); border-radius: 16px; padding: var(--space-lg); border: 1px solid rgba(124, 58, 237, 0.2); }
+        .hours-card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); border-radius: 16px; padding: var(--space-lg); border: 1px solid rgba(124, 58, 237, 0.2); }
         .hours-card__header { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); }
         .hours-card__header svg { width: 20px; height: 20px; stroke: var(--purple); fill: none; stroke-width: 1.5; }
         .hours-card__header h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--white); }
@@ -140,7 +104,7 @@
         .emergency-banner__content p { color: var(--gray-300); font-size: 0.875rem; }
         .emergency-banner__content a { color: var(--red); font-weight: 600; text-decoration: none; }
 
-        .contact__form-wrapper { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); backdrop-filter: blur(12px); border-radius: 24px; padding: var(--space-2xl); border: 1px solid rgba(124, 58, 237, 0.2); }
+        .contact__form-wrapper { background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95)); border-radius: 24px; padding: var(--space-2xl); border: 1px solid rgba(124, 58, 237, 0.2); }
         .contact__form-header { margin-bottom: var(--space-xl); }
         .contact__form-header h2 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; color: var(--white); margin-bottom: var(--space-sm); }
         .contact__form-header p { color: var(--gray-300); font-size: 0.9375rem; }
@@ -162,7 +126,7 @@
         .map-section__header { text-align: center; margin-bottom: var(--space-xl); }
         .map-section__title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--charcoal); margin-bottom: var(--space-sm); }
         .map-section__description { color: var(--gray-600); font-size: 1rem; }
-        .map-placeholder { background: linear-gradient(135deg, var(--gray-800), var(--gray-900)); border-radius: 24px; height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-md); border: 1px solid rgba(124, 58, 237, 0.2); }
+        .map-placeholder { background: linear-gradient(135deg, var(--gray-800), #0F172A); border-radius: 24px; height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-md); border: 1px solid rgba(124, 58, 237, 0.2); }
         .map-placeholder__icon { width: 80px; height: 80px; background: rgba(124, 58, 237, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--purple); }
         .map-placeholder__icon svg { width: 40px; height: 40px; stroke: currentColor; fill: none; stroke-width: 1.5; }
         .map-placeholder__text { color: var(--gray-400); font-size: 1rem; text-align: center; }
@@ -173,14 +137,13 @@
         .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-3xl); margin-bottom: var(--space-3xl); }
         .footer__brand { max-width: 280px; }
         .footer__logo { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); }
-        .footer__logo-mark { width: 56px; height: 56px; }
+        .footer__logo-mark { width: 100px; height: 100px; }
         .footer__logo-mark img { width: 100%; height: 100%; object-fit: contain; }
-        .footer__logo-text { display: flex; flex-direction: column; line-height: 1; }
-        .footer__logo-text-main { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
+        .footer__logo-text-group { display: flex; flex-direction: column; line-height: 1; }
+        .footer__logo-text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
         .footer__logo-text-abbey { color: #38BDF8; }
         .footer__logo-text-dental { color: #8B5CF6; }
-        .footer__logo-subtext { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 2px; }
-        .footer__logo-text { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--white); }
+        .footer__logo-subtext { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3px; }
         .footer__tagline { color: var(--gray-400); font-size: 0.9375rem; line-height: 1.7; }
         .footer__heading { color: var(--white); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--space-lg); }
         .footer__links { list-style: none; }
@@ -194,6 +157,9 @@
         .footer__legal a { color: var(--gray-600); text-decoration: none; font-size: 0.8125rem; transition: color 0.3s; }
         .footer__legal a:hover { color: var(--purple); }
 
+        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); transition: all 0.4s; z-index: 1000; }
+        .chatbot-widget:hover { transform: scale(1.1); }
+
         @media (max-width: 1024px) { .contact__container { grid-template-columns: 1fr; } .footer__grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             .header { top: 10px; max-width: 95%; }
@@ -201,9 +167,8 @@
             .nav__links { display: none; }
             .nav__cta { display: none; }
             .nav__mobile-toggle { display: flex; }
-            .logo__mark { width: 44px; height: 44px; }
-            .logo__text { font-size: 1.1rem; }
-            .logo__subtext { font-size: 0.55rem; }
+            .logo__mark { width: 70px; height: 70px; }
+            .branch-switcher { top: 75px; right: 10px; }
             .page-hero { padding: 140px 0 80px; }
             .form-row { grid-template-columns: 1fr; }
             .contact__form-wrapper { padding: var(--space-lg); }
@@ -216,9 +181,10 @@
     <header class="header">
         <nav class="nav">
             <a href="index.html" class="logo">
-                <div class="logo__mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__mark"><img src="../486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
                 <div class="logo__text-group">
                     <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                    <span class="logo__subtext">SOUTH HARROW</span>
                 </div>
             </a>
             <ul class="nav__links">
@@ -226,14 +192,23 @@
                 <li><a href="services.html" class="nav__link">Services</a></li>
                 <li><a href="about.html" class="nav__link">About</a></li>
                 <li><a href="gallery.html" class="nav__link">Gallery</a></li>
-                <li><a href="locations.html" class="nav__link">Locations</a></li>
-                <li><a href="chatbot.html" class="nav__link">Abbey AI</a></li>
                 <li><a href="contact.html" class="nav__link nav__link--active">Contact</a></li>
+                <li><a href="chatbot.html" class="nav__link nav__link--ai">Abbey AI</a></li>
             </ul>
             <a href="contact.html" class="nav__cta">Book Appointment</a>
             <button class="nav__mobile-toggle"><span></span><span></span><span></span></button>
         </nav>
     </header>
+
+    <a href="../select.html" class="branch-switcher">
+        <span class="branch-switcher__btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Change Branch
+        </span>
+    </a>
 
     <section class="page-hero">
         <div class="page-hero__gradient">
@@ -250,7 +225,7 @@
         </div>
         <div class="page-hero__container">
             <div class="page-hero__badge"><span class="page-hero__badge-dot"></span><span class="page-hero__badge-text">Contact Us</span></div>
-            <h1 class="page-hero__title">Get in touch</h1>
+            <h1 class="page-hero__title">Get in touch with our South Harrow practice</h1>
             <p class="page-hero__description">Ready to book your appointment or have a question? We're here to help.</p>
         </div>
     </section>
@@ -258,47 +233,29 @@
     <section class="contact">
         <div class="contact__container">
             <div class="contact__info">
-                <div class="info-card info-card--phones">
+                <div class="info-card">
                     <div class="info-card__icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-                    <div class="info-card__content">
-                        <h3>Call Us</h3>
-                        <p>Speak directly with our friendly team</p>
-                        <div class="phone-list">
-                            <div class="phone-item"><span class="phone-branch">Barking</span><a href="tel:02085944129">020 8594 4129</a></div>
-                            <div class="phone-item"><span class="phone-branch">Whitechapel</span><a href="tel:02072470964">020 7247 0964</a></div>
-                            <div class="phone-item"><span class="phone-branch">Walthamstow</span><a href="tel:02085212816">020 8521 2816</a></div>
-                            <div class="phone-item"><span class="phone-branch">South Harrow</span><a href="tel:02088644200">020 8864 4200</a></div>
-                        </div>
-                    </div>
+                    <div class="info-card__content"><h3>Call Us</h3><p>Speak directly with our friendly team</p><a href="tel:02088644200">020 8864 4200</a></div>
                 </div>
 
                 <div class="info-card">
                     <div class="info-card__icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                    <div class="info-card__content"><h3>Visit Us</h3><p>4 locations across London:<br>Barking, Walthamstow, Whitechapel, South Harrow</p><a href="locations.html">View all locations &rarr;</a></div>
+                    <div class="info-card__content"><h3>Visit Us</h3><p>338 Eastcote Lane<br>Harrow<br>HA2 9AJ</p></div>
                 </div>
 
-                <div class="info-card info-card--emails">
+                <div class="info-card">
                     <div class="info-card__icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                    <div class="info-card__content">
-                        <h3>Email Us</h3>
-                        <p>Contact your preferred branch directly</p>
-                        <div class="email-list">
-                            <div class="email-item"><span class="email-branch">Barking</span><a href="mailto:info@abbeydentalbarking.co.uk">info@abbeydentalbarking.co.uk</a></div>
-                            <div class="email-item"><span class="email-branch">Whitechapel</span><a href="mailto:info@abbeydentalwhitechapel.co.uk">info@abbeydentalwhitechapel.co.uk</a></div>
-                            <div class="email-item"><span class="email-branch">Walthamstow</span><a href="mailto:info@abbeydentalwalthamstow.co.uk">info@abbeydentalwalthamstow.co.uk</a></div>
-                            <div class="email-item"><span class="email-branch">South Harrow</span><a href="mailto:info@abbeydentalsouthharrow.co.uk">info@abbeydentalsouthharrow.co.uk</a></div>
-                        </div>
-                    </div>
+                    <div class="info-card__content"><h3>Email Us</h3><p>For general enquiries</p><a href="mailto:info@abbeydentalsouthharrow.co.uk">info@abbeydentalsouthharrow.co.uk</a></div>
                 </div>
 
                 <div class="hours-card">
                     <div class="hours-card__header"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><h3>Opening Hours</h3></div>
                     <ul class="hours-card__list">
-                        <li><span>Monday</span><span>8:30am - 6:00pm</span></li>
-                        <li><span>Tuesday</span><span>8:30am - 6:00pm</span></li>
-                        <li><span>Wednesday</span><span>8:30am - 6:00pm</span></li>
-                        <li><span>Thursday</span><span>8:30am - 6:00pm</span></li>
-                        <li><span>Friday</span><span>8:30am - 6:00pm</span></li>
+                        <li><span>Monday</span><span>9:00am - 5:30pm</span></li>
+                        <li><span>Tuesday</span><span>9:00am - 5:30pm</span></li>
+                        <li><span>Wednesday</span><span>9:00am - 5:30pm</span></li>
+                        <li><span>Thursday</span><span>9:00am - 5:30pm</span></li>
+                        <li><span>Friday</span><span>9:00am - 5:30pm</span></li>
                         <li class="closed"><span>Saturday</span><span>Closed</span></li>
                         <li class="closed"><span>Sunday</span><span>Closed</span></li>
                     </ul>
@@ -306,7 +263,7 @@
 
                 <div class="emergency-banner">
                     <div class="emergency-banner__icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-                    <div class="emergency-banner__content"><h4>Dental Emergency?</h4><p>Call your nearest branch immediately for same-day emergency appointments. All branches offer emergency care.</p></div>
+                    <div class="emergency-banner__content"><h4>Dental Emergency?</h4><p>Call us immediately on <a href="tel:02088644200">020 8864 4200</a> for same-day emergency appointments.</p></div>
                 </div>
             </div>
 
@@ -322,10 +279,7 @@
                         <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" placeholder="07xxx xxxxxx" required></div>
                     </div>
                     <div class="form-group"><label for="service">Service Required</label><select id="service"><option value="">Select a service...</option><option value="checkup">Check-up & Cleaning</option><option value="whitening">Teeth Whitening</option><option value="veneers">Veneers</option><option value="rootcanal">Root Canal</option><option value="fillings">Fillings</option><option value="crowns">Crowns & Bridges</option><option value="dentures">Dentures</option><option value="facial">Facial Aesthetics</option><option value="emergency">Emergency Appointment</option><option value="other">Other</option></select></div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="branch">Preferred Branch *</label><select id="branch" required><option value="">Select branch...</option><option value="barking">Barking</option><option value="walthamstow">Walthamstow</option><option value="whitechapel">Whitechapel</option><option value="south-harrow">South Harrow</option></select></div>
-                        <div class="form-group"><label for="patientType">Patient Type</label><select id="patientType"><option value="">Select patient type...</option><option value="new-nhs">New Patient - NHS</option><option value="new-private">New Patient - Private</option><option value="existing">Existing Patient</option></select></div>
-                    </div>
+                    <div class="form-group"><label for="patientType">Patient Type</label><select id="patientType"><option value="">Select patient type...</option><option value="new-nhs">New Patient - NHS</option><option value="new-private">New Patient - Private</option><option value="existing">Existing Patient</option></select></div>
                     <div class="form-group"><label for="message">Additional Information</label><textarea id="message" placeholder="Tell us about your dental needs, preferred appointment times, or any concerns..."></textarea></div>
                     <button type="submit" class="form-submit">Submit Booking Request <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
                 </form>
@@ -333,71 +287,15 @@
         </div>
     </section>
 
-    <section class="faq" id="faq">
-        <div class="faq__container">
-            <div class="faq__header">
-                <h2 class="faq__title">Frequently Asked Questions</h2>
-                <p class="faq__subtitle">Quick answers to common questions about our dental services</p>
-            </div>
-            <div class="faq__grid">
-                <div class="faq__item">
-                    <h3>Are you accepting new NHS patients?</h3>
-                    <p>Yes, we welcome new NHS patients at all our locations. Call us or use the booking form above to register.</p>
-                </div>
-                <div class="faq__item">
-                    <h3>How much do NHS treatments cost?</h3>
-                    <p><strong>Band 1:</strong> £26.80 - Check-up, X-rays, scale & polish<br><strong>Band 2:</strong> £73.50 - Fillings, extractions, root canals<br><strong>Band 3:</strong> £319.10 - Crowns, bridges, dentures</p>
-                </div>
-                <div class="faq__item">
-                    <h3>Do you offer emergency appointments?</h3>
-                    <p>Yes, we offer same-day emergency appointments for dental pain, swelling, or trauma. Call 020 8594 4129 as early as possible.</p>
-                </div>
-                <div class="faq__item">
-                    <h3>What payment methods do you accept?</h3>
-                    <p>We accept cash, all major debit/credit cards, and offer 0% finance options for private treatments over £500.</p>
-                </div>
-                <div class="faq__item">
-                    <h3>Is free dental care available for children?</h3>
-                    <p>Yes, all NHS dental treatment is FREE for children under 18 (or under 19 if in full-time education).</p>
-                </div>
-                <div class="faq__item">
-                    <h3>Do I need to be registered to book?</h3>
-                    <p>New patients can book directly - we'll register you at your first appointment. Existing patients can book online or by phone.</p>
-                </div>
-                <div class="faq__item">
-                    <h3>What should I bring to my first appointment?</h3>
-                    <p>Please bring photo ID, proof of address, and any NHS exemption certificates if applicable. Arrive 10 minutes early to complete forms.</p>
-                </div>
-                <div class="faq__item">
-                    <h3>Do you treat nervous patients?</h3>
-                    <p>Absolutely. Our team is trained in treating anxious patients with care and patience. We can discuss sedation options if needed.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <style>
-        .faq { padding: var(--space-4xl) 0; background: var(--black); }
-        .faq__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
-        .faq__header { text-align: center; margin-bottom: var(--space-2xl); }
-        .faq__title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: var(--space-sm); }
-        .faq__subtitle { color: var(--gray-400); font-size: 1.125rem; }
-        .faq__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); }
-        .faq__item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 16px; padding: var(--space-lg); transition: all 0.3s; }
-        .faq__item:hover { border-color: rgba(124, 58, 237, 0.4); background: rgba(124, 58, 237, 0.05); }
-        .faq__item h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.75rem; }
-        .faq__item p { color: var(--gray-300); font-size: 0.9375rem; line-height: 1.7; }
-    </style>
-
     <section class="map-section">
         <div class="map-section__container">
             <div class="map-section__header">
-                <h2 class="map-section__title">Find Your Nearest Branch</h2>
-                <p class="map-section__description">With 4 locations across London, quality dental care is always close to home.</p>
+                <h2 class="map-section__title">Find Us in South Harrow</h2>
+                <p class="map-section__description">Located on Eastcote Lane in South Harrow, easily accessible by public transport and with nearby parking.</p>
             </div>
             <div class="map-placeholder">
                 <div class="map-placeholder__icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                <p class="map-placeholder__text"><span class="map-placeholder__address">Barking | Walthamstow | Whitechapel | South Harrow</span><br><a href="locations.html" style="color: var(--purple-light);">View all locations with directions &rarr;</a></p>
+                <p class="map-placeholder__text"><span class="map-placeholder__address">338 Eastcote Lane, Harrow, HA2 9AJ</span><br>Map placeholder - Add Google Maps embed</p>
             </div>
         </div>
     </section>
@@ -406,43 +304,35 @@
         <div class="footer__container">
             <div class="footer__grid">
                 <div class="footer__brand">
-                    <div class="footer__logo"><div class="footer__logo-mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div><div class="footer__logo-text"><span class="footer__logo-text-main"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span></div></div>
-                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our 4 practices across London.</p>
+                    <div class="footer__logo"><div class="footer__logo-mark"><img src="../486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div><div class="footer__logo-text-group"><span class="footer__logo-text"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span><span class="footer__logo-subtext">SOUTH HARROW</span></div></div>
+                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our South Harrow practice.</p>
                     <div class="footer__socials" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Instagram">
+                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Instagram">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                         </a>
-                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Connect on LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
+                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                         </a>
-                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
+                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Connect on LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
                         </a>
                     </div>
                 </div>
-                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">Book Online</a></li></ul></div>
+                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="../select.html">Other Branches</a></li></ul></div>
                 <div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="services.html">General Dentistry</a></li><li><a href="services.html">Cosmetic Dentistry</a></li><li><a href="services.html">Root Canal</a></li><li><a href="services.html">Facial Aesthetics</a></li></ul></div>
-                <div><h4 class="footer__heading">Our Locations</h4><p class="footer__contact-item"><a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Barking</a> | <a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Walthamstow</a><br><a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Whitechapel</a> | <a href="locations.html" style="color: var(--gray-400); text-decoration: none;">South Harrow</a></p><p class="footer__contact-item"><a href="locations.html" style="color: var(--purple-light); text-decoration: none;">View all locations &rarr;</a></p><p class="footer__contact-item">Mon-Fri: 8:30am-6pm<br>Sat-Sun: Closed</p></div>
+                <div><h4 class="footer__heading">Contact</h4><p class="footer__contact-item">338 Eastcote Lane<br>Harrow, HA2 9AJ</p><p class="footer__contact-item">020 8864 4200</p><p class="footer__contact-item">Mon-Fri: 9am-5:30pm<br>Sat-Sun: Closed</p></div>
             </div>
-            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 Abbey Dental Practice. All rights reserved.</p><div class="footer__legal"><a href="employment.html">Careers</a><a href="#faq">FAQ</a><a href="#">Privacy Policy</a></div></div>
+            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 Abbey Dental South Harrow. All rights reserved.</p><div class="footer__legal"><a href="../employment.html">Careers</a><a href="../contact.html#faq">FAQ</a><a href="#">Privacy Policy</a></div></div>
         </div>
     </footer>
 
-    <!-- Chatbot Widget -->
-    <style>
-        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); transition: all 0.4s; z-index: 1000; }
-        .chatbot-widget:hover { transform: scale(1.1); box-shadow: 0 6px 30px var(--purple-glow); }
-        .chatbot-widget__pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); animation: chatbot-pulse 2s ease-out infinite; z-index: -1; }
-        @keyframes chatbot-pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
-    </style>
-    <a href="chatbot.html" class="chatbot-widget" title="Chat with Abbey AI">
+    <a href="chatbot.html" class="chatbot-widget" title="Abbey AI">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
-        <span class="chatbot-widget__pulse"></span>
     </a>
 
     <script>

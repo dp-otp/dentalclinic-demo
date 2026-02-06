@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | Abbey Dental Practice London</title>
+    <title>Our Services | Abbey Dental South Harrow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,43 +24,45 @@
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px var(--purple-glow); } 50% { box-shadow: 0 0 30px var(--purple-glow); } }
-        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(124, 58, 237, 0.05); display: flex; align-items: center; gap: 3rem; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .nav:hover { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(59, 130, 246, 0.15), 0 0 80px rgba(124, 58, 237, 0.1); }
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: auto; max-width: 95%; z-index: 1000; }
+        .nav { background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(20px); border-radius: 60px; padding: 0.75rem 2rem; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); display: flex; align-items: center; gap: 3rem; }
+        .logo { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; }
         .logo__mark { width: 100px; height: 100px; transition: all 0.5s; }
         .logo__mark img { width: 100%; height: 100%; object-fit: contain; }
-        .logo:hover .logo__mark { transform: scale(1.1); }
         .logo__text-group { display: flex; flex-direction: column; line-height: 1; }
         .logo__text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
         .logo__text-abbey { color: #38BDF8; }
         .logo__text-dental { color: #8B5CF6; }
         .logo__subtext { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3px; }
         .nav__links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em; transition: all 0.3s ease; position: relative; }
-        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue-neon), var(--purple)); transition: width 0.3s ease; border-radius: 2px; }
+        .nav__link { text-decoration: none; color: var(--gray-400); font-size: 0.85rem; font-weight: 500; transition: all 0.3s ease; position: relative; }
+        .nav__link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--blue-neon), var(--purple)); transition: width 0.3s ease; }
         .nav__link:hover, .nav__link--active { color: var(--white); }
         .nav__link:hover::after, .nav__link--active::after { width: 100%; }
-        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; transition: all 0.4s ease; position: relative; overflow: hidden; }
-        .nav__cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+        .nav__link--ai { color: var(--purple-light); }
+        .nav__link--ai::after { background: var(--purple); }
+        .nav__link--ai:hover { color: var(--purple-light); }
+        .nav__cta { padding: 0.6rem 1.25rem; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; border-radius: 50px; transition: all 0.4s ease; }
         .nav__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
-        .nav__cta:hover::before { left: 100%; }
         .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
-        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); transition: all 0.3s; border-radius: 2px; }
+        .nav__mobile-toggle span { width: 24px; height: 2px; background: var(--white); }
+
+        .branch-switcher { position: fixed; top: 90px; right: 20px; z-index: 999; }
+        .branch-switcher__btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(5, 10, 20, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 50px; color: var(--gray-300); font-size: 0.75rem; text-decoration: none; transition: all 0.3s; }
+        .branch-switcher__btn:hover { border-color: rgba(59, 130, 246, 0.5); color: var(--white); }
 
         .page-hero { padding: 160px 0 80px; position: relative; overflow: hidden; }
         .page-hero__gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000000; }
         .page-hero__diagonal-lines { position: absolute; top: 0; left: 0; width: 60%; height: 100%; pointer-events: none; }
-        .page-hero__diagonal { position: absolute; width: 130%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%); transform-origin: 0 0; transform: rotate(30deg); box-shadow: 0 0 6px rgba(124, 58, 237, 0.2); }
+        .page-hero__diagonal { position: absolute; width: 130%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.15) 10%, rgba(124, 58, 237, 0.35) 50%, rgba(124, 58, 237, 0.15) 90%, transparent 100%); transform-origin: 0 0; transform: rotate(30deg); }
         .page-hero__diagonal--1 { top: 10%; left: 0; opacity: 0.5; }
         .page-hero__diagonal--2 { top: 20%; left: 0; opacity: 0.6; }
         .page-hero__diagonal--3 { top: 30%; left: 0; opacity: 0.8; }
         .page-hero__diagonal--4 { top: 40%; left: 0; opacity: 1; }
         .page-hero__diagonal--5 { top: 50%; left: 0; opacity: 0.8; }
         .page-hero__diagonal--6 { top: 60%; left: 0; opacity: 0.6; }
-        .page-hero__arc { position: absolute; border-radius: 50%; border: 1.5px solid rgba(124, 58, 237, 0.2); box-shadow: 0 0 20px rgba(124, 58, 237, 0.1); }
+        .page-hero__arc { position: absolute; border-radius: 50%; border: 1.5px solid rgba(124, 58, 237, 0.2); }
         .page-hero__arc--1 { width: 500px; height: 500px; bottom: -250px; right: -100px; }
         .page-hero__arc--2 { width: 350px; height: 350px; bottom: -150px; right: -50px; border-color: rgba(124, 58, 237, 0.25); }
         .page-hero__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); position: relative; text-align: center; }
@@ -91,7 +93,7 @@
 
         .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
         .service-card { position: relative; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2); transition: all 0.4s; overflow: hidden; min-height: 420px; display: flex; flex-direction: column; }
-        .service-card:hover { transform: translateY(-8px); border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(124, 58, 237, 0.15); }
+        .service-card:hover { transform: translateY(-8px); border-color: rgba(124, 58, 237, 0.5); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
         .service-card__bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; }
         .service-card__bg img { width: 100%; height: 100%; object-fit: cover; }
         .service-card__bg-text { color: var(--gray-500); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
@@ -111,7 +113,7 @@
         .nhs-info__container { max-width: 1000px; margin: 0 auto; padding: 0 var(--container-padding); }
         .nhs-info__card { background: linear-gradient(145deg, rgba(30, 40, 55, 0.95), rgba(20, 30, 45, 0.98)); backdrop-filter: blur(12px); border-radius: 24px; padding: var(--space-2xl); border: 1px solid rgba(124, 58, 237, 0.2); }
         .nhs-info__header { display: flex; align-items: center; gap: var(--space-xl); margin-bottom: var(--space-xl); flex-wrap: wrap; }
-        .nhs-info__badge { width: 100px; height: 100px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--white); box-shadow: 0 0 40px var(--purple-glow); }
+        .nhs-info__badge { width: 100px; height: 100px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--white); }
         .nhs-info__title { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; color: var(--white); }
         .nhs-info__subtitle { color: var(--gray-400); font-size: 1rem; }
         .nhs-bands { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); margin-bottom: var(--space-xl); }
@@ -139,11 +141,11 @@
         .footer__logo { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-lg); }
         .footer__logo-mark { width: 100px; height: 100px; }
         .footer__logo-mark img { width: 100%; height: 100%; object-fit: contain; }
-        .footer__logo-text { display: flex; flex-direction: column; line-height: 1; }
-        .footer__logo-text-main { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
+        .footer__logo-text-group { display: flex; flex-direction: column; line-height: 1; }
+        .footer__logo-text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.05em; }
         .footer__logo-text-abbey { color: #38BDF8; }
         .footer__logo-text-dental { color: #8B5CF6; }
-        .footer__logo-subtext { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 2px; }
+        .footer__logo-subtext { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 500; color: #8B5CF6; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 3px; }
         .footer__tagline { color: var(--gray-400); font-size: 0.9375rem; line-height: 1.7; }
         .footer__heading { color: var(--white); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: var(--space-lg); }
         .footer__links { list-style: none; }
@@ -157,6 +159,9 @@
         .footer__legal a { color: var(--gray-600); text-decoration: none; font-size: 0.8125rem; transition: color 0.3s; }
         .footer__legal a:hover { color: var(--purple); }
 
+        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); transition: all 0.4s; z-index: 1000; }
+        .chatbot-widget:hover { transform: scale(1.1); }
+
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: 1fr; }
             .nhs-bands { grid-template-columns: 1fr; }
@@ -168,10 +173,8 @@
             .nav__links { display: none; }
             .nav__cta { display: none; }
             .nav__mobile-toggle { display: flex; }
-            .logo__mark { width: 54px; height: 54px; }
-            .logo__text { font-size: 1.1rem; }
-            .logo__subtext { font-size: 0.55rem; }
-            .logo__text { font-size: 1rem; }
+            .logo__mark { width: 70px; height: 70px; }
+            .branch-switcher { top: 75px; right: 10px; }
             .nhs-info__header { flex-direction: column; text-align: center; }
             .footer__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
             .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
@@ -181,20 +184,35 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="index.html" class="logo"><div class="logo__mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div><div class="logo__text-group"><span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span></div></a>
+            <a href="index.html" class="logo">
+                <div class="logo__mark"><img src="../486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div>
+                <div class="logo__text-group">
+                    <span class="logo__text"><span class="logo__text-abbey">ABBEY</span><span class="logo__text-dental">DENTAL</span></span>
+                    <span class="logo__subtext">SOUTH HARROW</span>
+                </div>
+            </a>
             <ul class="nav__links">
                 <li><a href="index.html" class="nav__link">Home</a></li>
                 <li><a href="services.html" class="nav__link nav__link--active">Services</a></li>
                 <li><a href="about.html" class="nav__link">About</a></li>
                 <li><a href="gallery.html" class="nav__link">Gallery</a></li>
-                <li><a href="locations.html" class="nav__link">Locations</a></li>
-                <li><a href="chatbot.html" class="nav__link">Abbey AI</a></li>
                 <li><a href="contact.html" class="nav__link">Contact</a></li>
+                <li><a href="chatbot.html" class="nav__link nav__link--ai">Abbey AI</a></li>
             </ul>
             <a href="contact.html" class="nav__cta">Book Appointment</a>
             <button class="nav__mobile-toggle"><span></span><span></span><span></span></button>
         </nav>
     </header>
+
+    <a href="../select.html" class="branch-switcher">
+        <span class="branch-switcher__btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Change Branch
+        </span>
+    </a>
 
     <section class="page-hero">
         <div class="page-hero__gradient">
@@ -212,7 +230,7 @@
         <div class="page-hero__container">
             <div class="page-hero__badge"><span class="page-hero__badge-dot"></span><span class="page-hero__badge-text">Complete Dental Care</span></div>
             <h1 class="page-hero__title">Our Services</h1>
-            <p class="page-hero__description">From preventative care to cosmetic transformations, we provide comprehensive dental services using the latest techniques. NHS and private options available.</p>
+            <p class="page-hero__description">From preventative care to cosmetic transformations, we provide comprehensive dental services at our South Harrow practice. NHS and private options available.</p>
         </div>
     </section>
 
@@ -234,69 +252,50 @@
                 <div class="service-section__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
                 <span class="service-section__eyebrow">Cosmetic Dentistry</span>
                 <h2 class="service-section__title">Transform Your Smile</h2>
-                <p class="service-section__description">Our cosmetic treatments can help you achieve the smile you've always wanted. From whitening to veneers, we offer affordable private options to enhance your natural beauty.</p>
+                <p class="service-section__description">Our cosmetic treatments at our South Harrow practice can help you achieve the smile you've always wanted.</p>
             </header>
             <div class="services-grid">
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Teeth Whitening"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Teeth Whitening"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Teeth Whitening</h3>
                         <p class="service-card__subtitle">Professional brightening</p>
                         <p class="service-card__text">Professional teeth whitening delivers dramatically brighter results than over-the-counter products.</p>
-                        <ul class="service-card__list">
-                            <li>Up to 8 shades whiter</li>
-                            <li>Safe, supervised treatment</li>
-                            <li>Take-home kits available</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Up to 8 shades whiter</li><li>Safe, supervised treatment</li><li>Take-home kits available</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Veneers"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Veneers"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Porcelain Veneers & Inlays</h3>
                         <p class="service-card__subtitle">Natural-looking restorations</p>
                         <p class="service-card__text">Thin shells bonded to teeth to correct chips, gaps, discolouration, or misalignment.</p>
-                        <ul class="service-card__list">
-                            <li>Custom-made to match teeth</li>
-                            <li>Stain-resistant porcelain</li>
-                            <li>Long-lasting (10-15 years)</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Custom-made to match teeth</li><li>Stain-resistant porcelain</li><li>Long-lasting (10-15 years)</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="White Fillings"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="White Fillings"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">White Fillings</h3>
                         <p class="service-card__subtitle">Mercury-free restorations</p>
                         <p class="service-card__text">Replace old metal amalgam fillings with tooth-coloured composite resin.</p>
-                        <ul class="service-card__list">
-                            <li>Mercury-free material</li>
-                            <li>Matches natural colour</li>
-                            <li>Bonds to tooth structure</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Mercury-free material</li><li>Matches natural colour</li><li>Bonds to tooth structure</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Mouth Guards"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Mouth Guards"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Sports Mouth Guards</h3>
                         <p class="service-card__subtitle">Custom protection</p>
                         <p class="service-card__text">Protect your smile during sports with custom-fitted mouth guards.</p>
-                        <ul class="service-card__list">
-                            <li>Custom-moulded fit</li>
-                            <li>Superior comfort</li>
-                            <li>Various colours available</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Custom-moulded fit</li><li>Superior comfort</li><li>Various colours available</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
@@ -310,69 +309,50 @@
                 <div class="service-section__icon"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
                 <span class="service-section__eyebrow">Restorative Dentistry</span>
                 <h2 class="service-section__title">Restore Your Smile</h2>
-                <p class="service-section__description">We repair and replace damaged or missing teeth using modern techniques and materials, restoring both function and aesthetics to your smile.</p>
+                <p class="service-section__description">We repair and replace damaged or missing teeth using modern techniques and materials.</p>
             </header>
             <div class="services-grid">
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Broken Teeth"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Broken Teeth"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Broken Teeth Repair</h3>
                         <p class="service-card__subtitle">Emergency & planned care</p>
                         <p class="service-card__text">Chipped, cracked, or broken teeth expertly repaired using bonding, veneers, or crowns.</p>
-                        <ul class="service-card__list">
-                            <li>Same-day emergency appointments</li>
-                            <li>Natural-looking results</li>
-                            <li>Pain-free treatment</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Same-day emergency appointments</li><li>Natural-looking results</li><li>Pain-free treatment</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Dental Crowns"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Dental Crowns"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Dental Crowns</h3>
                         <p class="service-card__subtitle">Protect & strengthen</p>
                         <p class="service-card__text">Crowns cap damaged or weakened teeth, restoring strength, shape, and appearance.</p>
-                        <ul class="service-card__list">
-                            <li>Protects weak teeth</li>
-                            <li>Restores chewing function</li>
-                            <li>15+ years durability</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Protects weak teeth</li><li>Restores chewing function</li><li>15+ years durability</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Dental Bridges"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Dental Bridges"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Dental Bridges</h3>
                         <p class="service-card__subtitle">Fill the gaps</p>
                         <p class="service-card__text">Bridges replace missing teeth by anchoring artificial teeth to neighbours.</p>
-                        <ul class="service-card__list">
-                            <li>Fixed in place permanently</li>
-                            <li>Prevents teeth shifting</li>
-                            <li>Natural appearance</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Fixed in place permanently</li><li>Prevents teeth shifting</li><li>Natural appearance</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Dentures"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Dentures"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Dentures</h3>
                         <p class="service-card__subtitle">Full & partial options</p>
                         <p class="service-card__text">Modern dentures look natural and fit comfortably for multiple missing teeth.</p>
-                        <ul class="service-card__list">
-                            <li>Custom-made fit</li>
-                            <li>Natural-looking teeth</li>
-                            <li>Easy to maintain</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Custom-made fit</li><li>Natural-looking teeth</li><li>Easy to maintain</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
@@ -386,69 +366,50 @@
                 <div class="service-section__icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
                 <span class="service-section__eyebrow">Preventative Dentistry</span>
                 <h2 class="service-section__title">Protect Your Oral Health</h2>
-                <p class="service-section__description">Prevention is better than cure. Our preventative services help you maintain healthy teeth and gums, catching problems early before they become serious.</p>
+                <p class="service-section__description">Prevention is better than cure. Our preventative services help maintain healthy teeth and gums.</p>
             </header>
             <div class="services-grid">
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Children's Dentistry"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Children's Dentistry"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Children's Dentistry</h3>
                         <p class="service-card__subtitle">Gentle care for little smiles</p>
                         <p class="service-card__text">We welcome children from when they develop baby teeth with a gentle approach.</p>
-                        <ul class="service-card__list">
-                            <li>Fissure sealants</li>
-                            <li>Fluoride applications</li>
-                            <li>Fun, friendly environment</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Fissure sealants</li><li>Fluoride applications</li><li>Fun, friendly environment</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Dental Hygiene"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Dental Hygiene"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Dental Hygiene</h3>
                         <p class="service-card__subtitle">Professional cleaning</p>
                         <p class="service-card__text">Regular hygiene visits remove plaque and tartar that brushing misses.</p>
-                        <ul class="service-card__list">
-                            <li>Scale and polish</li>
-                            <li>Prevents gum disease</li>
-                            <li>Personalised advice</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Scale and polish</li><li>Prevents gum disease</li><li>Personalised advice</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Gum Treatment"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Gum Treatment"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Gum Disease Treatment</h3>
                         <p class="service-card__subtitle">Protect your foundation</p>
                         <p class="service-card__text">We identify early signs and provide treatment to stop gum disease progression.</p>
-                        <ul class="service-card__list">
-                            <li>Early detection</li>
-                            <li>Deep cleaning available</li>
-                            <li>Bad breath treatment</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Early detection</li><li>Deep cleaning available</li><li>Bad breath treatment</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Cancer Screening"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Cancer Screening"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Mouth Cancer Screening</h3>
                         <p class="service-card__subtitle">Early detection saves lives</p>
                         <p class="service-card__text">Routine mouth cancer screenings during check-ups for early detection.</p>
-                        <ul class="service-card__list">
-                            <li>Quick, painless exam</li>
-                            <li>Part of routine check-ups</li>
-                            <li>Specialist referral if needed</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Quick, painless exam</li><li>Part of routine check-ups</li><li>Specialist referral if needed</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
@@ -462,53 +423,39 @@
                 <div class="service-section__icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
                 <span class="service-section__eyebrow">General Dentistry</span>
                 <h2 class="service-section__title">Comprehensive Care</h2>
-                <p class="service-section__description">Our general dental services address a wide range of oral health needs, from routine extractions to complex root canal treatments.</p>
+                <p class="service-section__description">Our general dental services address a wide range of oral health needs.</p>
             </header>
             <div class="services-grid">
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Oral Surgery"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Oral Surgery"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Oral Surgery & Extractions</h3>
                         <p class="service-card__subtitle">Expert surgical care</p>
                         <p class="service-card__text">Experienced dentists perform extractions with minimal discomfort.</p>
-                        <ul class="service-card__list">
-                            <li>Simple & surgical extractions</li>
-                            <li>Wisdom tooth removal</li>
-                            <li>Local anaesthesia</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Simple & surgical extractions</li><li>Wisdom tooth removal</li><li>Local anaesthesia</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Root Canal"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Root Canal"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Root Canal Treatment</h3>
                         <p class="service-card__subtitle">Save your natural tooth</p>
                         <p class="service-card__text">Modern root canal treatment is virtually painless and saves teeth.</p>
-                        <ul class="service-card__list">
-                            <li>Removes infection</li>
-                            <li>Preserves natural tooth</li>
-                            <li>1-2 visits only</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Removes infection</li><li>Preserves natural tooth</li><li>1-2 visits only</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
-
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="straighter-teeth.jpg" alt="Amalgam Removal"></div>
+                    <div class="service-card__bg"><img src="../straighter-teeth.jpg" alt="Amalgam Removal"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Amalgam Removal</h3>
                         <p class="service-card__subtitle">Safe mercury removal</p>
                         <p class="service-card__text">Safely remove old mercury amalgam fillings and replace with modern alternatives.</p>
-                        <ul class="service-card__list">
-                            <li>Safe removal protocols</li>
-                            <li>White composite replacement</li>
-                            <li>Mercury-free alternatives</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Safe removal protocols</li><li>White composite replacement</li><li>Mercury-free alternatives</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
@@ -522,21 +469,17 @@
                 <div class="service-section__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
                 <span class="service-section__eyebrow">Facial Aesthetics</span>
                 <h2 class="service-section__title">Enhance Your Appearance</h2>
-                <p class="service-section__description">Our trained clinicians offer facial aesthetic treatments to complement your smile. Professional, safe, and subtle enhancements.</p>
+                <p class="service-section__description">Our trained clinicians offer facial aesthetic treatments to complement your smile.</p>
             </header>
             <div class="services-grid" style="max-width: 600px; margin: 0 auto; grid-template-columns: 1fr;">
                 <article class="service-card">
-                    <div class="service-card__bg"><img src="IMG_3943.jpg" alt="Facial Aesthetics"></div>
+                    <div class="service-card__bg"><img src="../IMG_3943.jpg" alt="Facial Aesthetics"></div>
                     <div class="service-card__overlay"></div>
                     <div class="service-card__content">
                         <h3 class="service-card__title">Botulinum Toxin (Botox)</h3>
                         <p class="service-card__subtitle">Anti-wrinkle treatment</p>
                         <p class="service-card__text">Reduce fine lines and wrinkles with professional botulinum toxin injections.</p>
-                        <ul class="service-card__list">
-                            <li>Forehead lines & crow's feet</li>
-                            <li>Frown lines treatment</li>
-                            <li>Minimal downtime</li>
-                        </ul>
+                        <ul class="service-card__list"><li>Forehead lines & crow's feet</li><li>Frown lines treatment</li><li>Minimal downtime</li></ul>
                         <a href="contact.html" class="service-card__cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </article>
@@ -551,146 +494,32 @@
                     <div class="nhs-info__badge">NHS</div>
                     <div>
                         <h2 class="nhs-info__title">NHS & Private Treatment</h2>
-                        <p class="nhs-info__subtitle">Affordable quality care for everyone</p>
+                        <p class="nhs-info__subtitle">Affordable quality care for everyone at our South Harrow practice</p>
                     </div>
                 </div>
                 <div class="nhs-bands">
                     <div class="nhs-band">
-                        <div class="nhs-band__header">
-                            <span class="nhs-band__name">Band 1</span>
-                            <span class="nhs-band__price">£26.80</span>
-                        </div>
-                        <ul class="nhs-band__list">
-                            <li>Examination & diagnosis</li>
-                            <li>X-rays if needed</li>
-                            <li>Scale and polish*</li>
-                            <li>Prevention advice</li>
-                            <li>Some fissure sealants</li>
-                        </ul>
+                        <div class="nhs-band__header"><span class="nhs-band__name">Band 1</span><span class="nhs-band__price">£26.80</span></div>
+                        <ul class="nhs-band__list"><li>Examination & diagnosis</li><li>X-rays if needed</li><li>Scale and polish*</li><li>Prevention advice</li></ul>
                     </div>
                     <div class="nhs-band">
-                        <div class="nhs-band__header">
-                            <span class="nhs-band__name">Band 2</span>
-                            <span class="nhs-band__price">£73.50</span>
-                        </div>
-                        <ul class="nhs-band__list">
-                            <li>Everything in Band 1</li>
-                            <li>Fillings</li>
-                            <li>Root canal treatment</li>
-                            <li>Extractions</li>
-                            <li>Wisdom tooth removal</li>
-                        </ul>
+                        <div class="nhs-band__header"><span class="nhs-band__name">Band 2</span><span class="nhs-band__price">£73.50</span></div>
+                        <ul class="nhs-band__list"><li>Everything in Band 1</li><li>Fillings</li><li>Root canal treatment</li><li>Extractions</li></ul>
                     </div>
                     <div class="nhs-band">
-                        <div class="nhs-band__header">
-                            <span class="nhs-band__name">Band 3</span>
-                            <span class="nhs-band__price">£319.10</span>
-                        </div>
-                        <ul class="nhs-band__list">
-                            <li>Everything in Bands 1 & 2</li>
-                            <li>Crowns</li>
-                            <li>Bridges</li>
-                            <li>Dentures</li>
-                            <li>Inlays</li>
-                        </ul>
+                        <div class="nhs-band__header"><span class="nhs-band__name">Band 3</span><span class="nhs-band__price">£319.10</span></div>
+                        <ul class="nhs-band__list"><li>Everything in Bands 1 & 2</li><li>Crowns</li><li>Bridges</li><li>Dentures</li></ul>
                     </div>
                 </div>
-                <p class="nhs-info__note">*Scale and polish if deemed clinically necessary by your dentist. Charges apply to complete courses of treatment. Additional treatment in the same band within 2 months is free. Some patients may be exempt from charges - ask us for details. Cosmetic treatments such as whitening and implants are not available on the NHS.</p>
+                <p class="nhs-info__note">*Scale and polish if deemed clinically necessary. Some patients may be exempt from charges - ask us for details.</p>
             </div>
         </div>
     </section>
-
-    <section class="private-fees" id="private-fees">
-        <div class="private-fees__container">
-            <div class="private-fees__header">
-                <div class="private-fees__badge">PRIVATE</div>
-                <div>
-                    <h2 class="private-fees__title">Private Treatment Prices</h2>
-                    <p class="private-fees__subtitle">Premium treatments with flexible payment options</p>
-                </div>
-            </div>
-            <div class="private-fees__grid">
-                <div class="private-fees__category">
-                    <h3>Consultations & Examinations</h3>
-                    <ul>
-                        <li><span>New Patient Examination</span><span>£65</span></li>
-                        <li><span>Routine Check-up</span><span>£45</span></li>
-                        <li><span>Emergency Consultation</span><span>£75</span></li>
-                        <li><span>X-rays (per film)</span><span>£15</span></li>
-                    </ul>
-                </div>
-                <div class="private-fees__category">
-                    <h3>Hygiene & Prevention</h3>
-                    <ul>
-                        <li><span>Scale & Polish</span><span>£65</span></li>
-                        <li><span>Deep Clean (per quadrant)</span><span>£95</span></li>
-                        <li><span>Air Polish</span><span>£85</span></li>
-                        <li><span>Fluoride Treatment</span><span>£25</span></li>
-                    </ul>
-                </div>
-                <div class="private-fees__category">
-                    <h3>Cosmetic Dentistry</h3>
-                    <ul>
-                        <li><span>Teeth Whitening (Home Kit)</span><span>£295</span></li>
-                        <li><span>Teeth Whitening (In-chair)</span><span>£395</span></li>
-                        <li><span>Composite Veneers (per tooth)</span><span>From £250</span></li>
-                        <li><span>Porcelain Veneers (per tooth)</span><span>From £650</span></li>
-                    </ul>
-                </div>
-                <div class="private-fees__category">
-                    <h3>Restorative</h3>
-                    <ul>
-                        <li><span>White Filling (small)</span><span>£95</span></li>
-                        <li><span>White Filling (large)</span><span>£150</span></li>
-                        <li><span>Crown (porcelain)</span><span>From £495</span></li>
-                        <li><span>Bridge (per unit)</span><span>From £495</span></li>
-                    </ul>
-                </div>
-                <div class="private-fees__category">
-                    <h3>Facial Aesthetics</h3>
-                    <ul>
-                        <li><span>Anti-Wrinkle (1 area)</span><span>£195</span></li>
-                        <li><span>Anti-Wrinkle (2 areas)</span><span>£295</span></li>
-                        <li><span>Anti-Wrinkle (3 areas)</span><span>£350</span></li>
-                        <li><span>Dermal Fillers</span><span>From £295</span></li>
-                    </ul>
-                </div>
-                <div class="private-fees__category">
-                    <h3>Other Treatments</h3>
-                    <ul>
-                        <li><span>Root Canal (front tooth)</span><span>From £350</span></li>
-                        <li><span>Root Canal (back tooth)</span><span>From £495</span></li>
-                        <li><span>Extraction (simple)</span><span>£125</span></li>
-                        <li><span>Dentures (full set)</span><span>From £895</span></li>
-                    </ul>
-                </div>
-            </div>
-            <p class="private-fees__note">Prices are for guidance only. A full treatment plan with costs will be provided after examination. 0% finance available on treatments over £500. Ask about our membership plan for regular patients.</p>
-        </div>
-    </section>
-
-    <style>
-        .private-fees { padding: var(--space-4xl) 0; background: linear-gradient(180deg, var(--light-gray) 0%, var(--white) 100%); }
-        .private-fees__container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
-        .private-fees__header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-2xl); }
-        .private-fees__badge { background: linear-gradient(135deg, var(--purple), var(--blue-neon)); color: var(--white); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.5rem 1rem; border-radius: 8px; }
-        .private-fees__title { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--charcoal); }
-        .private-fees__subtitle { color: var(--gray-600); font-size: 1rem; }
-        .private-fees__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-lg); }
-        .private-fees__category { background: var(--white); border-radius: 16px; padding: var(--space-lg); border: 1px solid rgba(59, 130, 246, 0.1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
-        .private-fees__category h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--purple); margin-bottom: var(--space-md); padding-bottom: 0.75rem; border-bottom: 2px solid rgba(124, 58, 237, 0.1); }
-        .private-fees__category ul { list-style: none; }
-        .private-fees__category li { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid rgba(0, 0, 0, 0.05); font-size: 0.9375rem; }
-        .private-fees__category li:last-child { border-bottom: none; }
-        .private-fees__category li span:first-child { color: var(--gray-600); }
-        .private-fees__category li span:last-child { color: var(--charcoal); font-weight: 600; }
-        .private-fees__note { color: var(--gray-600); font-size: 0.875rem; line-height: 1.7; text-align: center; max-width: 800px; margin: 0 auto; padding: var(--space-md); background: rgba(124, 58, 237, 0.05); border-radius: 12px; }
-    </style>
 
     <section class="cta-section">
         <div class="cta-section__container">
             <h2 class="cta-section__title">Ready to get started?</h2>
-            <p class="cta-section__text">Book your appointment today and experience the difference quality dental care makes. We're accepting new NHS and private patients.</p>
+            <p class="cta-section__text">Book your appointment at our South Harrow practice today. Call us on 020 8864 4200 or book online.</p>
             <a href="contact.html" class="btn btn--primary">Book Your Appointment <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
     </section>
@@ -699,54 +528,38 @@
         <div class="footer__container">
             <div class="footer__grid">
                 <div class="footer__brand">
-                    <div class="footer__logo"><div class="footer__logo-mark"><img src="486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div><div class="footer__logo-text"><span class="footer__logo-text-main"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span></div></div>
-                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our 4 practices across London.</p>
+                    <div class="footer__logo"><div class="footer__logo-mark"><img src="../486483d4-1ea6-4099-b271-ff889f66ebdf.png" alt="Abbey Dental Logo"></div><div class="footer__logo-text-group"><span class="footer__logo-text"><span class="footer__logo-text-abbey">ABBEY</span><span class="footer__logo-text-dental">DENTAL</span></span><span class="footer__logo-subtext">SOUTH HARROW</span></div></div>
+                    <p class="footer__tagline">Quality dental care for the whole family. NHS and private patients welcome at our South Harrow practice.</p>
                     <div class="footer__socials" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Instagram">
+                        <a href="https://www.instagram.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Instagram">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                         </a>
-                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Connect on LinkedIn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
+                        <a href="https://www.facebook.com/abbeydentalbarking/" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Follow us on Facebook">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                         </a>
-                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--purple), var(--blue-neon)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
+                        <a href="https://www.linkedin.com/company/abbey-dental-barking" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Connect on LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="#youtube" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: linear-gradient(135deg, #7C3AED, #3B82F6); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;" title="Watch us on YouTube">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
                         </a>
                     </div>
                 </div>
-                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">Book Online</a></li></ul></div>
+                <div><h4 class="footer__heading">Quick Links</h4><ul class="footer__links"><li><a href="services.html">Services</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="../select.html">Other Branches</a></li></ul></div>
                 <div><h4 class="footer__heading">Services</h4><ul class="footer__links"><li><a href="#cosmetic">Cosmetic</a></li><li><a href="#restorative">Restorative</a></li><li><a href="#preventative">Preventative</a></li><li><a href="#general">General</a></li></ul></div>
-                <div><h4 class="footer__heading">Our Locations</h4><p class="footer__contact-item"><a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Barking</a> | <a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Walthamstow</a><br><a href="locations.html" style="color: var(--gray-400); text-decoration: none;">Whitechapel</a> | <a href="locations.html" style="color: var(--gray-400); text-decoration: none;">South Harrow</a></p><p class="footer__contact-item"><a href="locations.html" style="color: var(--purple-light); text-decoration: none;">View all locations &rarr;</a></p><p class="footer__contact-item">Mon-Fri: 8:30am-6pm</p></div>
+                <div><h4 class="footer__heading">Contact</h4><p class="footer__contact-item">338 Eastcote Lane<br>Harrow, HA2 9AJ</p><p class="footer__contact-item">020 8864 4200</p><p class="footer__contact-item">Mon-Fri: 9am-5:30pm</p></div>
             </div>
-            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 Abbey Dental Practice. All rights reserved.</p><div class="footer__legal"><a href="employment.html">Careers</a><a href="contact.html#faq">FAQ</a><a href="#">Privacy Policy</a></div></div>
+            <div class="footer__bottom"><p class="footer__copyright">&copy; 2026 Abbey Dental South Harrow. All rights reserved.</p><div class="footer__legal"><a href="../employment.html">Careers</a><a href="../contact.html#faq">FAQ</a><a href="#">Privacy Policy</a></div></div>
         </div>
     </footer>
 
-    <!-- Chatbot Widget -->
-    <style>
-        .chatbot-widget { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; box-shadow: 0 4px 20px var(--purple-glow); transition: all 0.4s; z-index: 1000; }
-        .chatbot-widget:hover { transform: scale(1.1); box-shadow: 0 6px 30px var(--purple-glow); }
-        .chatbot-widget__pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--blue-neon), var(--purple)); animation: chatbot-pulse 2s ease-out infinite; z-index: -1; }
-        @keyframes chatbot-pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
-    </style>
-    <a href="chatbot.html" class="chatbot-widget" title="Chat with Abbey AI">
+    <a href="chatbot.html" class="chatbot-widget" title="Abbey AI">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
-        <span class="chatbot-widget__pulse"></span>
     </a>
 
     <script>
-        document.querySelectorAll('.services-nav__link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                document.querySelectorAll('.services-nav__link').forEach(l => l.classList.remove('services-nav__link--active'));
-                this.classList.add('services-nav__link--active');
-            });
-        });
-
-        // Sticky nav detection
         const servicesNav = document.querySelector('.services-nav');
         const gapFiller = document.querySelector('.gap-filler');
         const hero = document.querySelector('.page-hero');
