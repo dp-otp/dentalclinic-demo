@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Plan Organizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.5; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.3px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-title:hover {
+            opacity: 0.9;
+        }
+
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.3), rgba(88, 86, 214, 0.3));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .collapse-indicator {
+            margin-left: auto;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .collapse-indicator.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+        }
+
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            font-size: 17px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #007aff;
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2), 0 4px 16px rgba(0, 122, 255, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.5;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: -0.3px;
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.4);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 122, 255, 0.5);
+            background: linear-gradient(135deg, #0051d5 0%, #4c3fb8 100%);
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+            box-shadow: none;
+        }
+
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .button-success {
+            background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+            box-shadow: 0 4px 16px rgba(52, 199, 89, 0.4);
+        }
+
+        .button-success:hover {
+            background: linear-gradient(135deg, #2db04c 0%, #28a745 100%);
+            box-shadow: 0 6px 24px rgba(52, 199, 89, 0.5);
+        }
+
+        .button-danger {
+            background: linear-gradient(135deg, #ff3b30 0%, #ff2d55 100%);
+            box-shadow: 0 4px 16px rgba(255, 59, 48, 0.4);
+        }
+
+        .button-danger:hover {
+            background: linear-gradient(135deg, #e6342a 0%, #e02443 100%);
+            box-shadow: 0 6px 24px rgba(255, 59, 48, 0.5);
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        .feature-text {
+            flex: 1;
+            font-size: 17px;
+            color: #ffffff;
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #ff3b30 0%, #ff2d55 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #e6342a 0%, #e02443 100%);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+        }
+
+        .delete-btn:active {
+            transform: scale(0.95);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 17px;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .export-section {
+            display: flex;
+            gap: 12px;
+        }
+
+        .export-section .button {
+            flex: 1;
+        }
+
+        .helper-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💡 Business Plan Organizer</h1>
+            <p class="subtitle">Transform your SaaS ideas into production-ready plans</p>
+
+            <div style="margin-top: 20px; padding: 16px; background: rgba(0, 122, 255, 0.1); border-radius: 12px; border: 1px solid rgba(0, 122, 255, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 15px; font-weight: 600;">Plan Completeness</span>
+                    <span id="completenessPercent" style="font-size: 15px; font-weight: 700;">0%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden;">
+                    <div id="completenessBar" style="height: 100%; background: linear-gradient(90deg, #007aff, #5856d6); width: 0%; transition: width 0.3s ease;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Business Problem -->
+            <div class="card">
+                <div class="section-title" onclick="toggleSection('businessProblem')">
+                    <div class="section-icon">🎯</div>
+                    Business Problem
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="businessProblem-section">
+                    <div class="input-group">
+                        <label>What problem are you solving?</label>
+                        <textarea id="problem" placeholder="Describe the problem your software will solve...">Local businesses lose customers because their online presence is missing, inconsistent or broken (bad hours, dead booking links, wrong maps, stale content). They lack time, skill or budget to fix it. IVL prevents lost revenue by creating a professional web presence automatically and continuously maintaining it so owners don't need to manage or monitor anything.</textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Who are your target users?</label>
+                        <input type="text" id="targetUsers" placeholder="e.g., Small business owners, Students, Developers..." value="Small local businesses (0–20 employees) across service verticals: barbers, cafes, dentists, tradespeople, tutors, detailers and small retail. Early adopters are tech-aware owners who want &quot;set and forget&quot; reliability or franchise/chain operators who need consistent multi-location presence.">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Stack -->
+            <div class="card">
+                <div class="section-title" onclick="toggleSection('techStack')">
+                    <div class="section-icon">🏗️</div>
+                    Technical Stack
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="techStack-section">
+                    <div class="input-group">
+                        <label>Frontend</label>
+                        <input type="text" id="frontend" placeholder="e.g., React, Vue, HTML/CSS/JS..." value="React + Framer for instant high-quality design and motion, hosted on Vercel. Framer components generate the hero, modular sections and motion templates. Small admin/dashboard built in React (Tailwind CSS) for owner settings and alerts. PWA-ready for mobile-first experience.">
+                    </div>
+                    <div class="input-group">
+                        <label>Backend</label>
+                        <input type="text" id="backend" placeholder="e.g., Node.js, Python/Django, None (static site)..." value="Serverless Node.js functions (Vercel/AWS Lambda) handling site builds, API orchestration, webhooks, and worker jobs (monitoring, reindexing). Microservice pattern: build service, monitor service, integrations service. CI/CD via GitHub Actions.">
+                    </div>
+                    <div class="input-group">
+                        <label>Database</label>
+                        <input type="text" id="database" placeholder="e.g., PostgreSQL, MongoDB, LocalStorage..." value="Supabase (Postgres) or Firebase for user profiles, business records, integration tokens, and event logs. Vector DB (Pinecone or Weaviate) for RAG embeddings powering AI assistant and Presence Intelligence indexing.">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Features -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('coreFeatures')">
+                    <div class="section-icon">✨</div>
+                    Core Features
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="coreFeatures-section">
+                    <div class="input-group">
+                        <label>Add a feature</label>
+                        <input type="text" id="featureInput" placeholder="e.g., User authentication, Dashboard, Export to PDF...">
+                    </div>
+                    <button class="button" onclick="addFeature()">+ Add Feature</button>
+                    <ul class="feature-list" id="featureList">
+                        <div class="empty-state">No features added yet. Start by adding your first feature above!</div>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MVP Scope -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('mvpScope')">
+                    <div class="section-icon">🚀</div>
+                    MVP Scope
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="mvpScope-section">
+                    <div class="input-group">
+                        <label>What's in your MVP?</label>
+                        <textarea id="mvpScope" placeholder="MVP v1.0 Includes:&#10;• User registration and authentication&#10;• Core feature set (list 3-5 essential features)&#10;• Basic dashboard/UI&#10;• Essential integrations only&#10;&#10;Deferred to v2.0+:&#10;• Advanced analytics&#10;• Team collaboration features&#10;• Mobile apps&#10;• Third-party marketplace integrations&#10;&#10;MVP Success Criteria:&#10;• 100 beta users in first month&#10;• <5% critical bug rate&#10;• 70%+ feature completion satisfaction">Framer template + 3 design systems (clean/premium/local).
+
+GPT/Claude integration (David) for homepage + services copy generation.
+
+Google Business Profile connect (+ write/update basic fields).
+
+Booking embed support (Calendly) + Stripe payment links.
+
+Monitoring engine: uptime, booking link check, GBP field mismatch detection.
+
+Simple owner inbox (alerts + one-click fixes).
+
+Deploy pipeline to Vercel/Netlify.
+
+Goal: ship a full flow that a non-tech owner can buy, onboard, and go live in one sitting — with mobile-first experience, supporting future app wrap.</textarea>
+                        <div class="helper-text">Be ruthless - MVP should be launchable in 8-12 weeks</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infrastructure & Deployment -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('infrastructure')">
+                    <div class="section-icon">☁️</div>
+                    Infrastructure & Deployment
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="infrastructure-section">
+                    <div class="input-group">
+                        <label>Hosting & Infrastructure</label>
+                        <textarea id="infrastructure" placeholder="Hosting Platform:&#10;• Primary: Vercel/AWS/Railway (specify region: US-East-1)&#10;• Database: Supabase/PlanetScale/Neon (managed PostgreSQL)&#10;• File Storage: S3/Cloudinary/UploadThing&#10;• CDN: Cloudflare/CloudFront for static assets&#10;&#10;CI/CD Pipeline:&#10;• GitHub Actions / GitLab CI&#10;• Auto-deploy on merge to main (production)&#10;• Preview deployments for PRs&#10;&#10;Environments:&#10;• Development (localhost)&#10;• Staging (staging.yourapp.com) - mirrors production&#10;• Production (yourapp.com)&#10;&#10;Monitoring & Backups:&#10;• Uptime monitoring: Uptime Robot / Better Stack&#10;• Error tracking: Sentry&#10;• Daily automated database backups (7-day retention)&#10;• Infrastructure as Code: Terraform/Pulumi (optional)">Host static sites via Vercel/Netlify + CDN.
+
+Serverless functions (Vercel/AWS) for on-demand builds and webhooks.
+
+Supabase for relational data; Pinecone for embeddings.
+
+GitHub Actions for CI; automatic builds on data change.
+
+Domain provisioning via Cloudflare API + Let's Encrypt.
+
+Cost assumptions (UK launch, 50 clients): ~£50–£200/month (hosting, DB, embeddings, LLM credits). Scale estimate provided on request.
+
+App-first note: Infrastructure designed to scale for native app wrap (iOS/Android) with same backend.</textarea>
+                        <div class="helper-text">Choose managed services to minimize DevOps overhead in early stages</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monetization & Pricing -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('monetization')">
+                    <div class="section-icon">💰</div>
+                    Monetization & Pricing
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="monetization-section">
+                    <div class="input-group">
+                        <label>Revenue Model</label>
+                        <textarea id="monetization" placeholder="Pricing Strategy: Monthly subscription (SaaS)&#10;&#10;Tiers:&#10;• Free: $0/mo - Limited features (100 items, 1 user, community support)&#10;• Pro: $19/mo - Full features (unlimited items, 5 users, email support, API access)&#10;• Team: $49/mo - Team features (unlimited users, priority support, SSO, advanced analytics)&#10;• Enterprise: Custom pricing - White-label, dedicated support, SLA, custom integrations&#10;&#10;Payment Processing:&#10;• Primary: Stripe (cards, subscriptions, invoicing)&#10;• Alternative: PayPal for regions where Stripe unavailable&#10;• Billing cycle: Monthly (default) / Annual (2 months free discount)&#10;&#10;Trial & Refunds:&#10;• 14-day free trial (no credit card required)&#10;• 30-day money-back guarantee&#10;• Prorated refunds for annual plans&#10;&#10;Special Offers:&#10;• Early adopter: 50% off first 3 months&#10;• Annual plan: 20% discount&#10;• Student/nonprofit: 50% discount (verification required)">One-time Setup: £149 — covers verification, generation, deployment, first optimisation.
+
+Presence Care Plan: £19/month — hosting, monitoring, fixes, AI assistant alerts, digest.
+
+Presence Growth Plan: £39/month — everything above + booking optimisation, review intelligence, light conversion improvements, priority fixes.
+
+Agency / Multi-location: custom pricing (white-label + bulk discounts).
+
+Optional: transaction fee 3–5% on bookings/payments (Stripe handles card processing).
+
+Note: Pricing reframed for "presence insurance" / utility feel, consistent with app-first and global scaling approach.</textarea>
+                        <div class="helper-text">Anchor pricing to value delivered, not just features</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integrations & External Services -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('integrations')">
+                    <div class="section-icon">🔌</div>
+                    Integrations & External Services
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="integrations-section">
+                    <div class="input-group">
+                        <label>Third-Party Services</label>
+                        <textarea id="integrations" placeholder="Core Services (MVP):&#10;• Auth: Clerk / Auth0 / Supabase Auth - Social login (Google, GitHub) + email/password&#10;• Email: Resend / SendGrid / Postmark - Transactional emails (welcome, password reset, receipts)&#10;• Payments: Stripe - Subscriptions, invoicing, webhooks&#10;• Analytics: PostHog / Mixpanel - Product analytics, funnels, cohorts&#10;• Monitoring: Sentry - Error tracking and performance monitoring&#10;&#10;Communication:&#10;• Customer support: Intercom / Crisp - In-app chat&#10;• Email marketing: ConvertKit / Loops - Newsletters and drip campaigns&#10;• Notifications: Knock / Novu - Multi-channel notifications (email, SMS, in-app)&#10;&#10;API Integrations (Post-MVP):&#10;• Slack - Notifications and slash commands&#10;• Zapier / Make - No-code automation for users&#10;• Google Workspace / Microsoft 365 - Calendar, Drive integration&#10;• GitHub / GitLab - For developer-focused products&#10;&#10;Infrastructure Services:&#10;• CDN: Cloudflare - DDoS protection, caching&#10;• SMS: Twilio - 2FA, notifications (if needed)&#10;• File uploads: UploadThing / Cloudinary - Image optimization&#10;• Search: Algolia / Typesense - Fast search (if needed)">Must-have (Phase 1): Google Business Profile API, Calendly, Stripe, Vercel/Netlify, Framer.
+
+Phase 2 / Add: Shopify (light usage — product highlights + "Buy" CTA), Square/Fresha, Facebook/Instagram posting API, Bing/Apple Maps.
+
+Monitoring helpers: UptimeChecker, Twilio (SMS alerts), SendGrid (email).
+
+Integration rule: only integrate if it reduces owner decisions or prevents lost customers.
+
+App-first note: API integrations designed to work seamlessly in mobile PWA / future native app.</textarea>
+                        <div class="helper-text">Start minimal - add integrations based on user demand</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security, Privacy & Compliance -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('security')">
+                    <div class="section-icon">🔒</div>
+                    Security, Privacy & Compliance
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="security-section">
+                    <div class="input-group">
+                        <label>Security & Compliance Requirements</label>
+                        <textarea id="security" placeholder="Authentication & Authorization:&#10;• OAuth 2.0 / OpenID Connect (delegated to Auth0/Clerk)&#10;• Multi-factor authentication (TOTP, SMS) - optional for free tier, required for enterprise&#10;• Session management: JWT tokens (short-lived access, refresh tokens)&#10;• Role-based access control (RBAC) - defined in Roles section&#10;• API authentication: Bearer tokens, rate limiting per tier&#10;&#10;Data Protection:&#10;• Encryption at rest: AES-256 (database-level encryption)&#10;• Encryption in transit: TLS 1.3 (HTTPS everywhere)&#10;• Password hashing: bcrypt/Argon2 (handled by auth provider)&#10;• Sensitive data: separate encrypted storage for PII&#10;• Data retention: user-controlled deletion + 30-day grace period&#10;&#10;Compliance:&#10;• GDPR compliance: Data export, right to deletion, consent tracking&#10;• CCPA compliance: Do Not Sell opt-out, data access requests&#10;• Privacy Policy: drafted, reviewed by legal (use Termly/iubenda template)&#10;• Terms of Service: standard SaaS terms, liability limitations&#10;• Cookie consent: GDPR-compliant banner (use CookieYes)&#10;&#10;Security Practices:&#10;• Regular security audits (quarterly)&#10;• Dependency vulnerability scanning: Dependabot / Snyk&#10;• Input validation & sanitization (prevent XSS, SQL injection)&#10;• CORS policy: whitelist allowed origins&#10;• Rate limiting: prevent abuse (100 req/min per user)&#10;• Audit logs: track sensitive actions (data access, exports, deletions)&#10;• Incident response plan: documented breach notification process&#10;&#10;Certifications (if pursuing enterprise):&#10;• SOC 2 Type II (18-24 months post-launch)&#10;• ISO 27001 (if targeting EU enterprise market)">GDPR-compliant data processing: explicit onboarding consent, data minimisation, deletion endpoint.
+
+No raw card storage (Stripe Checkout).
+
+OAuth for account/connect flows (GBP, Calendly, Shopify).
+
+Encryption: TLS in transit, AES-256 at rest for sensitive tokens.
+
+Parental/legal note: founder under 16 must use guardian for company/Stripe/legal signups.
+
+New note: Some platforms (Apple Developer Account, AWS, Cloudflare) may require 18+; must plan guardian/parent approval for app publishing or global deployment.</textarea>
+                        <div class="helper-text">Security is non-negotiable - budget time for this from day 1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roles & Permissions -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('roles')">
+                    <div class="section-icon">👥</div>
+                    Roles & Permissions
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="roles-section">
+                    <div class="input-group">
+                        <label>User Roles & Access Control</label>
+                        <textarea id="roles" placeholder="Role Hierarchy:&#10;&#10;1. Owner (per workspace)&#10;   • Full administrative access&#10;   • Billing and subscription management&#10;   • Add/remove team members&#10;   • Delete workspace&#10;   • Transfer ownership&#10;   • Access all features and data&#10;&#10;2. Admin&#10;   • Manage team members (invite, remove, change roles)&#10;   • Configure workspace settings&#10;   • Access all data and features&#10;   • View analytics and reports&#10;   • Cannot manage billing or delete workspace&#10;&#10;3. Manager / Editor&#10;   • Create, edit, delete their own content&#10;   • View team content&#10;   • Assign tasks to team members (if applicable)&#10;   • Export data&#10;   • Cannot manage users or settings&#10;&#10;4. Member / Viewer&#10;   • Read-only access to shared content&#10;   • Create and edit their own content only&#10;   • Comment on shared items&#10;   • Cannot delete others' content&#10;   • Limited export capabilities&#10;&#10;5. Guest (optional, if needed)&#10;   • Time-limited access (7-day expiry)&#10;   • View-only specific shared items&#10;   • No creation or editing permissions&#10;   • Cannot invite others&#10;&#10;Permission Matrix Example:&#10;┌─────────────────────┬───────┬───────┬─────────┬────────┬───────┐&#10;│ Action              │ Owner │ Admin │ Manager │ Member │ Guest │&#10;├─────────────────────┼───────┼───────┼─────────┼────────┼───────┤&#10;│ Manage billing      │   ✓   │   ✗   │    ✗    │   ✗    │   ✗   │&#10;│ Manage users        │   ✓   │   ✓   │    ✗    │   ✗    │   ✗   │&#10;│ Edit workspace      │   ✓   │   ✓   │    ✗    │   ✗    │   ✗   │&#10;│ Create content      │   ✓   │   ✓   │    ✓    │   ✓    │   ✗   │&#10;│ Edit own content    │   ✓   │   ✓   │    ✓    │   ✓    │   ✗   │&#10;│ Delete any content  │   ✓   │   ✓   │    ✗    │   ✗    │   ✗   │&#10;│ View reports        │   ✓   │   ✓   │    ✓    │   ✗    │   ✗   │&#10;└─────────────────────┴───────┴───────┴─────────┴────────┴───────┘&#10;&#10;Implementation:&#10;• Store roles in database (users_roles table)&#10;• Check permissions on every API route (middleware)&#10;• UI adapts based on user role (hide unavailable actions)">Owner (business): full control of business profile, approve content, view reports.
+
+Admin (IVL team): manage deployments, troubleshoot integrations (internal only).
+
+Support: limited access to logs and alerts (no financial keys).
+
+Reseller/Agency: multi-business view, billing delegation.
+
+API User: token-based programmatic access for partners (rate-limited).
+
+App-first note: Roles designed to work across mobile dashboards and potential multi-location / multi-admin setup.</textarea>
+                        <div class="helper-text">Design roles for scalability - enterprise customers need granular control</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roadmap / Phases -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('roadmap')">
+                    <div class="section-icon">🗺️</div>
+                    Roadmap / Phases
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="roadmap-section">
+                    <div class="input-group">
+                        <label>Development Roadmap</label>
+                        <textarea id="roadmap" placeholder="Phase 1: Foundation (Weeks 1-4)&#10;• Set up development environment & CI/CD&#10;• Database schema design&#10;• Authentication system (login, signup, password reset)&#10;• Basic UI/UX shell (navigation, layouts)&#10;• Core feature #1 (80% complete)&#10;Milestone: Working prototype with auth&#10;&#10;Phase 2: MVP Core (Weeks 5-8)&#10;• Complete core features from MVP scope&#10;• User dashboard / main interface&#10;• Basic settings page&#10;• API endpoints for core functionality&#10;• Unit and integration tests&#10;Milestone: Feature-complete MVP (internal testing)&#10;&#10;Phase 3: Polish & Payments (Weeks 9-12)&#10;• Stripe integration (subscriptions, webhooks)&#10;• Pricing page and checkout flow&#10;• Email notifications (welcome, receipts, password reset)&#10;• Onboarding flow and empty states&#10;• Bug fixes and performance optimization&#10;• Legal pages (privacy, terms, refund policy)&#10;Milestone: Beta launch to 50 early adopters&#10;&#10;Phase 4: Feedback & Iteration (Weeks 13-16)&#10;• Collect user feedback and analytics&#10;• Fix critical bugs and UX issues&#10;• Implement top 3 requested features&#10;• Improve onboarding based on drop-off data&#10;• Add help documentation and FAQs&#10;Milestone: Public launch v1.0&#10;&#10;Phase 5: Growth & Scale (Months 5-6)&#10;• SEO and content marketing&#10;• Advanced analytics and reporting&#10;• Team collaboration features (if applicable)&#10;• API documentation and developer tools&#10;• Performance optimization for scale&#10;Milestone: 500 paying customers&#10;&#10;Phase 6: Enterprise (Months 7-12)&#10;• SSO (SAML, OAuth) integration&#10;• Advanced permissions and team management&#10;• White-label options&#10;• SLA and dedicated support&#10;• SOC 2 compliance audit prep&#10;Milestone: First 5 enterprise customers">Month 0–3: MVP build (site gen, GBP connect, booking embed, Stripe links), 3 pilot customers.
+
+Month 4–6: Improve design systems (5 templates), add monitoring rules, onboarding flows, pricing. Reach 50 paying clients.
+
+Month 7–9: Vector DB + RAG for David; add review aggregation and AI reply drafting; add light Shopify integration.
+
+Month 10–12: Launch reseller portal, analytics upgrades, begin EU readiness (localisation, VAT, GDPR checks). Target 300 customers.
+
+App-first note: Roadmap compatible with PWA → native app transition, supporting scaling and App Store presence.</textarea>
+                        <div class="helper-text">Be realistic - add 30% buffer time to all estimates</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics & Success Metrics -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('analytics')">
+                    <div class="section-icon">📊</div>
+                    Analytics & Success Metrics
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="analytics-section">
+                    <div class="input-group">
+                        <label>Key Metrics to Track</label>
+                        <textarea id="analytics" placeholder="Acquisition Metrics:&#10;• Weekly/Monthly signups (free + paid)&#10;• Traffic sources (organic, paid, referral, direct)&#10;• Landing page conversion rate (visitor → signup)&#10;• Cost per acquisition (CPA) - if running paid ads&#10;• Viral coefficient (invites sent per user)&#10;&#10;Activation Metrics:&#10;• Onboarding completion rate (% completing first-time flow)&#10;• Time to first value (how long until user completes key action)&#10;• Activation rate (% of signups who complete core action within 7 days)&#10;• Feature adoption rate (% using each major feature)&#10;&#10;Engagement & Retention:&#10;• Daily Active Users (DAU) / Monthly Active Users (MAU)&#10;• DAU/MAU ratio (stickiness metric, target: >20%)&#10;• Session duration and frequency&#10;• Weekly retention cohorts (% returning week 1, 2, 3, 4)&#10;• Churn rate (% canceling per month, target: <5%)&#10;&#10;Revenue Metrics (Post-Launch):&#10;• MRR (Monthly Recurring Revenue) - primary growth metric&#10;• ARR (Annual Recurring Revenue)&#10;• ARPU (Average Revenue Per User)&#10;• Customer Lifetime Value (LTV) = ARPU × Average lifespan&#10;• LTV:CAC ratio (target: >3:1)&#10;• Expansion revenue (upgrades from Free → Pro → Team)&#10;• Revenue churn vs. customer churn&#10;&#10;Product Health:&#10;• Feature usage frequency (which features are used most?)&#10;• Error rate and crash-free sessions (target: >99.5%)&#10;• API response times (P50, P95, P99)&#10;• Page load times (target: <2s)&#10;• Uptime (target: 99.9%+)&#10;&#10;Support & Satisfaction:&#10;• NPS (Net Promoter Score) - quarterly survey&#10;• CSAT (Customer Satisfaction) - post-interaction&#10;• Support ticket volume and resolution time&#10;• Feature request frequency (use for roadmap prioritization)&#10;&#10;Tools:&#10;• Product analytics: PostHog / Mixpanel&#10;• Web analytics: Plausible / Google Analytics&#10;• Session replay: LogRocket / FullStory (for debugging UX issues)&#10;• Dashboards: Build custom dashboard showing top 8-10 KPIs">Acquisition: trial sign-ups / demo requests per week.
+
+Activation: % of sign-ups that publish a live site within 72 hours.
+
+Engagement: monthly active owners (open digest, respond to alerts).
+
+Revenue: MRR, ARPU, conversion (trial→paid).
+
+Reliability: site uptime %, mean time to detect/fix critical link failures.
+
+Outcome metric (early): bookings generated per site in first 30 days.
+
+Note: For businesses without booking infrastructure, this may be 0 — consider alternative early outcome signals.
+Set thresholds: Activation > 40%, Churn < 8% monthly for early validation.</textarea>
+                        <div class="helper-text">Track metrics that matter - avoid vanity metrics</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Logic -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('businessLogic')">
+                    <div class="section-icon">📋</div>
+                    Business Logic
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="businessLogic-section">
+                    <div class="input-group">
+                        <label>Key Business Rules</label>
+                        <textarea id="businessRules" placeholder="Account & Access Rules:&#10;• Email verification required before accessing core features&#10;• Unverified accounts deleted after 7 days of inactivity&#10;• Password requirements: 8+ chars, 1 uppercase, 1 number, 1 special char&#10;• Failed login attempts: 5 max, then 15-minute lockout&#10;• Inactive accounts (no login for 12 months): sent warning, then archived&#10;&#10;Tier Limits & Quotas:&#10;• Free tier: 100 items max, 1 user, 10 MB storage, community support&#10;• Pro tier: Unlimited items, 5 users, 10 GB storage, email support, API access (1000 req/day)&#10;• Team tier: Unlimited items, unlimited users, 100 GB storage, priority support, API (10k req/day)&#10;• Exceed quota: Prompt to upgrade (soft limit) or block creation (hard limit)&#10;&#10;Payment & Billing:&#10;• Trial: 14 days full access (no credit card), then downgrade to Free&#10;• Billing date: Day of month when user subscribed (prorated for changes)&#10;• Failed payment: 3 retry attempts over 7 days, then downgrade to Free&#10;• Refund window: 30 days from payment (full refund, no questions asked)&#10;• Upgrade: Immediate access, prorated charge for remaining billing period&#10;• Downgrade: Takes effect at end of current billing period, no refund&#10;&#10;Data & Content Rules:&#10;• User owns all data created (stated in Terms of Service)&#10;• Data export: Available to all users at any time (GDPR compliance)&#10;• Account deletion: 30-day grace period, then permanent deletion&#10;• Deleted data: Removed from production, backup retention for 90 days&#10;• Shared content: Original creator retains ownership, collaborators have access only&#10;• Public sharing: Optional, disabled by default&#10;&#10;Usage Policies:&#10;• API rate limits: 100 req/hour (Free), 1k req/hour (Pro), 10k req/hour (Team)&#10;• File uploads: 10 MB per file, max 100 files per day (Free), unlimited (paid)&#10;• Spam/abuse: Automated detection, flag for review, suspend if confirmed&#10;• Terms violation: Warning first, then suspension, then permanent ban&#10;&#10;Support & SLA:&#10;• Free tier: Community forum, no guaranteed response time&#10;• Pro tier: Email support, 48-hour response time&#10;• Team/Enterprise: Priority support, 24-hour response, 99.5% uptime SLA&#10;• Critical bugs: Escalated immediately regardless of tier">Owner inputs minimal info → system generates site + GBP draft.
+
+System runs validation checks (NAP consistency) and queues suggestions.
+
+If owner approves, system publishes site and triggers listing sync.
+
+Monitor jobs run hourly/daily; critical failures send SMS+email and auto-remediate where safe (e.g., reapply original GBP data).
+
+Billing runs monthly; automated reminders + grace period on non-payment.
+
+App-first note: Logic fully compatible with mobile PWA / future app notifications.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Constraints & Assumptions -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('constraints')">
+                    <div class="section-icon">⚠️</div>
+                    Constraints & Assumptions
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="constraints-section">
+                    <div class="input-group">
+                        <label>Technical & Business Constraints</label>
+                        <textarea id="constraints" placeholder="Budget Constraints:&#10;• Infrastructure: $200/month max (Vercel Pro, database, CDN)&#10;• SaaS tools: $300/month (auth, email, analytics, monitoring)&#10;• Marketing: $500/month for first 6 months (ads, SEO tools)&#10;• Total runway: $X to sustain Y months before revenue&#10;• Break-even: Need X paying customers at $Y/mo to cover costs&#10;&#10;Time Constraints:&#10;• MVP launch deadline: 12 weeks from start&#10;• Beta launch: Week 12 (50 users)&#10;• Public launch: Week 16 (open to all)&#10;• Feature freeze: 2 weeks before each launch&#10;• Solo founder or small team → realistic velocity limits&#10;&#10;Technical Limitations:&#10;• No native mobile apps initially (responsive web only)&#10;• English-only for MVP (i18n in Phase 2)&#10;• Limited offline functionality (requires internet connection)&#10;• Browser support: Modern browsers only (Chrome, Firefox, Safari, Edge - no IE)&#10;• No real-time collaboration in MVP (polling/refresh for updates)&#10;• File upload limits: 10MB per file, 100MB total per user (Free tier)&#10;&#10;Team & Skills:&#10;• Team size: Solo founder / 1 developer + 1 designer / small team of X&#10;• Skills available: Full-stack dev, basic design, limited DevOps&#10;• Skills missing: Mobile development, advanced security, compliance expertise&#10;• Time commitment: Full-time / part-time (20 hrs/week)&#10;• No dedicated QA → rely on automated testing + beta user feedback&#10;&#10;Regulatory & Legal:&#10;• Must comply with GDPR (EU users) and CCPA (California)&#10;• Cannot store health data (HIPAA) or financial data (PCI DSS) initially&#10;• Terms drafted by founder (not lawyer-reviewed until revenue justifies cost)&#10;• Operating as sole proprietor / LLC (entity structure impacts liability)&#10;&#10;Market Constraints:&#10;• Entering crowded market → need clear differentiation&#10;• Competing with free alternatives → must prove value quickly&#10;• B2B sales cycle longer than B2C (if applicable)&#10;• Seasonal demand variations (if applicable)&#10;&#10;Dependencies & Risks:&#10;• Reliant on third-party services (auth, payments) - vendor lock-in risk&#10;• API rate limits: Plan for scale but start conservative&#10;• Single point of failure: Database/hosting provider outage affects all users&#10;• Assumption: Target users have internet access and modern devices&#10;• Assumption: Payment processor (Stripe) available in target markets">Assumptions: UK first; owners will provide 2–5 photos; owners accept OAuth linking to GBP; LLM credits provided (sponsored or paid); Stripe can be onboarded via guardian if founder is minor.
+
+Constraints: Founder under 16 cannot legally sign contracts — need parental/guardian for banking, Stripe, terms. Reliance on third-party APIs (Google, Stripe, Calendly) — rate limits and policy changes are possible. Performance guarantee avoided until product stability proven.
+
+App-first note: Guardian approval may also be required for App Store / Google Play publishing.</textarea>
+                        <div class="helper-text">Document assumptions now - validate them with real users ASAP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI / LLMs & Tools -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('aiTools')">
+                    <div class="section-icon">🤖</div>
+                    AI / LLMs & Tools — Technical
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="aiTools-section">
+                    <div class="input-group">
+                        <label>AI Integration Architecture</label>
+                        <textarea id="aiTools" placeholder="Primary LLM:&#10;• Provider: Claude Sonnet 4.5 / GPT-4 / Gemini Pro&#10;• Assistant name: [Your assistant name]&#10;• Use cases: Copy generation, content review, ad text, customer support responses&#10;• Architecture: Instruction prompts + RAG (Retrieval-Augmented Generation) for accuracy&#10;• Fallback model: Claude Haiku / GPT-3.5 for cost-effective bulk operations&#10;&#10;Embeddings & Vector Database:&#10;• Vector DB: Pinecone / Weaviate / Qdrant / Supabase pgvector&#10;• Embedding model: OpenAI text-embedding-3-small / Cohere embed-english-v3.0&#10;• Use for: Semantic search, context retrieval for RAG, similar content recommendations&#10;• Index strategy: Separate collections per tenant (multi-tenancy) or unified with metadata filtering&#10;&#10;Image Generation / Vision Tools:&#10;• Image gen: DALL-E 3 / Midjourney API / Stable Diffusion (self-hosted/Replicate)&#10;• Use cases: Hero images, mockups, product visualizations, marketing assets&#10;• Image analysis: GPT-4 Vision / Claude 3 for content moderation, description generation&#10;• Hosting: Cloudinary / S3 with CloudFront for generated assets&#10;&#10;AI Orchestration & Safety:&#10;• Framework: LangChain / LlamaIndex / custom serverless functions&#10;• Prompt templating: Jinja2 templates with variable injection&#10;• Safety layers: Content moderation API (OpenAI Moderation), profanity filters, PII detection&#10;• Human-in-the-loop: Flag uncertain outputs (confidence <70%) for manual review before publish&#10;• Rate limits: 10 generations/hour (Free), 100/hour (Pro), unlimited (Enterprise)&#10;&#10;Cost Control & Optimization:&#10;• Caching: Cache LLM outputs for 24 hours (identical prompts → same response)&#10;• Model selection: Use smaller/cheaper models (Haiku, GPT-3.5) for bulk tasks, summaries&#10;• Batching: Queue non-urgent requests and process in batches during off-peak hours&#10;• Budget caps: $500/month AI costs in MVP, alert at 80% threshold&#10;• Token optimization: Compress prompts, use structured outputs (JSON mode) to reduce tokens&#10;&#10;Validation & Testing:&#10;• A/B test: Generate 10 homepage variants for 5 pilot businesses&#10;• Success metrics: ≥80% owner satisfaction score, ≥60% publish rate (owners approve without edits)&#10;• Accuracy benchmark: Human eval on 100 sample outputs, target: <5% factual errors&#10;• Latency target: <3s for text generation, <10s for image generation&#10;&#10;Ethical & Legal:&#10;• Disclosure: Clearly label AI-generated content to users&#10;• Copyright: Use only commercial-licensed training data models (avoid grey-area models)&#10;• Bias monitoring: Regular audits for demographic bias in outputs&#10;• User control: Allow users to edit/reject AI suggestions, never auto-publish without approval">Primary LLM (assistant name: David): Claude / GPT-4 for copy generation, review replies, ad text. Use instruction prompts + RAG for accuracy.
+
+Embeddings/Vector DB: Pinecone / Weaviate for RAG.
+
+Image tool: Sora / Stable Diffusion (hosted) for hero enhancements and mockups.
+
+Orchestration: LangChain-style functions or serverless orchestration for prompt templating and safety checks.
+
+Cost control: cache outputs, use smaller models for bulk tasks, human review for publish.
+
+Validation experiment: generate 10 homepage variants for 5 pilot businesses; measure owner satisfaction (≥80%) and publish rate.
+
+App-first note: LLM integration and assistant logic designed to work via mobile PWA notifications and future native app.</textarea>
+                        <div class="helper-text">AI is a feature, not the product - focus on user value, not tech hype</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presence Intelligence & Data -->
+            <div class="card card-full">
+                <div class="section-title" onclick="toggleSection('presenceData')">
+                    <div class="section-icon">📡</div>
+                    Presence Intelligence & Data — Product
+                    <span class="collapse-indicator">▼</span>
+                </div>
+                <div class="section-content" id="presenceData-section">
+                    <div class="input-group">
+                        <label>Data Collection & Intelligence Layer</label>
+                        <textarea id="presenceData" placeholder="What Data is Stored:&#10;• Business NAP (Name, Address, Phone) - snapshots tracked daily for drift detection&#10;• Reviews: Star ratings, text content, sentiment scores (positive/neutral/negative), source platform (Google, Yelp, Facebook)&#10;• Engagement signals: Booking frequency, appointment no-show rate, peak booking hours&#10;• Service metrics: Top-performing services (by revenue/bookings), service pricing trends&#10;• Traffic signals: Website visits, click-through rates from listings, call tracking (if integrated)&#10;• Listing health: Completeness score (photos, hours, description), consistency across platforms&#10;• Competitor benchmarks: Nearby businesses in same category (anonymized aggregate data)&#10;&#10;Primary Use Cases:&#10;• Automated recommendations: &#10;  - 'Your hours are outdated on Google' (drift detection)&#10;  - 'Add 3 more photos to match top competitors' (benchmark gap analysis)&#10;  - 'Respond to 5 unresponded reviews from last week' (engagement nudges)&#10;• Local benchmarking: &#10;  - 'Your avg rating (4.2★) is below local average (4.5★) - here's why'&#10;  - 'Competitors have 2x more reviews - launch review campaign?'&#10;• Aggregated insights for ML models:&#10;  - Train models to predict optimal service pricing, best posting times, review response templates&#10;  - Identify patterns: e.g., 'Businesses with 10+ photos get 30% more bookings'&#10;&#10;Privacy & Compliance:&#10;• Data aggregation: Anonymize individual business data for analytics (remove identifiers, use aggregate cohorts)&#10;• Opt-in for insights marketplace: Users must explicitly consent before their anonymized data contributes to industry reports&#10;• Data retention: Raw logs purged after 90 days, aggregated metrics retained indefinitely&#10;• GDPR compliance: User can export or delete all their presence data within 30 days&#10;• Third-party sharing: Never sell raw business data; only aggregated, anonymized insights (with consent)&#10;• Security: Encrypt PII (phone numbers, addresses) at rest, strict access controls (RBAC for internal team)&#10;&#10;Data Sources & Collection:&#10;• API integrations: Google My Business API, Yelp Fusion API, Facebook Graph API&#10;• Web scraping: Ethical scraping of public data (respect robots.txt, rate limits) for listings not accessible via API&#10;• User input: Business owners manually input data or connect accounts (OAuth)&#10;• Frequency: Daily snapshots for critical data (NAP, hours), weekly for reviews, monthly for benchmarks&#10;&#10;Early Validation Experiment:&#10;• Goal: Prove value of presence intelligence before scaling infrastructure&#10;• Method: Collect 30 days of signals from 10 pilot businesses (manual + automated)&#10;• Deliverable: 'Presence Scorecard' - visual dashboard showing:&#10;  - Overall health score (0-100)&#10;  - Top 3-5 actionable items (prioritized by impact)&#10;  - Benchmark comparison vs. local competitors&#10;• Success criteria: ≥80% of owners find ≥3 actionable items valuable, ≥50% take action on at least 1 item within 7 days&#10;&#10;Roadmap:&#10;• Phase 1 (MVP): Manual data collection + simple scorecard (proof of concept)&#10;• Phase 2: Automate data ingestion via APIs, basic anomaly detection (e.g., sudden rating drop)&#10;• Phase 3: Predictive insights (e.g., 'Your next review is likely negative based on sentiment trend')&#10;• Phase 4: Marketplace for anonymized insights - sell industry reports to enterprise clients">What it stores: NAP snapshots, reviews (+sentiment), booking frequency, top services, traffic signals.
+
+Primary use: automated recommendations (fix hours, add photos), local benchmarking, and aggregated insights for internal models.
+
+Privacy: aggregate/anonymise for analytics and require opt-in for selling insights.
+
+Early experiment: collect 30 days of signals from 10 pilots and produce a "presence scorecard" — owners should find ≥3 actionable items.
+
+App-first note: Presence Intelligence designed to feed mobile dashboard, digest, and future push notifications for global app rollout.</textarea>
+                        <div class="helper-text">Data is your moat - collect thoughtfully, respect privacy, deliver value</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Buttons -->
+            <div class="card card-full">
+                <div class="button-group">
+                    <button class="button button-success" onclick="savePlan()">💾 Save Plan</button>
+                    <button class="button button-secondary" onclick="loadPlan()">📂 Load Plan</button>
+                </div>
+                <div class="export-section" style="margin-top: 12px;">
+                    <button class="button button-success" onclick="generatePlan()">📄 Generate Plan Summary</button>
+                    <button class="button button-danger" onclick="clearAll()">🗑️ Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let features = [
+            "Instant, mobile-first website generation from minimal info (name, address, services, photos).",
+            "One-click Google Business Profile sync and directory syndication.",
+            "Booking embedding and Stripe payment links (Calendly / Fresha / Shopify-lite).",
+            "Continuous monitoring (uptime, booking links, GBP inconsistencies, review alerts).",
+            "AI assistant (\"David\") that drafts copy, responds to reviews, and guides setup.",
+            "Auto-deploy CI/CD: content updates trigger safe rebuilds.",
+            "Basic analytics dashboard (visits, calls, bookings).",
+            "Owner minimal UX: email/SMS alerts + monthly digest."
+        ];
+
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-section');
+            const card = content.closest('.card');
+            const indicator = card.querySelector('.collapse-indicator');
+
+            content.classList.toggle('collapsed');
+            indicator.classList.toggle('collapsed');
+        }
+
+        function addFeature() {
+            const input = document.getElementById('featureInput');
+            const featureText = input.value.trim();
+
+            if (featureText === '') {
+                alert('Please enter a feature description');
+                return;
+            }
+
+            features.push(featureText);
+            input.value = '';
+            renderFeatures();
+        }
+
+        function deleteFeature(index) {
+            features.splice(index, 1);
+            renderFeatures();
+        }
+
+        function renderFeatures() {
+            const featureList = document.getElementById('featureList');
+
+            if (features.length === 0) {
+                featureList.innerHTML = '<div class="empty-state">No features added yet. Start by adding your first feature above!</div>';
+                return;
+            }
+
+            featureList.innerHTML = features.map((feature, index) => `
+                <li class="feature-item">
+                    <span class="feature-text">${feature}</span>
+                    <button class="delete-btn" onclick="deleteFeature(${index})">Delete</button>
+                </li>
+            `).join('');
+        }
+
+        function formatSection(title, content) {
+            if (!content || content.trim() === '') return '';
+            return `\n${title}\n${'='.repeat(title.length)}\n${content.trim()}\n`;
+        }
+
+        function generatePlan() {
+            const problem = document.getElementById('problem').value;
+            const targetUsers = document.getElementById('targetUsers').value;
+            const frontend = document.getElementById('frontend').value;
+            const backend = document.getElementById('backend').value;
+            const database = document.getElementById('database').value;
+            const businessRules = document.getElementById('businessRules').value;
+            const mvpScope = document.getElementById('mvpScope').value;
+            const infrastructure = document.getElementById('infrastructure').value;
+            const monetization = document.getElementById('monetization').value;
+            const integrations = document.getElementById('integrations').value;
+            const security = document.getElementById('security').value;
+            const roles = document.getElementById('roles').value;
+            const roadmap = document.getElementById('roadmap').value;
+            const analytics = document.getElementById('analytics').value;
+            const constraints = document.getElementById('constraints').value;
+            const aiTools = document.getElementById('aiTools').value;
+            const presenceData = document.getElementById('presenceData').value;
+
+            if (!problem || !targetUsers) {
+                alert('Please fill in at least the problem and target users!');
+                return;
+            }
+
+            let plan = `BUSINESS PLAN SUMMARY\n`;
+            plan += `${'='.repeat(60)}\n`;
+
+            // Core sections (always included)
+            plan += formatSection('PROBLEM', problem);
+            plan += formatSection('TARGET USERS', targetUsers);
+
+            plan += `\nCORE FEATURES\n${'='.repeat(13)}\n`;
+            features.forEach((feature, index) => {
+                plan += `${index + 1}. ${feature}\n`;
+            });
+
+            // MVP Scope
+            plan += formatSection('MVP SCOPE', mvpScope);
+
+            // Technical Stack
+            if (frontend || backend || database) {
+                plan += `\nTECHNICAL STACK\n${'='.repeat(15)}\n`;
+                if (frontend) plan += `Frontend: ${frontend}\n`;
+                if (backend) plan += `Backend: ${backend}\n`;
+                if (database) plan += `Database: ${database}\n`;
+            }
+
+            // Infrastructure
+            plan += formatSection('INFRASTRUCTURE & DEPLOYMENT', infrastructure);
+
+            // Monetization
+            plan += formatSection('MONETIZATION & PRICING', monetization);
+
+            // Integrations
+            plan += formatSection('INTEGRATIONS & EXTERNAL SERVICES', integrations);
+
+            // Security
+            plan += formatSection('SECURITY, PRIVACY & COMPLIANCE', security);
+
+            // Roles
+            plan += formatSection('ROLES & PERMISSIONS', roles);
+
+            // Roadmap
+            plan += formatSection('ROADMAP / PHASES', roadmap);
+
+            // Analytics
+            plan += formatSection('ANALYTICS & SUCCESS METRICS', analytics);
+
+            // Business Logic
+            plan += formatSection('BUSINESS LOGIC', businessRules);
+
+            // Constraints
+            plan += formatSection('CONSTRAINTS & ASSUMPTIONS', constraints);
+
+            // AI/LLMs & Tools
+            plan += formatSection('AI / LLMS & TOOLS — TECHNICAL', aiTools);
+
+            // Presence Intelligence & Data
+            plan += formatSection('PRESENCE INTELLIGENCE & DATA — PRODUCT', presenceData);
+
+            plan += `\n${'='.repeat(60)}\n`;
+            plan += `Generated: ${new Date().toLocaleString()}\n`;
+
+            // Create a downloadable text file
+            const blob = new Blob([plan], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `business-plan-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('✅ Plan generated and downloaded successfully!');
+        }
+
+        function clearAll() {
+            if (!confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                return;
+            }
+
+            document.getElementById('problem').value = '';
+            document.getElementById('targetUsers').value = '';
+            document.getElementById('featureInput').value = '';
+            document.getElementById('frontend').value = '';
+            document.getElementById('backend').value = '';
+            document.getElementById('database').value = '';
+            document.getElementById('businessRules').value = '';
+            document.getElementById('mvpScope').value = '';
+            document.getElementById('infrastructure').value = '';
+            document.getElementById('monetization').value = '';
+            document.getElementById('integrations').value = '';
+            document.getElementById('security').value = '';
+            document.getElementById('roles').value = '';
+            document.getElementById('roadmap').value = '';
+            document.getElementById('analytics').value = '';
+            document.getElementById('constraints').value = '';
+            document.getElementById('aiTools').value = '';
+            document.getElementById('presenceData').value = '';
+            features = [];
+            renderFeatures();
+        }
+
+        // Allow Enter key to add features
+        document.getElementById('featureInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addFeature();
+            }
+        });
+
+        // Calculate and update completeness score
+        function updateCompleteness() {
+            const fields = [
+                'problem', 'targetUsers', 'frontend', 'backend', 'database',
+                'businessRules', 'mvpScope', 'infrastructure', 'monetization',
+                'integrations', 'security', 'roles', 'roadmap', 'analytics',
+                'constraints', 'aiTools', 'presenceData'
+            ];
+
+            let filledCount = features.length > 0 ? 1 : 0;
+            let totalCount = fields.length + 1; // +1 for features
+
+            fields.forEach(fieldId => {
+                const value = document.getElementById(fieldId)?.value || '';
+                if (value.trim().length > 0) {
+                    filledCount++;
+                }
+            });
+
+            const percentage = Math.round((filledCount / totalCount) * 100);
+            document.getElementById('completenessPercent').textContent = percentage + '%';
+            document.getElementById('completenessBar').style.width = percentage + '%';
+        }
+
+        // Save plan to localStorage
+        function savePlan() {
+            const planData = {
+                problem: document.getElementById('problem').value,
+                targetUsers: document.getElementById('targetUsers').value,
+                frontend: document.getElementById('frontend').value,
+                backend: document.getElementById('backend').value,
+                database: document.getElementById('database').value,
+                businessRules: document.getElementById('businessRules').value,
+                mvpScope: document.getElementById('mvpScope').value,
+                infrastructure: document.getElementById('infrastructure').value,
+                monetization: document.getElementById('monetization').value,
+                integrations: document.getElementById('integrations').value,
+                security: document.getElementById('security').value,
+                roles: document.getElementById('roles').value,
+                roadmap: document.getElementById('roadmap').value,
+                analytics: document.getElementById('analytics').value,
+                constraints: document.getElementById('constraints').value,
+                aiTools: document.getElementById('aiTools').value,
+                presenceData: document.getElementById('presenceData').value,
+                features: features,
+                timestamp: new Date().toISOString()
+            };
+
+            localStorage.setItem('businessPlan', JSON.stringify(planData));
+            alert('✅ Plan saved successfully!');
+            updateCompleteness();
+        }
+
+        // Load plan from localStorage
+        function loadPlan() {
+            const saved = localStorage.getItem('businessPlan');
+            if (!saved) {
+                alert('No saved plan found!');
+                return;
+            }
+
+            if (!confirm('This will replace your current plan. Continue?')) {
+                return;
+            }
+
+            const planData = JSON.parse(saved);
+
+            document.getElementById('problem').value = planData.problem || '';
+            document.getElementById('targetUsers').value = planData.targetUsers || '';
+            document.getElementById('frontend').value = planData.frontend || '';
+            document.getElementById('backend').value = planData.backend || '';
+            document.getElementById('database').value = planData.database || '';
+            document.getElementById('businessRules').value = planData.businessRules || '';
+            document.getElementById('mvpScope').value = planData.mvpScope || '';
+            document.getElementById('infrastructure').value = planData.infrastructure || '';
+            document.getElementById('monetization').value = planData.monetization || '';
+            document.getElementById('integrations').value = planData.integrations || '';
+            document.getElementById('security').value = planData.security || '';
+            document.getElementById('roles').value = planData.roles || '';
+            document.getElementById('roadmap').value = planData.roadmap || '';
+            document.getElementById('analytics').value = planData.analytics || '';
+            document.getElementById('constraints').value = planData.constraints || '';
+            document.getElementById('aiTools').value = planData.aiTools || '';
+            document.getElementById('presenceData').value = planData.presenceData || '';
+            features = planData.features || [];
+
+            renderFeatures();
+            alert('✅ Plan loaded successfully!');
+            updateCompleteness();
+        }
+
+        // Auto-update completeness when typing
+        document.addEventListener('input', updateCompleteness);
+
+        // Initial completeness calculation and feature rendering
+        renderFeatures();
+        updateCompleteness();
+    </script>
+</body>
+</html>

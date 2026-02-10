@@ -1,0 +1,260 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "background": {
+      "obsidian": {
+        "$value": "#0B0C0E",
+        "$description": "Primary page background. The deepest black with warmth."
+      },
+      "deep": {
+        "$value": "#08090A",
+        "$description": "For sections that need to feel recessed."
+      },
+      "elevated-1": {
+        "$value": "#0F1113",
+        "$description": "Card backgrounds, modals, nav (scrolled)."
+      },
+      "elevated-2": {
+        "$value": "#14161A",
+        "$description": "Nested cards, input backgrounds."
+      },
+      "elevated-3": {
+        "$value": "#1A1D22",
+        "$description": "Hover states on elevated surfaces."
+      }
+    },
+    "accent": {
+      "woop": {
+        "$value": "#D77A00",
+        "$description": "Primary brand accent. Royal gold-orange."
+      },
+      "woop-light": {
+        "$value": "#E8943A",
+        "$description": "Hover state for woop accent."
+      },
+      "glow": {
+        "$value": "#FFC57A",
+        "$description": "Soft bloom, highlights, secondary emphasis."
+      },
+      "cyan": {
+        "$value": "#4ECDC4",
+        "$description": "Cool counterpoint. Used in globe, data viz."
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "#FFFFFF",
+        "$description": "Headlines, important body text."
+      },
+      "secondary": {
+        "$value": "#BFC6CC",
+        "$description": "Body text, descriptions."
+      },
+      "muted": {
+        "$value": "#6B7280",
+        "$description": "Captions, timestamps, tertiary info."
+      },
+      "inverse": {
+        "$value": "#0B0C0E",
+        "$description": "Text on light/accent backgrounds."
+      }
+    },
+    "border": {
+      "subtle": {
+        "$value": "rgba(255, 255, 255, 0.04)",
+        "$description": "Barely visible separation."
+      },
+      "default": {
+        "$value": "rgba(255, 255, 255, 0.06)",
+        "$description": "Standard card borders."
+      },
+      "medium": {
+        "$value": "rgba(255, 255, 255, 0.12)",
+        "$description": "Emphasized borders, focus states."
+      },
+      "strong": {
+        "$value": "rgba(255, 255, 255, 0.2)",
+        "$description": "High contrast borders."
+      }
+    },
+    "semantic": {
+      "success": {
+        "$value": "#10B981",
+        "$description": "Positive states, confirmations."
+      },
+      "warning": {
+        "$value": "#F59E0B",
+        "$description": "Caution states, alerts."
+      },
+      "error": {
+        "$value": "#EF4444",
+        "$description": "Error states, destructive actions."
+      },
+      "info": {
+        "$value": "#3B82F6",
+        "$description": "Informational states."
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "display": {
+        "$value": "'GT America', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "$description": "Headlines, hero text, display sizes."
+      },
+      "body": {
+        "$value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        "$description": "Body text, UI elements."
+      },
+      "mono": {
+        "$value": "'JetBrains Mono', 'SF Mono', 'Consolas', monospace",
+        "$description": "Code, technical content."
+      }
+    },
+    "fontSize": {
+      "xs": { "$value": "0.75rem", "$description": "12px" },
+      "sm": { "$value": "0.875rem", "$description": "14px" },
+      "base": { "$value": "1rem", "$description": "16px" },
+      "lg": { "$value": "1.125rem", "$description": "18px" },
+      "xl": { "$value": "1.25rem", "$description": "20px" },
+      "2xl": { "$value": "1.5rem", "$description": "24px" },
+      "3xl": { "$value": "1.875rem", "$description": "30px" },
+      "4xl": { "$value": "2.25rem", "$description": "36px" },
+      "5xl": { "$value": "3rem", "$description": "48px" },
+      "6xl": { "$value": "3.75rem", "$description": "60px" },
+      "7xl": { "$value": "4.5rem", "$description": "72px" }
+    },
+    "fontWeight": {
+      "normal": { "$value": "400" },
+      "medium": { "$value": "500" },
+      "semibold": { "$value": "600" },
+      "bold": { "$value": "700" }
+    },
+    "lineHeight": {
+      "tight": { "$value": "1.15", "$description": "Headlines" },
+      "snug": { "$value": "1.3", "$description": "Subheadings" },
+      "normal": { "$value": "1.5", "$description": "Body text" },
+      "relaxed": { "$value": "1.65", "$description": "Long-form content" }
+    },
+    "letterSpacing": {
+      "tighter": { "$value": "-0.03em", "$description": "Large display text" },
+      "tight": { "$value": "-0.02em", "$description": "Headlines" },
+      "normal": { "$value": "0", "$description": "Body" },
+      "wide": { "$value": "0.02em", "$description": "Small caps, labels" },
+      "wider": { "$value": "0.1em", "$description": "Badges, uppercase" }
+    }
+  },
+  "spacing": {
+    "0": { "$value": "0" },
+    "1": { "$value": "0.25rem", "$description": "4px" },
+    "2": { "$value": "0.5rem", "$description": "8px" },
+    "3": { "$value": "0.75rem", "$description": "12px" },
+    "4": { "$value": "1rem", "$description": "16px" },
+    "5": { "$value": "1.25rem", "$description": "20px" },
+    "6": { "$value": "1.5rem", "$description": "24px" },
+    "8": { "$value": "2rem", "$description": "32px" },
+    "10": { "$value": "2.5rem", "$description": "40px" },
+    "12": { "$value": "3rem", "$description": "48px" },
+    "16": { "$value": "4rem", "$description": "64px" },
+    "20": { "$value": "5rem", "$description": "80px" },
+    "24": { "$value": "6rem", "$description": "96px" },
+    "32": { "$value": "8rem", "$description": "128px" },
+    "40": { "$value": "10rem", "$description": "160px" }
+  },
+  "borderRadius": {
+    "none": { "$value": "0" },
+    "sm": { "$value": "6px" },
+    "md": { "$value": "10px" },
+    "lg": { "$value": "14px" },
+    "xl": { "$value": "20px" },
+    "2xl": { "$value": "24px" },
+    "3xl": { "$value": "32px" },
+    "full": { "$value": "9999px" }
+  },
+  "shadow": {
+    "sm": {
+      "$value": "0 1px 2px rgba(0, 0, 0, 0.4)",
+      "$description": "Subtle lift"
+    },
+    "md": {
+      "$value": "0 4px 12px rgba(0, 0, 0, 0.4)",
+      "$description": "Cards"
+    },
+    "lg": {
+      "$value": "0 8px 24px rgba(0, 0, 0, 0.5)",
+      "$description": "Modals, dropdowns"
+    },
+    "xl": {
+      "$value": "0 16px 48px rgba(0, 0, 0, 0.6)",
+      "$description": "Large modals, hero cards"
+    },
+    "2xl": {
+      "$value": "0 24px 80px rgba(0, 0, 0, 0.7)",
+      "$description": "Maximum elevation"
+    },
+    "glow-sm": {
+      "$value": "0 0 20px rgba(215, 122, 0, 0.2)",
+      "$description": "Subtle accent glow"
+    },
+    "glow-md": {
+      "$value": "0 0 40px rgba(215, 122, 0, 0.3)",
+      "$description": "Medium accent glow"
+    },
+    "glow-lg": {
+      "$value": "0 0 60px rgba(215, 122, 0, 0.4)",
+      "$description": "Strong accent glow"
+    }
+  },
+  "motion": {
+    "duration": {
+      "instant": { "$value": "100ms", "$description": "Immediate feedback" },
+      "fast": { "$value": "180ms", "$description": "Micro-interactions" },
+      "normal": { "$value": "280ms", "$description": "Standard transitions" },
+      "slow": { "$value": "420ms", "$description": "Section reveals" },
+      "slower": { "$value": "600ms", "$description": "Hero moments" },
+      "cinematic": { "$value": "900ms", "$description": "Cinematic sequences" }
+    },
+    "easing": {
+      "default": {
+        "$value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "$description": "Smooth deceleration. The WooParcel signature."
+      },
+      "in": {
+        "$value": "cubic-bezier(0.4, 0, 1, 1)",
+        "$description": "Accelerating (exits)"
+      },
+      "out": {
+        "$value": "cubic-bezier(0, 0, 0.2, 1)",
+        "$description": "Decelerating (entrances)"
+      },
+      "inOut": {
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$description": "Symmetrical"
+      },
+      "bounce": {
+        "$value": "cubic-bezier(0.68, -0.55, 0.27, 1.55)",
+        "$description": "Playful overshoot (use sparingly)"
+      },
+      "spring": {
+        "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "$description": "Subtle spring for confirmations"
+      }
+    }
+  },
+  "breakpoint": {
+    "sm": { "$value": "640px", "$description": "Small devices" },
+    "md": { "$value": "768px", "$description": "Tablets" },
+    "lg": { "$value": "1024px", "$description": "Desktop" },
+    "xl": { "$value": "1280px", "$description": "Large desktop" },
+    "2xl": { "$value": "1536px", "$description": "Extra large" }
+  },
+  "zIndex": {
+    "dropdown": { "$value": "1000" },
+    "sticky": { "$value": "1100" },
+    "modal-backdrop": { "$value": "1200" },
+    "modal": { "$value": "1300" },
+    "popover": { "$value": "1400" },
+    "tooltip": { "$value": "1500" },
+    "toast": { "$value": "1600" }
+  }
+}

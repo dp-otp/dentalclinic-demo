@@ -1,0 +1,7 @@
+export * from './HeroSection'
+export * from './ProblemSolutionSection'
+export * from './ValuePillarsSection'
+export * from './HowItWorksSection'
+export * from './ServicesPreviewSection'
+export * from './SocialProofSection'
+export * from './CTASection'

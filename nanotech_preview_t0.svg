@@ -1,0 +1,38 @@
+<!-- Preview Frame: t=0.0s (0%) - Faint Traces Phase -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" style="background:#0B0C0E">
+  <defs>
+    <filter id="glow_trace">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <!-- Base unit: square with diagonally cut corners (octagon) -->
+    <path id="unit" d="M 9,0 L 55,0 L 64,9 L 64,55 L 55,64 L 9,64 L 0,55 L 0,9 Z"/>
+  </defs>
+
+  <!-- Bottom-right diagonal: very faint traces, opacity 0.03-0.06 -->
+  <g filter="url(#glow_trace)">
+    <!-- Row 1 (bottom-right, most visible in this phase) -->
+    <use href="#unit" x="920" y="650" transform="rotate(-3 952 682)" opacity="0.06" stroke="rgba(215,122,0,0.06)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="1020" y="690" transform="rotate(2 1052 722)" opacity="0.05" stroke="rgba(215,122,0,0.05)" stroke-width="0.8" fill="none"/>
+
+    <!-- Row 2 (diagonal progression) -->
+    <use href="#unit" x="780" y="580" transform="rotate(4 812 612)" opacity="0.05" stroke="rgba(215,122,0,0.05)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="890" y="550" transform="rotate(-2 922 582)" opacity="0.04" stroke="rgba(215,122,0,0.04)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="1000" y="590" transform="rotate(1 1032 622)" opacity="0.04" stroke="rgba(215,122,0,0.04)" stroke-width="0.8" fill="none"/>
+
+    <!-- Row 3 (middle diagonal) -->
+    <use href="#unit" x="650" y="480" transform="rotate(-4 682 512)" opacity="0.04" stroke="rgba(215,122,0,0.04)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="760" y="450" transform="rotate(3 792 482)" opacity="0.03" stroke="rgba(215,122,0,0.03)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="870" y="420" transform="rotate(-1 902 452)" opacity="0.03" stroke="rgba(215,122,0,0.03)" stroke-width="0.8" fill="none"/>
+
+    <!-- Row 4 (upper-left, barely visible) -->
+    <use href="#unit" x="520" y="380" transform="rotate(2 552 412)" opacity="0.03" stroke="rgba(215,122,0,0.03)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="630" y="320" transform="rotate(-3 662 352)" opacity="0.03" stroke="rgba(215,122,0,0.03)" stroke-width="0.8" fill="none"/>
+
+    <!-- Row 5 (top-left, minimal traces) -->
+    <use href="#unit" x="400" y="250" transform="rotate(4 432 282)" opacity="0.03" stroke="rgba(215,122,0,0.03)" stroke-width="0.8" fill="none"/>
+    <use href="#unit" x="290" y="180" transform="rotate(-2 322 212)" opacity="0.03" stroke="rgba(215,122,0,0.03)" stroke-width="0.8" fill="none"/>
+  </g>
+
+  <text x="20" y="40" fill="#00E5FF" font-family="monospace" font-size="16">t=0.0s | Phase: Faint Traces (0-50%) | Opacity: 0.03-0.06</text>
+</svg>

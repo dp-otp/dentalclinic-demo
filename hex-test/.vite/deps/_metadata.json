@@ -1,0 +1,43 @@
+{
+  "hash": "6fe457f3",
+  "configHash": "637edfef",
+  "lockfileHash": "2b1c3700",
+  "browserHash": "665ea78a",
+  "optimized": {
+    "three": {
+      "src": "../../node_modules/three/build/three.module.js",
+      "file": "three.js",
+      "fileHash": "5b4ffaf2",
+      "needsInterop": false
+    },
+    "three/addons/postprocessing/EffectComposer.js": {
+      "src": "../../node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+      "file": "three_addons_postprocessing_EffectComposer__js.js",
+      "fileHash": "75ff1f1d",
+      "needsInterop": false
+    },
+    "three/addons/postprocessing/RenderPass.js": {
+      "src": "../../node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+      "file": "three_addons_postprocessing_RenderPass__js.js",
+      "fileHash": "efe57770",
+      "needsInterop": false
+    },
+    "three/addons/postprocessing/UnrealBloomPass.js": {
+      "src": "../../node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+      "file": "three_addons_postprocessing_UnrealBloomPass__js.js",
+      "fileHash": "07738c76",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-2D4GNDWB": {
+      "file": "chunk-2D4GNDWB.js"
+    },
+    "chunk-2TZ2W67H": {
+      "file": "chunk-2TZ2W67H.js"
+    },
+    "chunk-PF4EC4Q7": {
+      "file": "chunk-PF4EC4Q7.js"
+    }
+  }
+}

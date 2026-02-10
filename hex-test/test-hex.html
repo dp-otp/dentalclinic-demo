@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { margin: 0; background: #0a0e14; }
+  </style>
+</head>
+<body>
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js';
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Create hexagon shape
+    const shape = new THREE.Shape();
+    const radius = 0.5;
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 3) * i;
+      const x = radius * Math.cos(angle);
+      const y = radius * Math.sin(angle);
+      if (i === 0) shape.moveTo(x, y);
+      else shape.lineTo(x, y);
+    }
+    shape.closePath();
+    const geometry = new THREE.ShapeGeometry(shape);
+
+    // Create 50 hexagons in a grid
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 5; j++) {
+        const material = new THREE.MeshBasicMaterial({
+          color: 0x00ffff,
+          transparent: true,
+          opacity: 0.6,
+          side: THREE.DoubleSide
+        });
+        const hex = new THREE.Mesh(geometry, material);
+        hex.position.x = (i - 5) * 1.2;
+        hex.position.y = (j - 2.5) * 1.2;
+        hex.position.z = -Math.random() * 2;
+        scene.add(hex);
+      }
+    }
+
+    camera.position.z = 8;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    console.log('Multiple hexagons created!');
+  </script>
+</body>
+</html>

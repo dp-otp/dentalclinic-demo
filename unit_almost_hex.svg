@@ -1,0 +1,42 @@
+<!-- Base Unit: Square with Diagonally Cut Corners (Almost-Hex) -->
+<!-- Width: 64px | Corner cut depth: 14% (9px) | Octagon geometry -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <style>
+      .unit-stroke {
+        fill: none;
+        stroke: #D77A00;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+
+  <!--
+    Octagon path with 8 vertices:
+    - 4 corner cuts at 45° angles (9px depth)
+    - 4 straight sides (perpendicular)
+    - Center: (32, 32)
+    - Total perimeter ≈ 210px
+  -->
+  <path class="unit-stroke" d="
+    M 9,0
+    L 55,0
+    L 64,9
+    L 64,55
+    L 55,64
+    L 9,64
+    L 0,55
+    L 0,9
+    Z
+  "/>
+
+  <!-- Center reference point (for instancing) -->
+  <circle cx="32" cy="32" r="1.5" fill="#00E5FF" opacity="0.3"/>
+
+  <!-- Metadata -->
+  <text x="32" y="80" text-anchor="middle" font-family="monospace" font-size="8" fill="#666">
+    unit_almost_hex | 64×64 | cut=9px
+  </text>
+</svg>

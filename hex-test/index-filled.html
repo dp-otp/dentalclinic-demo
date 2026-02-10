@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HEX GRID - FILLED + CONNECTING LINES</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body { overflow: hidden; background: #0a0e14; }
+  </style>
+</head>
+<body>
+  <script type="module">
+    import * as THREE from 'three';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+    // Scene setup
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0e14);
+
+    const aspect = window.innerWidth / window.innerHeight;
+    const viewSize = 10;
+    const camera = new THREE.OrthographicCamera(
+      -viewSize * aspect, viewSize * aspect,
+      viewSize, -viewSize,
+      0.1, 100
+    );
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    // Post-processing
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.2, 0.8, 0.2
+    );
+    composer.addPass(bloomPass);
+
+    // Hex parameters
+    const hexRadius = 0.8;
+    const hexHeight = hexRadius * Math.sqrt(3);
+    const hexWidth = hexRadius * 2;
+    const cols = 30;
+    const rows = 20;
+
+    // Spacing for physical separation
+    const spacingX = 1.15; // 15% more horizontal space
+    const spacingY = 1.25; // 25% more vertical space
+
+    // 2D noise function
+    function noise2D(x, y) {
+      const X = Math.floor(x) & 255;
+      const Y = Math.floor(y) & 255;
+      const xf = x - Math.floor(x);
+      const yf = y - Math.floor(y);
+      const u = xf * xf * (3 - 2 * xf);
+      const v = yf * yf * (3 - 2 * yf);
+      const a = hash2D(X, Y);
+      const b = hash2D(X + 1, Y);
+      const c = hash2D(X, Y + 1);
+      const d = hash2D(X + 1, Y + 1);
+      return a * (1 - u) * (1 - v) + b * u * (1 - v) + c * (1 - u) * v + d * u * v;
+    }
+
+    function hash2D(x, y) {
+      const n = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+      return n - Math.floor(n);
+    }
+
+    // Multi-scale noise for organic clustering
+    function multiScaleNoise(x, y) {
+      return noise2D(x * 0.5, y * 0.5) * 0.5 +
+             noise2D(x * 1.5, y * 1.5) * 0.3 +
+             noise2D(x * 3.0, y * 3.0) * 0.2;
+    }
+
+    // Stable random offset
+    function stableRandom(seed) {
+      const x = Math.sin(seed * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    // Hash function
+    function hash(n) {
+      const x = Math.sin(n) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    // Create hexagon shape geometry
+    function createHexShape(radius) {
+      const shape = new THREE.Shape();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i;
+        const x = radius * Math.cos(angle);
+        const y = radius * Math.sin(angle);
+        if (i === 0) shape.moveTo(x, y);
+        else shape.lineTo(x, y);
+      }
+      shape.closePath();
+      return shape;
+    }
+
+    // Shader for filled hexagons
+    const hexVertexShader = `
+      varying vec2 vUv;
+      varying float vDiagonalPos;
+      varying float vDepthLayer;
+
+      uniform float uTime;
+      uniform float uBuildProgress;
+
+      attribute float aHexSeed;
+      attribute float aDiagonalPos;
+      attribute float aDepthLayer;
+
+      void main() {
+        vUv = uv;
+        vDiagonalPos = aDiagonalPos;
+        vDepthLayer = aDepthLayer;
+
+        vec3 pos = position;
+
+        // Gentle breathing animation
+        float breathe = sin(uTime * 0.3 + aHexSeed * 2.0) * 0.02 + 1.0;
+        pos.xy *= breathe;
+
+        // Simple fade in
+        pos.xy *= uBuildProgress;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+    `;
+
+    const hexFragmentShader = `
+      varying vec2 vUv;
+      varying float vDiagonalPos;
+      varying float vDepthLayer;
+
+      uniform float uTime;
+      uniform vec3 uColorBright;
+      uniform vec3 uColorDark;
+
+      void main() {
+        // Distance from center for subtle fade
+        float dist = length(vUv - 0.5) * 2.0;
+        float edgeFade = 1.0 - smoothstep(0.8, 1.0, dist);
+
+        // Depth layer affects brightness (front layers brighter, back darker)
+        float depthBrightness = mix(0.4, 1.0, vDepthLayer);
+        vec3 color = mix(uColorDark, uColorBright, vDepthLayer);
+
+        // Uniform opacity with depth variation
+        float opacity = 0.5 + vDepthLayer * 0.3; // 0.5-0.8 range
+
+        // Subtle breathing
+        float breathe = sin(uTime * 0.3) * 0.05 + 0.95;
+        opacity *= breathe;
+
+        gl_FragColor = vec4(color, opacity * edgeFade);
+      }
+    `;
+
+    // Shader for connecting lines
+    const lineVertexShader = `
+      varying float vAlpha;
+
+      uniform float uTime;
+      uniform float uBuildProgress;
+
+      attribute float aLineSeed;
+      attribute float aDiagonalPos;
+
+      void main() {
+        // Simple build animation
+        vAlpha = 0.3 * uBuildProgress;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    const lineFragmentShader = `
+      varying float vAlpha;
+
+      uniform vec3 uLineColor;
+
+      void main() {
+        gl_FragColor = vec4(uLineColor, vAlpha);
+      }
+    `;
+
+    // Storage for hex data
+    const hexagons = [];
+    const hexMeshes = [];
+    let lineSegments;
+
+    // Create hexagon geometry (reusable)
+    const hexShape = createHexShape(hexRadius * 0.95); // Slightly smaller than full radius
+    const hexGeometry = new THREE.ShapeGeometry(hexShape);
+
+    // Arrays for all hexagons
+    const hexPositions = [];
+    const hexData = []; // {x, y, z, diagonalPos, seed, vertices}
+
+    let culledCount = 0;
+    let totalAttempted = 0;
+
+    // Generate hexagons with clustering and erosion
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        totalAttempted++;
+
+        const hexSeed = row * cols + col;
+
+        // Calculate base position
+        const xOffset = (row % 2) * (hexWidth * spacingX * 0.5);
+        const x = col * hexWidth * spacingX - (cols * hexWidth * spacingX) / 2 + xOffset;
+        const y = row * hexHeight * 0.75 * spacingY - (rows * hexHeight * 0.75 * spacingY) / 2;
+
+        // Stable random offsets for organic feel
+        const offsetX = (stableRandom(hexSeed * 7.123) - 0.5) * 0.3;
+        const offsetY = (stableRandom(hexSeed * 3.456) - 0.5) * 0.3;
+
+        const finalX = x + offsetX;
+        const finalY = y + offsetY;
+
+        // Diagonal position (0 = bottom-left, 1 = top-right)
+        const diagonalPos = (finalX + finalY + 20) / 40;
+
+        // === ORGANIC SCATTERED CULLING (like reference) ===
+        const noiseVal = multiScaleNoise(col * 0.5, row * 0.5);
+
+        // Uniform distribution with organic clustering
+        // Most hexes survive (70-80%), with noise-based removal
+        let survivalChance = 0.75 + stableRandom(hexSeed * 5.123) * 0.1; // 75-85%
+
+        // Clustered removal using noise (removes in organic patches)
+        if (noiseVal < 0.2) {
+          culledCount++;
+          continue;
+        }
+
+        // Random scattered removal for organic feel
+        if (stableRandom(hexSeed * 9.876) > survivalChance) {
+          culledCount++;
+          continue;
+        }
+
+        // Depth layer (0-2, front to back)
+        const depthLayer = Math.floor(hash(hexSeed * 13.7) * 3);
+        const z = -depthLayer * 0.5; // Front=0, Middle=-0.5, Back=-1.0
+
+        // Calculate hex vertices for connecting lines later
+        const vertices = [];
+        for (let i = 0; i < 6; i++) {
+          const angle = (Math.PI / 3) * i;
+          const vx = finalX + hexRadius * Math.cos(angle);
+          const vy = finalY + hexRadius * Math.sin(angle);
+          vertices.push({ x: vx, y: vy });
+        }
+
+        hexData.push({
+          x: finalX,
+          y: finalY,
+          z: z,
+          diagonalPos: diagonalPos,
+          seed: hexSeed,
+          depthLayer: depthLayer / 2, // Normalized 0-1
+          vertices: vertices,
+          row: row,
+          col: col
+        });
+
+        hexPositions.push({ x: finalX, y: finalY, z: z });
+      }
+    }
+
+    console.log(`Created ${hexData.length} hexagons (${culledCount} culled) - filled + connecting lines style`);
+
+    // Create instanced mesh for all hexagons
+    const hexCount = hexData.length;
+    const instancedHexGeometry = new THREE.InstancedBufferGeometry().copy(hexGeometry);
+
+    // Instance attributes
+    const hexSeeds = new Float32Array(hexCount);
+    const diagonalPositions = new Float32Array(hexCount);
+    const depthLayers = new Float32Array(hexCount);
+
+    for (let i = 0; i < hexCount; i++) {
+      hexSeeds[i] = hexData[i].seed;
+      diagonalPositions[i] = hexData[i].diagonalPos;
+      depthLayers[i] = hexData[i].depthLayer;
+    }
+
+    instancedHexGeometry.setAttribute('aHexSeed', new THREE.InstancedBufferAttribute(hexSeeds, 1));
+    instancedHexGeometry.setAttribute('aDiagonalPos', new THREE.InstancedBufferAttribute(diagonalPositions, 1));
+    instancedHexGeometry.setAttribute('aDepthLayer', new THREE.InstancedBufferAttribute(depthLayers, 1));
+
+    const hexMaterial = new THREE.ShaderMaterial({
+      vertexShader: hexVertexShader,
+      fragmentShader: hexFragmentShader,
+      uniforms: {
+        uTime: { value: 0 },
+        uBuildProgress: { value: 0 },
+        uColorBright: { value: new THREE.Color(0x00ffff) }, // Bright cyan
+        uColorDark: { value: new THREE.Color(0x008b8b) }    // Dark teal
+      },
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+
+    const instancedHexMesh = new THREE.InstancedMesh(instancedHexGeometry, hexMaterial, hexCount);
+
+    // Set instance matrices
+    const dummy = new THREE.Object3D();
+    for (let i = 0; i < hexCount; i++) {
+      dummy.position.set(hexData[i].x, hexData[i].y, hexData[i].z);
+      dummy.updateMatrix();
+      instancedHexMesh.setMatrixAt(i, dummy.matrix);
+    }
+
+    scene.add(instancedHexMesh);
+
+    // === CREATE CONNECTING LINES ===
+    const linePositions = [];
+    const lineSeeds = [];
+    const lineDiagonalPos = [];
+
+    // For each hex, check neighbors and create lines
+    for (let i = 0; i < hexData.length; i++) {
+      const hex1 = hexData[i];
+
+      // Check potential neighbors (within reasonable distance)
+      for (let j = i + 1; j < hexData.length; j++) {
+        const hex2 = hexData[j];
+
+        const dx = hex2.x - hex1.x;
+        const dy = hex2.y - hex1.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Only connect if within ~1.5x hex width (adjacent hexes)
+        if (dist < hexWidth * spacingX * 1.6 && dist > 0.1) {
+          // Find closest vertices between the two hexes
+          let minDist = Infinity;
+          let v1, v2;
+
+          for (const vert1 of hex1.vertices) {
+            for (const vert2 of hex2.vertices) {
+              const vdx = vert2.x - vert1.x;
+              const vdy = vert2.y - vert1.y;
+              const vdist = Math.sqrt(vdx * vdx + vdy * vdy);
+              if (vdist < minDist) {
+                minDist = vdist;
+                v1 = vert1;
+                v2 = vert2;
+              }
+            }
+          }
+
+          // Create line between closest vertices
+          if (v1 && v2) {
+            // Use same Z depth as first hex
+            linePositions.push(v1.x, v1.y, hex1.z);
+            linePositions.push(v2.x, v2.y, hex2.z);
+
+            const lineSeed = hash(hex1.seed * 100 + hex2.seed);
+            lineSeeds.push(lineSeed, lineSeed);
+
+            const avgDiagonal = (hex1.diagonalPos + hex2.diagonalPos) / 2;
+            lineDiagonalPos.push(avgDiagonal, avgDiagonal);
+          }
+        }
+      }
+    }
+
+    // Create line geometry
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+    lineGeometry.setAttribute('aLineSeed', new THREE.Float32BufferAttribute(lineSeeds, 1));
+    lineGeometry.setAttribute('aDiagonalPos', new THREE.Float32BufferAttribute(lineDiagonalPos, 1));
+
+    const lineMaterial = new THREE.ShaderMaterial({
+      vertexShader: lineVertexShader,
+      fragmentShader: lineFragmentShader,
+      uniforms: {
+        uTime: { value: 0 },
+        uBuildProgress: { value: 0 },
+        uLineColor: { value: new THREE.Color(0x00ffff) }
+      },
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      linewidth: 1
+    });
+
+    lineSegments = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lineSegments);
+
+    console.log(`Created ${linePositions.length / 6} connecting lines`);
+
+    // Animation
+    let buildProgress = 0;
+    const buildDuration = 3.0; // seconds
+
+    function animate(time) {
+      requestAnimationFrame(animate);
+
+      const seconds = time * 0.001;
+
+      // Build progress
+      if (buildProgress < 1) {
+        buildProgress = Math.min(1, seconds / buildDuration);
+      }
+
+      // Update uniforms
+      hexMaterial.uniforms.uTime.value = seconds;
+      hexMaterial.uniforms.uBuildProgress.value = buildProgress;
+
+      lineMaterial.uniforms.uTime.value = seconds;
+      lineMaterial.uniforms.uBuildProgress.value = buildProgress;
+
+      composer.render();
+    }
+
+    animate(0);
+
+    // Window resize
+    window.addEventListener('resize', () => {
+      const aspect = window.innerWidth / window.innerHeight;
+      camera.left = -viewSize * aspect;
+      camera.right = viewSize * aspect;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
