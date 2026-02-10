@@ -72,6 +72,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -522,6 +523,26 @@
             position: relative;
         }
 
+        .service-card__image {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+
+        .service-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-card__image img {
+            transform: scale(1.05);
+        }
+
         .service-card__list {
             list-style: none;
             margin-top: var(--space-md);
@@ -906,6 +927,7 @@
 
                 <!-- 1. General Dentistry -->
                 <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1631596577204-53ad0d6e6978?w=800&q=80" alt="General Dentistry"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -926,6 +948,7 @@
 
                 <!-- 2. Cosmetic Dentistry -->
                 <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1675526607070-f5cbd71dde92?w=800&q=80" alt="Cosmetic Dentistry"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
                             <circle cx="12" cy="12" r="10"/>
@@ -948,6 +971,7 @@
 
                 <!-- 3. Root Canal Treatment -->
                 <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1766338390573-ec092d69cdcb?w=800&q=80" alt="Root Canal Treatment"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -967,6 +991,7 @@
 
                 <!-- 4. Crowns & Bridges -->
                 <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1565090567208-c8038cfcf6cd?w=800&q=80" alt="Crowns and Bridges"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
@@ -987,6 +1012,7 @@
 
                 <!-- 5. Emergency Care -->
                 <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1642658615608-c741da5a75a4?w=800&q=80" alt="Emergency Dental Care"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
@@ -1008,6 +1034,7 @@
 
                 <!-- 6. Children's Dentistry -->
                 <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1661411025965-6d8e91a58b06?w=800&q=80" alt="Children's Dentistry"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
