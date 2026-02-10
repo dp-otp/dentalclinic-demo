@@ -72,6 +72,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -734,6 +735,25 @@
             stroke-width: 1.5;
         }
 
+        .service-card__image {
+            width: calc(100% + var(--space-xl) * 2);
+            height: 200px;
+            margin: calc(-1 * var(--space-xl)) calc(-1 * var(--space-xl)) var(--space-lg);
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+        }
+
+        .service-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover .service-card__image img {
+            transform: scale(1.05);
+        }
+
         .service-card__title {
             font-family: var(--font-display);
             font-size: 1.25rem;
@@ -906,33 +926,63 @@
         .testimonials {
             background: linear-gradient(180deg, rgba(80, 90, 100, 1) 0%, var(--gray-800) 100%);
             padding: var(--space-4xl) 0;
+            overflow: hidden;
         }
 
-        .testimonials__container {
+        .testimonials__header {
             max-width: var(--container-max);
             margin: 0 auto;
             padding: 0 var(--container-padding);
         }
 
-        .testimonials__grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-lg);
+        .testimonials .section-title {
+            color: var(--cream);
+        }
+
+        .testimonials__track {
+            display: flex;
+            gap: 28px;
+            animation: scrollReviews 50s linear infinite;
+            width: max-content;
+            padding: var(--space-sm) 0;
+        }
+
+        .testimonials__track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollReviews {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .testimonial-card {
+            flex-shrink: 0;
+            width: 400px;
             background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95), rgba(15, 25, 40, 0.85));
             backdrop-filter: blur(12px);
             padding: var(--space-xl);
             border-radius: 20px;
             border: 1px solid rgba(20, 184, 166, 0.2);
             transition: all 0.4s ease;
+            position: relative;
         }
 
         .testimonial-card:hover {
             border-color: rgba(20, 184, 166, 0.5);
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), 0 0 30px rgba(20, 184, 166, 0.15);
+        }
+
+        .testimonial-card__quote-mark {
+            font-size: 60px;
+            color: var(--teal);
+            opacity: 0.15;
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            font-family: Georgia, serif;
+            line-height: 1;
         }
 
         .testimonial-card__stars {
@@ -948,7 +998,7 @@
 
         .testimonial-card__quote {
             color: var(--gray-300);
-            font-size: 1rem;
+            font-size: 0.9375rem;
             line-height: 1.8;
             margin-bottom: var(--space-lg);
             font-style: italic;
@@ -971,6 +1021,7 @@
             color: var(--white);
             font-weight: 700;
             font-size: 1.125rem;
+            flex-shrink: 0;
         }
 
         .testimonial-card__name {
@@ -1016,7 +1067,7 @@
             width: 40%;
             height: 100%;
             pointer-events: none;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .cta-diagonal {
@@ -1245,6 +1296,7 @@
             /* Services */
             .services__grid { grid-template-columns: 1fr; }
             .service-card { padding: var(--space-lg); }
+            .service-card__image { width: calc(100% + var(--space-lg) * 2); margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-md); height: 180px; }
             .section-header { margin-bottom: var(--space-xl); }
 
             /* About */
@@ -1252,7 +1304,8 @@
             .about-preview__image { height: 240px; }
 
             /* Testimonials */
-            .testimonials__grid { grid-template-columns: 1fr; }
+            .testimonial-card { width: 320px; padding: var(--space-lg); }
+            .testimonials__track { animation-duration: 35s; gap: 16px; }
 
             /* Footer */
             .footer__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
@@ -1397,11 +1450,8 @@
 
             <div class="services__grid">
                 <article class="service-card">
-                    <div class="service-card__icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
+                    <div class="service-card__image">
+                        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80" alt="Dental check-up">
                     </div>
                     <h3 class="service-card__title">General Dentistry</h3>
                     <p class="service-card__text">
@@ -1411,13 +1461,8 @@
                 </article>
 
                 <article class="service-card">
-                    <div class="service-card__icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                            <line x1="9" y1="9" x2="9.01" y2="9"/>
-                            <line x1="15" y1="9" x2="15.01" y2="9"/>
-                        </svg>
+                    <div class="service-card__image">
+                        <img src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=600&q=80" alt="Cosmetic teeth whitening">
                     </div>
                     <h3 class="service-card__title">Cosmetic Dentistry</h3>
                     <p class="service-card__text">
@@ -1427,12 +1472,8 @@
                 </article>
 
                 <article class="service-card">
-                    <div class="service-card__icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                            <line x1="12" y1="9" x2="12" y2="13"/>
-                            <line x1="12" y1="17" x2="12.01" y2="17"/>
-                        </svg>
+                    <div class="service-card__image">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80" alt="Emergency dental care">
                     </div>
                     <h3 class="service-card__title">Emergency Care</h3>
                     <p class="service-card__text">
@@ -1488,55 +1529,294 @@
          TESTIMONIALS
          ========================================= -->
     <section class="testimonials">
-        <div class="testimonials__container">
+        <div class="testimonials__header">
             <header class="section-header">
                 <span class="section-eyebrow">Testimonials</span>
                 <h2 class="section-title">What our patients say</h2>
             </header>
+        </div>
 
-            <div class="testimonials__grid" style="grid-template-columns: repeat(2, 1fr);">
-                <article class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
+        <div class="testimonials__track">
+            <!-- Card 1 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "The team at Heathway Dental made me feel completely at ease. Professional, friendly, and my teeth have never looked better! Dr Kaushal is brilliant."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">SJ</div>
+                    <div>
+                        <div class="testimonial-card__name">Sarah J.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
                     </div>
-                    <p class="testimonial-card__quote">
-                        "The team at Heathway Dental made me feel completely at ease.
-                        Professional, friendly, and my teeth have never looked better!"
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">S</div>
-                        <div>
-                            <div class="testimonial-card__name">Sarah J.</div>
-                            <div class="testimonial-card__meta">Patient since 2022</div>
-                        </div>
-                    </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
+            <!-- Card 2 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Finally found a dentist I'm not afraid of! They really understand dental anxiety and take the time to make you comfortable. Can't recommend enough."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">AP</div>
+                    <div>
+                        <div class="testimonial-card__name">Aisha P.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
                     </div>
-                    <p class="testimonial-card__quote">
-                        "Finally found a dentist I'm not afraid of! They really understand
-                        dental anxiety and take the time to make you comfortable."
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">A</div>
-                        <div>
-                            <div class="testimonial-card__name">Aisha P.</div>
-                            <div class="testimonial-card__meta">Patient since 2023</div>
-                        </div>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Been coming here for 10 years with my whole family. The staff remember your name and genuinely care. Best dental surgery in Dagenham by far."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">MR</div>
+                    <div>
+                        <div class="testimonial-card__name">Mohammed R.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
                     </div>
-                </article>
-            </div>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Had an emergency toothache and they fit me in the same day. The pain was gone in minutes. Absolute lifesavers. Thank you Heathway Dental!"
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">DK</div>
+                    <div>
+                        <div class="testimonial-card__name">Daniel K.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "My kids actually look forward to their dental appointments now! The receptionist is so welcoming and Dr Kaushal is incredible with children. Five stars all round."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">LT</div>
+                    <div>
+                        <div class="testimonial-card__name">Laura T.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Moved to Dagenham last year and needed an NHS dentist. Got registered within a week. The whole experience has been seamless. Clean, modern surgery too."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">JO</div>
+                    <div>
+                        <div class="testimonial-card__name">James O.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 7 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Had my teeth whitened here and the results are amazing. So much more affordable than I expected on the NHS. The team are all lovely and professional."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">RB</div>
+                    <div>
+                        <div class="testimonial-card__name">Rebecca B.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 8 -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "I've had a bridge fitted and several fillings over the years. Always painless and they explain everything clearly. Wouldn't go anywhere else. Highly recommended."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">PA</div>
+                    <div>
+                        <div class="testimonial-card__name">Priya A.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- DUPLICATED for seamless infinite loop -->
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "The team at Heathway Dental made me feel completely at ease. Professional, friendly, and my teeth have never looked better! Dr Kaushal is brilliant."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">SJ</div>
+                    <div>
+                        <div class="testimonial-card__name">Sarah J.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Finally found a dentist I'm not afraid of! They really understand dental anxiety and take the time to make you comfortable. Can't recommend enough."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">AP</div>
+                    <div>
+                        <div class="testimonial-card__name">Aisha P.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Been coming here for 10 years with my whole family. The staff remember your name and genuinely care. Best dental surgery in Dagenham by far."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">MR</div>
+                    <div>
+                        <div class="testimonial-card__name">Mohammed R.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Had an emergency toothache and they fit me in the same day. The pain was gone in minutes. Absolute lifesavers. Thank you Heathway Dental!"
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">DK</div>
+                    <div>
+                        <div class="testimonial-card__name">Daniel K.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "My kids actually look forward to their dental appointments now! The receptionist is so welcoming and Dr Kaushal is incredible with children. Five stars all round."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">LT</div>
+                    <div>
+                        <div class="testimonial-card__name">Laura T.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Moved to Dagenham last year and needed an NHS dentist. Got registered within a week. The whole experience has been seamless. Clean, modern surgery too."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">JO</div>
+                    <div>
+                        <div class="testimonial-card__name">James O.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "Had my teeth whitened here and the results are amazing. So much more affordable than I expected on the NHS. The team are all lovely and professional."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">RB</div>
+                    <div>
+                        <div class="testimonial-card__name">Rebecca B.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="testimonial-card">
+                <div class="testimonial-card__quote-mark">&ldquo;</div>
+                <div class="testimonial-card__stars">
+                    <span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span><span class="testimonial-card__star">★</span>
+                </div>
+                <p class="testimonial-card__quote">
+                    "I've had a bridge fitted and several fillings over the years. Always painless and they explain everything clearly. Wouldn't go anywhere else. Highly recommended."
+                </p>
+                <div class="testimonial-card__author">
+                    <div class="testimonial-card__avatar">PA</div>
+                    <div>
+                        <div class="testimonial-card__name">Priya A.</div>
+                        <div class="testimonial-card__meta">Verified Patient</div>
+                    </div>
+                </div>
+            </article>
         </div>
     </section>
 

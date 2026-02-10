@@ -653,247 +653,398 @@
             return new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
         }
 
-        const responses = {
-            // Greetings
-            'hello': "Hello! I'm Abbey AI. Welcome to Abbey Dental Practice! How can I help you today?",
-            'hi': "Hi there! I'm Abbey AI. What can I assist you with?",
-            'hey': "Hey! Abbey AI here, ready to help. What do you need?",
-            'good morning': "Good morning! Abbey AI here. How can I help with your dental needs today?",
-            'good afternoon': "Good afternoon! What can I do for you?",
-            'good evening': "Good evening! How may I assist you?",
-            'hiya': "Hiya! Welcome to Abbey Dental! How can I help?",
-            'howdy': "Howdy! Abbey AI at your service. What brings you here today?",
-            'greetings': "Greetings! I'm Abbey AI, your dental assistant. How can I help?",
-
-            // Farewells
-            'bye': "Goodbye! Take care of your smile! 😊",
-            'goodbye': "Bye! Have a lovely day! Remember to brush twice daily!",
-            'see you': "See you soon! Keep smiling!",
-            'later': "Catch you later! Don't forget to floss!",
-            'cya': "Cya! Take care of those pearly whites!",
-
-            // Gratitude
-            'thanks': "You're welcome! Anything else I can help with?",
-            'thank you': "My pleasure! Let me know if you need anything else.",
-            'cheers': "Cheers! Happy to help. Need anything else?",
-            'ta': "No problem! Is there anything else?",
-            'appreciate': "Glad I could help! Any other questions?",
-
-            // About the AI
-            'who are you': "I'm Abbey AI, the friendly virtual assistant for Abbey Dental Practice. I can help with appointments, services, dental questions, and more!",
-            'what are you': "I'm Abbey AI - an intelligent chatbot designed to help patients of Abbey Dental. I know about our services, prices, team, and can answer dental questions!",
-            'your name': "I'm Abbey AI! Named after Abbey Dental Practice. Nice to meet you!",
-            'what can you do': "I can help you book appointments, explain our services, give pricing info, share opening hours, provide dental advice, tell jokes, and much more! Try asking me anything dental-related.",
-            'how are you': "I'm doing great, thanks for asking! Ready to help with any dental questions. How can I assist you?",
-
-            // Appointments & Booking
-            'book': "To book an appointment: Call 020 8594 4129, or visit our Contact page! We're at 2 Arboretum Place, Barking.",
-            'appointment': "Booking is easy! Call 020 8594 4129 or use our online Contact form. New patients always welcome!",
-            'schedule': "Ready to schedule? Call 020 8594 4129 or book online via our Contact page!",
-            'register': "To register as a new patient, call 020 8594 4129 or visit us with photo ID. NHS and private patients welcome!",
-            'new patient': "Welcome! New patients can register by calling 020 8594 4129 or visiting us. Bring photo ID and any medical history.",
-            'first visit': "Your first visit includes a thorough exam, X-rays if needed, and a treatment plan discussion. Allow about 30-45 minutes.",
-            'cancel': "To cancel or reschedule, please call 020 8594 4129 as soon as possible. We appreciate 24 hours notice.",
-            'reschedule': "Need to reschedule? No problem! Call 020 8594 4129 and we'll find a new time for you.",
-            'waiting list': "Want to get in sooner? Ask to be on our cancellation list when you call 020 8594 4129!",
-            'availability': "We have appointments Mon-Fri 8:30am-6pm. Call 020 8594 4129 to check availability.",
-
-            // Opening Hours
-            'hours': "We're open Mon-Fri: 8:30am-6pm | Closed Sat & Sun",
-            'opening': "Opening hours: Monday to Friday 8:30am-6pm. Weekends closed.",
-            'time': "Our hours are Mon-Fri 8:30am to 6pm.",
-            'open': "Yes, we're open Mon-Fri 8:30am-6pm! How can we help?",
-            'closed': "We're closed on weekends. Open Mon-Fri 8:30am-6pm.",
-            'weekend': "Sorry, we're closed on weekends. We're open Mon-Fri 8:30am-6pm.",
-            'saturday': "We're closed on Saturdays. Open Monday to Friday 8:30am-6pm.",
-            'sunday': "We're closed on Sundays. Please visit us Mon-Fri 8:30am-6pm.",
-            'bank holiday': "We're usually closed on bank holidays. Check our website or call ahead.",
-
-            // Services - General
-            'services': "We offer: ✓ General Dentistry ✓ Cosmetic (Whitening, Veneers) ✓ Restorative (Crowns, Bridges, Implants) ✓ Root Canal ✓ Children's Dentistry ✓ Facial Aesthetics ✓ Hygiene Services. Which interests you?",
-            'treatment': "Our treatments include: check-ups, fillings, whitening, veneers, crowns, bridges, dentures, root canals, extractions, Botox & more!",
-            'what do you offer': "We provide comprehensive dental care: preventive, cosmetic, and restorative treatments. NHS and private options available!",
-
-            // Specific Treatments
-            'whitening': "Professional teeth whitening can brighten your smile by several shades! We offer in-office and take-home options. Want to book a consultation?",
-            'veneer': "Porcelain veneers transform your smile! Perfect for chips, gaps, discoloration, or uneven teeth. Results last 10-15 years with proper care.",
-            'filling': "We offer tooth-colored (composite) and amalgam fillings. White fillings match your natural teeth and contain no metal!",
-            'crown': "Dental crowns protect and restore damaged teeth. We use porcelain for a natural look. The process usually takes 2 visits.",
-            'bridge': "Dental bridges fill the gap from missing teeth. Fixed in place, they look and function like natural teeth!",
-            'denture': "We offer full and partial dentures for natural-looking tooth replacement. Modern dentures are comfortable and secure!",
-            'extraction': "Tooth extractions are performed comfortably with local anaesthetic. This includes wisdom teeth removal.",
-            'implant': "Dental implants are the gold standard for replacing missing teeth. They look, feel, and function like natural teeth! Book a consultation to see if you're a candidate.",
-            'root canal': "Root canal treatment saves infected teeth. Modern techniques make it comfortable - similar to having a filling done!",
-            'braces': "Interested in straightening your teeth? We can discuss orthodontic options. Ask about a consultation!",
-            'invisalign': "Curious about Invisalign? Clear aligners are a discreet way to straighten teeth. Book a consultation to learn more!",
-            'orthodontic': "We can assess your orthodontic needs and discuss the best options for straightening your teeth.",
-
-            // Hygiene & Prevention
-            'clean': "Professional cleaning by our hygienist removes plaque and tartar that brushing misses. Recommended every 6 months!",
-            'hygiene': "Our hygienist provides professional cleaning, scale and polish, and gum disease treatment. Essential for a healthy mouth!",
-            'scale and polish': "A scale and polish removes built-up tartar and stains, leaving your teeth feeling fresh and clean!",
-            'checkup': "Regular check-ups include a thorough exam and X-rays if needed. We recommend every 6 months. Book today!",
-            'x-ray': "Dental X-rays help us spot problems invisible to the eye. Modern digital X-rays use minimal radiation.",
-            'fluoride': "Fluoride treatments strengthen enamel and help prevent decay. Great for children and adults!",
-            'sealant': "Dental sealants protect children's teeth from decay. A quick, painless protective coating for molars.",
-            'mouthguard': "We make custom mouthguards for sports and night guards for teeth grinding. Much better than store-bought!",
-            'night guard': "Grinding your teeth at night? A custom night guard protects your teeth from wear and can reduce jaw pain.",
-
-            // Dental Conditions
-            'cavity': "Cavities are treated with fillings. The sooner we catch them, the simpler the treatment. Regular check-ups help!",
-            'decay': "Tooth decay is preventable! Brush twice daily, floss, limit sugar, and see us regularly. If you have decay, we can treat it.",
-            'gum disease': "Gum disease is treatable! Signs include bleeding gums, bad breath, loose teeth. Our hygienist can help get your gums healthy.",
-            'gingivitis': "Gingivitis is early gum disease - reversible with good care! Professional cleaning and improved brushing/flossing can cure it.",
-            'periodontitis': "Periodontitis is advanced gum disease. We offer deep cleaning and treatment to save your teeth. Early action is key!",
-            'sensitive': "Sensitive teeth? Could be worn enamel, gum recession, or decay. We can assess and recommend treatment or special toothpaste.",
-            'sensitivity': "Tooth sensitivity has many causes. Use a sensitivity toothpaste and book an appointment so we can check the cause.",
-            'abscess': "A dental abscess needs urgent treatment! Call 020 8594 4129 immediately - don't wait as infection can spread.",
-            'broken tooth': "Broken a tooth? Try to save any pieces. Rinse gently and call us urgently at 020 8594 4129!",
-            'chipped': "Chipped tooth? We can repair it with bonding, veneers, or crowns depending on severity. Call for an appointment!",
-            'loose tooth': "Adult loose tooth? Don't ignore it - could be gum disease or injury. Please call 020 8594 4129 for assessment.",
-            'bleeding gums': "Bleeding gums often indicate gum disease. Don't stop brushing! Book a hygiene appointment and we'll help.",
-            'bad breath': "Bad breath (halitosis) can be caused by gum disease, decay, or other issues. We can help identify and treat the cause!",
-            'halitosis': "Halitosis has dental causes we can treat! Book an appointment for a check-up and hygiene visit.",
-            'plaque': "Plaque is a film of bacteria that causes decay and gum disease. Brush twice daily, floss, and visit our hygienist!",
-            'tartar': "Tartar is hardened plaque that only professional cleaning can remove. Regular hygiene visits keep it under control!",
-            'wisdom teeth': "Wisdom teeth problems? We can assess whether they need removal. Pain or swelling? Call us urgently!",
-
-            // Location & Directions
-            'location': "We're at 2 Arboretum Place, Barking, IG11 7RL. Our modern, purpose-built practice is easy to find!",
-            'address': "Abbey Dental: 2 Arboretum Place, Barking, IG11 7RL",
-            'where': "Find us at 2 Arboretum Place, Barking, IG11 7RL. Near Barking town centre!",
-            'directions': "We're at 2 Arboretum Place, Barking, IG11 7RL. Click the map link on our Contact page for directions!",
-            'parking': "There's parking nearby at Barking town centre car parks. We're also accessible by public transport!",
-            'transport': "We're a short walk from Barking station (District, Hammersmith & City, Overground lines). Buses stop nearby too!",
-            'near': "We're near Barking town centre, a short walk from the station. Easy to reach by tube, train, or bus!",
-            'moved': "Yes, we moved from Abbey Road to our new purpose-built practice at 2 Arboretum Place, Barking!",
-
-            // NHS & Pricing
-            'nhs': "Yes! We're NHS registered & CQC approved. NHS Band prices: Band 1: £26.80 | Band 2: £73.50 | Band 3: £319.10",
-            'price': "NHS Bands: £26.80 / £73.50 / £319.10. Private fees quoted at consultation.",
-            'cost': "NHS treatments: £26.80-£319.10 depending on band. Private options available - ask for quote!",
-            'fee': "NHS fees: Band 1 £26.80 (check-up), Band 2 £73.50 (fillings), Band 3 £319.10 (crowns etc). Private rates on request.",
-            'band 1': "NHS Band 1 (£26.80): Check-up, diagnosis, X-rays, scale and polish, prevention advice.",
-            'band 2': "NHS Band 2 (£73.50): Everything in Band 1 plus fillings, extractions, root canal treatment.",
-            'band 3': "NHS Band 3 (£319.10): Everything in Bands 1 & 2 plus crowns, dentures, bridges.",
-            'private': "We offer private treatments with premium materials and extended appointments. Ask for a quote!",
-            'payment': "We accept cash, card, and offer payment plans for larger treatments. Ask our reception for details!",
-            'finance': "Need to spread the cost? Ask about our payment plan options for private treatments!",
-            'payment plan': "Yes, we offer payment plans to help spread the cost of private treatments. Ask reception for details!",
-            'card': "Yes, we accept all major credit and debit cards!",
-            'insurance': "We work with various dental insurance providers. Check with your insurer and bring your details!",
-            'exempt': "Some patients are exempt from NHS charges (under 18, pregnant, certain benefits). Ask us if you qualify!",
-            'free dental': "Free NHS dental care is available if you're under 18, pregnant/new mum, or on certain benefits like Universal Credit.",
-            'hc2': "Have an HC2 certificate? You'll get free NHS dental treatment. Bring it to your appointment!",
-
-            // Emergency
-            'emergency': "Dental emergency? Call 020 8594 4129 immediately! We'll fit you in as soon as possible.",
-            'pain': "In pain? Don't suffer! Call 020 8594 4129 for an urgent appointment.",
-            'toothache': "Toothache? Call 020 8594 4129 - we'll see you urgently! Take paracetamol while you wait.",
-            'urgent': "Need urgent care? Call 020 8594 4129 now. We prioritize emergencies!",
-            'swelling': "Facial swelling can be serious! Call 020 8594 4129 urgently, or go to A&E if severe/affecting breathing.",
-            'knocked out': "Knocked out tooth? Keep it moist (in milk), don't touch the root, and come IMMEDIATELY! Call 020 8594 4129!",
-            'bleeding': "Mouth bleeding heavily? Apply pressure with clean gauze. If it won't stop, call 020 8594 4129 or seek A&E.",
-
-            // Children's Dentistry
-            'child': "Kids are very welcome! We provide gentle, friendly care. Dr Rachael O'Flaherty is especially great with nervous children.",
-            'kid': "Children's dentistry: gentle, patient care in a relaxed environment. We make dental visits fun!",
-            'children': "We love seeing children! Start visits early to build good habits. NHS care is free for under 18s!",
-            'baby': "Baby teeth matter! Start dental visits when first teeth appear. We're gentle with little ones.",
-            'teenager': "Teens welcome! We address unique concerns like wisdom teeth, orthodontics, and cosmetic questions.",
-
-            // Nervous Patients
-            'nervous': "Dental anxiety? We completely understand! Our team is gentle, patient, and will go at your pace.",
-            'scared': "Nervous patients welcome! We explain everything, offer breaks, and you're always in control.",
-            'anxious': "Feeling anxious about the dentist? You're not alone! We specialise in helping nervous patients feel comfortable.",
-            'phobia': "Dental phobia is more common than you think. We're experienced in helping fearful patients. Take that first step - call us!",
-            'relax': "We create a calm, relaxing environment. Tell us your concerns and we'll help you feel at ease.",
-            'sedation': "Ask us about sedation options for anxious patients. We want your visit to be as comfortable as possible.",
-            'gentle': "We pride ourselves on gentle treatment. Your comfort is our priority!",
-
-            // Comfort & Experience
-            'numbing': "We use effective local anaesthetic so you won't feel pain during treatment. Let us know if you need more!",
-            'injection': "Nervous about injections? We use techniques to minimize discomfort. Most patients say it's not as bad as expected!",
-            'anaesthetic': "Local anaesthetic numbs the area completely. You'll feel pressure but no pain. We wait until it's fully working!",
-            'pain free': "We aim for pain-free dentistry! Modern anaesthetics and techniques make treatment very comfortable.",
-            'comfortable': "Your comfort matters to us. Tell us if you need a break or feel any discomfort during treatment.",
-
-            // Facial Aesthetics
-            'botox': "Facial aesthetics including Botox available! Reduce wrinkles for a refreshed, natural look. Administered by trained clinicians.",
-            'facial': "Facial aesthetic treatments by our trained team. We offer Botox for natural-looking wrinkle reduction.",
-            'aesthetic': "Facial aesthetics: Botox for forehead lines, crow's feet, and frown lines. Subtle, natural results!",
-            'wrinkle': "Interested in wrinkle reduction? Our Botox treatments give natural-looking results. Book a consultation!",
-            'anti-aging': "We offer anti-aging facial aesthetic treatments. Botox can smooth lines and refresh your appearance.",
-
-            // Team
-            'team': "Our amazing team includes Dr Shital Sojitra (Principal), Dr Janki Vaghela, Dr Maryam, Dr Amina, Dr Bhavini, Dr Rachael, and more! 9 dentists plus hygienist Dhirendra.",
-            'dentist': "We have 9 experienced dentists led by Dr Shital Sojitra (Principal). Our multilingual team speaks many languages!",
-            'dr shital': "Dr Shital Sojitra is our Principal Dentist and practice owner. Highly experienced and committed to excellent care!",
-            'principal': "Dr Shital Sojitra is our Principal Dentist, leading a team of 9 experienced clinicians.",
-            'hygienist': "Our hygienist Dhirendra provides professional cleaning, gum disease treatment, and oral health advice.",
-            'staff': "Our friendly team includes 9 dentists, a hygienist, and dedicated support staff. We're here to help!",
-            'language': "Our team speaks: English, Hindi, Gujarati, Farsi, Urdu, Bengali, and Nepali. We can help patients in many languages!",
-
-            // Oral Hygiene Tips
-            'brush': "Brush twice daily for 2 minutes with fluoride toothpaste. Use gentle circular motions and don't forget the gum line!",
-            'brushing': "Brushing tips: Twice daily, 2 minutes, soft brush, fluoride paste. Replace your brush every 3 months!",
-            'floss': "Floss daily to clean between teeth where brushes can't reach. It prevents gum disease and decay!",
-            'flossing': "How to floss: Gently slide between teeth, curve around each tooth, use clean section each time. Daily is best!",
-            'mouthwash': "Mouthwash is a good addition to brushing and flossing - but not a replacement! Use at a different time to brushing.",
-            'electric toothbrush': "Electric toothbrushes can be more effective than manual ones. They do the brushing motion for you!",
-            'toothbrush': "Choose a soft-bristled brush and replace it every 3 months. Electric brushes are great too!",
-
-            // Aftercare
-            'aftercare': "After treatment: follow our specific advice, take any prescribed medication, and call if you have concerns!",
-            'recovery': "Recovery varies by treatment. We'll give you specific aftercare instructions. Call us with any questions!",
-            'after extraction': "After extraction: bite on gauze, avoid hot drinks and smoking, eat soft foods, don't rinse for 24 hours.",
-            'after filling': "After a filling: avoid eating until numbness wears off. Some sensitivity is normal for a few days.",
-            'eating after': "Wait until numbness wears off before eating. For extractions, stick to soft foods for 24-48 hours.",
-            'medication': "Take any prescribed medication as directed. Over-the-counter painkillers help if needed after treatment.",
-            'antibiotics': "Take antibiotics exactly as prescribed - complete the full course even if you feel better!",
-            'painkillers': "Paracetamol or ibuprofen can help after dental treatment. Follow the packet instructions.",
-
-            // Fun & Personality
-            'joke': "Why did the king go to the dentist? To get his teeth crowned! 👑 Want another?",
-            'another joke': "What does the dentist of the year get? A little plaque! 🏆",
-            'funny': "What time is a dental appointment? Tooth-hurty! (2:30) 😄",
-            'tell me a joke': "Why did the deer need braces? Because it had buck teeth! 🦌",
-            'make me laugh': "I told my dentist I wanted a crown. She said: 'You're royalty to us!' 👑",
-            'trivia': "Did you know? Your enamel is the hardest substance in your body - harder than bone!",
-            'fact': "Dental fact: The average person spends 38.5 days brushing their teeth over a lifetime!",
-            'interesting': "Fun fact: A snail's mouth contains thousands of teeth - up to 20,000! Imagine cleaning those!",
-            'bored': "Here's a smile fact: Smiling releases endorphins and makes you feel happier! 😊",
-
-            // Social & Contact
-            'phone': "Call us on 020 8594 4129 - we're here Mon-Fri 8:30am-6pm!",
-            'call': "Phone: 020 8594 4129. We're happy to answer questions or book appointments!",
-            'contact': "Contact us: Phone 020 8594 4129 or visit our Contact page for the online form!",
-            'email': "You can reach us through our Contact page form, or call 020 8594 4129!",
-            'instagram': "Follow us on Instagram: @abbeydentalbarking for updates and tips!",
-            'social': "Find us on Instagram @abbeydentalbarking and LinkedIn for dental tips and practice news!",
-            'facebook': "Check out our Facebook page for updates, dental tips, and patient stories!",
-            'website': "Visit our website for full information: services, team, gallery, and booking!",
-            'review': "We'd love your feedback! Leave us a review on Google - it helps other patients find quality care.",
-
-            // Misc
-            'pregnant': "Dental care is safe and important during pregnancy! NHS treatment is free if you're pregnant or had a baby in the last 12 months.",
-            'diabetes': "If you have diabetes, dental care is especially important. Gum disease and diabetes are linked. Keep us informed!",
-            'medical history': "Please tell us about your medical history and medications - it helps us provide safe care!",
-            'smoking': "Smoking affects oral health - gum disease, staining, cancer risk. We can help with advice and support to quit!",
-            'vaping': "Vaping still affects oral health - dry mouth, gum irritation. Better than smoking but not risk-free.",
-            'alcohol': "Excess alcohol increases mouth cancer risk and causes dry mouth. Moderation helps your oral health!",
-            'diet': "A healthy diet supports healthy teeth! Limit sugar and acid, drink water, eat crunchy vegetables.",
-
-            // Default
-            'default': "I'm Abbey AI! I can help with: Appointments, Services, Prices, Hours, Location, NHS info, Dental advice, Team info, or Emergencies. Or call 020 8594 4129!"
-        };
+        // =============================================
+        // Response Logic — 200+ patterns
+        // =============================================
+        const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
         function getResponse(text) {
-            const lower = text.toLowerCase();
-            for (const [key, value] of Object.entries(responses)) {
-                if (key !== 'default' && lower.includes(key)) return value;
+            const msg = text.toLowerCase().trim();
+
+            // ── EMERGENCY (highest priority) ──
+            if (/\b(emergency|agony|unbearable|excruciating|severe pain|swelling|swollen|abscess|knocked out|knocked-out|broken tooth|cracked tooth|jaw broke|can't open mouth|face swelling|blood won't stop)\b/.test(msg)) {
+                return "🚨 DENTAL EMERGENCY\n\nCall us immediately: 📞 020 8594 4129\n\nWe'll fit you in ASAP. Outside hours? Call NHS 111.\n\nFirst aid:\n• Toothache — warm salt water rinse, take paracetamol\n• Knocked-out tooth — keep in milk, come immediately\n• Swelling — cold compress on cheek, 10 min on/off\n• Bleeding — bite clean gauze for 20 min\n• Broken tooth — save pieces, rinse gently, call us";
             }
-            return responses.default;
+            if (/\b(toothache|tooth ache|tooth hurts|teeth hurt|pain|aching|throbbing)\b/.test(msg)) {
+                return "😣 Toothache? Don't suffer!\n\nCall 020 8594 4129 for an urgent appointment.\n\nWhile you wait:\n• Take paracetamol or ibuprofen\n• Rinse with warm salt water\n• Avoid hot, cold & sweet foods\n• Don't place aspirin on gums\n\nThe sooner we see you, the simpler the fix!";
+            }
+
+            // ── GREETINGS ──
+            if (/\b(hello|hi|hey|hiya|howdy|yo|sup|what'?s up|wotcha|alright|good morning|good afternoon|good evening|morning|afternoon|evening|oi|greetings)\b/.test(msg)) {
+                return pick([
+                    "Hello! 👋 Welcome to Abbey Dental Practice! I'm Abbey AI — how can I help you today?",
+                    "Hi there! I'm Abbey AI, your dental assistant. Ask me about appointments, services, prices, or anything dental!",
+                    "Hey! Great to hear from you. Whether it's booking, treatments, or dental advice — I'm here to help! 🦷",
+                    "Good day! Welcome to Abbey Dental. How may I assist you today?",
+                    "Hiya! 😊 Abbey AI here. What can I do for you?"
+                ]);
+            }
+
+            // ── HOW ARE YOU / SMALL TALK ──
+            if (/\b(how are you|how're you|how r u|how you doing|you good|you ok|how do you do|how's it going|how's things)\b/.test(msg)) {
+                return pick([
+                    "I'm great, thanks for asking! 😊 Ready to help. What can I do for you today?",
+                    "Doing wonderful! My circuits are buzzing. What dental question can I tackle for you?",
+                    "All good here! 🦷 How about you — what brings you to Abbey Dental today?"
+                ]);
+            }
+
+            // ── WHO ARE YOU / ABOUT AI ──
+            if (/\b(who are you|what are you|your name|are you real|are you human|are you a robot|are you a bot|are you ai|what can you do|tell me about yourself)\b/.test(msg)) {
+                return "🤖 I'm Abbey AI, the virtual dental assistant for Abbey Dental Practice!\n\nI can help with:\n• Booking appointments\n• Opening hours & locations\n• NHS pricing & charges\n• Service information\n• Dental advice & tips\n• Emergency guidance\n• Team info\n• And much more!\n\nI'm not a real person, but I'm trained with real practice info. For anything I can't answer, call 020 8594 4129.";
+            }
+
+            // ── FAREWELLS ──
+            if (/\b(bye|goodbye|good bye|see you|see ya|later|cya|take care|peace|night|gotta go|that's all|all done)\b/.test(msg)) {
+                return pick([
+                    "Goodbye! Take care of that smile — brush, floss & keep smiling! 😊",
+                    "See you! Remember we're here whenever you need us. Call 020 8594 4129 anytime!",
+                    "Bye for now! Wishing you a bright, healthy smile 🦷",
+                    "Take care! Don't forget your next check-up. See you soon! 👋"
+                ]);
+            }
+
+            // ── THANKS ──
+            if (/\b(thanks|thank you|thankyou|ta|cheers|appreciate|thx|ty|much appreciated)\b/.test(msg)) {
+                return pick([
+                    "You're very welcome! 😊 Anything else I can help with?",
+                    "My pleasure! Happy to help. Need anything else?",
+                    "No problem at all! That's what I'm here for. 🦷",
+                    "Glad I could help! Let me know if there's anything else."
+                ]);
+            }
+
+            // ── COMPLIMENTS ──
+            if (/\b(good bot|smart|helpful|amazing|brilliant|great|clever|awesome|love you|well done|nice one|legend|fantastic|excellent|perfect|wonderful)\b/.test(msg)) {
+                return pick([
+                    "Aww, thank you! That means a lot 😊 What else can I help with?",
+                    "You're too kind! 🦷 I'm just happy to help. Need anything else?",
+                    "That's made my day! I'm here to make your Abbey Dental experience as smooth as possible."
+                ]);
+            }
+
+            // ── INSULTS ──
+            if (/\b(stupid|dumb|useless|rubbish|terrible|hate|worst|idiot|suck|awful|pathetic|trash|shut up|crap|bad bot)\b/.test(msg)) {
+                return "I'm sorry you feel that way! 😔 I'm always trying to improve. Try rephrasing your question and I'll do my best.\n\nOr call our friendly team directly: 020 8594 4129";
+            }
+
+            // ── APPOINTMENTS / BOOKING ──
+            if (/\b(book|appointment|schedule|visit|register|sign up|sign-up|new patient|first visit|how to book|make an appointment|see the dentist|come in|walk.?in|drop.?in)\b/.test(msg)) {
+                return "📅 Book an Appointment\n\nCall: 📞 020 8594 4129\n\nHours: Mon–Fri 8:30am–6pm\n\n• NHS & private patients welcome\n• New patients — bring photo ID\n• Allow 30-45 min for first visit\n• 4 branches across London\n\nWe also have branches in Whitechapel, Walthamstow & South Harrow!";
+            }
+            if (/\b(cancel|cancellation|reschedule|change appointment|move appointment|rearrange)\b/.test(msg)) {
+                return "To cancel or reschedule, call 020 8594 4129 ASAP. We appreciate 24 hours notice so we can offer the slot to another patient. Thank you!";
+            }
+            if (/\b(waiting list|wait list|cancellation list|sooner|earlier appointment)\b/.test(msg)) {
+                return "Want to be seen sooner? Ask for our cancellation list when you call 020 8594 4129. If a slot opens up, we'll ring you!";
+            }
+
+            // ── OPENING HOURS ──
+            if (/\b(hours|opening|time|when|open|close|closed|working hours|lunch|monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekend|bank holiday)\b/.test(msg)) {
+                return "🕐 Opening Hours\n\nBarking: Mon–Fri 8:30am–6pm\nWhitechapel: Mon–Fri 9am–5:30pm\nWalthamstow: Mon–Fri 9am–5:30pm\nSouth Harrow: Mon–Fri 9am–5:30pm\n\nAll branches closed Sat, Sun & bank holidays.\n\n📞 Barking: 020 8594 4129";
+            }
+
+            // ── NHS & PRICING ──
+            if (/\b(band 1)\b/.test(msg)) {
+                return "💷 NHS Band 1 — £26.80\n\nCovers:\n• Examination & diagnosis\n• X-rays\n• Scale & polish (if clinically needed)\n• Advice & prevention planning";
+            }
+            if (/\b(band 2)\b/.test(msg)) {
+                return "💷 NHS Band 2 — £73.50\n\nCovers everything in Band 1, plus:\n• Fillings\n• Root canal treatment\n• Extractions\n• Gum treatments";
+            }
+            if (/\b(band 3)\b/.test(msg)) {
+                return "💷 NHS Band 3 — £319.10\n\nCovers everything in Bands 1 & 2, plus:\n• Crowns\n• Dentures\n• Bridges";
+            }
+            if (/\b(nhs|price|cost|how much|fee|charge|band|afford|pay|money|expensive|cheap)\b/.test(msg)) {
+                return "💷 NHS Dental Charges (2024/25)\n\nBand 1 — £26.80: Check-up, X-rays, scale & polish\nBand 2 — £73.50: + Fillings, root canal, extractions\nBand 3 — £319.10: + Crowns, dentures, bridges\n\n✅ FREE for: under 18s, pregnant/new mums, qualifying benefits, HC2 holders\n\nPrivate treatments quoted at consultation. Call 020 8594 4129.";
+            }
+            if (/\b(free dental|exempt|exemption|hc2|hc3|maternity.*dent|benefits.*dent)\b/.test(msg)) {
+                return "✅ Free NHS Dental Care\n\nYou may qualify if you're:\n• Under 18 (or under 19 in full-time education)\n• Pregnant or had a baby in last 12 months\n• On income-related benefits\n• Named on an HC2 certificate\n\nBring proof of exemption to your appointment!";
+            }
+            if (/\b(private|payment plan|finance|instalment|spread the cost|card|cash|accept|insurance)\b/.test(msg)) {
+                return "💳 Payment Options\n\n• NHS treatments: Standard band charges\n• Private treatments: Quoted at consultation\n• We accept cash, debit & credit cards\n• Payment plans available for larger treatments\n• We work with dental insurance providers\n\nCall 020 8594 4129 for pricing queries.";
+            }
+
+            // ── SPECIFIC TREATMENTS ──
+            if (/\b(whitening|whiten|bleach.*teeth|white.*teeth)\b/.test(msg)) {
+                return "✨ Teeth Whitening\n\nProfessional whitening brightens your smile by several shades!\n\n• In-office and take-home options\n• Results last 1-3 years\n• Safe for enamel when done professionally\n• Much more effective than shop-bought kits\n\nBook a consultation: 020 8594 4129";
+            }
+            if (/\b(veneer)\b/.test(msg)) {
+                return "🦷 Dental Veneers\n\nThin porcelain shells for a stunning transformation:\n\n• Perfect for chips, gaps, staining, uneven teeth\n• Last 10-15 years with proper care\n• Natural-looking, custom colour-matched\n• Minimal tooth preparation\n\nBook a smile consultation: 020 8594 4129";
+            }
+            if (/\b(filling|amalgam|composite|white filling|silver filling)\b/.test(msg)) {
+                return "🦷 Dental Fillings\n\n• Composite (white): Tooth-coloured, invisible\n• Amalgam (silver): Durable NHS option\n• Quick and comfortable, usually one visit\n• NHS Band 2: £73.50";
+            }
+            if (/\b(crown)\b/.test(msg)) {
+                return "👑 Dental Crowns\n\nA cap that covers and protects damaged teeth:\n\n• Porcelain for natural appearance\n• Protects weak, cracked, or root-treated teeth\n• Usually 2 visits\n• Can last 15+ years\n• NHS Band 3: £319.10";
+            }
+            if (/\b(bridge)\b/.test(msg)) {
+                return "🦷 Dental Bridges\n\nReplace missing teeth by anchoring to adjacent teeth:\n\n• Fixed, natural-looking results\n• Restore your smile and chewing ability\n• Usually 2-3 visits\n• NHS Band 3 or private options";
+            }
+            if (/\b(denture|false teeth)\b/.test(msg)) {
+                return "🦷 Dentures\n\nModern dentures are comfortable and natural-looking:\n\n• Full dentures: Replace all teeth\n• Partial dentures: Fill gaps\n• Custom-made for comfort\n• NHS Band 3: £319.10 or private";
+            }
+            if (/\b(extraction|pull.*tooth|tooth.*out|remove.*tooth|wisdom teeth|wisdom tooth)\b/.test(msg)) {
+                return "🦷 Tooth Extractions\n\n• Done under local anaesthetic — painless\n• Includes wisdom teeth removal\n• NHS Band 2: £73.50\n\nAftercare: Bite gauze, avoid hot drinks, no smoking 48hrs, soft foods.\n\nCall 020 8594 4129 if needed.";
+            }
+            if (/\b(implant)\b/.test(msg)) {
+                return "🦷 Dental Implants\n\nThe gold standard for replacing missing teeth:\n\n• Titanium post fused to jawbone\n• Natural-looking porcelain crown\n• Permanent — can last a lifetime\n• Private treatment\n\nBook an implant consultation: 020 8594 4129";
+            }
+            if (/\b(root canal|endodontic)\b/.test(msg)) {
+                return "🦷 Root Canal Treatment\n\nSaves infected teeth:\n\n• Removes infected pulp\n• Modern techniques = comfortable (like a filling!)\n• Usually 1-2 visits\n• NHS Band 2: £73.50\n• Usually crowned afterwards\n\nDon't delay — early treatment prevents complications!";
+            }
+            if (/\b(brace|braces|invisalign|straight.*teeth|orthodontic|ortho)\b/.test(msg)) {
+                return "🦷 Orthodontics\n\nOptions for straighter teeth:\n\n• Traditional braces\n• Invisalign clear aligners\n• Treatment: typically 6-24 months\n• Free consultation available\n\nCall 020 8594 4129 for an assessment.";
+            }
+            if (/\b(scale and polish|clean.*teeth|hygien|deep clean|plaque removal)\b/.test(msg)) {
+                return "✨ Scale & Polish / Hygiene\n\nProfessional cleaning by our hygienist Dhirendra:\n\n• Removes plaque and tartar\n• Polishes away stains\n• Prevents gum disease\n• Recommended every 6 months\n• Included in NHS Band 1 if clinically needed\n\nBook: 020 8594 4129";
+            }
+            if (/\b(check.?up|checkup|examination|exam|routine)\b/.test(msg)) {
+                return "✅ Dental Check-ups\n\n• Thorough exam of teeth, gums & mouth\n• Digital X-rays if needed\n• Oral cancer screening\n• Personalised advice\n• NHS Band 1: £26.80\n\nWe recommend every 6-12 months. Book: 020 8594 4129";
+            }
+            if (/\b(x.?ray|xray|radiograph)\b/.test(msg)) {
+                return "📷 Dental X-Rays\n\nSpot problems invisible to the eye:\n• Decay between teeth\n• Bone loss\n• Impacted wisdom teeth\n• Root infections\n\nDigital X-rays = minimal radiation, perfectly safe. Included in Band 1 check-ups.";
+            }
+            if (/\b(botox|facial|aesthetic|wrinkle|anti.?aging|anti.?ageing)\b/.test(msg)) {
+                return "💉 Facial Aesthetics\n\nBotox treatments by trained clinicians:\n\n• Forehead lines\n• Crow's feet\n• Frown lines\n• Subtle, natural results\n• Quick treatment, minimal downtime\n\nBook a consultation: 020 8594 4129";
+            }
+            if (/\b(fluoride)\b/.test(msg)) {
+                return "🦷 Fluoride Treatment\n\nStrengthens enamel and prevents decay. Especially good for children and high-risk patients. Quick, painless — ask at your check-up!";
+            }
+            if (/\b(sealant|fissure)\b/.test(msg)) {
+                return "🦷 Fissure Sealants\n\nProtective coating for back teeth:\n• Prevents decay in grooves\n• Recommended for children\n• Quick, painless, no drilling\n• Lasts several years";
+            }
+            if (/\b(mouthguard|gum ?shield|sports guard)\b/.test(msg)) {
+                return "🏆 Custom Mouthguards\n\nProtect teeth during sports:\n• Much better fit than shop-bought\n• More comfortable and protective\n• Essential for contact sports\n\nCall 020 8594 4129 for a fitting.";
+            }
+            if (/\b(night guard|grinding|grind|bruxism|clench|clenching|tmj|jaw pain|clicking jaw)\b/.test(msg)) {
+                return "😴 Night Guards & Teeth Grinding\n\nGrinding (bruxism) causes headaches, jaw pain, worn teeth.\n\n• Custom night guards protect while you sleep\n• Helps TMJ/jaw problems too\n• Signs: worn teeth, jaw pain, headaches, clicking\n\nBook an assessment: 020 8594 4129";
+            }
+
+            // ── SERVICES OVERVIEW ──
+            if (/\b(services|treatment|what do you (do|offer)|options|what.*available|menu)\b/.test(msg)) {
+                return "🦷 Our Services\n\nGeneral: Check-ups, fillings, extractions, root canal\nCosmetic: Whitening, veneers, smile makeovers\nRestorative: Crowns, bridges, dentures, implants\nPreventive: Scale & polish, fluoride, sealants\nFacial: Botox & aesthetics\nOther: Children's, nervous patients, emergencies\n\n9 experienced dentists across 4 branches!\nCall 020 8594 4129 for details.";
+            }
+
+            // ── DENTAL CONDITIONS ──
+            if (/\b(cavity|cavities|decay|hole in.*tooth|rotten)\b/.test(msg)) {
+                return "🦷 Tooth Decay & Cavities\n\nPrevention: Brush 2x daily, floss, limit sugar, regular check-ups\n\nTreatment: Small cavities → fillings. Left untreated → root canal or extraction.\n\nBook a check-up: 020 8594 4129";
+            }
+            if (/\b(gum disease|gum.*bleed|bleeding gum|gingivitis|periodontitis|periodontal|receding gum)\b/.test(msg)) {
+                return "🦷 Gum Disease\n\nGingivitis (early) is reversible! Periodontitis (advanced) needs treatment.\n\nSigns: Bleeding when brushing, red/swollen gums, bad breath, loose teeth\n\nTreatment: Professional deep cleaning + better home care\n\nDon't ignore bleeding gums! Book: 020 8594 4129";
+            }
+            if (/\b(sensitiv|hot.*cold|cold.*hot|ice cream.*teeth|sharp pain.*tooth)\b/.test(msg)) {
+                return "🧊 Tooth Sensitivity\n\nCauses: Worn enamel, gum recession, decay, cracked tooth\n\nSelf-help:\n• Use Sensodyne or similar\n• Soft brush, gentle pressure\n• Avoid acidic foods\n• Don't brush right after eating\n\nSee us if: sudden, severe, or one specific tooth.\nCall 020 8594 4129";
+            }
+            if (/\b(bad breath|breath smell|halitosis|smell.*mouth|stink.*breath)\b/.test(msg)) {
+                return "💨 Bad Breath\n\nCommon causes: Gum disease, plaque, dry mouth, diet\n\nTips:\n• Brush 2x daily including tongue\n• Floss daily\n• Stay hydrated\n• Use mouthwash (different time to brushing)\n• Regular hygiene visits\n\nPersistent? Could be gum disease. Book: 020 8594 4129";
+            }
+            if (/\b(ulcer|mouth sore|canker|sore mouth)\b/.test(msg)) {
+                return "🦷 Mouth Ulcers\n\nMost heal in 1-2 weeks.\n\nSelf-care: Antiseptic mouthwash, avoid spicy foods, soft brush, Bonjela gel\n\nSee us if: Lasts 3+ weeks, keeps recurring, or is unusually large. Important for oral cancer screening.\n\nCall 020 8594 4129";
+            }
+            if (/\b(dry mouth|xerostomia)\b/.test(msg)) {
+                return "💧 Dry Mouth\n\nIncreases decay risk. Tips:\n• Sip water frequently\n• Chew sugar-free gum\n• Avoid caffeine & alcohol\n• Use dry mouth spray/gel\n\nCommon cause: medications. If persistent, book a check-up.";
+            }
+            if (/\b(chipped|chip)\b/.test(msg)) {
+                return "🦷 Chipped Tooth?\n\nWe can fix it!\n• Bonding: Quick same-day repair\n• Veneer: For larger chips\n• Crown: For significant damage\n\nSave any pieces. Call 020 8594 4129";
+            }
+            if (/\b(loose tooth|wobbly tooth|tooth.*move)\b/.test(msg)) {
+                return "⚠️ Loose Adult Tooth\n\nPossible causes: Gum disease, injury, grinding, infection\n\nPlease call 020 8594 4129 promptly. Early treatment can often save the tooth!";
+            }
+            if (/\b(overcrowd|crooked|misalign|cross.?bite|over.?bite|under.?bite|gap.*teeth|teeth.*gap)\b/.test(msg)) {
+                return "🦷 Crooked/Misaligned Teeth\n\nOptions:\n• Braces (traditional or clear)\n• Invisalign clear aligners\n• Veneers (mild cases)\n\nCall 020 8594 4129 for a consultation.";
+            }
+
+            // ── LOCATION / DIRECTIONS ──
+            if (/\b(location|address|where|direction|find|map|postcode|post ?code|get there|parking|station|bus|tube|transport|near|how.*get.*to|sat.?nav)\b/.test(msg)) {
+                return "📍 Main Practice (Barking)\n2 Arboretum Place, Barking, IG11 7RL\n\n🚇 Short walk from Barking station (District, H&C, Overground)\n🚌 Multiple bus routes nearby\n🅿️ Town centre car parks available\n\nWe also have 3 other branches — ask me about them!";
+            }
+
+            // ── OTHER BRANCHES ──
+            if (/\b(whitechapel|walthamstow|south harrow|harrow|other branch|branches|locations|which branch|nearest)\b/.test(msg)) {
+                return "📍 Our 4 Branches\n\n🏥 Barking (Main): 2 Arboretum Place, IG11 7RL\n📞 020 8594 4129\n\n🏥 Whitechapel: 224 Whitechapel Rd, E1 1BJ\n📞 020 7247 0964\n\n🏥 Walthamstow: 25 St James St, E17 7PJ\n📞 020 8521 2816\n\n🏥 South Harrow: 338 Eastcote Lane, HA2 9AJ\n📞 020 8864 4200";
+            }
+
+            // ── CHILDREN ──
+            if (/\b(child|kid|baby|toddler|infant|son|daughter|little one|young|first tooth|teething|milk teeth|children)\b/.test(msg)) {
+                return "👶 Children's Dentistry\n\n• First visit: From age 1 or first teeth\n• FREE NHS treatment for under 18s\n• Gentle, friendly team (Dr Rachael is great with kids!)\n• Preventive: fluoride, sealants, diet advice\n• We make visits fun!\n\nRegister your child: 020 8594 4129";
+            }
+
+            // ── NERVOUS PATIENTS ──
+            if (/\b(nervous|scared|anxiety|afraid|anxious|phobia|fear|worried|panic|dread|hate.*dentist|terrified|frightened|sedation)\b/.test(msg)) {
+                return "💚 Nervous Patient Care\n\nWe completely understand! Our approach:\n\n• Go at your pace — no rushing\n• Full explanations before every step\n• Stop signal — raise your hand, we pause\n• Breaks whenever needed\n• Gentle technique\n• Sedation options available\n\nYou're not alone. Take the first step — call 020 8594 4129 💚";
+            }
+
+            // ── TEAM ──
+            if (/\b(team|staff|dentist|doctor|dr|who works|shital|principal|hygienist|dhirendra|rachael|janki|maryam|amina|bhavini)\b/.test(msg)) {
+                return "👨‍⚕️ Our Team\n\nDr Shital Sojitra — Principal Dentist\nDr Janki Vaghela\nDr Maryam\nDr Amina\nDr Bhavini\nDr Rachael O'Flaherty (great with kids!)\n+ 3 more dentists\nDhirendra — Hygienist\n\n9 dentists! Languages: English, Hindi, Gujarati, Farsi, Urdu, Bengali, Nepali 🌍";
+            }
+
+            // ── PREGNANCY / MEDICAL ──
+            if (/\b(pregnant|pregnancy|expecting|maternity|prenatal)\b/.test(msg)) {
+                return "🤰 Dental Care During Pregnancy\n\n• Treatment is SAFE during pregnancy\n• NHS treatment is FREE (and 12 months after birth)\n• Hormonal changes increase gum disease risk\n• Get a MatEx certificate from your midwife\n\nDon't skip dental visits! Call 020 8594 4129";
+            }
+            if (/\b(diabetes|diabetic)\b/.test(msg)) {
+                return "🦷 Diabetes & Dental Health\n\nDiabetes and gum disease are closely linked:\n• Higher risk of infections\n• Slower healing\n• Dry mouth common\n\nTell us about your diabetes. Regular check-ups are extra important!";
+            }
+            if (/\b(medical history|medication|blood thinner|warfarin|heart|allerg|asthma)\b/.test(msg)) {
+                return "📋 Medical History\n\nPlease always tell us about:\n• Medical conditions\n• All medications (especially blood thinners)\n• Allergies (anaesthetics, latex)\n• Recent hospital treatment\n\nThis ensures the safest possible care.";
+            }
+
+            // ── SMOKING / LIFESTYLE ──
+            if (/\b(smok|cigarette|vap|e.?cig)\b/.test(msg)) {
+                return "🚭 Smoking & Oral Health\n\n• 6x higher gum disease risk\n• Slows healing\n• Causes staining and bad breath\n• Increases oral cancer risk\n\nVaping: Better than smoking but still causes dry mouth & gum irritation.\n\nWe can advise on quitting!";
+            }
+            if (/\b(diet|sugar|sweet|fizzy|cola|acid.*teeth|erosion|coffee.*stain|tea.*stain|stain|yellow|discolou?r)\b/.test(msg)) {
+                return "🍎 Diet & Your Teeth\n\nLimit: Sugar, fizzy drinks, fruit juice, acidic foods\nEnjoy: Water, cheese, crunchy veg, sugar-free gum\n\nTips:\n• Drink acidic drinks through a straw\n• Wait 30 min after eating before brushing\n• Professional cleaning removes tea/coffee stains\n\nBook a hygiene visit: 020 8594 4129";
+            }
+
+            // ── ORAL HYGIENE ──
+            if (/\b(brush|brushing|how.*brush|tooth ?brush|electric toothbrush)\b/.test(msg)) {
+                return "🪥 Brushing Guide\n\n• Brush TWICE daily for 2 MINUTES\n• Fluoride toothpaste (1350-1500ppm)\n• Soft brush, gentle circular motions\n• Don't forget gum line and tongue\n• Replace brush every 3 months\n• DON'T rinse after — just spit\n• Electric brushes are great!";
+            }
+            if (/\b(floss|flossing|interdental|between.*teeth|food.*stuck)\b/.test(msg)) {
+                return "🧵 Flossing Guide\n\n• Clean between teeth ONCE daily\n• Use floss or interdental brushes (TePe)\n• Gently curve around each tooth\n• Bleeding at first is normal — it'll improve\n• Prevents gum disease and decay\n\nYour hygienist can show you the best technique!";
+            }
+            if (/\b(mouthwash|mouth ?rinse|corsodyl|listerine)\b/.test(msg)) {
+                return "🦷 Mouthwash Tips\n\n• Use at a DIFFERENT time to brushing\n• Don't use right after brushing (washes away fluoride!)\n• Fluoride mouthwash adds protection\n• Corsodyl is great for gum problems (short-term)\n• It's a supplement, not a replacement!";
+            }
+
+            // ── AFTERCARE ──
+            if (/\b(aftercare|after.*treatment|recovery|after.*extraction|after.*filling|what.*eat|swelling after|bleeding after|after.*root canal)\b/.test(msg)) {
+                return "🏥 Aftercare Advice\n\nAfter extractions:\n• Bite gauze 20 min\n• No hot drinks 24 hrs\n• No smoking 48 hrs\n• Soft foods 24-48 hrs\n• Salt water rinse after 24 hrs\n\nAfter fillings:\n• Wait for numbness to wear off\n• Some sensitivity is normal\n\nCall 020 8594 4129 with any concerns.";
+            }
+
+            // ── COSMETIC CONCERNS ──
+            if (/\b(smile|makeover|improve.*teeth|better.*teeth|ugly.*teeth|hate.*teeth|embarrass.*teeth|cosmetic)\b/.test(msg)) {
+                return "✨ Smile Makeover\n\nTransform your smile:\n\n• Whitening — brighter teeth\n• Veneers — perfect shape & colour\n• Bonding — repair chips & gaps\n• Braces/Invisalign — straighten\n• Crowns — rebuild damaged teeth\n\nBook a cosmetic consultation: 020 8594 4129";
+            }
+
+            // ── CQC / REGULATIONS ──
+            if (/\b(cqc|regulated|inspection|safe|standard|quality|accredit)\b/.test(msg)) {
+                return "✅ CQC Regulated\n\nAbbey Dental Practice is:\n• CQC registered and inspected\n• NHS approved\n• All safety standards compliant\n• Regular infection control audits\n• Continuous staff development\n\nYour safety is our top priority.";
+            }
+
+            // ── COVID / SAFETY ──
+            if (/\b(covid|corona|mask|ppe|sanitiz|infection control|steriliz|sterilise)\b/.test(msg)) {
+                return "😷 Safety & Infection Control\n\n• Full PPE for clinical procedures\n• Rigorous instrument sterilisation\n• Hand sanitiser throughout\n• Enhanced ventilation\n• Deep cleaning between patients\n• CQC inspected and approved";
+            }
+
+            // ── ACCESSIBILITY ──
+            if (/\b(wheelchair|disabled|disability|accessibility|mobility|step.?free|ramp|lift|access)\b/.test(msg)) {
+                return "♿ Accessibility\n\nOur Barking practice at 2 Arboretum Place is a modern, purpose-built facility. Call 020 8594 4129 before your visit so we can discuss your specific needs.";
+            }
+
+            // ── REFERRAL / SPECIALIST ──
+            if (/\b(referr|specialist|hospital|consultant|orthodontist|periodontist|endodontist|oral surgeon)\b/.test(msg)) {
+                return "🏥 Referrals\n\nWe can refer to specialists:\n• Orthodontists (alignment)\n• Oral surgeons (complex extractions)\n• Periodontists (gum specialists)\n• Endodontists (root canal specialists)\n\nYour dentist will arrange referrals as needed.";
+            }
+
+            // ── WAITING TIME ──
+            if (/\b(how long|wait|queue|waiting time|same day|quick|fast|soon)\b/.test(msg)) {
+                return "⏰ Wait Times\n\n• Routine check-ups: Usually 1-2 weeks\n• Emergency/urgent: Same day where possible\n• Cancellation list: Ask to be added!\n\nCall 020 8594 4129 to check availability.";
+            }
+
+            // ── AGE-SPECIFIC ──
+            if (/\b(elderly|senior|pensioner|older|aging|ageing|retire|over 65)\b/.test(msg)) {
+                return "👴 Care for Older Patients\n\n• Regular check-ups vital as we age\n• Dry mouth (from meds) increases decay risk\n• Gum recession treatment available\n• Denture care and adjustments\n• Oral cancer screening every visit\n\nYou may qualify for free NHS treatment. Call 020 8594 4129.";
+            }
+
+            // ── COMPLAINTS / FEEDBACK ──
+            if (/\b(complaint|complain|unhappy|unsatisfied|problem with|issue|wrong|mistake|feedback|not happy)\b/.test(msg)) {
+                return "📝 Feedback & Complaints\n\nWe take all feedback seriously.\n\n• Call: 020 8594 4129\n• Write to: Practice Manager, 2 Arboretum Place, Barking, IG11 7RL\n\nWe'll investigate and respond within 10 working days. Your feedback helps us improve.";
+            }
+
+            // ── REVIEWS ──
+            if (/\b(review|google review|rate|rating|recommend)\b/.test(msg)) {
+                return "⭐ Reviews\n\nHad a good experience? Please leave us a Google review — it helps other patients find quality care!\n\nFollow us on Instagram too: @abbeydentalbarking 📸";
+            }
+
+            // ── CONTACT / SOCIAL ──
+            if (/\b(phone|call|contact|email|reach|get in touch|speak|talk to|instagram|social|facebook|website)\b/.test(msg)) {
+                return "📞 Contact Us\n\nBarking: 020 8594 4129\nWhitechapel: 020 7247 0964\nWalthamstow: 020 8521 2816\nSouth Harrow: 020 8864 4200\n\n📸 Instagram: @abbeydentalbarking\n\nOr visit our Contact page to send a message!";
+            }
+
+            // ── DENTAL FACTS / TRIVIA ──
+            if (/\b(fact|trivia|did you know|interesting|tell me something|random|fun fact)\b/.test(msg)) {
+                return pick([
+                    "💡 Dental Fact: Tooth enamel is the hardest substance in the human body — harder than bone!",
+                    "💡 Dental Fact: The average person produces about 10,000 gallons of saliva in a lifetime — two swimming pools worth!",
+                    "💡 Dental Fact: Your teeth are as unique as fingerprints — no two people have the same set!",
+                    "💡 Dental Fact: A snail's mouth has over 20,000 teeth. Imagine that dental bill! 🐌",
+                    "💡 Dental Fact: The first toothbrush was invented in China in 1498 using pig bristles!",
+                    "💡 Dental Fact: You spend about 38.5 days of your life brushing your teeth!",
+                    "💡 Dental Fact: An average smile generates the same stimulation as 2,000 bars of chocolate!",
+                    "💡 Dental Fact: Mosquitoes have 47 teeth. Even they need a dentist! 🦟",
+                    "💡 Dental Fact: The first known dentist was an Egyptian called Hesy-Re, around 2600 BC.",
+                    "💡 Dental Fact: Right-handed people tend to chew on the right side!",
+                    "💡 Dental Fact: Cheese protects teeth by reducing acid levels. Cheese lovers, rejoice! 🧀",
+                    "💡 Dental Fact: Blue toothbrushes are more popular than red ones worldwide!"
+                ]) + "\n\nWant another fact? Or can I help with something else?";
+            }
+
+            // ── DENTAL MYTHS ──
+            if (/\b(myth|is it true|true.*false|old wives)\b/.test(msg)) {
+                return pick([
+                    "❌ Myth: \"White teeth = healthy teeth\"\n✅ Truth: Colour varies naturally. White teeth can still have decay. Regular check-ups matter more!",
+                    "❌ Myth: \"Sugar directly causes cavities\"\n✅ Truth: Bacteria feeding on sugar produce acid that causes decay. Frequency matters more than amount!",
+                    "❌ Myth: \"Brushing harder cleans better\"\n✅ Truth: Hard brushing damages enamel and gums! Gentle circular motions with a soft brush work best.",
+                    "❌ Myth: \"Baby teeth don't matter\"\n✅ Truth: They hold space for adult teeth and affect speech. They need care too!",
+                    "❌ Myth: \"No pain = no problem\"\n✅ Truth: Many dental issues are painless until advanced. Regular check-ups catch them early!",
+                    "❌ Myth: \"Don't brush bleeding gums\"\n✅ Truth: Bleeding = gum disease. Keep brushing gently and flossing — it'll improve!"
+                ]) + "\n\nWant to bust another myth?";
+            }
+
+            // ── JOKES ──
+            if (/\b(joke|funny|laugh|humou?r|make me laugh|another joke|tell me a joke|cheer me up|bored)\b/.test(msg)) {
+                return pick([
+                    "Why did the king go to the dentist? To get his teeth crowned! 👑",
+                    "What does the dentist of the year get? A little plaque! 🏆",
+                    "What time is a dental appointment? Tooth-hurty! (2:30) 🕑",
+                    "What do you call a bear with no teeth? A gummy bear! 🐻",
+                    "Why did the deer need braces? Buck teeth! 🦌",
+                    "What did the tooth say to the departing dentist? Fill me in when you get back!",
+                    "Why did the smartphone go to the dentist? Bluetooth problems! 📱",
+                    "What does a dentist call an astronaut's cavity? A black hole! 🚀",
+                    "What's a dentist's favourite animal? A molar bear! 🐻",
+                    "What's a dentist's favourite day? Toothsday!",
+                    "How do you fix a broken tooth? With toothpaste!",
+                    "I told my dentist I wanted a crown. She said: 'You're royalty to us!' 👑",
+                    "What did one tooth say to the other? Get your cap on, the dentist is taking us out!",
+                    "Why did the tree go to the dentist? To get a root canal! 🌳",
+                    "What's a dentist's favourite film? Plaque to the Future! 🎬"
+                ]) + "\n\n😄 Want another? Or can I help with something dental?";
+            }
+
+            // ── OFF-TOPIC / FUN ──
+            if (/\b(weather|football|soccer|cricket|pizza|burger|dog|cat|pet|movie|film|music|song|game|love|girlfriend|boyfriend|wife|husband|politics)\b/.test(msg)) {
+                return pick([
+                    "Ha! That's outside my expertise 😄 I'm best at dental topics. But did you know smiling uses fewer muscles than frowning? Keep smiling! How can I help with your teeth?",
+                    "I wish I could help with that, but I'm a dental nerd! 🦷 Anything teeth-related I can assist with?",
+                    "I'm just a humble dental assistant — I'll leave that one to the experts! 😄 Now, about your teeth..."
+                ]);
+            }
+
+            // ── CLARIFICATION ──
+            if (/^(what|huh|eh|pardon|sorry|come again|repeat|again|didn't understand|don't understand|\?)$/.test(msg) || msg.length <= 2) {
+                return "No worries! Could you rephrase that? I can help with appointments, services, pricing, dental advice, and more 😊";
+            }
+
+            // ── GENERAL QUESTIONS ──
+            if (/\b(what is a|what's a|what are|how does|how do|why do|when should|is it normal|explain|tell me about)\b/.test(msg)) {
+                return "Great question! I know about many dental topics. Could you be more specific?\n\nExamples:\n• \"What is a root canal?\"\n• \"How does whitening work?\"\n• \"When should I see a dentist?\"\n\nOr call 020 8594 4129 for personalised advice.";
+            }
+
+            // ── MOVED PRACTICE ──
+            if (/\b(moved|new building|old practice|abbey road|arboretum)\b/.test(msg)) {
+                return "Yes! We moved from Abbey Road to our new purpose-built practice at 2 Arboretum Place, Barking, IG11 7RL. Modern facilities, same brilliant team! 🏥";
+            }
+
+            // ── DEFAULT ──
+            return pick([
+                "I'm not sure I caught that, but I'd love to help! Try asking about: appointments, services, pricing, hours, location, or dental advice 😊",
+                "Hmm, I didn't quite understand. I can help with:\n• 📅 Appointments\n• 🦷 Services\n• 💷 NHS pricing\n• 🕐 Hours\n• 📍 Location\n• 🚨 Emergencies\n\nOr call 020 8594 4129.",
+                "I want to help but I'm not sure what you mean! Try rephrasing, or call 020 8594 4129 to speak with our team."
+            ]);
         }
 
         function addMessage(text, isUser = false) {
