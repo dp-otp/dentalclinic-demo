@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Heathway Dental Surgery | Quality Dental Care in Dagenham</title>
+    <title>Services | The Heathway Dental Surgery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -325,20 +325,17 @@
         .mobile-menu__cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--teal), var(--teal-muted)); color: var(--white); text-decoration: none; font-size: 1rem; font-weight: 600; border-radius: 50px; margin-top: 1rem; transition: all 0.3s; }
 
         /* ===========================================
-           HERO — Dark Cinematic / Luxury Agency
+           PAGE HERO — Smaller inner-page banner
            =========================================== */
 
-        .hero {
+        .page-hero {
             background: var(--navy);
             position: relative;
             overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding: 10rem 0 4rem;
         }
 
-        /* Grain texture overlay for premium tactile feel */
-        .hero::before {
+        .page-hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -351,8 +348,7 @@
             z-index: 1;
         }
 
-        /* Ambient warm light — top right */
-        .hero::after {
+        .page-hero::after {
             content: '';
             position: absolute;
             top: -15%;
@@ -363,310 +359,86 @@
             pointer-events: none;
         }
 
-        .hero__container {
+        .page-hero__container {
             max-width: var(--container-max);
             margin: 0 auto;
-            padding: 10rem var(--container-padding) 0;
+            padding: 0 var(--container-padding);
             position: relative;
             z-index: 2;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            text-align: center;
         }
 
-        /* Eyebrow - thin, understated */
-        .hero__eyebrow {
+        .page-hero__eyebrow {
             font-size: 0.6875rem;
             font-weight: 500;
             letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--teal);
-            margin-bottom: var(--space-xl);
+            margin-bottom: var(--space-lg);
             animation: fadeInUp 0.7s ease forwards;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .hero__eyebrow::before {
+        .page-hero__eyebrow::before,
+        .page-hero__eyebrow::after {
             content: '';
             width: 2rem;
             height: 1px;
             background: var(--teal);
         }
 
-        /* Massive cinematic headline */
-        .hero__title {
+        .page-hero__title {
             font-family: var(--font-display);
-            font-size: clamp(2.75rem, 7vw, 5.5rem);
+            font-size: clamp(2.25rem, 5vw, 3.5rem);
             font-weight: 700;
-            line-height: 1.02;
+            line-height: 1.1;
             color: var(--cream);
-            letter-spacing: -0.04em;
-            max-width: 900px;
-            margin-bottom: var(--space-2xl);
+            letter-spacing: -0.03em;
+            max-width: 700px;
+            margin: 0 auto var(--space-lg);
             animation: fadeInUp 0.9s ease 0.1s forwards;
             opacity: 0;
         }
 
-        .hero__title em {
-            font-style: italic;
-            font-weight: 300;
-            color: var(--teal);
-        }
-
-        /* Content + Metrics row */
-        .hero__row {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: var(--space-3xl);
-            margin-bottom: auto;
-            padding-bottom: var(--space-3xl);
-            animation: fadeInUp 0.8s ease 0.25s forwards;
-            opacity: 0;
-        }
-
-        .hero__left {
-            max-width: 400px;
-        }
-
-        .hero__description {
-            font-size: 1rem;
-            line-height: 1.75;
+        .page-hero__subtitle {
+            font-size: 1.0625rem;
+            line-height: 1.7;
             color: var(--gray-400);
-            margin-bottom: var(--space-lg);
-        }
-
-        .hero__cta-group {
-            display: flex;
-            align-items: center;
-            gap: var(--space-lg);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.9375rem 1.75rem;
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn--primary {
-            background: var(--teal);
-            color: var(--white);
-        }
-
-        .btn--primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(20, 184, 166, 0.3);
-        }
-
-        .hero__text-link {
-            color: var(--cream);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            transition: all 0.3s;
-            opacity: 0.7;
-        }
-
-        .hero__text-link:hover { gap: 0.625rem; opacity: 1; color: var(--teal); }
-
-        /* Metrics */
-        .hero__metrics {
-            display: flex;
-            gap: var(--space-2xl);
-            padding-bottom: 0.5rem;
-        }
-
-        .hero__metric {
-            text-align: left;
-            position: relative;
-            padding-left: var(--space-md);
-        }
-
-        .hero__metric::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 1px;
-            height: 100%;
-            background: rgba(20, 184, 166, 0.3);
-        }
-
-        .hero__metric-value {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--cream);
-            line-height: 1;
-        }
-
-        .hero__metric-label {
-            font-size: 0.75rem;
-            color: var(--gray-400);
-            margin-top: 0.375rem;
-        }
-
-        /* Full-width image triptych at bottom of hero */
-        .hero__image-band {
-            position: relative;
-            width: calc(100% + var(--container-padding) * 2);
-            margin-left: calc(-1 * var(--container-padding));
-            animation: fadeInUp 0.9s ease 0.45s forwards;
-            opacity: 0;
-        }
-
-        .hero__image-grid {
-            display: grid;
-            grid-template-columns: 1.3fr 0.7fr 1fr;
-            gap: 4px;
-        }
-
-        .hero__img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            display: block;
-            transition: all 0.5s;
-            filter: brightness(0.85);
-        }
-
-        .hero__img:nth-child(1) { object-position: center top; }
-        .hero__img:nth-child(2) { object-position: center 25%; }
-        .hero__img:nth-child(3) { object-position: center center; }
-
-        .hero__img:hover { filter: brightness(1); }
-
-        /* Glass button for dark sections */
-        .btn--glass {
-            background: rgba(245, 235, 228, 0.05);
-            backdrop-filter: blur(10px);
-            color: var(--cream);
-            border: 1px solid rgba(232, 223, 216, 0.15);
-        }
-
-        .btn--glass:hover {
-            background: rgba(245, 235, 228, 0.1);
-            border-color: rgba(232, 223, 216, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* ===========================================
-           TRUST BAR
-           =========================================== */
-
-        .trust {
-            background: var(--charcoal);
-            border-top: 1px solid rgba(20, 184, 166, 0.15);
-            border-bottom: 1px solid rgba(20, 184, 166, 0.15);
-            padding: var(--space-xl) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .trust::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.05), transparent);
-            animation: shimmer 3s ease-in-out infinite;
-            background-size: 200% 100%;
-        }
-
-        .trust__container {
-            max-width: var(--container-max);
+            max-width: 560px;
             margin: 0 auto;
-            padding: 0 var(--container-padding);
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-lg);
-            position: relative;
-        }
-
-        .trust__item {
-            text-align: center;
-            padding: var(--space-md);
-        }
-
-        .trust__value {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: var(--space-xs);
-        }
-
-        .trust__label {
-            color: var(--cream);
-            font-size: 0.875rem;
-            letter-spacing: 0.02em;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
         }
 
         /* ===========================================
-           SERVICES
+           SERVICES GRID — Full page
            =========================================== */
 
         .services {
-            background: linear-gradient(180deg, var(--beige) 0%, rgba(180, 165, 150, 1) 100%);
+            background: linear-gradient(180deg, var(--charcoal) 0%, var(--gray-900) 100%);
             padding: var(--space-4xl) 0;
             position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.04), transparent 60%);
+            pointer-events: none;
         }
 
         .services__container {
             max-width: var(--container-max);
             margin: 0 auto;
             padding: 0 var(--container-padding);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-        }
-
-        .section-eyebrow {
-            display: inline-block;
-            color: var(--teal);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            color: var(--charcoal);
-            letter-spacing: -0.02em;
-            margin-bottom: var(--space-md);
-        }
-
-        .section-description {
-            max-width: 560px;
-            margin: 0 auto;
-            color: var(--navy);
-            font-size: 1.0625rem;
-            line-height: 1.7;
+            position: relative;
         }
 
         .services__grid {
@@ -740,6 +512,7 @@
             font-weight: 600;
             color: var(--cream);
             margin-bottom: var(--space-sm);
+            position: relative;
         }
 
         .service-card__text {
@@ -749,243 +522,33 @@
             position: relative;
         }
 
-        /* ===========================================
-           ABOUT PREVIEW
-           =========================================== */
-
-        .about-preview {
-            background: linear-gradient(180deg, rgba(180, 165, 150, 1) 0%, rgba(80, 90, 100, 1) 100%);
-            padding: var(--space-4xl) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-preview::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(20, 184, 166, 0.06), transparent 60%);
-            pointer-events: none;
-        }
-
-        .about-preview__container {
-            max-width: var(--container-max);
-            margin: 0 auto;
-            padding: 0 var(--container-padding);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-3xl);
-            align-items: center;
-            position: relative;
-        }
-
-        .about-preview__image {
-            border-radius: 24px;
-            height: 480px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-md);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-preview__image::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--teal), var(--blue-neon), var(--teal));
-            border-radius: 26px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .about-preview__image:hover::before {
-            opacity: 0.5;
-        }
-
-        .about-preview__image-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--blue-neon);
-        }
-
-        .about-preview__image-text {
-            color: var(--gray-600);
-            font-size: 0.8125rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .about-preview__content {
-            max-width: 500px;
-        }
-
-        .about-preview__eyebrow {
-            color: var(--teal);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: var(--space-md);
-        }
-
-        .about-preview__title {
-            font-family: var(--font-display);
-            font-size: clamp(1.75rem, 3vw, 2.25rem);
-            font-weight: 700;
-            color: var(--charcoal);
-            line-height: 1.3;
-            margin-bottom: var(--space-lg);
-        }
-
-        .about-preview__text {
-            color: var(--navy);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: var(--space-lg);
-        }
-
-        .about-preview__list {
+        .service-card__list {
             list-style: none;
-            margin-bottom: var(--space-xl);
+            margin-top: var(--space-md);
+            position: relative;
         }
 
-        .about-preview__list li {
+        .service-card__list li {
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
-            color: var(--navy);
-            font-size: 0.9375rem;
-            padding: var(--space-xs) 0;
-        }
-
-        .about-preview__list li::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--teal-glow);
-        }
-
-        .link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            color: var(--teal);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .link:hover {
-            gap: var(--space-sm);
-            color: var(--blue-neon);
-        }
-
-        /* ===========================================
-           TESTIMONIALS
-           =========================================== */
-
-        .testimonials {
-            background: linear-gradient(180deg, rgba(80, 90, 100, 1) 0%, var(--gray-800) 100%);
-            padding: var(--space-4xl) 0;
-        }
-
-        .testimonials__container {
-            max-width: var(--container-max);
-            margin: 0 auto;
-            padding: 0 var(--container-padding);
-        }
-
-        .testimonials__grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-lg);
-        }
-
-        .testimonial-card {
-            background: linear-gradient(145deg, rgba(30, 40, 55, 0.9), rgba(20, 30, 45, 0.95), rgba(15, 25, 40, 0.85));
-            backdrop-filter: blur(12px);
-            padding: var(--space-xl);
-            border-radius: 20px;
-            border: 1px solid rgba(20, 184, 166, 0.2);
-            transition: all 0.4s ease;
-        }
-
-        .testimonial-card:hover {
-            border-color: rgba(20, 184, 166, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), 0 0 30px rgba(20, 184, 166, 0.15);
-        }
-
-        .testimonial-card__stars {
-            display: flex;
-            gap: 4px;
-            margin-bottom: var(--space-md);
-        }
-
-        .testimonial-card__star {
-            color: var(--teal);
-            font-size: 1rem;
-        }
-
-        .testimonial-card__quote {
-            color: var(--gray-300);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: var(--space-lg);
-            font-style: italic;
-        }
-
-        .testimonial-card__author {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        .testimonial-card__avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1.125rem;
-        }
-
-        .testimonial-card__name {
-            font-weight: 600;
-            color: var(--cream);
-            font-size: 0.9375rem;
-        }
-
-        .testimonial-card__meta {
+            gap: 0.625rem;
             color: var(--gray-400);
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
+            padding: 0.375rem 0;
+        }
+
+        .service-card__list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--teal);
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--teal-glow);
         }
 
         /* ===========================================
-           CTA SECTION - Hero Style
+           CTA SECTION
            =========================================== */
 
         .cta-section {
@@ -1066,6 +629,44 @@
             font-size: 1.0625rem;
             line-height: 1.7;
             margin-bottom: var(--space-xl);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.9375rem 1.75rem;
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn--primary {
+            background: var(--teal);
+            color: var(--white);
+        }
+
+        .btn--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(20, 184, 166, 0.3);
+        }
+
+        .btn--glass {
+            background: rgba(245, 235, 228, 0.05);
+            backdrop-filter: blur(10px);
+            color: var(--cream);
+            border: 1px solid rgba(232, 223, 216, 0.15);
+        }
+
+        .btn--glass:hover {
+            background: rgba(245, 235, 228, 0.1);
+            border-color: rgba(232, 223, 216, 0.3);
+            transform: translateY(-2px);
         }
 
         /* ===========================================
@@ -1195,18 +796,13 @@
             color: var(--teal);
         }
 
-        /* AI chat button handled inline */
-
         /* ===========================================
            MOBILE RESPONSIVE
            =========================================== */
 
         @media (max-width: 1024px) {
             .services__grid { grid-template-columns: repeat(2, 1fr); }
-            .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
             .footer__grid { grid-template-columns: repeat(2, 1fr); }
-            .hero__title { font-size: clamp(2.25rem, 5.5vw, 4rem); }
-            .hero__row { gap: var(--space-2xl); }
         }
 
         @media (max-width: 768px) {
@@ -1220,58 +816,30 @@
             .logo__mark { width: 40px; height: 40px; border-radius: 10px; }
             .logo__text { font-size: 1rem; }
 
-            /* Hero */
-            .hero { min-height: auto; }
-            .hero__container { padding-top: 6.5rem; }
-            .hero__eyebrow { margin-bottom: var(--space-md); font-size: 0.625rem; }
-            .hero__title { font-size: 2rem; margin-bottom: var(--space-lg); max-width: 100%; }
-            .hero__row { flex-direction: column; align-items: flex-start; gap: var(--space-xl); padding-bottom: var(--space-xl); }
-            .hero__left { max-width: 100%; }
-            .hero__description { font-size: 0.9375rem; }
-            .hero__cta-group { flex-direction: column; align-items: stretch; gap: var(--space-md); width: 100%; }
-            .hero__cta-group .btn { justify-content: center; width: 100%; }
-            .hero__cta-group .hero__text-link { justify-content: center; }
-            .hero__metrics { gap: var(--space-lg); width: 100%; }
-            .hero__metric-value { font-size: 1.5rem; }
-            .hero__image-grid { grid-template-columns: 1fr; gap: 3px; }
-            .hero__img { height: 220px; }
-
-            /* Trust */
-            .trust__container { grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
-            .trust__item { padding: var(--space-sm); }
-            .trust__value { font-size: 1.5rem; }
-            .trust__label { font-size: 0.75rem; }
+            /* Page hero */
+            .page-hero { padding: 7rem 0 3rem; }
+            .page-hero__title { font-size: 2rem; }
+            .page-hero__subtitle { font-size: 0.9375rem; }
 
             /* Services */
             .services__grid { grid-template-columns: 1fr; }
             .service-card { padding: var(--space-lg); }
-            .section-header { margin-bottom: var(--space-xl); }
-
-            /* About */
-            .about-preview__container { grid-template-columns: 1fr; }
-            .about-preview__image { height: 240px; }
-
-            /* Testimonials */
-            .testimonials__grid { grid-template-columns: 1fr; }
 
             /* Footer */
             .footer__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
             .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
 
+            /* AI Widget */
+            .ai-widget__toggle { width: 56px !important; height: 56px !important; }
         }
 
         @media (max-width: 480px) {
             :root { --container-padding: 1rem; }
             .logo__mark { width: 36px; height: 36px; border-radius: 8px; }
             .logo__text { font-size: 0.875rem; }
-            .hero__container { padding-top: 5.5rem; }
-            .hero__eyebrow { font-size: 0.5625rem; gap: 0.5rem; }
-            .hero__eyebrow::before { width: 1rem; }
-            .hero__title { font-size: 1.75rem; }
-            .hero__description { font-size: 0.875rem; }
-            .hero__metrics { flex-direction: column; gap: var(--space-md); }
-            .hero__metric { padding-left: var(--space-sm); }
-            .hero__metric-value { font-size: 1.25rem; }
+            .page-hero { padding: 6rem 0 2.5rem; }
+            .page-hero__title { font-size: 1.75rem; }
+            .page-hero__eyebrow { font-size: 0.5625rem; gap: 0.5rem; }
             .mobile-menu__link { font-size: 1.125rem; padding: 0.6rem 2rem; }
         }
     </style>
@@ -1282,14 +850,14 @@
          ========================================= -->
     <header class="header header--dark" id="header">
         <nav class="nav">
-            <a href="#" class="logo">
+            <a href="heathway-backup.html" class="logo">
                 <div class="logo__mark"><img src="BD1D4592-92E2-4AE9-86C2-ADCECC526B78.png" alt="Heathway Dental Logo"></div>
                 <span class="logo__text">Heathway Dental</span>
             </a>
 
             <ul class="nav__links">
-                <li><a href="heathway-backup.html" class="nav__link nav__link--active">Home</a></li>
-                <li><a href="heathway-services.html" class="nav__link">Services</a></li>
+                <li><a href="heathway-backup.html" class="nav__link">Home</a></li>
+                <li><a href="heathway-services.html" class="nav__link nav__link--active">Services</a></li>
                 <li><a href="heathway-about.html" class="nav__link">About</a></li>
                 <li><a href="heathway-contact.html" class="nav__link">Contact</a></li>
                 <li><a href="heathway-chatbot.html" class="nav__link">Heathway AI</a></li>
@@ -1307,8 +875,8 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu__links">
-            <li><a href="heathway-backup.html" class="mobile-menu__link mobile-menu__link--active">Home</a></li>
-            <li><a href="heathway-services.html" class="mobile-menu__link">Services</a></li>
+            <li><a href="heathway-backup.html" class="mobile-menu__link">Home</a></li>
+            <li><a href="heathway-services.html" class="mobile-menu__link mobile-menu__link--active">Services</a></li>
             <li><a href="heathway-about.html" class="mobile-menu__link">About</a></li>
             <li><a href="heathway-contact.html" class="mobile-menu__link">Contact</a></li>
             <li><a href="heathway-chatbot.html" class="mobile-menu__link mobile-menu__link--ai">Heathway AI</a></li>
@@ -1316,86 +884,27 @@
         <a href="tel:02085925030" class="mobile-menu__cta">Call 020 8592 5030</a>
     </div>
 
-    <section class="hero">
-        <div class="hero__container">
-            <p class="hero__eyebrow">The Heathway Dental Surgery &mdash; Dagenham</p>
-
-            <h1 class="hero__title">Your smile deserves <em>exceptional</em> care</h1>
-
-            <div class="hero__row">
-                <div class="hero__left">
-                    <p class="hero__description">We combine modern dentistry with genuine care. NHS and private treatments for the whole family, in a practice built around you.</p>
-                    <div class="hero__cta-group">
-                        <a href="tel:02085925030" class="btn btn--primary">Book Appointment</a>
-                        <a href="#services" class="hero__text-link">View services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                </div>
-                <div class="hero__metrics">
-                    <div class="hero__metric">
-                        <div class="hero__metric-value">20+</div>
-                        <div class="hero__metric-label">Years serving Dagenham</div>
-                    </div>
-                    <div class="hero__metric">
-                        <div class="hero__metric-value">NHS</div>
-                        <div class="hero__metric-label">Registered practice</div>
-                    </div>
-                    <div class="hero__metric">
-                        <div class="hero__metric-value">CQC</div>
-                        <div class="hero__metric-label">Quality approved</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="hero__image-band">
-            <div class="hero__image-grid">
-                <img src="IMG_3933.jpeg" alt="Heathway Dental Surgery exterior" class="hero__img">
-                <img src="IMG_3930.jpeg" alt="Our receptionist" class="hero__img">
-                <img src="IMG_3931.jpeg" alt="Treatment room" class="hero__img">
-            </div>
-        </div>
-    </section>
-
     <!-- =========================================
-         TRUST INDICATORS
+         PAGE HERO
          ========================================= -->
-    <section class="trust">
-        <div class="trust__container">
-            <div class="trust__item">
-                <div class="trust__value">NHS</div>
-                <div class="trust__label">Registered Practice</div>
-            </div>
-            <div class="trust__item">
-                <div class="trust__value">CQC</div>
-                <div class="trust__label">Regulated &amp; Inspected</div>
-            </div>
-            <div class="trust__item">
-                <div class="trust__value">All Ages</div>
-                <div class="trust__label">Adults &amp; Children</div>
-            </div>
-            <div class="trust__item">
-                <div class="trust__value">20+</div>
-                <div class="trust__label">Years Serving Dagenham</div>
-            </div>
+    <section class="page-hero">
+        <div class="page-hero__container">
+            <p class="page-hero__eyebrow">What We Offer</p>
+            <h1 class="page-hero__title">Our Services</h1>
+            <p class="page-hero__subtitle">
+                From routine check-ups to advanced restorative treatments, we provide comprehensive dental care for the whole family using modern techniques and genuine compassion.
+            </p>
         </div>
     </section>
 
     <!-- =========================================
-         SERVICES SECTION
+         SERVICES GRID
          ========================================= -->
     <section class="services" id="services">
         <div class="services__container">
-            <header class="section-header">
-                <span class="section-eyebrow">Our Services</span>
-                <h2 class="section-title">Comprehensive dental care</h2>
-                <p class="section-description">
-                    From routine check-ups to advanced treatments, we provide
-                    the full range of dental services your family needs.
-                </p>
-            </header>
-
             <div class="services__grid">
+
+                <!-- 1. General Dentistry -->
                 <article class="service-card">
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
@@ -1405,11 +914,17 @@
                     </div>
                     <h3 class="service-card__title">General Dentistry</h3>
                     <p class="service-card__text">
-                        Routine check-ups, cleanings, and preventive care to keep
-                        your smile healthy for years to come.
+                        Comprehensive preventive and restorative care to keep your smile healthy for years to come. We believe prevention is always better than cure.
                     </p>
+                    <ul class="service-card__list">
+                        <li>Routine check-ups and examinations</li>
+                        <li>Professional cleanings and scale &amp; polish</li>
+                        <li>Fillings and tooth restoration</li>
+                        <li>Preventive care and oral hygiene advice</li>
+                    </ul>
                 </article>
 
+                <!-- 2. Cosmetic Dentistry -->
                 <article class="service-card">
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
@@ -1421,11 +936,56 @@
                     </div>
                     <h3 class="service-card__title">Cosmetic Dentistry</h3>
                     <p class="service-card__text">
-                        Teeth whitening, veneers, and smile makeovers to help
-                        you feel confident about your smile.
+                        Transform your smile with our range of cosmetic treatments. We help you achieve the confident, natural-looking smile you deserve.
                     </p>
+                    <ul class="service-card__list">
+                        <li>Professional teeth whitening</li>
+                        <li>Porcelain and composite veneers</li>
+                        <li>Complete smile makeovers</li>
+                        <li>Tooth bonding and reshaping</li>
+                    </ul>
                 </article>
 
+                <!-- 3. Root Canal Treatment -->
+                <article class="service-card">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Root Canal Treatment</h3>
+                    <p class="service-card__text">
+                        Save infected or damaged teeth with our modern, painless root canal techniques. We use advanced methods to ensure your comfort throughout.
+                    </p>
+                    <ul class="service-card__list">
+                        <li>Modern painless techniques</li>
+                        <li>Save infected or damaged teeth</li>
+                        <li>Advanced rotary instrumentation</li>
+                        <li>Post-treatment restoration</li>
+                    </ul>
+                </article>
+
+                <!-- 4. Crowns & Bridges -->
+                <article class="service-card">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Crowns &amp; Bridges</h3>
+                    <p class="service-card__text">
+                        Restore damaged or missing teeth with durable, natural-looking crowns and bridges custom-crafted to blend seamlessly with your smile.
+                    </p>
+                    <ul class="service-card__list">
+                        <li>Porcelain and ceramic crowns</li>
+                        <li>Fixed bridges for missing teeth</li>
+                        <li>Natural-looking replacements</li>
+                        <li>Long-lasting restorations</li>
+                    </ul>
+                </article>
+
+                <!-- 5. Emergency Care -->
                 <article class="service-card">
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
@@ -1436,114 +996,43 @@
                     </div>
                     <h3 class="service-card__title">Emergency Care</h3>
                     <p class="service-card__text">
-                        Same-day appointments available for dental emergencies.
-                        We're here when you need us most.
+                        Dental emergencies don't wait, and neither do we. We offer same-day appointments for urgent issues so you get the care you need fast.
                     </p>
+                    <ul class="service-card__list">
+                        <li>Same-day emergency appointments</li>
+                        <li>Toothache and pain relief</li>
+                        <li>Broken or chipped tooth repair</li>
+                        <li>Lost filling or crown replacement</li>
+                    </ul>
                 </article>
-            </div>
 
-            <div style="text-align: center; margin-top: var(--space-xl);">
-                <a href="heathway-services.html" class="btn btn--glass">
-                    View all services
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <!-- 6. Children's Dentistry -->
+                <article class="service-card">
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Children's Dentistry</h3>
+                    <p class="service-card__text">
+                        Gentle, friendly dental care designed to make young patients feel safe and comfortable. We help build healthy habits that last a lifetime.
+                    </p>
+                    <ul class="service-card__list">
+                        <li>Gentle examinations for children</li>
+                        <li>Fissure sealants and fluoride treatments</li>
+                        <li>Fun, family-friendly environment</li>
+                        <li>Oral health education for kids</li>
+                    </ul>
+                </article>
+
             </div>
         </div>
     </section>
 
     <!-- =========================================
-         ABOUT PREVIEW
+         CTA SECTION
          ========================================= -->
-    <section class="about-preview" id="about">
-        <div class="about-preview__container">
-            <div class="about-preview__image">
-                <img src="IMG_3929.jpeg" alt="Heathway Dental Reception" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
-            </div>
-
-            <div class="about-preview__content">
-                <span class="about-preview__eyebrow">About Us</span>
-                <h2 class="about-preview__title">
-                    Caring for Dagenham's smiles since 2003
-                </h2>
-                <p class="about-preview__text">
-                    Led by Dr Niti Kaushal, our experienced team provides exceptional
-                    dental care for the whole family. NHS and private patients welcome.
-                </p>
-                <ul class="about-preview__list">
-                    <li>NHS &amp; Private patients welcome</li>
-                    <li>CQC regulated practice</li>
-                    <li>Accepting new patients</li>
-                </ul>
-                <a href="heathway-about.html" class="link">
-                    Learn more about us
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         TESTIMONIALS
-         ========================================= -->
-    <section class="testimonials">
-        <div class="testimonials__container">
-            <header class="section-header">
-                <span class="section-eyebrow">Testimonials</span>
-                <h2 class="section-title">What our patients say</h2>
-            </header>
-
-            <div class="testimonials__grid" style="grid-template-columns: repeat(2, 1fr);">
-                <article class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                    </div>
-                    <p class="testimonial-card__quote">
-                        "The team at Heathway Dental made me feel completely at ease.
-                        Professional, friendly, and my teeth have never looked better!"
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">S</div>
-                        <div>
-                            <div class="testimonial-card__name">Sarah J.</div>
-                            <div class="testimonial-card__meta">Patient since 2022</div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                        <span class="testimonial-card__star">★</span>
-                    </div>
-                    <p class="testimonial-card__quote">
-                        "Finally found a dentist I'm not afraid of! They really understand
-                        dental anxiety and take the time to make you comfortable."
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">A</div>
-                        <div>
-                            <div class="testimonial-card__name">Aisha P.</div>
-                            <div class="testimonial-card__meta">Patient since 2023</div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         CTA SECTION - Hero Style
-         ========================================= -->
-    <section class="cta-section" id="contact">
+    <section class="cta-section">
         <div class="cta-section__bg">
             <div class="cta-section__lines">
                 <div class="cta-diagonal cta-diagonal--1"></div>
@@ -1558,8 +1047,8 @@
         <div class="cta-section__container">
             <h2 class="cta-section__title">Ready to book your appointment?</h2>
             <p class="cta-section__text">
-                Whether you're due for a check-up or have a specific concern,
-                we're here to help. Call us or visit our contact page.
+                Whether you need a routine check-up or a specific treatment,
+                our friendly team is here to help. Call us today to get started.
             </p>
             <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
                 <a href="tel:02085925030" class="btn btn--primary">
@@ -1659,7 +1148,7 @@
         window.addEventListener('scroll', updateHeader, { passive: true });
         updateHeader();
 
-        // Intersection Observer for fade-in animations
+        // Intersection Observer for fade-in animations on service cards
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1674,10 +1163,10 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+        document.querySelectorAll('.service-card').forEach((el, index) => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            el.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
             observer.observe(el);
         });
 
