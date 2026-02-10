@@ -196,17 +196,19 @@
         .logo__mark {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
             position: relative;
-            animation: pulse-glow 3s ease-in-out infinite;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo__mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .logo__text {
@@ -533,24 +535,16 @@
             gap: 4px;
         }
 
-        .hero__img-placeholder {
+        .hero__img {
             width: 100%;
             aspect-ratio: 16 / 9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6875rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            display: block;
             transition: all 0.5s;
+            filter: brightness(0.85);
         }
 
-        .hero__img-placeholder:hover { color: rgba(255, 255, 255, 0.6); }
-
-        .hero__img-placeholder:nth-child(1) { background: linear-gradient(135deg, #1a2d42, #142234); }
-        .hero__img-placeholder:nth-child(2) { background: linear-gradient(135deg, #1c3040, #162636); }
-        .hero__img-placeholder:nth-child(3) { background: linear-gradient(135deg, #182c3e, #122030); }
+        .hero__img:hover { filter: brightness(1); }
 
         /* Glass button for dark sections */
         .btn--glass {
@@ -786,7 +780,6 @@
         }
 
         .about-preview__image {
-            background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
             border-radius: 24px;
             height: 480px;
             display: flex;
@@ -1108,15 +1101,18 @@
         .footer__logo-mark {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--teal), var(--blue-neon));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 700;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .footer__logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .footer__logo-text {
@@ -1455,7 +1451,7 @@
             .nav__links { display: none; }
             .nav__cta { display: none; }
             .nav__mobile-toggle { display: flex; }
-            .logo__mark { width: 40px; height: 40px; font-size: 1.125rem; border-radius: 10px; }
+            .logo__mark { width: 40px; height: 40px; border-radius: 10px; }
             .logo__text { font-size: 1rem; }
 
             /* Hero */
@@ -1472,7 +1468,7 @@
             .hero__metrics { gap: var(--space-lg); width: 100%; }
             .hero__metric-value { font-size: 1.5rem; }
             .hero__image-grid { grid-template-columns: 1fr; gap: 3px; }
-            .hero__img-placeholder { aspect-ratio: 2 / 1; }
+            .hero__img { aspect-ratio: 2 / 1; }
 
             /* Trust */
             .trust__container { grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
@@ -1502,7 +1498,7 @@
 
         @media (max-width: 480px) {
             :root { --container-padding: 1rem; }
-            .logo__mark { width: 36px; height: 36px; font-size: 1rem; border-radius: 8px; }
+            .logo__mark { width: 36px; height: 36px; border-radius: 8px; }
             .logo__text { font-size: 0.875rem; }
             .hero__container { padding-top: 5.5rem; }
             .hero__eyebrow { font-size: 0.5625rem; gap: 0.5rem; }
@@ -1522,20 +1518,19 @@
          ========================================= -->
     <header class="header header--dark" id="header">
         <nav class="nav">
-            <a href="index.html" class="logo">
-                <div class="logo__mark">H</div>
+            <a href="#" class="logo">
+                <div class="logo__mark"><img src="BD1D4592-92E2-4AE9-86C2-ADCECC526B78.png" alt="Heathway Dental Logo"></div>
                 <span class="logo__text">Heathway Dental</span>
             </a>
 
             <ul class="nav__links">
-                <li><a href="index.html" class="nav__link nav__link--active">Home</a></li>
-                <li><a href="services.html" class="nav__link">Services</a></li>
-                <li><a href="about.html" class="nav__link">About</a></li>
-                <li><a href="contact.html" class="nav__link">Contact</a></li>
-                <li><a href="chatbot.html" class="nav__link">DentalAI</a></li>
+                <li><a href="#" class="nav__link nav__link--active">Home</a></li>
+                <li><a href="#services" class="nav__link">Services</a></li>
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
             </ul>
 
-            <a href="contact.html" class="nav__cta">Book Appointment</a>
+            <a href="tel:02085925030" class="nav__cta">Call 020 8592 5030</a>
 
             <button class="nav__mobile-toggle" aria-label="Toggle menu">
                 <span></span>
@@ -1547,13 +1542,12 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu__links">
-            <li><a href="index.html" class="mobile-menu__link mobile-menu__link--active">Home</a></li>
-            <li><a href="services.html" class="mobile-menu__link">Services</a></li>
-            <li><a href="about.html" class="mobile-menu__link">About</a></li>
-            <li><a href="contact.html" class="mobile-menu__link">Contact</a></li>
-            <li><a href="chatbot.html" class="mobile-menu__link mobile-menu__link--ai">DentalAI</a></li>
+            <li><a href="#" class="mobile-menu__link mobile-menu__link--active">Home</a></li>
+            <li><a href="#services" class="mobile-menu__link">Services</a></li>
+            <li><a href="#about" class="mobile-menu__link">About</a></li>
+            <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
         </ul>
-        <a href="contact.html" class="mobile-menu__cta">Book Appointment</a>
+        <a href="tel:02085925030" class="mobile-menu__cta">Call 020 8592 5030</a>
     </div>
 
     <section class="hero">
@@ -1566,8 +1560,8 @@
                 <div class="hero__left">
                     <p class="hero__description">We combine modern dentistry with genuine care. NHS and private treatments for the whole family, in a practice built around you.</p>
                     <div class="hero__cta-group">
-                        <a href="contact.html" class="btn btn--primary">Book Appointment</a>
-                        <a href="services.html" class="hero__text-link">View services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        <a href="tel:02085925030" class="btn btn--primary">Book Appointment</a>
+                        <a href="#services" class="hero__text-link">View services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
                 <div class="hero__metrics">
@@ -1590,9 +1584,9 @@
 
         <div class="hero__image-band">
             <div class="hero__image-grid">
-                <div class="hero__img-placeholder">Practice exterior</div>
-                <div class="hero__img-placeholder">Our team</div>
-                <div class="hero__img-placeholder">Treatment room</div>
+                <img src="IMG_3933.jpeg" alt="Heathway Dental Surgery exterior" class="hero__img">
+                <img src="IMG_3930.jpeg" alt="Our receptionist" class="hero__img">
+                <img src="IMG_3931.jpeg" alt="Treatment room" class="hero__img">
             </div>
         </div>
     </section>
@@ -1608,15 +1602,15 @@
             </div>
             <div class="trust__item">
                 <div class="trust__value">CQC</div>
-                <div class="trust__label">Quality Approved</div>
+                <div class="trust__label">Regulated &amp; Inspected</div>
             </div>
             <div class="trust__item">
-                <div class="trust__value">5</div>
-                <div class="trust__label">Days a Week</div>
+                <div class="trust__value">All Ages</div>
+                <div class="trust__label">Adults &amp; Children</div>
             </div>
             <div class="trust__item">
-                <div class="trust__value">15+</div>
-                <div class="trust__label">Years Experience</div>
+                <div class="trust__value">20+</div>
+                <div class="trust__label">Years Serving Dagenham</div>
             </div>
         </div>
     </section>
@@ -1624,7 +1618,7 @@
     <!-- =========================================
          SERVICES SECTION
          ========================================= -->
-    <section class="services">
+    <section class="services" id="services">
         <div class="services__container">
             <header class="section-header">
                 <span class="section-eyebrow">Our Services</span>
@@ -1673,10 +1667,10 @@
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                     </div>
-                    <h3 class="service-card__title">Dental Implants</h3>
+                    <h3 class="service-card__title">Root Canal Treatment</h3>
                     <p class="service-card__text">
-                        Permanent tooth replacement solutions that look, feel,
-                        and function like natural teeth.
+                        Save infected teeth with modern, virtually painless
+                        root canal therapy using the latest techniques.
                     </p>
                 </article>
 
@@ -1687,10 +1681,10 @@
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
                     </div>
-                    <h3 class="service-card__title">Orthodontics</h3>
+                    <h3 class="service-card__title">Crowns &amp; Bridges</h3>
                     <p class="service-card__text">
-                        Invisalign and traditional braces to straighten teeth
-                        and correct bite issues at any age.
+                        Restore damaged teeth or replace missing ones with
+                        natural-looking crowns and bridges built to last.
                     </p>
                 </article>
 
@@ -1728,17 +1722,10 @@
     <!-- =========================================
          ABOUT PREVIEW
          ========================================= -->
-    <section class="about-preview">
+    <section class="about-preview" id="about">
         <div class="about-preview__container">
             <div class="about-preview__image">
-                <div class="about-preview__image-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                </div>
-                <span class="about-preview__image-text">Insert Interior Photo</span>
+                <img src="IMG_3929.jpeg" alt="Heathway Dental Reception" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;">
             </div>
 
             <div class="about-preview__content">
@@ -1749,16 +1736,18 @@
                 <p class="about-preview__text">
                     Led by Dr Niti Kaushal, our experienced team is committed to
                     providing exceptional dental care in a welcoming environment.
-                    We believe everyone deserves access to quality dentistry.
+                    Located on The Heathway since 2003, we treat patients of all ages
+                    with NHS and private options available.
                 </p>
                 <ul class="about-preview__list">
-                    <li>NHS & Private patients welcome</li>
-                    <li>CQC quality approved practice</li>
-                    <li>Modern, comfortable facilities</li>
-                    <li>Friendly, experienced team</li>
+                    <li>NHS &amp; Private patients welcome</li>
+                    <li>CQC regulated (ID: 1-7701378176)</li>
+                    <li>Accepting new patients &mdash; adults &amp; children</li>
+                    <li>Emergency appointments available</li>
+                    <li>Near Dagenham Heathway station</li>
                 </ul>
-                <a href="about.html" class="link">
-                    Learn more about us
+                <a href="tel:02085925030" class="link">
+                    Call to book &mdash; 020 8592 5030
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -1847,7 +1836,7 @@
     <!-- =========================================
          CTA SECTION - Hero Style
          ========================================= -->
-    <section class="cta-section">
+    <section class="cta-section" id="contact">
         <div class="cta-section__bg">
             <div class="cta-section__lines">
                 <div class="cta-diagonal cta-diagonal--1"></div>
@@ -1863,10 +1852,11 @@
             <h2 class="cta-section__title">Ready to book your appointment?</h2>
             <p class="cta-section__text">
                 Whether you're due for a check-up or have a specific concern,
-                we're here to help. Contact us today to schedule your visit.
+                we're here to help. Call us today at 020 8592 5030 or visit us at
+                276a Heathway, Dagenham. Open Monday&ndash;Friday, 9am&ndash;5pm.
             </p>
-            <a href="contact.html" class="btn btn--primary">
-                Book Appointment
+            <a href="tel:02085925030" class="btn btn--primary">
+                Call 020 8592 5030
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
@@ -1882,40 +1872,40 @@
             <div class="footer__grid">
                 <div class="footer__brand">
                     <div class="footer__logo">
-                        <div class="footer__logo-mark">H</div>
+                        <div class="footer__logo-mark"><img src="BD1D4592-92E2-4AE9-86C2-ADCECC526B78.png" alt="Heathway Dental Logo"></div>
                         <span class="footer__logo-text">Heathway Dental</span>
                     </div>
                     <p class="footer__tagline">
                         Quality dental care for the whole family. NHS and private
-                        patients welcome at our Dagenham practice.
+                        patients welcome at our Dagenham practice since 2003.
                     </p>
                 </div>
 
                 <div>
                     <h4 class="footer__heading">Quick Links</h4>
                     <ul class="footer__links">
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="contact.html">Book Online</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="tel:02085925030">Call to Book</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="footer__heading">Services</h4>
+                    <h4 class="footer__heading">Treatments</h4>
                     <ul class="footer__links">
-                        <li><a href="services.html">General Dentistry</a></li>
-                        <li><a href="services.html">Cosmetic Dentistry</a></li>
-                        <li><a href="services.html">Dental Implants</a></li>
-                        <li><a href="services.html">Orthodontics</a></li>
+                        <li><a href="#services">Check-ups &amp; Cleaning</a></li>
+                        <li><a href="#services">Crowns &amp; Bridges</a></li>
+                        <li><a href="#services">Root Canal Treatment</a></li>
+                        <li><a href="#services">Emergency Care</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="footer__heading">Contact</h4>
-                    <p class="footer__contact-item">276a Heathway<br>Dagenham, RM10 8QS</p>
-                    <p class="footer__contact-item">020 8592 5030</p>
-                    <p class="footer__contact-item">Mon-Thu: 9am-5pm<br>Fri: 9am-4:30pm</p>
+                    <p class="footer__contact-item">276a Heathway<br>Dagenham, Essex, RM10 8QS</p>
+                    <p class="footer__contact-item"><a href="tel:02085925030" style="color: var(--cream); text-decoration: none;">020 8592 5030</a></p>
+                    <p class="footer__contact-item">Mon&ndash;Fri: 9am&ndash;1pm, 2pm&ndash;5pm<br>Sat&ndash;Sun: Closed</p>
                 </div>
             </div>
 
@@ -2040,11 +2030,11 @@
             'visit': "We'd love to see you! Book a visit by calling 020 8592 5030 or through our Contact page.",
 
             // Hours
-            'hours': "Our opening hours:\n\n🕘 Mon-Thu: 9am - 5pm\n🕘 Friday: 9am - 4:30pm\n🚫 Sat-Sun: Closed\n\nEmergency appointments available!",
-            'opening': "We're open:\n\nMonday-Thursday: 9am - 5pm\nFriday: 9am - 4:30pm\nWeekends: Closed\n\nNeed an emergency appointment?",
-            'time': "Our hours are Mon-Thu 9am-5pm, Fri 9am-4:30pm. Closed weekends. Can I help with anything else?",
-            'when': "We're open Mon-Thu 9-5, Fri 9-4:30. Closed weekends. Would you like to book?",
-            'open': "Yes, we're open Mon-Thu 9am-5pm and Fri 9am-4:30pm!",
+            'hours': "Our opening hours:\n\n🕘 Mon-Fri: 9am - 1pm, 2pm - 5pm\n🚫 Sat-Sun: Closed\n\n(1 hour lunch break 1-2pm)\nEmergency appointments available!",
+            'opening': "We're open:\n\nMonday-Friday: 9am - 1pm, 2pm - 5pm\n(Closed 1-2pm for lunch)\nWeekends: Closed\n\nNeed an emergency appointment?",
+            'time': "Our hours are Mon-Fri 9am-1pm, 2pm-5pm (1hr lunch break). Closed weekends. Can I help with anything else?",
+            'when': "We're open Mon-Fri 9am-1pm, then 2pm-5pm. Closed weekends. Would you like to book?",
+            'open': "Yes, we're open Mon-Fri 9am-1pm and 2pm-5pm!",
 
             // Services
             'services': "We offer comprehensive dental care:\n\n• General Dentistry\n• Cosmetic Dentistry\n• Dental Implants\n• Orthodontics (Invisalign)\n• Root Canal Treatment\n• Children's Dentistry\n• Emergency Care\n\nWhich interests you?",
