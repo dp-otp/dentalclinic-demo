@@ -498,20 +498,27 @@
             grid-template-columns: 1fr;
         }
 
+        .about-section--gradient-2 .about-section__container {
+            max-width: 100%;
+            padding: 0 var(--space-xl);
+        }
+
         .about-content--full-width {
             width: 100%;
-            padding: var(--space-4xl) var(--space-3xl);
+            padding: var(--space-3xl) var(--space-4xl);
             background: rgba(0, 0, 0, 0.12);
             border-radius: 24px;
             border: 1px solid rgba(20, 184, 166, 0.1);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .about-content--full-width .about-content__eyebrow {
             font-size: 0.95rem;
             letter-spacing: 0.2em;
             margin-bottom: var(--space-md);
-            display: block;
         }
 
         .about-content--full-width .about-content__title {
@@ -524,21 +531,18 @@
         }
 
         .about-content--full-width .about-content__text {
-            font-size: 1.1875rem;
-            line-height: 1.85;
-            max-width: 100%;
-            margin-bottom: var(--space-lg);
+            font-size: 1.125rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin-bottom: var(--space-md);
         }
 
         .about-content--full-width .about-content__list {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 1rem 3rem;
             text-align: left;
             margin-top: var(--space-xl);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
             font-size: 1.0625rem;
         }
 
@@ -1052,10 +1056,11 @@
             .about-image--practice img { height: 280px; }
 
             /* Dr Niti text section mobile */
-            .about-content--full-width { padding: var(--space-xl) var(--space-md); text-align: center; }
-            .about-content--full-width .about-content__title { font-size: 2rem; }
-            .about-content--full-width .about-content__text { font-size: 1rem; line-height: 1.7; }
-            .about-content--full-width .about-content__list { grid-template-columns: 1fr; gap: 0.5rem; max-width: 100%; }
+            .about-section--gradient-2 .about-section__container { padding: 0 var(--space-md); }
+            .about-content--full-width { padding: var(--space-xl) var(--space-md); }
+            .about-content--full-width .about-content__title { font-size: 1.75rem; }
+            .about-content--full-width .about-content__text { font-size: 0.9375rem; }
+            .about-content--full-width .about-content__list { grid-template-columns: 1fr; gap: 0.5rem; }
 
             /* Trust */
             .trust__container { grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
