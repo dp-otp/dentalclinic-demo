@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | The Heathway Dental Surgery</title>
+    <meta name="description" content="NHS and private dental services at The Heathway Dental Surgery, Dagenham. Check-ups, fillings, crowns, bridges, dentures, root canals and more. Call 020 8592 5030.">
+    <link rel="icon" href="BD1D4592-92E2-4AE9-86C2-ADCECC526B78.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -72,7 +74,8 @@
 
         html {
             scroll-behavior: smooth;
-            overflow-x: hidden;
+            overflow-x: clip;
+            max-width: 100vw;
         }
 
         body {
@@ -82,7 +85,8 @@
             line-height: 1.6;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            overflow-x: clip;
+            max-width: 100%;
         }
 
         /* ===========================================
@@ -444,7 +448,7 @@
 
         .services__grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: var(--space-lg);
         }
 
@@ -457,6 +461,8 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card::before {
@@ -545,7 +551,8 @@
 
         .service-card__list {
             list-style: none;
-            margin-top: var(--space-md);
+            margin-top: auto;
+            padding-top: var(--space-md);
             position: relative;
         }
 
@@ -843,7 +850,7 @@
             .page-hero__subtitle { font-size: 0.9375rem; }
 
             /* Services */
-            .services__grid { grid-template-columns: 1fr; }
+            .services__grid { grid-template-columns: repeat(2, 1fr); }
             .service-card { padding: var(--space-lg); }
 
             /* Footer */
@@ -862,6 +869,7 @@
             .page-hero__title { font-size: 1.75rem; }
             .page-hero__eyebrow { font-size: 0.5625rem; gap: 0.5rem; }
             .mobile-menu__link { font-size: 1.125rem; padding: 0.6rem 2rem; }
+            .services__grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -871,13 +879,13 @@
          ========================================= -->
     <header class="header header--dark" id="header">
         <nav class="nav">
-            <a href="heathway-backup.html" class="logo">
+            <a href="index.html" class="logo">
                 <div class="logo__mark"><img src="BD1D4592-92E2-4AE9-86C2-ADCECC526B78.png" alt="Heathway Dental Logo"></div>
                 <span class="logo__text">Heathway Dental</span>
             </a>
 
             <ul class="nav__links">
-                <li><a href="heathway-backup.html" class="nav__link">Home</a></li>
+                <li><a href="index.html" class="nav__link">Home</a></li>
                 <li><a href="heathway-services.html" class="nav__link nav__link--active">Services</a></li>
                 <li><a href="heathway-about.html" class="nav__link">About</a></li>
                 <li><a href="heathway-contact.html" class="nav__link">Contact</a></li>
@@ -896,7 +904,7 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu__links">
-            <li><a href="heathway-backup.html" class="mobile-menu__link">Home</a></li>
+            <li><a href="index.html" class="mobile-menu__link">Home</a></li>
             <li><a href="heathway-services.html" class="mobile-menu__link mobile-menu__link--active">Services</a></li>
             <li><a href="heathway-about.html" class="mobile-menu__link">About</a></li>
             <li><a href="heathway-contact.html" class="mobile-menu__link">Contact</a></li>
@@ -946,26 +954,28 @@
                     </ul>
                 </article>
 
-                <!-- 2. Cosmetic Dentistry -->
+                <!-- 2. Dentures -->
                 <article class="service-card">
-                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1675526607070-f5cbd71dde92?w=800&q=80" alt="Cosmetic Dentistry"></div>
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80" alt="Dentures"></div>
                     <div class="service-card__icon">
                         <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                            <line x1="9" y1="9" x2="9.01" y2="9"/>
-                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            <path d="M4 12c0-3 2-8 8-8s8 5 8 8"/>
+                            <path d="M4 12c0 3 2 8 8 8s8-5 8-8"/>
+                            <line x1="4" y1="12" x2="20" y2="12"/>
+                            <line x1="8" y1="8" x2="8" y2="16"/>
+                            <line x1="12" y1="7" x2="12" y2="17"/>
+                            <line x1="16" y1="8" x2="16" y2="16"/>
                         </svg>
                     </div>
-                    <h3 class="service-card__title">Cosmetic Dentistry</h3>
+                    <h3 class="service-card__title">Dentures</h3>
                     <p class="service-card__text">
-                        Transform your smile with our range of cosmetic treatments. We help you achieve the confident, natural-looking smile you deserve.
+                        Replace missing teeth with comfortable, natural-looking dentures. We offer both full and partial options to restore your smile and confidence.
                     </p>
                     <ul class="service-card__list">
-                        <li>Professional teeth whitening</li>
-                        <li>Porcelain and composite veneers</li>
-                        <li>Complete smile makeovers</li>
-                        <li>Tooth bonding and reshaping</li>
+                        <li>Full dentures for complete tooth loss</li>
+                        <li>Partial dentures for missing teeth</li>
+                        <li>Denture adjustments and repairs</li>
+                        <li>Available on NHS Band 3</li>
                     </ul>
                 </article>
 
@@ -1032,7 +1042,49 @@
                     </ul>
                 </article>
 
-                <!-- 6. Children's Dentistry -->
+                <!-- 6. Extractions -->
+                <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Tooth Extractions"></div>
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8 2 6 5 6 8c0 2.5 1 4 2 5.5S10 16 10 18c0 1 .5 4 2 4s2-3 2-4c0-2 0-3.5 2-5.5S18 10.5 18 8c0-3-2-6-6-6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Tooth Extractions</h3>
+                    <p class="service-card__text">
+                        When a tooth cannot be saved, our team ensures a comfortable, stress-free extraction with modern techniques and thorough aftercare guidance.
+                    </p>
+                    <ul class="service-card__list">
+                        <li>Simple and surgical extractions</li>
+                        <li>Wisdom teeth removal</li>
+                        <li>Pain-free under local anaesthetic</li>
+                        <li>Replacement options discussed after</li>
+                    </ul>
+                </article>
+
+                <!-- 7. Gum Disease Treatment -->
+                <article class="service-card">
+                    <div class="service-card__image"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&q=80" alt="Gum Disease Treatment"></div>
+                    <div class="service-card__icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4.93 4.93a10 10 0 0 1 14.14 0"/>
+                            <path d="M7.76 7.76a6 6 0 0 1 8.48 0"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Gum Disease Treatment</h3>
+                    <p class="service-card__text">
+                        Gum disease is one of the leading causes of tooth loss. We offer thorough diagnosis and effective treatment to protect your gums and teeth.
+                    </p>
+                    <ul class="service-card__list">
+                        <li>Gingivitis and periodontitis treatment</li>
+                        <li>Deep cleaning and root planing</li>
+                        <li>Ongoing gum health monitoring</li>
+                        <li>Prevention advice and hygiene plans</li>
+                    </ul>
+                </article>
+
+                <!-- 8. Children's Dentistry -->
                 <article class="service-card">
                     <div class="service-card__image"><img src="https://images.unsplash.com/photo-1733817336090-04082ff6ab4f?w=800&q=80" alt="Children's Dentistry"></div>
                     <div class="service-card__icon">
@@ -1149,7 +1201,7 @@
     </footer>
 
     <!-- AI Chatbot floating button - links to full chatbot page -->
-    <a href="heathway-chatbot.html" class="ai-widget__toggle" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), #00d4ff); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(20, 184, 166, 0.25); text-decoration: none; animation: pulse-glow 2s ease-in-out infinite;">
+    <a href="heathway-chatbot.html" class="ai-widget__toggle" aria-label="Open Heathway AI chat assistant" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), #00d4ff); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(20, 184, 166, 0.25); text-decoration: none; animation: pulse-glow 2s ease-in-out infinite;">
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="28" height="28">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
